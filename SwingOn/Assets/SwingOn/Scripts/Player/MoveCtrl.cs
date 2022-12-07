@@ -45,6 +45,7 @@ public class MoveCtrl : MonoBehaviour
     void Update()
     {
         GetInput();
+        UpdateAnimationValue();
         CheckMovement();
         Move();
     }
@@ -53,63 +54,6 @@ public class MoveCtrl : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
-
-        if (x > 0.0f)
-        {
-            if (animation_X < 1.0f) animation_X += Time.deltaTime;
-            else animation_X = 1.0f;
-        }
-        if(x < 0.0f)
-        {
-            if (animation_X > -1.0f) animation_X -= Time.deltaTime;
-            else animation_X = -1.0f;
-        }
-        
-        if (z > 0.0f)
-        {
-            if (animation_Z < 1.0f) animation_Z += Time.deltaTime;
-            else animation_Z = 1.0f;
-        }
-        if(z < 0.0f)
-        {
-            if (animation_Z > -1.0f) animation_Z -= Time.deltaTime;
-            else animation_Z = -1.0f;
-        }
-
-        if(x == 0.0f)
-        {
-            if(animation_X > 0.0f)
-            {
-                animation_X -= Time.deltaTime;
-                if (animation_X <= 0.0f) animation_X = 0.0f;
-            }
-            else if(animation_X < 0.0f)
-            {
-                animation_X += Time.deltaTime;
-                if (animation_X >= 0.0f) animation_X = 0.0f;
-            }
-            else
-            {
-                animation_X = 0.0f;
-            }
-        }
-        if(z == 0.0f)
-        {
-            if (animation_Z > 0.0f)
-            {
-                animation_Z -= Time.deltaTime;
-                if (animation_Z <= 0.0f) animation_Z = 0.0f;
-            }
-            else if (animation_Z < 0.0f)
-            {
-                animation_Z += Time.deltaTime;
-                if (animation_Z >= 0.0f) animation_Z = 0.0f;
-            }
-            else
-            {
-                animation_Z = 0.0f;
-            }
-        }
     }
 
     private void CheckMovement()
@@ -138,9 +82,6 @@ public class MoveCtrl : MonoBehaviour
         curDir = new Vector3(x, 0, z);
         curDir = curDir.normalized;
 
-        //animation_X = (Vector3.Lerp(preDir, curDir, Time.deltaTime * animationBlendSpeed)).normalized.x;
-        //animation_Z = (Vector3.Lerp(preDir, curDir, Time.deltaTime * animationBlendSpeed)).normalized.z;
-
         if (-preDir == curDir)
         {
             //°¨¼Ó
@@ -154,5 +95,65 @@ public class MoveCtrl : MonoBehaviour
         }
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
+    }
+
+    private void UpdateAnimationValue()
+    {
+        if (x > 0.0f)
+        {
+            if (animation_X < 1.0f) animation_X += Time.deltaTime;
+            else animation_X = 1.0f;
+        }
+        if (x < 0.0f)
+        {
+            if (animation_X > -1.0f) animation_X -= Time.deltaTime;
+            else animation_X = -1.0f;
+        }
+
+        if (z > 0.0f)
+        {
+            if (animation_Z < 1.0f) animation_Z += Time.deltaTime;
+            else animation_Z = 1.0f;
+        }
+        if (z < 0.0f)
+        {
+            if (animation_Z > -1.0f) animation_Z -= Time.deltaTime;
+            else animation_Z = -1.0f;
+        }
+
+        if (x == 0.0f)
+        {
+            if (animation_X > 0.0f)
+            {
+                animation_X -= Time.deltaTime;
+                if (animation_X <= 0.0f) animation_X = 0.0f;
+            }
+            else if (animation_X < 0.0f)
+            {
+                animation_X += Time.deltaTime;
+                if (animation_X >= 0.0f) animation_X = 0.0f;
+            }
+            else
+            {
+                animation_X = 0.0f;
+            }
+        }
+        if (z == 0.0f)
+        {
+            if (animation_Z > 0.0f)
+            {
+                animation_Z -= Time.deltaTime;
+                if (animation_Z <= 0.0f) animation_Z = 0.0f;
+            }
+            else if (animation_Z < 0.0f)
+            {
+                animation_Z += Time.deltaTime;
+                if (animation_Z >= 0.0f) animation_Z = 0.0f;
+            }
+            else
+            {
+                animation_Z = 0.0f;
+            }
+        }
     }
 }
