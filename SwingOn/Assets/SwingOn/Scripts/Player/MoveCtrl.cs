@@ -88,16 +88,16 @@ public class MoveCtrl : MonoBehaviour
         else isCurFront = false;
 
         //앞 뒤로만 구분 할꺼고 
-        if(isPreFront == isCurFront)
+        if(-preDir == curDir)
+        {
+            //감속
+            cur_Speed = init_Speed;
+        }
+        else
         {
             //가속
             if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
             else cur_Speed = max_Speed;
-        }
-        else
-        {
-            //속도 초기화
-            cur_Speed = init_Speed;
         }
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
