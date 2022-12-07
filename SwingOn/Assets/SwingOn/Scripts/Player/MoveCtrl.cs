@@ -17,24 +17,23 @@ public class MoveCtrl : MonoBehaviour
     private bool isMove;
     [SerializeField]
     private bool isRun;
-    [SerializeField]
-    private bool isCurFront;
-    private bool isPreFront;
 
     private float init_Speed;
     private float x;
     private float z;
+    private float animation_X;
+    private float animation_Z;
+    private float animationBlendSpeed = 0.1f;
+
     private Vector3 preDir;
     public Vector3 curDir;
     private float AccelerationValue = 3.0f;
     private float RunPercent = 0.8f;
 
-    public float X { get { return x; } }
-    public float Z { get { return z; } }
+    public float X { get { return animation_X; } }
+    public float Z { get { return animation_Z; } }
     public bool IsMove { get { return isMove; } }
     public bool IsRun { get { return isRun; } }
-
-
 
     void Start()
     {
@@ -53,7 +52,64 @@ public class MoveCtrl : MonoBehaviour
     private void GetInput()
     {
         x = Input.GetAxisRaw("Horizontal");
-        z = Input.GetAxisRaw("Vertical"); ;
+        z = Input.GetAxisRaw("Vertical");
+
+        if (x > 0.0f)
+        {
+            if (animation_X < 1.0f) animation_X += Time.deltaTime;
+            else animation_X = 1.0f;
+        }
+        if(x < 0.0f)
+        {
+            if (animation_X > -1.0f) animation_X -= Time.deltaTime;
+            else animation_X = -1.0f;
+        }
+        
+        if (z > 0.0f)
+        {
+            if (animation_Z < 1.0f) animation_Z += Time.deltaTime;
+            else animation_Z = 1.0f;
+        }
+        if(z < 0.0f)
+        {
+            if (animation_Z > -1.0f) animation_Z -= Time.deltaTime;
+            else animation_Z = -1.0f;
+        }
+
+        if(x == 0.0f)
+        {
+            if(animation_X > 0.0f)
+            {
+                animation_X -= Time.deltaTime;
+                if (animation_X <= 0.0f) animation_X = 0.0f;
+            }
+            else if(animation_X < 0.0f)
+            {
+                animation_X += Time.deltaTime;
+                if (animation_X >= 0.0f) animation_X = 0.0f;
+            }
+            else
+            {
+                animation_X = 0.0f;
+            }
+        }
+        if(z == 0.0f)
+        {
+            if (animation_Z > 0.0f)
+            {
+                animation_Z -= Time.deltaTime;
+                if (animation_Z <= 0.0f) animation_Z = 0.0f;
+            }
+            else if (animation_Z < 0.0f)
+            {
+                animation_Z += Time.deltaTime;
+                if (animation_Z >= 0.0f) animation_Z = 0.0f;
+            }
+            else
+            {
+                animation_Z = 0.0f;
+            }
+        }
     }
 
     private void CheckMovement()
@@ -61,11 +117,12 @@ public class MoveCtrl : MonoBehaviour
         if (x == 0.0f && z == 0.0f) isMove = false;
         else isMove = true;
 
-        if(isMove)
+        if (isMove)
         {
             if (cur_Speed >= max_Speed * RunPercent) isRun = true;
             else isRun = false;
         }
+        else isRun = false;
     }
 
     private void Move()
@@ -73,22 +130,18 @@ public class MoveCtrl : MonoBehaviour
         if (x == 0.0f && z == 0.0f)
         {
             cur_Speed = init_Speed;
+            curDir = Vector3.zero;
             return;
         }
 
         preDir = curDir;
-
         curDir = new Vector3(x, 0, z);
         curDir = curDir.normalized;
 
-        isPreFront = isCurFront;
+        //animation_X = (Vector3.Lerp(preDir, curDir, Time.deltaTime * animationBlendSpeed)).normalized.x;
+        //animation_Z = (Vector3.Lerp(preDir, curDir, Time.deltaTime * animationBlendSpeed)).normalized.z;
 
-        if (curDir.z == 0.0f) { }
-        else if(curDir.z > 0.0f) isCurFront = true;
-        else isCurFront = false;
-
-        //앞 뒤로만 구분 할꺼고 
-        if(-preDir == curDir)
+        if (-preDir == curDir)
         {
             //감속
             cur_Speed = init_Speed;
