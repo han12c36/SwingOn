@@ -17,13 +17,15 @@ public class MoveCtrl : MonoBehaviour
     private bool isMove;
     [SerializeField]
     private bool isRun;
-
+    [SerializeField]
+    private bool isCurFront;
+    private bool isPreFront;
 
     private float init_Speed;
     private float x;
     private float z;
     private Vector3 preDir;
-    private Vector3 curDir;
+    public Vector3 curDir;
     private float AccelerationValue = 3.0f;
     private float RunPercent = 0.8f;
 
@@ -79,16 +81,23 @@ public class MoveCtrl : MonoBehaviour
         curDir = new Vector3(x, 0, z);
         curDir = curDir.normalized;
 
-        if (curDir != preDir)
-        {
-            //속도 초기화
-            cur_Speed = init_Speed;
-        }
-        else
+        isPreFront = isCurFront;
+
+        if (curDir.z == 0.0f) { }
+        else if(curDir.z > 0.0f) isCurFront = true;
+        else isCurFront = false;
+
+        //앞 뒤로만 구분 할꺼고 
+        if(isPreFront == isCurFront)
         {
             //가속
             if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
             else cur_Speed = max_Speed;
+        }
+        else
+        {
+            //속도 초기화
+            cur_Speed = init_Speed;
         }
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
