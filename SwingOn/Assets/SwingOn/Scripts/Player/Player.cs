@@ -62,6 +62,6 @@ public class Player : MonoBehaviour
         aniCtrl.SetBool("isMove",moveCtrl.IsMove);
         aniCtrl.SetBool("isRun",moveCtrl.IsRun);
         aniCtrl.SetFloat("X", moveCtrl.X);
-        aniCtrl.SetFloat("X", moveCtrl.Z);
+        aniCtrl.SetFloat("Z", moveCtrl.Z);
     }
 }
