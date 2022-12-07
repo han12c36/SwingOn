@@ -23,7 +23,6 @@ public class MoveCtrl : MonoBehaviour
     private float z;
     private float animation_X;
     private float animation_Z;
-    private float animationBlendSpeed = 0.1f;
 
     private Vector3 preDir;
     public Vector3 curDir;
@@ -97,15 +96,28 @@ public class MoveCtrl : MonoBehaviour
         transform.position += curDir * cur_Speed * Time.deltaTime;
     }
 
+    private void ToMax(ref float value,float max)
+    {
+        if (value < max) value += Time.deltaTime;
+        else value = max;
+    }
+    private void ToMin(ref float value,float min)
+    {
+        if (value > min) value -= Time.deltaTime;
+        else value = min;
+    }
+
     private void UpdateAnimationValue()
     {
         if (x > 0.0f)
         {
+            //ToMax(ref animation_X, 1.0f);
             if (animation_X < 1.0f) animation_X += Time.deltaTime;
             else animation_X = 1.0f;
         }
         if (x < 0.0f)
         {
+            //ToMin(ref animation_X, 0.0f);
             if (animation_X > -1.0f) animation_X -= Time.deltaTime;
             else animation_X = -1.0f;
         }
