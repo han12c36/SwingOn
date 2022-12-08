@@ -46,7 +46,7 @@ public class ActionTable : MonoBehaviour
     {
         Initialize();
         actions[(int)Enums.PlayerActions.None] = new None();
-        actions[(int)Enums.PlayerActions.Normal] = new NormalAtt();
+        actions[(int)Enums.PlayerActions.NormalAtt] = new NormalAtt();
         actions[(int)Enums.PlayerActions.Skill_1] = new Skill_1();
         actions[(int)Enums.PlayerActions.Skill_2] = new Skill_2();
         actions[(int)Enums.PlayerActions.Skill_3] = new Skill_3();
@@ -107,9 +107,7 @@ public class ActionTable : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            owner.GetAniCtrl.SetTrigger("isSwing");
-
-            //SetCurAction((int)Enums.PlayerActions.Normal);
+            SetCurAction((int)Enums.PlayerActions.NormalAtt);
         }
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {

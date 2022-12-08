@@ -29,7 +29,7 @@ namespace Enums
     public enum PlayerActions
     {
         None,
-        Normal,
+        NormalAtt,
         Skill_1,
         Skill_2,
         Skill_3,

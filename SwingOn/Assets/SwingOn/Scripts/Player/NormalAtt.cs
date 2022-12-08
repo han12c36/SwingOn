@@ -7,8 +7,7 @@ public class NormalAtt : Action
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-        me.GetActionTable.ClickCount++;
-        
+        me.GetAniCtrl.SetTrigger("isSwing");
     }
 
     public override void ActionUpdate()
@@ -22,5 +21,6 @@ public class NormalAtt : Action
     public override void ActionExit()
     {
         Debug.Log("노말공격 나가기");
+        me.GetActionTable.isAttFinish = false;
     }
 }
