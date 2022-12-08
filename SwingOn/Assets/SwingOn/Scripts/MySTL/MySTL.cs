@@ -29,6 +29,14 @@ namespace Structs
         public int curHp;
     }
 
+    [System.Serializable]
+    public struct Components
+    {
+        public Rigidbody rigid;
+        public Collider collider;
+        public Animator aniCtrl;
+    }
+
 }
 
 

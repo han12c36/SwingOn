@@ -4,34 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance = null;
 
-    public static Player instance;
-
-    [Header("Status")]
     public Structs.Status status;
-
-    [Header("Component")]
-    [SerializeField]
-    private Rigidbody rigid;
-    [SerializeField]
-    private Collider collider;
-    [SerializeField]
-    private Animator aniCtrl;
-
-    [Header("MoveCtrl")]
+    [Space(5f)]
+    public Structs.Components components;
+    [Space(5f)]
     [SerializeField]
     private MoveCtrl moveCtrl;
 
-    public MoveCtrl MoveController { set { moveCtrl = value; } }
+    public MoveCtrl SetMoveCtrl { set { moveCtrl = value; } }
 
     private void Initialize()
     {
         status.unitName = Enums.UnitNameTable.Player;
         status.maxHp = 100;
         status.curHp = status.maxHp;
-        rigid = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
-        aniCtrl = GetComponent<Animator>();
+        components.rigid = GetComponent<Rigidbody>();
+        components.collider = GetComponent<Collider>();
+        components.aniCtrl = GetComponent<Animator>();
         moveCtrl = GetComponent<MoveCtrl>();
     }
 
@@ -59,9 +50,9 @@ public class Player : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        aniCtrl.SetBool("isMove",moveCtrl.IsMove);
-        aniCtrl.SetBool("isRun",moveCtrl.IsRun);
-        aniCtrl.SetFloat("X", moveCtrl.X);
-        aniCtrl.SetFloat("Z", moveCtrl.Z);
-    }
+        components.aniCtrl.SetBool("isMove",moveCtrl.IsMove);
+        components.aniCtrl.SetBool("isRun",moveCtrl.IsRun);
+        components.aniCtrl.SetFloat("X", moveCtrl.X);
+        components.aniCtrl.SetFloat("Z", moveCtrl.Z);
+    }   
 }

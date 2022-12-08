@@ -22,7 +22,7 @@ public class MoveCtrl : MonoBehaviour
     private float animation_Z;
 
     private Vector3 preDir;
-    public Vector3 curDir;
+    private Vector3 curDir;
     private float AccelerationValue = 3.0f;
     private float RunPercent = 0.8f;
 
@@ -34,7 +34,7 @@ public class MoveCtrl : MonoBehaviour
     void Start()
     {
         ctrl_Owner = GetComponent<Player>();
-        if (ctrl_Owner) ctrl_Owner.MoveController = this;
+        if (ctrl_Owner) ctrl_Owner.SetMoveCtrl = this;
         init_Speed = cur_Speed;
     }
 
