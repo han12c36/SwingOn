@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoveCtrl : MonoBehaviour
 {
+    [SerializeField]
+    private bool canMove = true;
     [Header("Ctrl_Owner")]
     private Player ctrl_Owner;
 
@@ -26,20 +28,26 @@ public class MoveCtrl : MonoBehaviour
     private float AccelerationValue = 3.0f;
     private float RunPercent = 0.8f;
 
+    public bool CanMove { get { return canMove; } set{ canMove = value; } }
     public float X { get { return animation_X; } }
     public float Z { get { return animation_Z; } }
     public bool IsMove { get { return isMove; } }
     public bool IsRun { get { return isRun; } }
 
-    void Start()
+    private void Awake()
     {
         ctrl_Owner = GetComponent<Player>();
-        if (ctrl_Owner) ctrl_Owner.SetMoveCtrl = this;
+        if (ctrl_Owner) ctrl_Owner.MoveCtrl = this;
+    }
+    void Start()
+    {
+       
         init_Speed = cur_Speed;
     }
 
     void Update()
     {
+        if (!canMove) return;
         GetInput();
         UpdateAnimationBlendValue();
         CheckMovement();

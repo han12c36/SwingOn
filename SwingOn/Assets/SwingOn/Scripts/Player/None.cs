@@ -7,12 +7,16 @@ public class None : Action
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-        Debug.Log("아무것도 아닌 상태 들어옴");
-        me.GetActionTable.isAttFinish = false;
+        //if(!me.MoveCtrl)me.MoveCtrl.CanMove = true;
+        me.GetActionTable.AnimationSpeed = 1.0f;
     }
 
     public override void ActionUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.NormalAtt);
+        }
     }
     public override void ActionExit()
     {

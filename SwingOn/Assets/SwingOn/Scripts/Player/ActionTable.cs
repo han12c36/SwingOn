@@ -13,24 +13,19 @@ public class ActionTable : MonoBehaviour
     private Enums.PlayerActions preAction_e;
     [SerializeField]
     private Enums.PlayerActions curAction_e;
+    [SerializeField]
+    private bool isAttFinish;
 
     [SerializeField]
-    private int clickCount;
-    [SerializeField]
-    private float comboTime = 0.5f;
-    [SerializeField]
-    private float timer = 0.0f;
-
-    public bool isAttFinish;
+    private float animationSpeed = 1.0f;
 
     public Vector3 dashstartPos;
     public Vector3 dashtargetPos;
     public float dashSpeed = 0.1f;      //´ë½¬ ¼Óµµ
     public float DashLength = 5.0f;     //´ë½¬ ±æÀÌ
 
-    public float Timer { get { return timer; } set { timer = value; }  }
-    public int ClickCount { get { return clickCount; } set { clickCount = value; } }
-    public float GetComboTime { get { return comboTime; }}
+    public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
+    public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
 
 
     private void Initialize()
@@ -56,11 +51,12 @@ public class ActionTable : MonoBehaviour
     }
     private void Start()
     {
+        animationSpeed = 1.0f;
     }
     private void Update()
     {
         GetInput();
-
+        if (Att_Finish) Debug.Log("³¡³µ´Ù°í ÂïÈû");
         if (curAction != null) curAction.ActionUpdate();
     }
     private void FixedUpdate()
@@ -105,10 +101,7 @@ public class ActionTable : MonoBehaviour
 
     private void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            SetCurAction((int)Enums.PlayerActions.NormalAtt);
-        }
+        
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             SetCurAction((int)Enums.PlayerActions.Skill_1);
@@ -126,21 +119,6 @@ public class ActionTable : MonoBehaviour
     {
         return owner.GetAniCtrl.GetCurrentAnimatorStateInfo(0).normalizedTime > time;
     }
-
-    public void ComboCheck(int Comboindex)
-    {
-        if (Comboindex == 1)
-        {
-            if (Comboindex == clickCount -1) owner.GetAniCtrl.SetTrigger("goCombo2");
-        }
-        else if (Comboindex == 2)
-        {
-            if (Comboindex == clickCount - 1) owner.GetAniCtrl.SetTrigger("goCombo3");
-        }
-        else if (Comboindex == 3)
-        {
-            if (Comboindex == clickCount - 1) owner.GetAniCtrl.SetTrigger("goCombo4");
-        }
-    }
+    
     public void AttFinish() { isAttFinish = true; }
 } 

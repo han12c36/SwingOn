@@ -10,12 +10,13 @@ public class Player : MonoBehaviour
     [Space(5f)]
     public Structs.UnitComponents components;
     [Space(5f)]
+    [SerializeField]
     private ActionTable actionTable;
     [Space(5f)]
     [SerializeField]
     private MoveCtrl moveCtrl;
 
-    public MoveCtrl SetMoveCtrl { set { moveCtrl = value; } }
+    public MoveCtrl MoveCtrl { get { return moveCtrl; } set { moveCtrl = value; } }
     public ActionTable SetActionTable { set { actionTable = value; } }
     public ActionTable GetActionTable { get { return actionTable; } }
     public Animator GetAniCtrl { get { return components.aniCtrl; } }
