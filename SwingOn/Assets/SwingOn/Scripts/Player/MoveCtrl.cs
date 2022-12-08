@@ -10,12 +10,9 @@ public class MoveCtrl : MonoBehaviour
     [Header("Speed")]
     public float max_Speed;
     public float cur_Speed;
+    public float max_BackSpeed;
 
-    [Space(10f)]
-    [Header("Bool")]
-    [SerializeField]
     private bool isMove;
-    [SerializeField]
     private bool isRun;
 
     private float init_Speed;
@@ -44,7 +41,7 @@ public class MoveCtrl : MonoBehaviour
     void Update()
     {
         GetInput();
-        UpdateAnimationValue();
+        UpdateAnimationBlendValue();
         CheckMovement();
         Move();
     }
@@ -62,7 +59,7 @@ public class MoveCtrl : MonoBehaviour
 
         if (isMove)
         {
-            if (cur_Speed >= max_Speed * RunPercent) isRun = true;
+            if (cur_Speed >= max_Speed * RunPercent || cur_Speed >= max_BackSpeed * RunPercent) isRun = true;
             else isRun = false;
         }
         else isRun = false;
@@ -89,83 +86,52 @@ public class MoveCtrl : MonoBehaviour
         else
         {
             //°¡¼Ó
-            if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
-            else cur_Speed = max_Speed;
+            if (curDir.z >= 0.0f)
+            {
+                if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
+                else cur_Speed = max_Speed;
+            }
+            else
+            {
+                if (cur_Speed < max_BackSpeed) cur_Speed += Time.deltaTime * AccelerationValue;
+                else cur_Speed = max_BackSpeed;
+            }
         }
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
     }
 
-    private void ToMax(ref float value,float max)
+    private float ToMax(float value,float max)
     {
         if (value < max) value += Time.deltaTime;
         else value = max;
+
+        return value;
     }
-    private void ToMin(ref float value,float min)
+    private float ToMin(float value,float min)
     {
         if (value > min) value -= Time.deltaTime;
         else value = min;
+        return value;
     }
 
-    private void UpdateAnimationValue()
+    private void UpdateAnimationBlendValue()
     {
-        if (x > 0.0f)
-        {
-            //ToMax(ref animation_X, 1.0f);
-            if (animation_X < 1.0f) animation_X += Time.deltaTime;
-            else animation_X = 1.0f;
-        }
-        if (x < 0.0f)
-        {
-            //ToMin(ref animation_X, 0.0f);
-            if (animation_X > -1.0f) animation_X -= Time.deltaTime;
-            else animation_X = -1.0f;
-        }
-
-        if (z > 0.0f)
-        {
-            if (animation_Z < 1.0f) animation_Z += Time.deltaTime;
-            else animation_Z = 1.0f;
-        }
-        if (z < 0.0f)
-        {
-            if (animation_Z > -1.0f) animation_Z -= Time.deltaTime;
-            else animation_Z = -1.0f;
-        }
-
+        if (x > 0.0f) animation_X = ToMax(animation_X, 1.0f);
+        if (x < 0.0f) animation_X = ToMin(animation_X, -1.0f);
+        if (z > 0.0f) animation_Z = ToMax(animation_Z, 1.0f);
+        if (z < 0.0f) animation_Z = ToMin(animation_Z, -1.0f);
         if (x == 0.0f)
         {
-            if (animation_X > 0.0f)
-            {
-                animation_X -= Time.deltaTime;
-                if (animation_X <= 0.0f) animation_X = 0.0f;
-            }
-            else if (animation_X < 0.0f)
-            {
-                animation_X += Time.deltaTime;
-                if (animation_X >= 0.0f) animation_X = 0.0f;
-            }
-            else
-            {
-                animation_X = 0.0f;
-            }
+            if (animation_X > 0.0f) animation_X = ToMin(animation_X, 0.0f);
+            else if (animation_X < 0.0f) animation_X = ToMax(animation_X, 0.0f);
+            else animation_X = 0.0f;
         }
         if (z == 0.0f)
         {
-            if (animation_Z > 0.0f)
-            {
-                animation_Z -= Time.deltaTime;
-                if (animation_Z <= 0.0f) animation_Z = 0.0f;
-            }
-            else if (animation_Z < 0.0f)
-            {
-                animation_Z += Time.deltaTime;
-                if (animation_Z >= 0.0f) animation_Z = 0.0f;
-            }
-            else
-            {
-                animation_Z = 0.0f;
-            }
+            if (animation_Z > 0.0f) animation_Z = ToMin(animation_Z, 0.0f);
+            else if (animation_Z < 0.0f) animation_Z = ToMax(animation_Z, 0.0f);
+            else animation_Z = 0.0f;
         }
     }
 }
