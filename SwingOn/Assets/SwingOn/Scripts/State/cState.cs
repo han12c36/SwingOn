@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class cState : MonoBehaviour
+public class cState : MonoBehaviour
 {
 
 

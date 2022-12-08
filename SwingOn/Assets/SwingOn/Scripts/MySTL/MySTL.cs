@@ -16,6 +16,27 @@ namespace Enums
         Enemy_B,
         End
     }
+
+    public enum PlayerStates
+    {
+        None,
+        Idle,
+        Move,
+        Att,
+        Death,
+        End
+    }
+    public enum PlayerActions
+    {
+        None,
+        Normal,
+        Skill_1,
+        Skill_2,
+        Skill_3,
+        End
+    }
+
+
 }
 
 namespace Structs
@@ -30,7 +51,7 @@ namespace Structs
     }
 
     [System.Serializable]
-    public struct Components
+    public struct UnitComponents
     {
         public Rigidbody rigid;
         public Collider collider;

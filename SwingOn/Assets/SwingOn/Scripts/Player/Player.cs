@@ -8,12 +8,19 @@ public class Player : MonoBehaviour
 
     public Structs.Status status;
     [Space(5f)]
-    public Structs.Components components;
+    public Structs.UnitComponents components;
+    [Space(5f)]
+    private ActionTable actionTable;
     [Space(5f)]
     [SerializeField]
     private MoveCtrl moveCtrl;
 
     public MoveCtrl SetMoveCtrl { set { moveCtrl = value; } }
+    public ActionTable SetActionTable { set { actionTable = value; } }
+    public ActionTable GetActionTable { get { return actionTable; } }
+    public Animator GetAniCtrl { get { return components.aniCtrl; } }
+    public Rigidbody GetRigid { get { return components.rigid; } }
+
 
     private void Initialize()
     {
@@ -47,6 +54,8 @@ public class Player : MonoBehaviour
     {
         
     }
+
+    
 
     private void UpdateAnimation()
     {
