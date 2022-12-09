@@ -56,13 +56,17 @@ public class Player : MonoBehaviour
         
     }
 
-    
-
     private void UpdateAnimation()
     {
         components.aniCtrl.SetBool("isMove",moveCtrl.IsMove);
         components.aniCtrl.SetBool("isRun",moveCtrl.IsRun);
         components.aniCtrl.SetFloat("X", moveCtrl.X);
         components.aniCtrl.SetFloat("Z", moveCtrl.Z);
-    }   
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        //Color col = Color.black;
+        //Debug.DrawRay(transform.position, transform.forward, col, 10f);
+    }
 }
