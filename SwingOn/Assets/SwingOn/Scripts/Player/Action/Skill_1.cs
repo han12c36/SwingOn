@@ -16,7 +16,17 @@ public class Skill_1 : Action
     }
     public override void ActionUpdate()
     {
-        if(me.GetActionTable.Dash_Finish)
+        if(!me.GetAniCtrl.GetBool("DoubleDash"))
+        {
+            if (me.GetActionTable.AttType == Enums.PlayerAttType.Hard)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    me.GetAniCtrl.SetBool("DoubleDash",true);
+                }
+            }
+        }
+        if (me.GetActionTable.Dash_Finish)
         {
             me.GetActionTable.Dash_Finish = false;
             me.GetActionTable.SetCurAction((int)Enums.PlayerActions.None);
@@ -39,6 +49,7 @@ public class Skill_1 : Action
     {
         Debug.Log("´ë½¬³¡");
         me.GetAniCtrl.ResetTrigger("Skill_1");
+        me.GetAniCtrl.SetBool("DoubleDash", false);
         //startPos = Vector3.zero;
         //targetPos = Vector3.zero;
     }
