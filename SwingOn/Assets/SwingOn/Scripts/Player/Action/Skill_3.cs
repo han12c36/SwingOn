@@ -23,7 +23,6 @@ public class Skill_3 : Action
         if(me.GetActionTable.Equipt_Finish)
         {
             me.GetActionTable.Equipt_Finish = false;
-            me.GetActionTable.ModeChange = false;
             me.GetActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }
@@ -41,7 +40,6 @@ public class Skill_3 : Action
         {
             me.GetActionTable.AttType = Enums.PlayerAttType.Normal;
         }
-        me.GetActionTable.ModeChange = false;
         me.GetAniCtrl.SetBool("ModeChange", false);
         me.GetAniCtrl.SetLayerWeight(1, 0.0f);
         me.GetAniCtrl.SetLayerWeight(2, 0.0f);

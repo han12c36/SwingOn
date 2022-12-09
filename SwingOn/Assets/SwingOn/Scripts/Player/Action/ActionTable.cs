@@ -21,8 +21,6 @@ public class ActionTable : MonoBehaviour
     private bool isDashFinish;
     [SerializeField]
     private bool isBlitzFinish;
-    [SerializeField]
-    private bool modeChange;
     private float animationSpeed = 1.0f;
     [SerializeField]
     private Enums.PlayerAttType attType;
@@ -36,7 +34,6 @@ public class ActionTable : MonoBehaviour
     public float hardDashSpeed = 0.2f;          //하드 대쉬 속도
     public float hardDashDistance = 3.0f;       //하드 대쉬 길이
 
-    public bool ModeChange { get { return modeChange; } set { modeChange = value; } }
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
     public bool Dash_Finish { get { return isDashFinish; } set { isDashFinish = value; } }

@@ -22,7 +22,6 @@ public class None : Action
     }
     public override void ActionExit()
     {
-        me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetLayerWeight(2, 0.0f);
     }
 
