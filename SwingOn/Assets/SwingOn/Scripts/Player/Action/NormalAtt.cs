@@ -14,7 +14,10 @@ public class NormalAtt : Action
 
     public override void ActionUpdate()
     {
-
+        if (me.GetActionTable.ModeChange)
+        {
+            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.Skill_3);
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0)) me.GetAniCtrl.SetTrigger("NormalSwing");
 
         if (me.GetActionTable.Att_Finish)

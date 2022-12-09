@@ -23,19 +23,25 @@ public class ActionTable : MonoBehaviour
 
     [SerializeField]
     private Enums.PlayerAttType attType;
+    [SerializeField]
+    private bool modeChange;
 
     public float hardModeDurationTime = 3.0f;
-    private float timer;
+    [SerializeField]
+    private float modeDurtaionTimer;
 
     public Vector3 dashstartPos;
     public Vector3 dashtargetPos;
     public float dashSpeed = 0.1f;      //¥ÎΩ¨ º”µµ
     public float DashLength = 5.0f;     //¥ÎΩ¨ ±Ê¿Ã
 
+    public bool ModeChange { get { return modeChange; } set { modeChange = value; } }
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
 
     public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
+    public float ModeDurtaionTimer { get { return modeDurtaionTimer; } set { modeDurtaionTimer = value; } }
+
     public Enums.PlayerAttType AttType { get { return attType; } set { attType = value; } }
 
     private void Initialize()
@@ -66,15 +72,8 @@ public class ActionTable : MonoBehaviour
     }
     private void Update()
     {
-        if(attType == Enums.PlayerAttType.Hard)
-        {
-            if (timer < hardModeDurationTime) timer += Time.deltaTime;
-            else
-            {
-                timer = 0.0f;
-                attType = Enums.PlayerAttType.Normal;
-            }
-        }
+        Mode_Change();
+
         if (Att_Finish) Debug.Log("≥°≥µ¥Ÿ∞Ì ¬Ô»˚");
         if (curAction != null) curAction.ActionUpdate();
 
@@ -119,6 +118,23 @@ public class ActionTable : MonoBehaviour
         curAction.ActionEnter(owner);
     }
 
+    private void Mode_Change()
+    {
+        if (attType == Enums.PlayerAttType.Hard)
+        {
+            if (modeDurtaionTimer < hardModeDurationTime &&
+                curAction != actions[(int)Enums.PlayerActions.Skill_3]) modeDurtaionTimer += Time.deltaTime;
+            else
+            {
+                modeDurtaionTimer = 0.0f;
+                ModeChange = true;
+            }
+        }
+        else if (AttType == Enums.PlayerAttType.Normal)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha3)) ModeChange = true;
+        }
+    }
    
     public bool isCurrentAnimationOver(float time)
     {

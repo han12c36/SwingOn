@@ -14,6 +14,10 @@ public class None : Action
     public override void ActionUpdate()
     {
         GetInput();
+        if(me.GetActionTable.ModeChange)
+        {
+            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.Skill_3);
+        }
     }
     public override void ActionExit()
     {
@@ -40,10 +44,6 @@ public class None : Action
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             me.GetActionTable.SetCurAction((int)Enums.PlayerActions.Skill_2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.Skill_3);
         }
     }
 }

@@ -14,6 +14,10 @@ public class HardAtt : Action
 
     public override void ActionUpdate()
     {
+        if (me.GetActionTable.ModeChange)
+        {
+            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.Skill_3);
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0)) me.GetAniCtrl.SetTrigger("HardSwing");
 
         if (me.GetActionTable.Att_Finish)
