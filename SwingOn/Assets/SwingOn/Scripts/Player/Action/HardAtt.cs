@@ -28,6 +28,7 @@ public class HardAtt : Action
     }
     public override void ActionExit()
     {
+        me.GetAniCtrl.ResetTrigger("HardSwing");
         me.GetActionTable.Att_Finish = false;
         me.GetAniCtrl.applyRootMotion = false;
         me.MoveCtrl.CanMove = true;

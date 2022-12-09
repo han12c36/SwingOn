@@ -17,6 +17,8 @@ public class ActionTable : MonoBehaviour
     private bool isAttFinish;
     [SerializeField]
     private bool isEquptFinish;
+    [SerializeField]
+    private bool isDashFinish;
 
     [SerializeField]
     private float animationSpeed = 1.0f;
@@ -26,7 +28,7 @@ public class ActionTable : MonoBehaviour
     [SerializeField]
     private bool modeChange;
 
-    public float hardModeDurationTime = 3.0f;
+    public float hardModeDurationTime = 10.0f;
     [SerializeField]
     private float modeDurtaionTimer;
 
@@ -38,6 +40,7 @@ public class ActionTable : MonoBehaviour
     public bool ModeChange { get { return modeChange; } set { modeChange = value; } }
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
+    public bool Dash_Finish { get { return isDashFinish; } set { isDashFinish = value; } }
 
     public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
     public float ModeDurtaionTimer { get { return modeDurtaionTimer; } set { modeDurtaionTimer = value; } }
@@ -143,5 +146,6 @@ public class ActionTable : MonoBehaviour
     
     public void AttFinish() { isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }
+    public void DashFinish() { isDashFinish = true; }
 
 }

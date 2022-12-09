@@ -28,6 +28,7 @@ public class NormalAtt : Action
     }
     public override void ActionExit()
     {
+        me.GetAniCtrl.ResetTrigger("NormalSwing");
         me.GetActionTable.Att_Finish = false;
         me.GetAniCtrl.applyRootMotion = false;
         me.MoveCtrl.CanMove = true;
