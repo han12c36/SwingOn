@@ -204,5 +204,4 @@ public class ActionTable : MonoBehaviour
         if(value == 0) owner.PlayerWeapon.OnOffWeaponCollider(true);
         else owner.PlayerWeapon.OnOffWeaponCollider(false);
     }
-
 }

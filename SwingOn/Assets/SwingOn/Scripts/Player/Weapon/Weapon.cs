@@ -40,6 +40,7 @@ public class Weapon : MonoBehaviour
         if(other.gameObject.layer == detectionLayer)
         {
             Debug.Log("적이 한대 맞음!!");
+
         }
     }
 }
