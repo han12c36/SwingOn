@@ -9,7 +9,7 @@ public class None : Action
         base.ActionEnter(script);
         me.MoveCtrl.CanMove = true;
         me.GetActionTable.AnimationSpeed = 1.0f;
-        me.GetAniCtrl.SetLayerWeight(2, 1.0f);
+        //me.GetAniCtrl.SetLayerWeight(2, 1.0f);
     }
 
     public override void ActionUpdate()
@@ -22,7 +22,7 @@ public class None : Action
     }
     public override void ActionExit()
     {
-        me.GetAniCtrl.SetLayerWeight(2, 0.0f);
+        //me.GetAniCtrl.SetLayerWeight(2, 0.0f);
     }
 
     private void GetInput()

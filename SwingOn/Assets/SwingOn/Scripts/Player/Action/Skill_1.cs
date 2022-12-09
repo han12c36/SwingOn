@@ -38,6 +38,7 @@ public class Skill_1 : Action
         {
             if (!me.GetActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
         }
+
         if (me.GetActionTable.Dash_Finish)
         {
             me.GetActionTable.Dash_Finish = false;
