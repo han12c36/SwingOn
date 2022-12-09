@@ -7,11 +7,12 @@ public class Skill_3 : Action
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
+        me.GetAniCtrl.SetLayerWeight(1, 1.0f);
+        me.GetAniCtrl.SetLayerWeight(2, 1.0f);
         me.GetAniCtrl.ResetTrigger("NormalSwing");
         me.GetAniCtrl.ResetTrigger("HardSwing");
         me.GetActionTable.Att_Finish = false;
         me.GetAniCtrl.applyRootMotion = false;
-        me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetTrigger("Skill_3");
         me.GetAniCtrl.SetBool("ModeChange",true);
     }
@@ -41,7 +42,8 @@ public class Skill_3 : Action
             me.GetActionTable.AttType = Enums.PlayerAttType.Normal;
         }
         me.GetActionTable.ModeChange = false;
-        me.MoveCtrl.CanMove = true;
         me.GetAniCtrl.SetBool("ModeChange", false);
+        me.GetAniCtrl.SetLayerWeight(1, 0.0f);
+        me.GetAniCtrl.SetLayerWeight(2, 0.0f);
     }
 }

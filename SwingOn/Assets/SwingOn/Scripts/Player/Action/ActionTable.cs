@@ -14,7 +14,6 @@ public class ActionTable : MonoBehaviour
     [SerializeField]
     private Enums.PlayerActions curAction_e;
     [SerializeField]
-
     private bool isAttFinish;
     [SerializeField]
     private bool isEquptFinish;
@@ -25,8 +24,9 @@ public class ActionTable : MonoBehaviour
     [SerializeField]
     private bool modeChange;
     private float animationSpeed = 1.0f;
+    [SerializeField]
     private Enums.PlayerAttType attType;
-
+    [SerializeField]
     private float modeDurtaionTimer;
     public float hardModeDurationTime = 10.0f;
     [Header("NormalDash")]
@@ -78,6 +78,18 @@ public class ActionTable : MonoBehaviour
     {
         Mode_Change();
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (AttType == Enums.PlayerAttType.Normal)
+            {
+                SetCurAction((int)Enums.PlayerActions.NormalAtt);
+            }
+            else if (AttType == Enums.PlayerAttType.Hard)
+            {
+                SetCurAction((int)Enums.PlayerActions.HardAtt);
+            }
+        }
+
         if (Att_Finish) Debug.Log("³¡³µ´Ù°í ÂïÈû");
         if (curAction != null) curAction.ActionUpdate();
 
@@ -124,19 +136,26 @@ public class ActionTable : MonoBehaviour
 
     private void Mode_Change()
     {
+        if (curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (AttType == Enums.PlayerAttType.Normal)
+            {
+                SetCurAction((int)Enums.PlayerActions.Skill_3);
+            }
+        }
         if (attType == Enums.PlayerAttType.Hard)
         {
-            if (modeDurtaionTimer < hardModeDurationTime &&
-                curAction != actions[(int)Enums.PlayerActions.Skill_3]) modeDurtaionTimer += Time.deltaTime;
+            if (modeDurtaionTimer < hardModeDurationTime)
+            {
+                modeDurtaionTimer += Time.deltaTime;
+            }
             else
             {
                 modeDurtaionTimer = 0.0f;
-                ModeChange = true;
+                SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
-        }
-        else if (AttType == Enums.PlayerAttType.Normal)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha3)) ModeChange = true;
+
         }
     }
    
