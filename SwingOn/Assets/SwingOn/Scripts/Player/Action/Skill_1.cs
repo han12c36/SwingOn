@@ -50,7 +50,6 @@ public class Skill_1 : Action
 
     public override void ActionExit()
     {
-        Debug.Log("대쉬끝");
         me.GetAniCtrl.ResetTrigger("Skill_1");
         me.GetAniCtrl.SetBool("DoubleDash", false);
         me.MoveCtrl.CanMove = true;
@@ -60,14 +59,10 @@ public class Skill_1 : Action
     }
     private void NormalDash()
     {
-        Debug.Log("현재 노말 대쉬중");
         me.transform.position = Vector3.Lerp(me.transform.position, targetPos_1, me.GetActionTable.normalDashSpeed);
     }
     private void HardDash()
     {
-        //쪼금 다르게 해야될듯
-        //도착점을 예측해서 타겟 재지정 해야할듯
-        Debug.Log("현재 하드 대쉬중");
         me.transform.position = Vector3.Lerp(me.transform.position, targetPos_2, me.GetActionTable.hardDashSpeed);
     }
 }

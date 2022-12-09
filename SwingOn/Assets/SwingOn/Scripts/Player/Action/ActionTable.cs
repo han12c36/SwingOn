@@ -13,9 +13,16 @@ public class ActionTable : MonoBehaviour
     private Enums.PlayerActions preAction_e;
     [SerializeField]
     private Enums.PlayerActions curAction_e;
+    [SerializeField]
+
     private bool isAttFinish;
+    [SerializeField]
     private bool isEquptFinish;
+    [SerializeField]
     private bool isDashFinish;
+    [SerializeField]
+    private bool isBlitzFinish;
+    [SerializeField]
     private bool modeChange;
     private float animationSpeed = 1.0f;
     private Enums.PlayerAttType attType;
@@ -33,6 +40,8 @@ public class ActionTable : MonoBehaviour
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
     public bool Dash_Finish { get { return isDashFinish; } set { isDashFinish = value; } }
+    public bool Blitz_Finish { get { return isBlitzFinish; } set { isBlitzFinish = value; } }
+
 
     public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
     public float ModeDurtaionTimer { get { return modeDurtaionTimer; } set { modeDurtaionTimer = value; } }
@@ -139,5 +148,6 @@ public class ActionTable : MonoBehaviour
     public void AttFinish() { isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }
     public void DashFinish() { isDashFinish = true; }
+    public void BlitzFinish() { isBlitzFinish = true; }
 
 }
