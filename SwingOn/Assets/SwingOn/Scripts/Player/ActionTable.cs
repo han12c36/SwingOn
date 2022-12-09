@@ -47,10 +47,10 @@ public class ActionTable : MonoBehaviour
         actions[(int)Enums.PlayerActions.Skill_3] = new Skill_3();
 
 
-        SetCurAction((int)Enums.PlayerActions.None);
     }
     private void Start()
     {
+        SetCurAction((int)Enums.PlayerActions.None);
         animationSpeed = 1.0f;
     }
     private void Update()

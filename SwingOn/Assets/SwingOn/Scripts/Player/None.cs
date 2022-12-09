@@ -20,5 +20,6 @@ public class None : Action
     }
     public override void ActionExit()
     {
+        me.MoveCtrl.CanMove = false;
     }
 }
