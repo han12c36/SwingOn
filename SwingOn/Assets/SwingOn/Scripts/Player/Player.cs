@@ -15,13 +15,15 @@ public class Player : MonoBehaviour
     [Space(5f)]
     [SerializeField]
     private MoveCtrl moveCtrl;
+    [SerializeField]
+    private Weapon player_Weapon;
 
     public MoveCtrl MoveCtrl { get { return moveCtrl; } set { moveCtrl = value; } }
+    public Weapon PlayerWeapon { get { return player_Weapon; } set { player_Weapon = value; } }
     public ActionTable SetActionTable { set { actionTable = value; } }
     public ActionTable GetActionTable { get { return actionTable; } }
     public Animator GetAniCtrl { get { return components.aniCtrl; } }
     public Rigidbody GetRigid { get { return components.rigid; } }
-
 
     private void Initialize()
     {

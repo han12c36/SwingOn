@@ -139,7 +139,6 @@ public class ActionTable : MonoBehaviour
         }
         else if (attType == Enums.PlayerAttType.Hard)
         {
-            
             if (modeDurtaionTimer < hardModeDurationTime)
             {
                 modeDurtaionTimer += Time.deltaTime;
@@ -200,4 +199,10 @@ public class ActionTable : MonoBehaviour
     public void EquiptFinish() { isEquptFinish = true; }
     public void DashFinish() { if (!modeChange) isDashFinish = true; }
     public void BlitzFinish() { if (!modeChange) isBlitzFinish = true; }
+    public void OnOffWeaponCollider(int value)
+    {
+        if(value == 0) owner.PlayerWeapon.OnOffWeaponCollider(true);
+        else owner.PlayerWeapon.OnOffWeaponCollider(false);
+    }
+
 }
