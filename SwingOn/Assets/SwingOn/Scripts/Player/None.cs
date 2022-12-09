@@ -7,7 +7,7 @@ public class None : Action
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-        //if(!me.MoveCtrl)me.MoveCtrl.CanMove = true;
+        me.MoveCtrl.CanMove = true;
         me.GetActionTable.AnimationSpeed = 1.0f;
     }
 

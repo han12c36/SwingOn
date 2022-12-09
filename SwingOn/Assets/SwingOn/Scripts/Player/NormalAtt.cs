@@ -10,7 +10,6 @@ public class NormalAtt : Action
         me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetTrigger("isSwing");
         me.GetAniCtrl.applyRootMotion = true;
-        //Debug.Log("공격 들어오기");
     }
 
     public override void ActionUpdate()
@@ -28,6 +27,5 @@ public class NormalAtt : Action
         me.GetActionTable.Att_Finish = false;
         me.GetAniCtrl.applyRootMotion = false;
         me.MoveCtrl.CanMove = true;
-        //Debug.Log("공격 나가기");
     }
 }
