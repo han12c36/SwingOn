@@ -21,6 +21,7 @@ public class ActionTable : MonoBehaviour
     private bool isDashFinish;
     [SerializeField]
     private bool isBlitzFinish;
+
     private float animationSpeed = 1.0f;
     [SerializeField]
     private Enums.PlayerAttType attType;
@@ -38,6 +39,7 @@ public class ActionTable : MonoBehaviour
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
     public bool Dash_Finish { get { return isDashFinish; } set { isDashFinish = value; } }
     public bool Blitz_Finish { get { return isBlitzFinish; } set { isBlitzFinish = value; } }
+
 
 
     public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
