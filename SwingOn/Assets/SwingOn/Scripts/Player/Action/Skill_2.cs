@@ -54,10 +54,12 @@ public class Skill_2 : Action
     private void NormalBlitz()
     {
         Debug.Log("전방찌르기!");
+        //몬스터가 있다는 가정하에 몬스터 뒤쪽까지 찌르기로 돌진
     }
     private void HardBlitz()
     {
         Debug.Log("샥 돌아서 뒤에서 챠챠챱");
+        //몬스터가 있다는 가정하에 몬스터 등 방향으로 휙 돌기
     }
 
 }
