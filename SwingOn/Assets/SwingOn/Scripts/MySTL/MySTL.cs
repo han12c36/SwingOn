@@ -30,11 +30,20 @@ namespace Enums
     {
         None,
         NormalAtt,
+        HardAtt,
         Skill_1,
         Skill_2,
         Skill_3,
         End
     }
+
+    public enum PlayerAttType
+    {
+        Normal,
+        Hard,
+        End
+    }
+    
 
 
 }

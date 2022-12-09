@@ -15,9 +15,17 @@ public class ActionTable : MonoBehaviour
     private Enums.PlayerActions curAction_e;
     [SerializeField]
     private bool isAttFinish;
+    [SerializeField]
+    private bool isEquptFinish;
 
     [SerializeField]
     private float animationSpeed = 1.0f;
+
+    [SerializeField]
+    private Enums.PlayerAttType attType;
+
+    public float hardModeDurationTime = 3.0f;
+    private float timer;
 
     public Vector3 dashstartPos;
     public Vector3 dashtargetPos;
@@ -25,8 +33,10 @@ public class ActionTable : MonoBehaviour
     public float DashLength = 5.0f;     //¥ÎΩ¨ ±Ê¿Ã
 
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
-    public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
+    public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
 
+    public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
+    public Enums.PlayerAttType AttType { get { return attType; } set { attType = value; } }
 
     private void Initialize()
     {
@@ -42,11 +52,12 @@ public class ActionTable : MonoBehaviour
         Initialize();
         actions[(int)Enums.PlayerActions.None] = new None();
         actions[(int)Enums.PlayerActions.NormalAtt] = new NormalAtt();
+        actions[(int)Enums.PlayerActions.HardAtt] = new HardAtt();
         actions[(int)Enums.PlayerActions.Skill_1] = new Skill_1();
         actions[(int)Enums.PlayerActions.Skill_2] = new Skill_2();
         actions[(int)Enums.PlayerActions.Skill_3] = new Skill_3();
 
-
+        attType = Enums.PlayerAttType.Normal;
     }
     private void Start()
     {
@@ -55,9 +66,18 @@ public class ActionTable : MonoBehaviour
     }
     private void Update()
     {
-        GetInput();
+        if(attType == Enums.PlayerAttType.Hard)
+        {
+            if (timer < hardModeDurationTime) timer += Time.deltaTime;
+            else
+            {
+                timer = 0.0f;
+                attType = Enums.PlayerAttType.Normal;
+            }
+        }
         if (Att_Finish) Debug.Log("≥°≥µ¥Ÿ∞Ì ¬Ô»˚");
         if (curAction != null) curAction.ActionUpdate();
+
     }
     private void FixedUpdate()
     {
@@ -99,26 +119,13 @@ public class ActionTable : MonoBehaviour
         curAction.ActionEnter(owner);
     }
 
-    private void GetInput()
-    {
-        
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetCurAction((int)Enums.PlayerActions.Skill_1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetCurAction((int)Enums.PlayerActions.Skill_2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetCurAction((int)Enums.PlayerActions.Skill_3);
-        }
-    }
+   
     public bool isCurrentAnimationOver(float time)
     {
         return owner.GetAniCtrl.GetCurrentAnimatorStateInfo(0).normalizedTime > time;
     }
     
     public void AttFinish() { isAttFinish = true; }
-} 
+    public void EquiptFinish() { isEquptFinish = true; }
+
+}
