@@ -351,6 +351,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2730953268141678827, guid: 3ef13734e7d20cc40b512412dccd437a, type: 3}
+      propertyPath: hardDashSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730953268141678827, guid: 3ef13734e7d20cc40b512412dccd437a, type: 3}
+      propertyPath: hardDashDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730953268141678827, guid: 3ef13734e7d20cc40b512412dccd437a, type: 3}
       propertyPath: hardModeDurationTime
       value: 10
       objectReference: {fileID: 0}

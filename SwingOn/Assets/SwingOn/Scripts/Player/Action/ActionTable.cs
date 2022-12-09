@@ -13,29 +13,21 @@ public class ActionTable : MonoBehaviour
     private Enums.PlayerActions preAction_e;
     [SerializeField]
     private Enums.PlayerActions curAction_e;
-    [SerializeField]
     private bool isAttFinish;
-    [SerializeField]
     private bool isEquptFinish;
-    [SerializeField]
     private bool isDashFinish;
-
-    [SerializeField]
-    private float animationSpeed = 1.0f;
-
-    [SerializeField]
-    private Enums.PlayerAttType attType;
-    [SerializeField]
     private bool modeChange;
+    private float animationSpeed = 1.0f;
+    private Enums.PlayerAttType attType;
 
-    public float hardModeDurationTime = 10.0f;
-    [SerializeField]
     private float modeDurtaionTimer;
-
-    public Vector3 dashstartPos;
-    public Vector3 dashtargetPos;
-    public float dashSpeed = 0.1f;      //대쉬 속도
-    public float DashLength = 5.0f;     //대쉬 길이
+    public float hardModeDurationTime = 10.0f;
+    [Header("NormalDash")]
+    public float normalDashSpeed = 0.1f;        //노말 대쉬 속도
+    public float normalDashDistance = 5.0f;     //노말 대쉬 길이
+    [Header("HardDash")]
+    public float hardDashSpeed = 0.2f;          //하드 대쉬 속도
+    public float hardDashDistance = 3.0f;       //하드 대쉬 길이
 
     public bool ModeChange { get { return modeChange; } set { modeChange = value; } }
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
