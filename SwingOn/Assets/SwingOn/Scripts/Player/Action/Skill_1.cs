@@ -53,6 +53,7 @@ public class Skill_1 : Action
     {
         me.GetAniCtrl.ResetTrigger("Skill_1");
         me.GetAniCtrl.SetBool("DoubleDash", false);
+        me.GetActionTable.Dash_Finish = false;
         me.MoveCtrl.CanMove = true;
         startPos = Vector3.zero;
         targetPos_1 = Vector3.zero;

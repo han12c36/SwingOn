@@ -48,6 +48,7 @@ public class Skill_2 : Action
     {
         me.GetAniCtrl.ResetTrigger("Skill_2");
         me.GetAniCtrl.SetBool("DoubleBlitz", false);
+        me.GetActionTable.Blitz_Finish = false;
         me.MoveCtrl.CanMove = true;
     }
 

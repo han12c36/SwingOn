@@ -21,6 +21,8 @@ public class ActionTable : MonoBehaviour
     private bool isDashFinish;
     [SerializeField]
     private bool isBlitzFinish;
+    [SerializeField]
+    private bool modeChange;
 
     private float animationSpeed = 1.0f;
     [SerializeField]
@@ -39,7 +41,7 @@ public class ActionTable : MonoBehaviour
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
     public bool Dash_Finish { get { return isDashFinish; } set { isDashFinish = value; } }
     public bool Blitz_Finish { get { return isBlitzFinish; } set { isBlitzFinish = value; } }
-
+    public bool ModeChange { get { return modeChange; } set { modeChange = value; } }
 
 
     public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
@@ -76,22 +78,11 @@ public class ActionTable : MonoBehaviour
     private void Update()
     {
         Mode_Change();
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if (AttType == Enums.PlayerAttType.Normal)
-            {
-                SetCurAction((int)Enums.PlayerActions.NormalAtt);
-            }
-            else if (AttType == Enums.PlayerAttType.Hard)
-            {
-                SetCurAction((int)Enums.PlayerActions.HardAtt);
-            }
-        }
-
-        if (Att_Finish) Debug.Log("³¡³µ´Ù°í ÂïÈû");
-        if (curAction != null) curAction.ActionUpdate();
-
+        ComboAtt();
+        DashAtt();
+        BlitzAtt();
+        
+        if(curAction != null) curAction.ActionUpdate();
     }
     private void FixedUpdate()
     {
@@ -138,13 +129,17 @@ public class ActionTable : MonoBehaviour
         if (curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
+               curAction == actions[(int)Enums.PlayerActions.Skill_2]) return;
             if (AttType == Enums.PlayerAttType.Normal)
             {
+                modeChange = true;
                 SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
         }
-        if (attType == Enums.PlayerAttType.Hard)
+        else if (attType == Enums.PlayerAttType.Hard)
         {
+            
             if (modeDurtaionTimer < hardModeDurationTime)
             {
                 modeDurtaionTimer += Time.deltaTime;
@@ -152,20 +147,57 @@ public class ActionTable : MonoBehaviour
             else
             {
                 modeDurtaionTimer = 0.0f;
+                modeChange = true;
                 SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
-
         }
     }
-   
+    private void ComboAtt()
+    {
+        if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
+               curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
+               curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (AttType == Enums.PlayerAttType.Normal)
+            {
+                SetCurAction((int)Enums.PlayerActions.NormalAtt);
+            }
+            else if (AttType == Enums.PlayerAttType.Hard)
+            {
+                SetCurAction((int)Enums.PlayerActions.HardAtt);
+            }
+        }
+    }
+    private void DashAtt()
+    {
+        if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
+                   curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
+                   curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SetCurAction((int)Enums.PlayerActions.Skill_1);
+        }
+    }
+    private void BlitzAtt()
+    {
+        if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
+                curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
+                curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SetCurAction((int)Enums.PlayerActions.Skill_2);
+        }
+    }
+
     public bool isCurrentAnimationOver(float time)
     {
         return owner.GetAniCtrl.GetCurrentAnimatorStateInfo(0).normalizedTime > time;
     }
-    
-    public void AttFinish() { isAttFinish = true; }
-    public void EquiptFinish() { isEquptFinish = true; }
-    public void DashFinish() { isDashFinish = true; }
-    public void BlitzFinish() { isBlitzFinish = true; }
 
+    public void AttFinish() { if (!modeChange) isAttFinish = true; }
+    public void EquiptFinish() { isEquptFinish = true; }
+    public void DashFinish() { if (!modeChange) isDashFinish = true; }
+    public void BlitzFinish() { if (!modeChange) isBlitzFinish = true; }
 }

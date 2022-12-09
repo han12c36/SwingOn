@@ -13,21 +13,8 @@ public class None : Action
 
     public override void ActionUpdate()
     {
-        GetInput();
     }
     public override void ActionExit()
     {
-    }
-
-    private void GetInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.Skill_1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.Skill_2);
-        }
     }
 }
