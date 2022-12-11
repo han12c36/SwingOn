@@ -17,11 +17,7 @@ public class GameManager : Manager<GameManager>
     private void Awake()
     {
         Debug.Log("게임 매니저 어웨이크");
-        if (Instance != this)
-        {
-            Destroy(this);
-        }
-        InstantiateManger(true);
+        if (InstantiateManger(true) != this) Destroy(this);
         sceneCtrl = GetComponent<SceneController>();
     }
 
@@ -89,7 +85,7 @@ public class GameManager : Manager<GameManager>
     private void InstantiateManagerForIntroScene()
     {
         Debug.Log("인트로씬에 필요한 매니저 생성");
-        InstantiateManger(true);
+        //InstantiateManger(true);
     }
     private void InstantiateManagerForMainTitleScene()
     {

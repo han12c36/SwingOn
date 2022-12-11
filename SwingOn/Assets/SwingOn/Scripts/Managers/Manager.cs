@@ -28,8 +28,9 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
     //순서 : 게임매니저 어웨이크 -> 이후 다른 매니저들 생성
 
     //하이라키창이나 매니저프리팹폴더에 없으면 못만들어
-    protected static void InstantiateManger(bool isDonDestroy)
+    protected static T InstantiateManger(bool isDonDestroy)
     {
+        //하이라키 창에 있으면 그냥 반환
         if (instance == null)
         {
             //하이라키창에서 본인의 유무를 검출
@@ -44,11 +45,14 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
                 T prefab = Resources.Load("ManagerPrefabs/" + typeof(T).Name) as T;
                 if (prefab)
                 {
+                    Debug.Log("하이라키창에 없으니까 프리팹폴더에서 끄내올께");
                     managerObj = Instantiate(prefab);
                     managerObj.name = prefab.name.Replace("(Clone)", string.Empty);
                 }
                 else
                 {
+                    Debug.Log("아무대도 없으니까 새로 만들께");
+
                     //하이라키에도 없고 프리팹폴더에도 없어
                     //그럼 그냥 아예 새로운놈으로 만들어
                     GameObject newManager = new GameObject(typeof(T).Name);
@@ -60,27 +64,26 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                Debug.Log("하이라키창에 있으니까 그냥 저거로 쓸께");
+            }
             
             T newInstance = managerObj.GetComponent<T>();
 
-            //if (instance != newInstance)
-            //{
-            //    //만들고봤는데 돈디스트로놈이라 살아있었어
-            //    //그래서 새로만든놈 없애버려
-            //    Destroy(newInstance);
-            //}
-
             if (isDonDestroy) RegistrationTo_DontDestroyManagerBox(newInstance);
             else RegistrationTo_CanDestroyManagerBox(newInstance);
+
+            return newInstance;
         }
-        
+        return Instance;
     }
 
     private static void RegistrationTo_CanDestroyManagerBox(T manager)
     {
         manager.transform.SetParent(GetManagerBox("CanDestroy_ManagerBox",false).transform);
     }
-    private static void RegistrationTo_DontDestroyManagerBox(T manager)
+    protected static void RegistrationTo_DontDestroyManagerBox(T manager)
     {
         manager.transform.SetParent(GetManagerBox("DontDestroy_ManagerBox",true).transform);
     }
