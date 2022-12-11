@@ -7,12 +7,19 @@ public class MoveCtrl : MonoBehaviour
     [SerializeField]
     private bool canMove = true;
     [Header("Ctrl_Owner")]
+    [SerializeField]
     private Player ctrl_Owner;
 
     [Header("Speed")]
     public float max_Speed;
     public float cur_Speed;
     public float max_BackSpeed;
+
+    [Header("Rotation")]
+    public float RotationSpeed = 0.1f;
+    public float RotationSize;
+
+
 
     private bool isMove;
     private bool isRun;
@@ -52,7 +59,6 @@ public class MoveCtrl : MonoBehaviour
         UpdateAnimationBlendValue();
         CheckMovement();
         Move();
-        Rotate();
     }
 
     private void GetInput()
@@ -74,6 +80,8 @@ public class MoveCtrl : MonoBehaviour
         else isRun = false;
     }
 
+    float rotateSpeed = 1.0f;
+
     private void Move()
     {
         if (x == 0.0f && z == 0.0f)
@@ -87,6 +95,7 @@ public class MoveCtrl : MonoBehaviour
         curDir = new Vector3(x, 0, z);
         curDir = curDir.normalized;
 
+
         if (-preDir == curDir)
         {
             //감속
@@ -94,30 +103,25 @@ public class MoveCtrl : MonoBehaviour
         }
         else
         {
+            if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
+            else cur_Speed = max_Speed;
             //가속
-            if (curDir.z >= 0.0f)
-            {
-                if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
-                else cur_Speed = max_Speed;
-            }
-            else
-            {
-                if (cur_Speed < max_BackSpeed) cur_Speed += Time.deltaTime * AccelerationValue;
-                else cur_Speed = max_BackSpeed;
-            }
+            //if (curDir.z >= 0.0f)
+            //{
+            //    if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
+            //    else cur_Speed = max_Speed;
+            //}
+            //감속
+            //else
+            //{
+            //    if (cur_Speed < max_BackSpeed) cur_Speed += Time.deltaTime * AccelerationValue;
+            //    else cur_Speed = max_BackSpeed;
+            //}
         }
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(curDir), Time.deltaTime * rotateSpeed);
     }
-
-    private void Rotate()
-    {
-        //좌우 키를 누르면 회전과 이동이 같이 되게하자.
-        //캐릭터 회전은 여기서
-        //카메라 회전은 카메라쪽에서
-
-    }
-
 
     private float ToMax(float value,float max)
     {
@@ -135,21 +139,22 @@ public class MoveCtrl : MonoBehaviour
 
     private void UpdateAnimationBlendValue()
     {
-        if (x > 0.0f) animation_X = ToMax(animation_X, 1.0f);
-        if (x < 0.0f) animation_X = ToMin(animation_X, -1.0f);
-        if (z > 0.0f) animation_Z = ToMax(animation_Z, 1.0f);
-        if (z < 0.0f) animation_Z = ToMin(animation_Z, -1.0f);
-        if (x == 0.0f)
-        {
-            if (animation_X > 0.0f) animation_X = ToMin(animation_X, 0.0f);
-            else if (animation_X < 0.0f) animation_X = ToMax(animation_X, 0.0f);
-            else animation_X = 0.0f;
-        }
-        if (z == 0.0f)
-        {
-            if (animation_Z > 0.0f) animation_Z = ToMin(animation_Z, 0.0f);
-            else if (animation_Z < 0.0f) animation_Z = ToMax(animation_Z, 0.0f);
-            else animation_Z = 0.0f;
-        }
+
+        //if (x > 0.0f) animation_X = ToMax(animation_X, 1.0f);
+        //if (x < 0.0f) animation_X = ToMin(animation_X, -1.0f);
+        //if (z > 0.0f) animation_Z = ToMax(animation_Z, 1.0f);
+        //if (z < 0.0f) animation_Z = ToMin(animation_Z, -1.0f);
+        //if (x == 0.0f)
+        //{
+        //    if (animation_X > 0.0f) animation_X = ToMin(animation_X, 0.0f);
+        //    else if (animation_X < 0.0f) animation_X = ToMax(animation_X, 0.0f);
+        //    else animation_X = 0.0f;
+        //}
+        //if (z == 0.0f)
+        //{
+        //    if (animation_Z > 0.0f) animation_Z = ToMin(animation_Z, 0.0f);
+        //    else if (animation_Z < 0.0f) animation_Z = ToMax(animation_Z, 0.0f);
+        //    else animation_Z = 0.0f;
+        //}
     }
 }

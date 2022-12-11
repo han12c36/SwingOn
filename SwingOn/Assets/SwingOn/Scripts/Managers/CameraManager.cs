@@ -48,11 +48,13 @@ public class CameraManager : Manager<CameraManager>
 
     private void RotateCamera()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+        if(Input.GetKey(KeyCode.Mouse1))
         {
             float yRotateSize = Input.GetAxis("Mouse X") * turnSpeed;
             float yRotate = transform.eulerAngles.y + yRotateSize;
             transform.eulerAngles = new Vector3(0, yRotate, 0);
+
+            //target.transform.eulerAngles = new Vector3(0, yRotate, 0);
         }
     }
 

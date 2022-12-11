@@ -62,8 +62,7 @@ public class Player : MonoBehaviour
     {
         components.aniCtrl.SetBool("isMove",moveCtrl.IsMove);
         components.aniCtrl.SetBool("isRun",moveCtrl.IsRun);
-        components.aniCtrl.SetFloat("X", moveCtrl.X);
-        components.aniCtrl.SetFloat("Z", moveCtrl.Z);
+        components.aniCtrl.SetFloat("MoveValue", (moveCtrl.cur_Speed) / moveCtrl.max_Speed);
     }
 
     private void OnDrawGizmosSelected()
