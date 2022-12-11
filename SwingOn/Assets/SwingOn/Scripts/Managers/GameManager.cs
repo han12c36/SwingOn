@@ -14,6 +14,13 @@ public class GameManager : Manager<GameManager>
 
     public SceneController SceneCtrl { get { return sceneCtrl; } }
 
+    //[RuntimeInitializeOnLoadMethod]
+    //private void InstantiateGameManger()
+    //{
+    //    if (InstantiateManger(true) != this) Destroy(this);
+    //    sceneCtrl = GetComponent<SceneController>();
+    //}
+
     private void Awake()
     {
         Debug.Log("게임 매니저 어웨이크");
@@ -25,7 +32,6 @@ public class GameManager : Manager<GameManager>
     {
         Debug.Log("게임 매니저 인에이블");
     }
-    //[RuntimeInitializeOnLoadMethod]
     
 
     private void OnDisable()
@@ -96,6 +102,7 @@ public class GameManager : Manager<GameManager>
     {
         Debug.Log("인게임씬에 필요한 매니저 생성");
         InGameManager.InstantiateManger(false);
+        CameraManager.InstantiateManger(false);
     }
     //=====================================================================================
 }

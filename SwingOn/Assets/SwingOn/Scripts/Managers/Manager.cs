@@ -83,7 +83,7 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
     {
         manager.transform.SetParent(GetManagerBox("CanDestroy_ManagerBox",false).transform);
     }
-    protected static void RegistrationTo_DontDestroyManagerBox(T manager)
+    private static void RegistrationTo_DontDestroyManagerBox(T manager)
     {
         manager.transform.SetParent(GetManagerBox("DontDestroy_ManagerBox",true).transform);
     }
