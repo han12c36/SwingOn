@@ -23,11 +23,11 @@ public class SceneController : MonoBehaviour
     public void LoadScene(int sceneindex)
     {
         if ((int)curScene == sceneindex) return;
-        if(sceneindex == (int)SceneIndex.Intro)
-        {
-            //인트로씬으로 바꿔달라고 하면 강제로 메인 타이틀 씬으로 변경하자.
-            sceneindex = (int)SceneIndex.MainTitle;
-        }
+        //if(sceneindex == (int)SceneIndex.Intro)
+        //{
+        //    //인트로씬으로 바꿔달라고 하면 강제로 메인 타이틀 씬으로 변경하자.
+        //    sceneindex = (int)SceneIndex.MainTitle;
+        //}
         Debug.Log("다음 씬 로드 전에 씬 : " + SceneManager.GetActiveScene().name);
         SceneManager.sceneLoaded += OnLoadScene;
         StartCoroutine(LoadSceneProcess(sceneindex));

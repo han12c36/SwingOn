@@ -21,10 +21,6 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
         }
     }
 
-    protected virtual void Awake()
-    {
-    }
-
     //매니저 생성 전제조건 : 
     //하이라키창에는 인트로씬의 게임매니저 제외하곤 어떤 매니저도 올라가있으면 안됨
     //-> 게임매니저만 자체 어웨이크에서 본인을 돈디스트로이 걸어줌
@@ -53,7 +49,7 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
                 {
                     //하이라키에도 없고 프리팹폴더에도 없어
                     //그럼 그냥 아예 새로운놈으로 만들어
-                    GameObject newManager = new GameObject();
+                    GameObject newManager = new GameObject(typeof(T).Name);
                     managerObj = newManager.AddComponent<T>();
                     if(managerObj == null)
                     {
@@ -67,7 +63,7 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
             if (isDonDestroy) RegistrationTo_DontDestroyManagerBox(managerObj);
             else RegistrationTo_CanDestroyManagerBox(managerObj);
         }
-        //if (instance != this)
+        //if (instance != managerObj)
         //{
             //있는데 또 만들었으면 파괴시켜(문제는 여기서 아마 어웨이크,인에이블,디스에이블 다 호출되서 혼란있을수도)
         //    Destroy(gameObject);
@@ -76,13 +72,13 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
 
     private static void RegistrationTo_CanDestroyManagerBox(T manager)
     {
-        manager.transform.SetParent(GetManagerBox("CanDestroy_ManagerBox").transform);
+        manager.transform.SetParent(GetManagerBox("CanDestroy_ManagerBox",false).transform);
     }
     private static void RegistrationTo_DontDestroyManagerBox(T manager)
     {
-        manager.transform.SetParent(GetManagerBox("DontDestroy_ManagerBox").transform);
+        manager.transform.SetParent(GetManagerBox("DontDestroy_ManagerBox",true).transform);
     }
-    private static GameObject GetManagerBox(string BoxName)
+    private static GameObject GetManagerBox(string BoxName,bool isDontDestroy)
     {
         GameObject boxObj = GameObject.Find(BoxName);
         if (boxObj == null)
@@ -90,6 +86,7 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
             boxObj = new GameObject();
             boxObj.name = BoxName;
         }
+        if (isDontDestroy) DontDestroyOnLoad(boxObj);
         return boxObj;
     }
 

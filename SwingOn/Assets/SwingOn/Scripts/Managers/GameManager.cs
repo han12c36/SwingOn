@@ -5,11 +5,16 @@ using UnityEngine;
 public class GameManager : Manager<GameManager>
 {
     //게임매니저는 생성될떄 등록된 돈디스트로이 매니저를 모두 생성하게 한다...?
+    //씬 전환이 일어나면 해당 매니저의 디스에이블이 발동한다
+    //꺼졋다 다시 켜지는 매니저는 저장된 정보다 다 날라감
+
     private SceneController sceneCtrl;
+
+    public int count;
 
     public SceneController SceneCtrl { get { return sceneCtrl; } }
 
-    protected override void Awake()
+    private void Awake()
     {
         Debug.Log("게임 매니저 어웨이크");
         InstantiateManger(true);
@@ -34,9 +39,9 @@ public class GameManager : Manager<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            if(sceneCtrl.CurSceneIndex == SceneIndex.Intro)
+            if (sceneCtrl.CurSceneIndex == SceneIndex.Intro)
             {
                 sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
             }
@@ -48,6 +53,10 @@ public class GameManager : Manager<GameManager>
             {
                 sceneCtrl.LoadScene((int)SceneIndex.Intro);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            count++;
         }
     }
 
