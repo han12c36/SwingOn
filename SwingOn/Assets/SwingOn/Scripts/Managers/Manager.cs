@@ -35,38 +35,42 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
         {
             //하이라키창에서 본인의 유무를 검출
             //만약 하이라키창에 있다면 걔를 부술수 있는 박스에 넣어
-            T managerObj = FindObjectOfType(typeof(T)) as T;
+            string managerName = typeof(T).Name;
+            //T managerObj = FindObjectOfType(typeof(T)) as T;
+            GameObject managerObj = GameObject.Find(managerName);
 
             if (!managerObj)
             {
-                Debug.Log("하이라키창에 없으니까 만들꼐");
+                Debug.Log(typeof(T).Name + "하이라키창에 없으니까 만들꼐");
 
                 //하이라키창에 없다면 매니저 프리팹폴더에 있는 놈을 만들어서 박스에 넣어줘
-                T prefab = Resources.Load("ManagerPrefabs/" + typeof(T).Name) as T;
-                if (prefab)
+                GameObject prefab = Resources.Load("ManagerPrefabs/" + typeof(T).Name) as GameObject;
+
+                if (prefab != null)
                 {
-                    Debug.Log("하이라키창에 없으니까 프리팹폴더에서 끄내올께");
+                    Debug.Log(typeof(T).Name + "하이라키창에 없으니까 프리팹폴더에서 끄내올께");
                     managerObj = Instantiate(prefab);
                     managerObj.name = prefab.name.Replace("(Clone)", string.Empty);
                 }
                 else
                 {
-                    Debug.Log("아무대도 없으니까 새로 만들께");
+                    Debug.LogError(typeof(T).Name + "Invalid format of request.");
+
+                    //Debug.Log(typeof(T).Name + "아무대도 없으니까 새로 만들께");
 
                     //하이라키에도 없고 프리팹폴더에도 없어
                     //그럼 그냥 아예 새로운놈으로 만들어
-                    GameObject newManager = new GameObject(typeof(T).Name);
-                    managerObj = newManager.AddComponent<T>();
-                    if(managerObj == null)
-                    {
+                    //GameObject temp = new GameObject(typeof(T).Name);
+                    //if(managerObj == null)
+                    //{
                         //스크립트도없어? 그면 아무것도없는데 어캐만드노?
-                        Debug.LogError("Invalid format of request.");
-                    }
+                    //    Debug.LogError(typeof(T).Name + "Invalid format of request.");
+                    //}
                 }
             }
             else
             {
-                Debug.Log("하이라키창에 있으니까 그냥 저거로 쓸께");
+                Debug.Log(typeof(T).Name + "하이라키창에 있으니까 그냥 저거로 쓸께");
             }
             
             T newInstance = managerObj.GetComponent<T>();

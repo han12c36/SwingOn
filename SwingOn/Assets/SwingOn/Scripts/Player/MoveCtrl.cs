@@ -52,6 +52,7 @@ public class MoveCtrl : MonoBehaviour
         UpdateAnimationBlendValue();
         CheckMovement();
         Move();
+        Rotate();
     }
 
     private void GetInput()
@@ -108,6 +109,15 @@ public class MoveCtrl : MonoBehaviour
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
     }
+
+    private void Rotate()
+    {
+        //좌우 키를 누르면 회전과 이동이 같이 되게하자.
+        //캐릭터 회전은 여기서
+        //카메라 회전은 카메라쪽에서
+
+    }
+
 
     private float ToMax(float value,float max)
     {
