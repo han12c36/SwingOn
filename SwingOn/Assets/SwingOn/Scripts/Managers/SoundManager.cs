@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : Manager<CameraManager>
+public class SoundManager : Manager<SoundManager>
 {
-
     void Start()
     {
         
