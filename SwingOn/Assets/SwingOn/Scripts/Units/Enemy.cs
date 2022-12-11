@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy<T> : MonoBehaviour
 {
+    public Enums.EnemyType enemyType;
     public Structs.Status status;
     [Space(5f)]
     public Structs.UnitComponents components;
@@ -12,11 +13,11 @@ public abstract class Enemy : MonoBehaviour
     protected Player target;
     [SerializeField]
     protected float distToTarget;
-    //[Space(5f)]
-    //[SerializeField]
-    //protected ActionTable actionTable;
-    
+    [Space(5f)]
+    [SerializeField]
+    protected ActionTable<T> actionTable;
 
+    public ActionTable<T> ActionTable { get { return actionTable; } set { actionTable = value; } }
     protected abstract void Initialize();
 
     protected virtual void Awake()

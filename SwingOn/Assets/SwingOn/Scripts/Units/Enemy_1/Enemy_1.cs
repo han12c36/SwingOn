@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_1 : Enemy
+public class Enemy_1 : Enemy<Enemy_1>
 {
     protected override void Initialize()
     {
         status.unitName = Enums.UnitNameTable.Enemy1;
         status.maxHp = 100;
         status.curHp = 100;
+        actionTable = GetComponent<ActionTable<Enemy_1>>();
     }
     protected override void OnEnable() 
     {
