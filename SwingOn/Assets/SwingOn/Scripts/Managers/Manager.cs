@@ -41,14 +41,11 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
 
             if (!managerObj)
             {
-                Debug.Log(typeof(T).Name + "하이라키창에 없으니까 만들꼐");
-
                 //하이라키창에 없다면 매니저 프리팹폴더에 있는 놈을 만들어서 박스에 넣어줘
                 GameObject prefab = Resources.Load("ManagerPrefabs/" + typeof(T).Name) as GameObject;
 
                 if (prefab != null)
                 {
-                    Debug.Log(typeof(T).Name + "하이라키창에 없으니까 프리팹폴더에서 끄내올께");
                     managerObj = Instantiate(prefab);
                     managerObj.name = prefab.name.Replace("(Clone)", string.Empty);
                 }
@@ -67,10 +64,6 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
                     //    Debug.LogError(typeof(T).Name + "Invalid format of request.");
                     //}
                 }
-            }
-            else
-            {
-                Debug.Log(typeof(T).Name + "하이라키창에 있으니까 그냥 저거로 쓸께");
             }
             
             T newInstance = managerObj.GetComponent<T>();

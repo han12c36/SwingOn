@@ -87,17 +87,14 @@ public class GameManager : Manager<GameManager>
     // 씬 넘어갈떄마다 잘 삭제되는지 확인하자
     private void InstantiateManagerForIntroScene()
     {
-        Debug.Log("인트로씬에 필요한 매니저 생성");
         //InstantiateManger(true);
     }
     private void InstantiateManagerForMainTitleScene()
     {
-        Debug.Log("메인 타이틀씬에 필요한 매니저 생성");
         MainTitleManager.InstantiateManger(false);
     }
     private void InstantiateManagerForInGameScene()
     {
-        Debug.Log("인게임씬에 필요한 매니저 생성");
         InGameManager.InstantiateManger(false);
         CameraManager.InstantiateManger(false);
     }
