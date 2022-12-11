@@ -17,6 +17,10 @@ public class GameManager : Manager<GameManager>
     private void Awake()
     {
         Debug.Log("게임 매니저 어웨이크");
+        if (Instance != this)
+        {
+            Destroy(this);
+        }
         InstantiateManger(true);
         sceneCtrl = GetComponent<SceneController>();
     }

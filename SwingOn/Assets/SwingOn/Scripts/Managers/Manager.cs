@@ -38,6 +38,8 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
 
             if (!managerObj)
             {
+                Debug.Log("하이라키창에 없으니까 만들꼐");
+
                 //하이라키창에 없다면 매니저 프리팹폴더에 있는 놈을 만들어서 박스에 넣어줘
                 T prefab = Resources.Load("ManagerPrefabs/" + typeof(T).Name) as T;
                 if (prefab)
@@ -58,16 +60,20 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
                     }
                 }
             }
-            instance = managerObj.GetComponent<T>();
+            
+            T newInstance = managerObj.GetComponent<T>();
 
-            if (isDonDestroy) RegistrationTo_DontDestroyManagerBox(managerObj);
-            else RegistrationTo_CanDestroyManagerBox(managerObj);
+            //if (instance != newInstance)
+            //{
+            //    //만들고봤는데 돈디스트로놈이라 살아있었어
+            //    //그래서 새로만든놈 없애버려
+            //    Destroy(newInstance);
+            //}
+
+            if (isDonDestroy) RegistrationTo_DontDestroyManagerBox(newInstance);
+            else RegistrationTo_CanDestroyManagerBox(newInstance);
         }
-        //if (instance != managerObj)
-        //{
-            //있는데 또 만들었으면 파괴시켜(문제는 여기서 아마 어웨이크,인에이블,디스에이블 다 호출되서 혼란있을수도)
-        //    Destroy(gameObject);
-        //}
+        
     }
 
     private static void RegistrationTo_CanDestroyManagerBox(T manager)
