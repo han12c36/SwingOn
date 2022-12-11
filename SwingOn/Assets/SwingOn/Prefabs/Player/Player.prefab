@@ -34,7 +34,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3812986687350881297}
-  - {fileID: 4023896514272305506}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -100,9 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  ctrl_Owner: {fileID: 0}
   max_Speed: 5
   cur_Speed: 1
   max_BackSpeed: 2
+  RotationSpeed: 0.1
+  RotationSize: 0
 --- !u!114 &4023896513290613326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,89 +155,6 @@ MonoBehaviour:
   normalDashDistance: 5
   hardDashSpeed: 0.2
   hardDashDistance: 3
---- !u!1 &4023896514272305503
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4023896514272305506}
-  - component: {fileID: 4023896514272305501}
-  - component: {fileID: 4023896514272305500}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4023896514272305506
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4023896514272305503}
-  m_LocalRotation: {x: -0.043586984, y: -0.46753278, z: -0.005042841, w: 0.88288605}
-  m_LocalPosition: {x: 5.5, y: 1.27, z: -0.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3817404604672133185}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -4.685, y: -55.882, z: 1.831}
---- !u!20 &4023896514272305501
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4023896514272305503}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &4023896514272305500
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4023896514272305503}
-  m_Enabled: 1
 --- !u!1001 &3817404605335750035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -676,6 +595,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1685844718995212, guid: ab8c277f4a25a1f46bbed446e914750d, type: 3}
   m_PrefabInstance: {fileID: 3817404605335750035}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &944571103247390243
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3819008534002336415}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.40438375, y: 1.2359793, z: 0.09887952}
+  m_Center: {x: -0.007658858, y: -0.5534284, z: 0.0000003142614}
 --- !u!114 &5205159449917244890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,16 +622,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Owner: {fileID: 0}
   collider: {fileID: 0}
---- !u!65 &944571103247390243
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3819008534002336415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.40438375, y: 1.2359793, z: 0.09887952}
-  m_Center: {x: -0.007658858, y: -0.5534284, z: 0.0000003142614}
+  detectionLayer: 0

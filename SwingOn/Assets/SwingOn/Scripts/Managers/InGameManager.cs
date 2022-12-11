@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class InGameManager : Manager<InGameManager>
 {
+    private Player player;
     private Vector3 playerStartPos = Vector3.zero;
+
+    public Player GetPlayer { get { return player; } }
 
     private void Awake()
     {
         Player.instance.transform.position = playerStartPos;
-        Debug.Log("인게임 매니저 어웨이크");
+        player = Player.instance;
     }
     private void OnEnable()
     {
-        Debug.Log("인게임 매니저 온에이블");
     }
     private void Start()
     {
-        Debug.Log("인게임 매니저 스타트");
     }
 
     private void Update()
@@ -25,6 +26,5 @@ public class InGameManager : Manager<InGameManager>
     }
     private void OnDisable()
     {
-        Debug.Log("인게임 매니저 디스에이블");
     }
 }

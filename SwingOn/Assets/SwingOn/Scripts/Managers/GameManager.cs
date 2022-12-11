@@ -23,28 +23,25 @@ public class GameManager : Manager<GameManager>
 
     private void Awake()
     {
-        Debug.Log("게임 매니저 어웨이크");
         if (InstantiateManger(true) != this) Destroy(this);
         sceneCtrl = GetComponent<SceneController>();
     }
 
     private void OnEnable()
     {
-        Debug.Log("게임 매니저 인에이블");
     }
     
 
     private void OnDisable()
     {
-        Debug.Log("게임 매니저 디스 에이블");
     }
     private void Start()
     {
-        Debug.Log("게임 매니저 스타트");
     }
 
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (sceneCtrl.CurSceneIndex == SceneIndex.Intro)
