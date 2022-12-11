@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3817404604672133196}
   - component: {fileID: 4023896513290613321}
   - component: {fileID: 4023896513290613326}
-  - component: {fileID: 3817404604672133202}
+  - component: {fileID: 5191120201147685349}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -128,7 +128,7 @@ MonoBehaviour:
   actionTable: {fileID: 0}
   moveCtrl: {fileID: 0}
   player_Weapon: {fileID: 0}
---- !u!114 &3817404604672133202
+--- !u!114 &5191120201147685349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3817404604672133197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9dded05a70ecd4c94aca291a73db0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c6cf85c293a6de4493f0348b30f3247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   modeChange: 0
   attType: 0
   modeDurtaionTimer: 0
-  hardModeDurationTime: 3
+  hardModeDurationTime: 10
   normalDashSpeed: 0.1
   normalDashDistance: 5
   hardDashSpeed: 0.2

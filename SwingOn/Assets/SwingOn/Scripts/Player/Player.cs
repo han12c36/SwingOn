@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public Structs.UnitComponents components;
     [Space(5f)]
     [SerializeField]
-    private ActionTable actionTable;
+    private PlayerActionTable actionTable;
     [Space(5f)]
     [SerializeField]
     private MoveCtrl moveCtrl;
@@ -20,8 +20,7 @@ public class Player : MonoBehaviour
 
     public MoveCtrl MoveCtrl { get { return moveCtrl; } set { moveCtrl = value; } }
     public Weapon PlayerWeapon { get { return player_Weapon; } set { player_Weapon = value; } }
-    public ActionTable SetActionTable { set { actionTable = value; } }
-    public ActionTable GetActionTable { get { return actionTable; } }
+    public PlayerActionTable ActionTable { get { return actionTable; } set { actionTable = value; } }
     public Animator GetAniCtrl { get { return components.aniCtrl; } }
     public Rigidbody GetRigid { get { return components.rigid; } }
 

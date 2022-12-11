@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_2 : Action
+public class Skill_2 : Action<Player>
 {
     public override void ActionEnter(Player script)
     {
@@ -14,12 +14,12 @@ public class Skill_2 : Action
     {
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
         {
-            if (!me.GetActionTable.isCurrentAnimationOver(0.62f)) NormalBlitz();
+            if (!me.ActionTable.isCurrentAnimationOver(0.62f)) NormalBlitz();
         }
 
         if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
         {
-            if (me.GetActionTable.AttType == Enums.PlayerAttType.Hard)
+            if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
             {
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
@@ -33,10 +33,10 @@ public class Skill_2 : Action
             HardBlitz();
         }
 
-        if (me.GetActionTable.Blitz_Finish)
+        if (me.ActionTable.Blitz_Finish)
         {
-            me.GetActionTable.Blitz_Finish = false;
-            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.None);
+            me.ActionTable.Blitz_Finish = false;
+            me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }
     public override void ActionFixedUpdate()
@@ -48,7 +48,7 @@ public class Skill_2 : Action
     {
         me.GetAniCtrl.ResetTrigger("Skill_2");
         me.GetAniCtrl.SetBool("DoubleBlitz", false);
-        me.GetActionTable.Blitz_Finish = false;
+        me.ActionTable.Blitz_Finish = false;
         me.MoveCtrl.CanMove = true;
     }
 

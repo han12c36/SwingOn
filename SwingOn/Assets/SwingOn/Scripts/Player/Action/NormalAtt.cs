@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalAtt : Action
+public class NormalAtt : Action<Player>
 {
     public override void ActionEnter(Player script)
     {
@@ -16,16 +16,16 @@ public class NormalAtt : Action
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)) me.GetAniCtrl.SetTrigger("NormalSwing");
 
-        if (me.GetActionTable.Att_Finish)
+        if (me.ActionTable.Att_Finish)
         {
-            me.GetActionTable.Att_Finish = false;
-            me.GetActionTable.SetCurAction((int)Enums.PlayerActions.None);
+            me.ActionTable.Att_Finish = false;
+            me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }
     public override void ActionExit()
     {
         me.GetAniCtrl.ResetTrigger("NormalSwing");
-        me.GetActionTable.Att_Finish = false;
+        me.ActionTable.Att_Finish = false;
         me.GetAniCtrl.applyRootMotion = false;
         me.MoveCtrl.CanMove = true;
     }

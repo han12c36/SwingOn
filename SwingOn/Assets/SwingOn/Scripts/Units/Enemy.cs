@@ -12,9 +12,9 @@ public abstract class Enemy : MonoBehaviour
     protected Player target;
     [SerializeField]
     protected float distToTarget;
-    [Space(5f)]
-    [SerializeField]
-    protected ActionTable actionTable;
+    //[Space(5f)]
+    //[SerializeField]
+    //protected ActionTable actionTable;
     
 
     protected abstract void Initialize();
