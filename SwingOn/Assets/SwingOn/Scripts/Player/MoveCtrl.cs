@@ -12,7 +12,7 @@ public class MoveCtrl : MonoBehaviour
 
     [Header("Speed")]
     public float max_Speed;
-    public float cur_Speed;
+    public float cur_Speed = 0.1f;
     public float max_BackSpeed;
 
     [Header("Rotation")]
@@ -38,6 +38,7 @@ public class MoveCtrl : MonoBehaviour
     public bool CanMove { get { return canMove; } set{ canMove = value; } }
     public float X { get { return animation_X; } }
     public float Z { get { return animation_Z; } }
+
     public bool IsMove { get { return isMove; } }
     public bool IsRun { get { return isRun; } }
 
@@ -48,13 +49,16 @@ public class MoveCtrl : MonoBehaviour
     }
     void Start()
     {
-       
         init_Speed = cur_Speed;
     }
 
     void Update()
     {
-        if (!canMove) return;
+        if (!canMove)
+        {
+            cur_Speed = init_Speed;
+            return;
+        }
         GetInput();
         UpdateAnimationBlendValue();
         CheckMovement();
