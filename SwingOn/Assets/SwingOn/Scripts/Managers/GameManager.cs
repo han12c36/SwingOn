@@ -9,10 +9,13 @@ public class GameManager : Manager<GameManager>
     //꺼졋다 다시 켜지는 매니저는 저장된 정보다 다 날라감
 
     private SceneController sceneCtrl;
+    private CoroutineHelper coroutineHelper;
 
     public int count;
 
     public SceneController SceneCtrl { get { return sceneCtrl; } }
+    public CoroutineHelper GetCoroutineHelper { get { return coroutineHelper; } }
+
 
     //[RuntimeInitializeOnLoadMethod]
     //private void InstantiateGameManger()
@@ -25,6 +28,7 @@ public class GameManager : Manager<GameManager>
     {
         if (InstantiateManger(true) != this) Destroy(this);
         sceneCtrl = GetComponent<SceneController>();
+        coroutineHelper = GetComponent<CoroutineHelper>();
     }
 
     private void OnEnable()

@@ -7,13 +7,18 @@ public class Enemy_1Trace : Action<Enemy_1>
     public override void ActionEnter(Enemy_1 script)
     {
         base.ActionEnter(script);
-        me.MoveOrder(me.GetTarget.transform, 2.0f);
         me.GetAniCtrl.SetBool("isMove", true);
     }
     public override void ActionUpdate()
     {
         me.transform.LookAt(me.GetTarget.transform.position);
-        //me.transform.position = Vector3.MoveTowards(me.transform.position, me.GetTarget.transform.position, me.moveSpeed);
+        me.MoveOrder(me.GetTarget.transform, 2.0f);
+
+        if (me.GetDistToTarget < me.status.AttRange)
+        {
+            me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Att_1);
+        }
+
     }
     public override void ActionExit()
     {

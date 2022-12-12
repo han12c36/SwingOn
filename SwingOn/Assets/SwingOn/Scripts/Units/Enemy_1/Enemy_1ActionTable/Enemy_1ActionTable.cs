@@ -46,18 +46,6 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
             {
                 SetCurAction((int)Enums.Enemy_1Actions.Damaged);
             }
-            else if (owner.GetDistToTarget < owner.status.AttRange)
-            {
-                SetCurAction((int)Enums.Enemy_1Actions.Att_1);
-            }
-            else if(owner.GetDistToTarget >= owner.status.AttRange)
-            {
-                SetCurAction((int)Enums.Enemy_1Actions.Trace);
-            }
-            else
-            {
-                SetCurAction((int)Enums.Enemy_1Actions.Idle);
-            }
         }
         else
         {
@@ -87,4 +75,5 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
         if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
         else owner.EnemyWeapon.OnOffWeaponCollider(false);
     }
+    
 }

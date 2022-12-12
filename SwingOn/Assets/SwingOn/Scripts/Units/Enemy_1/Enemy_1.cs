@@ -9,6 +9,8 @@ public class Enemy_1 : Enemy<Enemy_1>
     private float idleWaitTime = 1.5f;
     private float moveSpeed = 2f;
     private float timer;
+    [SerializeField]
+    private float changeMaterialTimer;
 
     public float Timer { get { return timer; } set { timer = value; } }
     public float IdleWaitTime { get { return idleWaitTime; } set { idleWaitTime = value; } }
@@ -19,7 +21,7 @@ public class Enemy_1 : Enemy<Enemy_1>
         status.maxHp = 5;
         status.curHp = status.maxHp;
         status.preHp = status.curHp;
-        status.AttRange = 1.0f;
+        status.AttRange = 1.5f;
         actionTable = GetComponent<ActionTable<Enemy_1>>();
         navAgent.speed = 2.0f;
     }
@@ -41,7 +43,6 @@ public class Enemy_1 : Enemy<Enemy_1>
     {
         base.Update();
 
-
     }
     protected override void FixedUpdate() 
     {
@@ -51,4 +52,7 @@ public class Enemy_1 : Enemy<Enemy_1>
     {
         base.LateUpdate();
     }
+
+    
+    
 }

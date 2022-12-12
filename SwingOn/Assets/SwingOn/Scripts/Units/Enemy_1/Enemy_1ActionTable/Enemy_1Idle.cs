@@ -17,7 +17,14 @@ public class Enemy_1Idle : Action<Enemy_1>
             if (me.Timer < me.IdleWaitTime) me.Timer += Time.deltaTime;
             else
             {
-                me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
+                if (me.GetDistToTarget >= me.status.AttRange)
+                {
+                    me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
+                }
+                else
+                {
+                    me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Att_1);
+                }
                 me.Timer = 0.0f;
             }
         }

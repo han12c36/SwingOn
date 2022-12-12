@@ -58,4 +58,5 @@ public abstract class ActionTable<T> : MonoBehaviour
 
         curAction.ActionEnter(owner);
     }
+    
 }

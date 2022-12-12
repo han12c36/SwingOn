@@ -12,15 +12,23 @@ public class Enemy_1Att_1 : Action<Enemy_1>
         //일반몹은 그냥 와서 떄리기만
         //네임드 몹은 도중 소환 기술 사용
         me.transform.LookAt(me.GetTarget.transform.position);
-        me.GetAniCtrl.SetBool("isAtt", true);
+        //me.GetAniCtrl.SetBool("isAtt", true);
+        me.GetAniCtrl.SetTrigger("isAtt");
     }
 
     public override void ActionUpdate()
     {
+        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Att"))
+        {
+            if (me.isCurrentAnimationOver(1.0f))
+            {
+                me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
+            }
+        }
     }
     public override void ActionExit()
     {
-        me.GetAniCtrl.SetBool("isAtt", false);
+        //me.GetAniCtrl.SetBool("isAtt", false);
     }
 
 }

@@ -12,11 +12,15 @@ public abstract class Enemy<T> : MonoBehaviour
     public Structs.UnitComponents components;
     [SerializeField]
     protected float distToTarget;
-
+    [SerializeField]
     protected Player target;
+    [SerializeField]
     protected ActionTable<T> actionTable;
+    [SerializeField]
     protected NavMeshAgent navAgent;
+    [SerializeField]
     private int detectionLayer;
+    [SerializeField]
     private EnemyWeapon<T> enemyWeapon;
 
 
@@ -58,7 +62,6 @@ public abstract class Enemy<T> : MonoBehaviour
     {
         if (other.gameObject.layer == detectionLayer)
         {
-            Debug.Log("큿소 한대 맞아뿠노");
             status.curHp -= target.PlayerWeapon.dmg;
         }
     }
@@ -76,5 +79,17 @@ public abstract class Enemy<T> : MonoBehaviour
         if (navAgent == null) return;
         if (!navAgent.isStopped) navAgent.isStopped = true;
         navAgent.SetDestination(transform.position);
+    }
+    public bool isCurrentAnimationOver(float time)
+    {
+        return GetAniCtrl.GetCurrentAnimatorStateInfo(0).normalizedTime > time;
+    }
+
+    public IEnumerator ChangeMaterial(Material OriginMaterial, Material DamagedMaterial, float durtaionTime)
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().material = DamagedMaterial;
+        yield return new WaitForSeconds(durtaionTime);
+        GetComponentInChildren<SkinnedMeshRenderer>().material = OriginMaterial;
+
     }
 }
