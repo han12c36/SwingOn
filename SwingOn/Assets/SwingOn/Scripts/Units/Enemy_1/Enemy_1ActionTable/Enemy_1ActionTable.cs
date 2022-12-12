@@ -84,7 +84,7 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     }
     public void OnOffWeaponCollider_Enemy(int value)
     {
-        if (value == 0) owner.Enemy_1Weapon.OnOffWeaponCollider(true);
-        else owner.Enemy_1Weapon.OnOffWeaponCollider(false);
+        if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
+        else owner.EnemyWeapon.OnOffWeaponCollider(false);
     }
 }

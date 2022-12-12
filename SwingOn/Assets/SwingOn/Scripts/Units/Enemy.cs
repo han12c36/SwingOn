@@ -21,10 +21,14 @@ public abstract class Enemy<T> : MonoBehaviour
     protected NavMeshAgent navAgent;
     [SerializeField]
     private int detectionLayer;
+    [SerializeField]
+    private EnemyWeapon<T> enemyWeapon;
+
 
     public ActionTable<T> ActionTable { get { return actionTable; } set { actionTable = value; } }
     public Player GetTarget { get { return target; } }
     public Animator GetAniCtrl { get { return components.aniCtrl; } }
+    public EnemyWeapon<T> EnemyWeapon { get { return enemyWeapon; } set { enemyWeapon = value; } }
 
     public float GetDistToTarget { get { return distToTarget; } }
 
@@ -49,7 +53,6 @@ public abstract class Enemy<T> : MonoBehaviour
 
     protected virtual void Update() 
     {
-
         if(target) distToTarget = Vector3.Distance(target.transform.position, transform.position);
         status.preHp = status.curHp;
     }

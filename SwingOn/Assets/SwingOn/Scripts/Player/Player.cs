@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private MoveCtrl moveCtrl;
     [SerializeField]
     private PlayerWeapon player_Weapon;
+    [SerializeField]
+    private int detectionLayer;
 
     public MoveCtrl MoveCtrl { get { return moveCtrl; } set { moveCtrl = value; } }
     public PlayerWeapon PlayerWeapon { get { return player_Weapon; } set { player_Weapon = value; } }
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
         components.collider = GetComponent<Collider>();
         components.aniCtrl = GetComponent<Animator>();
         moveCtrl = GetComponent<MoveCtrl>();
+        detectionLayer = LayerMask.NameToLayer("EnemyWeapon");
     }
 
     private void Awake()
@@ -64,9 +67,11 @@ public class Player : MonoBehaviour
         components.aniCtrl.SetFloat("MoveValue", (moveCtrl.cur_Speed) / moveCtrl.max_Speed);
     }
 
-    private void OnDrawGizmosSelected()
+    public void OnTriggerEnter(Collider other)
     {
-        //Color col = Color.black;
-        //Debug.DrawRay(transform.position, transform.forward, col, 10f);
+        if (other.gameObject.layer == detectionLayer)
+        {
+            status.curHp -= other.GetComponent<Enemy_1Weapon>().dmg;
+        }
     }
 }
