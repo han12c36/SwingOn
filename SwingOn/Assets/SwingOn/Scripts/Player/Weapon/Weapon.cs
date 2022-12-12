@@ -17,11 +17,10 @@ public abstract class Weapon<T> : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (collider.enabled) OnOffWeaponCollider(false);
     }
     protected virtual void Start()
     {
-
+        if (collider.enabled) OnOffWeaponCollider(false);
     }
     protected virtual void Update()
     {

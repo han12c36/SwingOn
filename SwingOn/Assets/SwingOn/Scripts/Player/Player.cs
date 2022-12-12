@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
     public PlayerActionTable ActionTable { get { return actionTable; } set { actionTable = value; } }
     public Animator GetAniCtrl { get { return components.aniCtrl; } }
     public Rigidbody GetRigid { get { return components.rigid; } }
-    public PlayerWeapon GetPlayerWeapon { get { return player_Weapon; } }
 
     private void Initialize()
     {

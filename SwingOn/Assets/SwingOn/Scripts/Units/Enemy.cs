@@ -61,7 +61,7 @@ public abstract class Enemy<T> : MonoBehaviour
         if (other.gameObject.layer == detectionLayer)
         {
             Debug.Log("큿소 한대 맞아뿠노");
-            status.curHp -= target.GetPlayerWeapon.dmg;
+            status.curHp -= target.PlayerWeapon.dmg;
         }
     }
 
