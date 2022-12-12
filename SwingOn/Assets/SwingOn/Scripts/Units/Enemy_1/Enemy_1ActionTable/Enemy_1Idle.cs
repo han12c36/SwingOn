@@ -7,10 +7,12 @@ public class Enemy_1Idle : Action<Enemy_1>
     public override void ActionEnter(Enemy_1 script)
     {
         base.ActionEnter(script);
+        me.GetAniCtrl.SetBool("isIdle", true);
+        me.MoveStop();
     }
     public override void ActionUpdate()
     {
-        if(me.GetPlayer)
+        if(me.GetTarget)
         {
             if (me.Timer < me.idleWaitTime) me.Timer += Time.deltaTime;
             else
@@ -23,5 +25,6 @@ public class Enemy_1Idle : Action<Enemy_1>
     public override void ActionExit()
     {
         me.Timer = 0.0f;
+        me.GetAniCtrl.SetBool("isIdle", false);
     }
 }

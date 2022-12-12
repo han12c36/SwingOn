@@ -41,6 +41,7 @@ public class Weapon : MonoBehaviour
         {
             Debug.Log("적이 한대 맞음!!");
 
+            //other.GetComponent<Enemy<Enemy_1>>().status.curHp--;
         }
     }
 }

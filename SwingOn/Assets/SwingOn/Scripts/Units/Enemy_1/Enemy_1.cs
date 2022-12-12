@@ -6,6 +6,8 @@ public class Enemy_1 : Enemy<Enemy_1>
 {
     public float idleWaitTime = 1.5f;
 
+    public float moveSpeed = 2f;
+    
     [SerializeField]
     private float timer;
 
@@ -14,10 +16,12 @@ public class Enemy_1 : Enemy<Enemy_1>
     protected override void Initialize()
     {
         status.unitName = Enums.UnitNameTable.Enemy1;
-        status.maxHp = 100;
-        status.curHp = 100;
-        status.AttRange = 2.0f;
+        status.maxHp = 5;
+        status.curHp = status.maxHp;
+        status.preHp = status.curHp;
+        status.AttRange = 1.0f;
         actionTable = GetComponent<ActionTable<Enemy_1>>();
+        navAgent.speed = 2.0f;
     }
     protected override void OnEnable() 
     {

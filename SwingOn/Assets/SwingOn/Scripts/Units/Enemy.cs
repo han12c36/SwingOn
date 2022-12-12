@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class Enemy<T> : MonoBehaviour
 {
+    //public int HitCount;
     public Enums.EnemyType enemyType;
     public Structs.Status status;
     [Space(5f)]
@@ -16,9 +18,15 @@ public abstract class Enemy<T> : MonoBehaviour
     [Space(5f)]
     [SerializeField]
     protected ActionTable<T> actionTable;
+    [SerializeField]
+    protected NavMeshAgent navAgent;
+    [SerializeField]
+    private int detectionLayer;
 
     public ActionTable<T> ActionTable { get { return actionTable; } set { actionTable = value; } }
-    public Player GetPlayer { get { return target; } }
+    public Player GetTarget { get { return target; } }
+    public Animator GetAniCtrl { get { return components.aniCtrl; } }
+
     public float GetDistToTarget { get { return distToTarget; } }
 
     protected abstract void Initialize();
@@ -28,6 +36,8 @@ public abstract class Enemy<T> : MonoBehaviour
         components.rigid = GetComponent<Rigidbody>();
         components.collider = GetComponent<Collider>();
         components.aniCtrl = GetComponent<Animator>();
+        navAgent = GetComponent<NavMeshAgent>();
+        detectionLayer = LayerMask.NameToLayer("PlayerWeapon");
         Initialize();
     }
     protected virtual void OnEnable() { }
@@ -42,10 +52,33 @@ public abstract class Enemy<T> : MonoBehaviour
     {
 
         if(target) distToTarget = Vector3.Distance(target.transform.position, transform.position);
-        
-        
+        status.preHp = status.curHp;
     }
     protected virtual void FixedUpdate() { }
     protected virtual void LateUpdate() { }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == detectionLayer)
+        {
+            Debug.Log("큿소 한대 맞아뿠노");
+            //HitCount++;
+            status.curHp--;
+        }
+    }
+
+    public void MoveOrder(Transform targetPos,float MoveSpeed)
+    {
+        if (navAgent == null) return;
+        if (navAgent.isStopped) navAgent.isStopped = false;
+        navAgent.speed = MoveSpeed;
+        navAgent.SetDestination(targetPos.position);
+    }
+
+    public void MoveStop()
+    {
+        if (navAgent == null) return;
+        if (!navAgent.isStopped) navAgent.isStopped = true;
+        navAgent.SetDestination(transform.position);
+    }
 }

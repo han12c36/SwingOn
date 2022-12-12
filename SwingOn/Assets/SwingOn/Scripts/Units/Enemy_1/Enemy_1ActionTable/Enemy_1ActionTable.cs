@@ -9,6 +9,7 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     [SerializeField]
     private Enums.Enemy_1Actions curAction_e;
 
+
     protected override void Initialize()
     {
         if (owner == null) owner = GetComponent<Enemy_1>();
@@ -39,10 +40,9 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     protected override void Update()
     {
         base.Update();
-
         if(owner.status.curHp > 0)
         {
-            if (owner.status.preHp < owner.status.curHp)
+            if (owner.status.preHp > owner.status.curHp)
             {
                 SetCurAction((int)Enums.Enemy_1Actions.Damaged);
             }
@@ -61,7 +61,10 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
         }
         else
         {
-            SetCurAction((int)Enums.Enemy_1Actions.Death);
+            if(curAction_e != Enums.Enemy_1Actions.Death)
+            {
+                SetCurAction((int)Enums.Enemy_1Actions.Death);
+            }
         }
     }
     protected override void FixedUpdate()
