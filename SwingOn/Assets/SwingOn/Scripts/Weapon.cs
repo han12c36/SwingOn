@@ -17,6 +17,9 @@ public abstract class Weapon<T> : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (Owner == null) Owner = GetComponentInParent<T>();
+        if(Owner != null) collider = GetComponent<Collider>();
+
     }
     protected virtual void Start()
     {

@@ -10,8 +10,11 @@ public class Enemy_1 : Enemy<Enemy_1>
     
     [SerializeField]
     private float timer;
+    [SerializeField]
+    private Enemy_1Weapon enemy_1Weapon;
 
     public float Timer { get { return timer; } set { timer = value; } }
+    public Enemy_1Weapon Enemy_1Weapon { get { return enemy_1Weapon; } set { enemy_1Weapon = value; } }
 
     protected override void Initialize()
     {
