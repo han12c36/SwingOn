@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerActionTable : ActionTable<Player>
 {
     [SerializeField]
+    private Enums.PlayerActions preAction_e;
+    [SerializeField]
+    private Enums.PlayerActions curAction_e;
+
+    [SerializeField]
     private bool isAttFinish;
     [SerializeField]
     private bool isEquptFinish;
@@ -169,5 +174,12 @@ public class PlayerActionTable : ActionTable<Player>
     public bool isCurrentAnimationOver(float time)
     {
         return owner.GetAniCtrl.GetCurrentAnimatorStateInfo(0).normalizedTime > time;
+    }
+
+    public override void SetCurAction(int index)
+    {
+        preAction_e = (Enums.PlayerActions)preAction_i;
+        base.SetCurAction(index);
+        curAction_e = (Enums.PlayerActions)curAction_i;
     }
 }

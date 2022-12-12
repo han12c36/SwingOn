@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Enemy_1ActionTable : ActionTable<Enemy_1>
 {
+    [SerializeField]
+    private Enums.Enemy_1Actions preAction_e;
+    [SerializeField]
+    private Enums.Enemy_1Actions curAction_e;
+
     protected override void Initialize()
     {
         if (owner == null) owner = GetComponent<Enemy_1>();
@@ -34,6 +39,30 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     protected override void Update()
     {
         base.Update();
+
+        if(owner.status.curHp > 0)
+        {
+            if (owner.status.preHp < owner.status.curHp)
+            {
+                SetCurAction((int)Enums.Enemy_1Actions.Damaged);
+            }
+            else if (owner.GetDistToTarget < owner.status.AttRange)
+            {
+                SetCurAction((int)Enums.Enemy_1Actions.Att_1);
+            }
+            else if(owner.GetDistToTarget >= owner.status.AttRange)
+            {
+                SetCurAction((int)Enums.Enemy_1Actions.Trace);
+            }
+            else
+            {
+                SetCurAction((int)Enums.Enemy_1Actions.Idle);
+            }
+        }
+        else
+        {
+            SetCurAction((int)Enums.Enemy_1Actions.Death);
+        }
     }
     protected override void FixedUpdate()
     {
@@ -42,5 +71,12 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     protected override void LateUpdate()
     {
         base.LateUpdate();
+    }
+
+    public override void SetCurAction(int index)
+    {
+        preAction_e = (Enums.Enemy_1Actions)preAction_i;
+        base.SetCurAction(index);
+        curAction_e = (Enums.Enemy_1Actions)curAction_i;
     }
 }

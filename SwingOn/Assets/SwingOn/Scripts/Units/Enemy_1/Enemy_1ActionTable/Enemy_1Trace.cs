@@ -10,6 +10,7 @@ public class Enemy_1Trace : Action<Enemy_1>
     }
     public override void ActionUpdate()
     {
+        me.transform.LookAt(me.GetPlayer.transform.position);
     }
     public override void ActionExit()
     {

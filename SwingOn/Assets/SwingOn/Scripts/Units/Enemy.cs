@@ -18,6 +18,9 @@ public abstract class Enemy<T> : MonoBehaviour
     protected ActionTable<T> actionTable;
 
     public ActionTable<T> ActionTable { get { return actionTable; } set { actionTable = value; } }
+    public Player GetPlayer { get { return target; } }
+    public float GetDistToTarget { get { return distToTarget; } }
+
     protected abstract void Initialize();
 
     protected virtual void Awake()
@@ -37,8 +40,12 @@ public abstract class Enemy<T> : MonoBehaviour
 
     protected virtual void Update() 
     {
+
         if(target) distToTarget = Vector3.Distance(target.transform.position, transform.position);
+        
+        
     }
     protected virtual void FixedUpdate() { }
     protected virtual void LateUpdate() { }
+    
 }

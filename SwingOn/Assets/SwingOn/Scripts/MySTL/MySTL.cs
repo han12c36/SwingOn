@@ -74,6 +74,11 @@ namespace Structs
 
         public int maxHp;
         public int curHp;
+        public int preHp;
+
+        public float AttRange;
+
+        public bool isDead;
     }
 
     [System.Serializable]

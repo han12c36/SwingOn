@@ -13,10 +13,9 @@ public abstract class ActionTable<T> : MonoBehaviour
     protected Action<T> curAction;
 
     [SerializeField]
-    private Enums.PlayerActions preAction_e;
+    protected int preAction_i;
     [SerializeField]
-    private Enums.PlayerActions curAction_e;
-
+    protected int curAction_i;
 
     protected abstract void Initialize();
 
@@ -38,7 +37,7 @@ public abstract class ActionTable<T> : MonoBehaviour
         if (curAction != null) curAction.ActionLateUpdate();
     }
 
-    public void SetCurAction(int index)
+    public virtual void SetCurAction(int index)
     {
         //있는지 없는지부터 판단
         int nextAction = -1;
@@ -50,15 +49,27 @@ public abstract class ActionTable<T> : MonoBehaviour
             //if (curAction == actions[index]) return;
             curAction.ActionExit();
             preAction = curAction;
-            preAction_e = (Enums.PlayerActions)System.Array.IndexOf(actions, curAction);
+
+            //preAction_i = (Enums.PlayerActions)System.Array.IndexOf(actions, curAction);
+            preAction_i = System.Array.IndexOf(actions, curAction);
         }
 
         curAction = actions[nextAction];
-        curAction_e = (Enums.PlayerActions)nextAction;
+        curAction_i = nextAction;
+
 
         curAction.ActionEnter(owner);
     }
+    //private static Enums GetEnum(Type type, int value)
+    //{
+    //    if (type.IsEnum)
+    //        if (Enum.IsDefined(type, value))
+    //        {
+    //            return (Enum)Enum.ToObject(type, value);
+    //        }
+    //
+    //    return null;
+    //}
 
-    
-   
+
 }
