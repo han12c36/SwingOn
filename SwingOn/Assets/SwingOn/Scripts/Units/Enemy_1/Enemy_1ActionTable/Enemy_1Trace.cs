@@ -12,7 +12,7 @@ public class Enemy_1Trace : Action<Enemy_1>
     public override void ActionUpdate()
     {
         me.transform.LookAt(me.GetTarget.transform.position);
-        me.MoveOrder(me.GetTarget.transform, 2.0f);
+        me.MoveOrder(me.GetTarget.transform, me.status.Speed);
 
         if (me.GetDistToTarget < me.status.AttRange)
         {

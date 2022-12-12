@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6893264112954099275}
   - component: {fileID: 1746438075933674580}
   m_Layer: 8
-  m_Name: Enemy_1
+  m_Name: Enemy_1_N
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822531146917605548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.911}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2236933436183791398}
@@ -88,20 +88,13 @@ MonoBehaviour:
     curHp: 0
     preHp: 0
     AttRange: 0
-    isDead: 0
   components:
     rigid: {fileID: 0}
     collider: {fileID: 0}
     aniCtrl: {fileID: 0}
-  target: {fileID: 0}
-  distToTarget: 0
-  actionTable: {fileID: 0}
-  navAgent: {fileID: 0}
-  detectionLayer: 0
-  idleWaitTime: 1.5
-  moveSpeed: 2
-  timer: 0
-  enemy_1Weapon: {fileID: 0}
+  OriginMaterial: {fileID: 2100000, guid: 9e99e47d4929a7045bddbd55835dad43, type: 2}
+  DamagedMaterial: {fileID: 2100000, guid: aaeca5e4855ae8c4c9d343c56bb7a0cb, type: 2}
+  changeMaterialTimer: 0
 --- !u!114 &6893264112954099275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  preAction_i: 0
-  curAction_i: 0
   preAction_e: 0
   curAction_e: 0
 --- !u!195 &1746438075933674580
@@ -129,7 +120,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -334,7 +325,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08177645, y: 0.68381447, z: 0.66168475}
   m_Center: {x: -0.4591157, y: 0.011965044, z: -0.014643372}
---- !u!114 &7113684138753610666
+--- !u!114 &281735440084481704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

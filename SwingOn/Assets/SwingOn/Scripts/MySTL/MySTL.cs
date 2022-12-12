@@ -77,8 +77,7 @@ namespace Structs
         public int preHp;
 
         public float AttRange;
-
-        public bool isDead;
+        public float Speed;
     }
 
     [System.Serializable]

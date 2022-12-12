@@ -10,17 +10,11 @@ public abstract class Enemy<T> : MonoBehaviour
     public Structs.Status status;
     [Space(5f)]
     public Structs.UnitComponents components;
-    [SerializeField]
     protected float distToTarget;
-    [SerializeField]
     protected Player target;
-    [SerializeField]
     protected ActionTable<T> actionTable;
-    [SerializeField]
     protected NavMeshAgent navAgent;
-    [SerializeField]
     private int detectionLayer;
-    [SerializeField]
     private EnemyWeapon<T> enemyWeapon;
 
 
