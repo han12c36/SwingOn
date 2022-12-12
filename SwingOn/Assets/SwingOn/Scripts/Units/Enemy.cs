@@ -6,22 +6,17 @@ using UnityEngine.AI;
 public abstract class Enemy<T> : MonoBehaviour
 {
     public Enums.EnemyType enemyType;
+    [Space(5f)]
     public Structs.Status status;
     [Space(5f)]
     public Structs.UnitComponents components;
-    [Space(5f)]
-    [SerializeField]
-    protected Player target;
     [SerializeField]
     protected float distToTarget;
-    [Space(5f)]
-    [SerializeField]
+
+    protected Player target;
     protected ActionTable<T> actionTable;
-    [SerializeField]
     protected NavMeshAgent navAgent;
-    [SerializeField]
     private int detectionLayer;
-    [SerializeField]
     private EnemyWeapon<T> enemyWeapon;
 
 

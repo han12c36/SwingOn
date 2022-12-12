@@ -13,6 +13,7 @@ public class Enemy_1Damaged : Action<Enemy_1>
         me.MoveStop();
         Vector3 vec = (-me.transform.forward).normalized * nuckBackSpeed;
         nuckBackPos = me.transform.position + vec;
+        me.GetComponentInChildren<SkinnedMeshRenderer>().material = me.DamagedMaterial;
     }
 
     public override void ActionUpdate()
@@ -22,5 +23,6 @@ public class Enemy_1Damaged : Action<Enemy_1>
     }
     public override void ActionExit()
     {
+        me.GetComponentInChildren<SkinnedMeshRenderer>().material = me.OriginMaterial;
     }
 }

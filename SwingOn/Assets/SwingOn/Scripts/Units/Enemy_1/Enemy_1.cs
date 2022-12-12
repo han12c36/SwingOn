@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Enemy_1 : Enemy<Enemy_1>
 {
-    public float idleWaitTime = 1.5f;
-    public float moveSpeed = 2f;
-    
-    [SerializeField]
+    public Material OriginMaterial;
+    public Material DamagedMaterial;
+    private float idleWaitTime = 1.5f;
+    private float moveSpeed = 2f;
     private float timer;
 
     public float Timer { get { return timer; } set { timer = value; } }
+    public float IdleWaitTime { get { return idleWaitTime; } set { idleWaitTime = value; } }
 
     protected override void Initialize()
     {

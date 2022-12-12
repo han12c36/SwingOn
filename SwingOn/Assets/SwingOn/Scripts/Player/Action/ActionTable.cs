@@ -12,9 +12,7 @@ public abstract class ActionTable<T> : MonoBehaviour
     [SerializeField]
     protected Action<T> curAction;
 
-    [SerializeField]
     protected int preAction_i;
-    [SerializeField]
     protected int curAction_i;
 
     protected abstract void Initialize();
@@ -60,16 +58,4 @@ public abstract class ActionTable<T> : MonoBehaviour
 
         curAction.ActionEnter(owner);
     }
-    //private static Enums GetEnum(Type type, int value)
-    //{
-    //    if (type.IsEnum)
-    //        if (Enum.IsDefined(type, value))
-    //        {
-    //            return (Enum)Enum.ToObject(type, value);
-    //        }
-    //
-    //    return null;
-    //}
-
-
 }
