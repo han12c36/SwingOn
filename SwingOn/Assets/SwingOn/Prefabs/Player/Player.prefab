@@ -101,7 +101,7 @@ MonoBehaviour:
   canMove: 1
   ctrl_Owner: {fileID: 0}
   max_Speed: 5
-  cur_Speed: 1
+  cur_Speed: 0.1
   max_BackSpeed: 2
   RotationSpeed: 0.1
   RotationSize: 0
@@ -121,6 +121,9 @@ MonoBehaviour:
     unitName: 0
     maxHp: 0
     curHp: 0
+    preHp: 0
+    AttRange: 0
+    isDead: 0
   components:
     rigid: {fileID: 0}
     collider: {fileID: 0}
@@ -141,6 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  preAction_i: 0
+  curAction_i: 0
   preAction_e: 0
   curAction_e: 0
   isAttFinish: 0
@@ -623,3 +628,4 @@ MonoBehaviour:
   Owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
+  dmg: 2

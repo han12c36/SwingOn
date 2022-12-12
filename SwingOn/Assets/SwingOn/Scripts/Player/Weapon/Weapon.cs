@@ -2,31 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon<T> : MonoBehaviour
 {
     [SerializeField]
-    private Player Owner;
+    protected T Owner;
     [SerializeField]
-    private Collider collider;
+    protected Collider collider;
     [SerializeField]
-    private int detectionLayer;
+    protected int detectionLayer;
 
-    private void Awake()
+    public int dmg;
+
+    public int GetDetectionLayer { get { return detectionLayer; } }
+
+    protected virtual void Awake()
     {
-        if(Owner == null) Owner = GetComponentInParent<Player>();
-        if (Owner != null)
-        {
-            Owner.PlayerWeapon = this;
-            collider = GetComponent<Collider>();
-            detectionLayer = LayerMask.NameToLayer("Enemy");
-        }
         if (collider.enabled) OnOffWeaponCollider(false);
     }
-    private void Start()
+    protected virtual void Start()
     {
 
     }
-    private void Update()
+    protected virtual void Update()
+    {
+
+    }
+    protected virtual void FixedUpdate()
     {
 
     }
@@ -35,13 +36,7 @@ public class Weapon : MonoBehaviour
     {
         collider.enabled = value;
     }
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == detectionLayer)
-        {
-            Debug.Log("적이 한대 맞음!!");
-
-            //other.GetComponent<Enemy<Enemy_1>>().status.curHp--;
-        }
     }
 }

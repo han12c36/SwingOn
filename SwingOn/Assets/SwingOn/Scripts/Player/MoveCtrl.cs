@@ -84,7 +84,7 @@ public class MoveCtrl : MonoBehaviour
         else isRun = false;
     }
 
-    float rotateSpeed = 1.0f;
+    float rotateSpeed = 12.0f;
 
     private void Move()
     {

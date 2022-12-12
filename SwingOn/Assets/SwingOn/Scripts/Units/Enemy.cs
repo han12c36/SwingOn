@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public abstract class Enemy<T> : MonoBehaviour
 {
-    //public int HitCount;
     public Enums.EnemyType enemyType;
     public Structs.Status status;
     [Space(5f)]
@@ -62,8 +61,7 @@ public abstract class Enemy<T> : MonoBehaviour
         if (other.gameObject.layer == detectionLayer)
         {
             Debug.Log("큿소 한대 맞아뿠노");
-            //HitCount++;
-            status.curHp--;
+            status.curHp -= target.GetPlayerWeapon.dmg;
         }
     }
 

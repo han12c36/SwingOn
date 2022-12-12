@@ -13,6 +13,7 @@ public class Skill_3 : Action<Player>
         me.GetAniCtrl.applyRootMotion = false;
         me.GetAniCtrl.SetTrigger("Skill_3");
         me.GetAniCtrl.SetBool("ModeChange",true);
+        //me.MoveCtrl.cur_Speed = 1.5f;
     }
     public override void ActionUpdate()
     {
