@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy_1Att_1 : Action<Enemy_1>
 {
     int PatternIndex;
+    int RandomNum;
     public override void ActionEnter(Enemy_1 script)
     {
         base.ActionEnter(script);
@@ -17,7 +18,6 @@ public class Enemy_1Att_1 : Action<Enemy_1>
 
     public override void ActionUpdate()
     {
-        //분기 처리하기
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Att"))
         {
             if (me.isCurrentAnimationOver(1.0f))
@@ -36,12 +36,13 @@ public class Enemy_1Att_1 : Action<Enemy_1>
                 if (PatternIndex == (int)Enemy_1Pattern.Spawn)
                 {
                     Debug.Log("소환 중");
-                    //
-                    //ini(me.Egg)
+                    //랜덤위치 찾아와서 거따 소환
                 }
                 else if (PatternIndex == (int)Enemy_1Pattern.Hill)
                 {
                     Debug.Log("힐 중");
+                    //근처 범위 몬스터 가져와서 힐
+
                 }
             }
         }
@@ -49,6 +50,7 @@ public class Enemy_1Att_1 : Action<Enemy_1>
     public override void ActionExit()
     {
         PatternIndex = 0;
+        RandomNum = 0;
     }
 
     private void SetTrigger_Enemy_1(int PatternIndex)
@@ -57,7 +59,16 @@ public class Enemy_1Att_1 : Action<Enemy_1>
         switch (PatternIndex)
         {
             case (int)Enemy_1Pattern.Spawn:
-                me.GetAniCtrl.SetTrigger("isCast");
+                {
+                    RandomNum = Random.Range(3, 6);
+                    Debug.Log(RandomNum);
+                    me.GetAniCtrl.SetTrigger("isCast");
+                    for(int i = 0; i < RandomNum; i++)
+                    {
+                        GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_Un");
+                        obj.transform.position = MySTL.RandomVec(me.transform.position, 5f);
+                    }
+                }
                 break;
             case (int)Enemy_1Pattern.Hill:
                 me.GetAniCtrl.SetTrigger("isCast");

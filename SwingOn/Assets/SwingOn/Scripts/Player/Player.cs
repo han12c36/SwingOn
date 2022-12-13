@@ -64,6 +64,11 @@ public class Player : MonoBehaviour
             GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_H");
             obj.transform.position = Vector3.zero;
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_Un");
+            obj.transform.position = Vector3.zero;
+        }
     }
     private void FixedUpdate()
     {

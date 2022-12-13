@@ -12,7 +12,6 @@ public enum Enemy_1Pattern
 
 public class Enemy_1 : Enemy<Enemy_1>
 {
-    //public Enemy_1Un Egg;
     public Material OriginMaterial;
     public Material DamagedMaterial;
     private float idleWaitTime = 1.5f;
@@ -56,17 +55,6 @@ public class Enemy_1 : Enemy<Enemy_1>
     protected override void OnDisable() 
     {
         base.OnDisable();
-        if (enemyType == Enums.EnemyType.Normal)
-        {
-            status.curHp = status.maxHp;
-            status.preHp = status.curHp;
-        }
-        else if (enemyType == Enums.EnemyType.Hard)
-        {
-            status.curHp = status.maxHp;
-            status.preHp = status.curHp;
-        }
-        actionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
     }
 
     protected override void Start() 

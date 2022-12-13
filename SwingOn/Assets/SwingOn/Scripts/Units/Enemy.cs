@@ -41,7 +41,12 @@ public abstract class Enemy<T> : MonoBehaviour
         Initialize();
     }
     protected virtual void OnEnable() { }
-    protected virtual void OnDisable() { }
+    protected virtual void OnDisable() 
+    {
+        status.curHp = status.maxHp;
+        status.preHp = status.curHp;
+        actionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
+    }
 
     protected virtual void Start() 
     {

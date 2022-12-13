@@ -53,7 +53,13 @@ namespace Enums
         Death,
         End
     }
-
+    public enum Enemy_1EggActions
+    {
+        Idle,
+        Damaged,
+        Death,
+        End
+    }
     public enum PlayerAttType
     {
         Normal,
@@ -87,13 +93,18 @@ namespace Structs
         public Collider collider;
         public Animator aniCtrl;
     }
-
 }
 
-
-
-
-
-public class MySTL : MonoBehaviour
+public static class MySTL
 {
+    public static Vector3 RandomVec(Vector3 originPos,float range)
+    {
+        float range_X, range_Z;
+        range_X = Random.Range((range / 2) * -1, range / 2);
+        range_Z = Random.Range((range / 2) * -1, range / 2);
+        Vector3 randomPos = new Vector3(range_X, 0f, range_Z);
+
+        Vector3 RandomPos = originPos + randomPos;
+        return RandomPos;
+    }
 }
