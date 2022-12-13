@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Enemy_1Un : Enemy<Enemy_1Un>
 {
-    public Structs.Status status;
-    public Structs.UnitComponents component;
-    public float awakeTime = 3.0f;
+    public Material OriginMaterial;
+    public Material DamagedMaterial;
+    public float awakeTime = 6.0f;
     public float timer;
-    public GameObject enemy_1_N;
 
     protected override void Initialize()
     {
@@ -21,22 +20,5 @@ public class Enemy_1Un : Enemy<Enemy_1Un>
         //navAgent.speed = status.Speed;
         components.aniCtrl.speed = 1f;
         actionTable = GetComponent<ActionTable<Enemy_1Un>>();
-    }
-
-    //애도 상태머신 간단하게 만들어서 죽을때 바뀌는걸로 하자
-
-    //PoolingManager.Instance.ReturnObj(gameObject);
-    //GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_N");
-    //obj.transform.position = transform.position;
-
-    private void Update()
-    {
-        base.Update();
-        if(timer < awakeTime) timer += Time.deltaTime;
-        else
-        {
-            timer = 0.0f;
-            gameObject.SetActive(false);
-        }
     }
 }

@@ -36,18 +36,19 @@ public class Enemy_1UnActionTable : ActionTable<Enemy_1Un>
     protected override void Update()
     {
         base.Update();
+        if(owner.status.curHp <= 0 || owner.timer >= owner.awakeTime)
+        {
+            if (curAction_e != Enums.Enemy_1EggActions.Death)
+            {
+                SetCurAction((int)Enums.Enemy_1EggActions.Death);
+            }
+
+        }
         if (owner.status.curHp > 0)
         {
             if (owner.status.preHp > owner.status.curHp)
             {
                 SetCurAction((int)Enums.Enemy_1EggActions.Damaged);
-            }
-        }
-        else
-        {
-            if (curAction_e != Enums.Enemy_1EggActions.Death)
-            {
-                SetCurAction((int)Enums.Enemy_1EggActions.Death);
             }
         }
     }

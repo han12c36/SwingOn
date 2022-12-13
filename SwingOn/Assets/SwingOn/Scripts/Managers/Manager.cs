@@ -52,17 +52,6 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
                 else
                 {
                     Debug.LogError(typeof(T).Name + "Invalid format of request.");
-
-                    //Debug.Log(typeof(T).Name + "아무대도 없으니까 새로 만들께");
-
-                    //하이라키에도 없고 프리팹폴더에도 없어
-                    //그럼 그냥 아예 새로운놈으로 만들어
-                    //GameObject temp = new GameObject(typeof(T).Name);
-                    //if(managerObj == null)
-                    //{
-                        //스크립트도없어? 그면 아무것도없는데 어캐만드노?
-                    //    Debug.LogError(typeof(T).Name + "Invalid format of request.");
-                    //}
                 }
             }
             

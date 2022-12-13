@@ -82,20 +82,8 @@ MonoBehaviour:
   - 10
   - 10
   - 80
-  status:
-    unitName: 0
-    maxHp: 0
-    curHp: 0
-    preHp: 0
-    AttRange: 0
-    Speed: 0
-  component:
-    rigid: {fileID: 0}
-    collider: {fileID: 0}
-    aniCtrl: {fileID: 0}
-  awakeTime: 3
+  awakeTime: 6
   timer: 0
-  enemy_1_N: {fileID: 822531146917605548, guid: cf5d900147be1a84091f16a73e03708c, type: 3}
 --- !u!136 &1103140302
 CapsuleCollider:
   m_ObjectHideFlags: 0
