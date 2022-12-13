@@ -33,8 +33,16 @@ public class Enemy_1Att_1 : Action<Enemy_1>
             }
             else
             {
-                if(PatternIndex == (int)Enemy_1Pattern.Spawn) Debug.Log("소환 중");
-                if (PatternIndex == (int)Enemy_1Pattern.Hill) Debug.Log("힐 중");
+                if (PatternIndex == (int)Enemy_1Pattern.Spawn)
+                {
+                    Debug.Log("소환 중");
+                    //
+                    //ini(me.Egg)
+                }
+                else if (PatternIndex == (int)Enemy_1Pattern.Hill)
+                {
+                    Debug.Log("힐 중");
+                }
             }
         }
     }

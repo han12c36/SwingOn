@@ -101,6 +101,7 @@ public class GameManager : Manager<GameManager>
     {
         InGameManager.InstantiateManger(false);
         CameraManager.InstantiateManger(false);
+        PoolingManager.InstantiateManger(false);
     }
     //=====================================================================================
 }

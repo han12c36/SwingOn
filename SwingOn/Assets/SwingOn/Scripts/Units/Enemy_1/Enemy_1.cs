@@ -19,6 +19,7 @@ public class Enemy_1 : Enemy<Enemy_1>
     private float timer;
     [SerializeField]
     private float changeMaterialTimer;
+    public GameObject Egg;
 
     public float Timer { get { return timer; } set { timer = value; } }
     public float IdleWaitTime { get { return idleWaitTime; } set { idleWaitTime = value; } }
