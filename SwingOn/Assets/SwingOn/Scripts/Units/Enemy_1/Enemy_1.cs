@@ -32,7 +32,7 @@ public class Enemy_1 : Enemy<Enemy_1>
             status.maxHp = 5;
             status.curHp = status.maxHp;
             status.preHp = status.curHp;
-            status.AttRange = 1.5f;
+            status.AttRange = 1f;
             status.Speed = 3.5f;
             navAgent.speed = status.Speed;
             components.aniCtrl.speed = 1.0f;
@@ -56,6 +56,17 @@ public class Enemy_1 : Enemy<Enemy_1>
     protected override void OnDisable() 
     {
         base.OnDisable();
+        if (enemyType == Enums.EnemyType.Normal)
+        {
+            status.curHp = status.maxHp;
+            status.preHp = status.curHp;
+        }
+        else if (enemyType == Enums.EnemyType.Hard)
+        {
+            status.curHp = status.maxHp;
+            status.preHp = status.curHp;
+        }
+        actionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
     }
 
     protected override void Start() 
