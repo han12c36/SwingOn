@@ -16,6 +16,9 @@ public abstract class Enemy<T> : MonoBehaviour
     protected NavMeshAgent navAgent;
     private int detectionLayer;
     private EnemyWeapon<T> enemyWeapon;
+    [SerializeField]
+    private float[] patternValue = new float[3] { 10f, 10f, 80f };
+
 
 
     public ActionTable<T> ActionTable { get { return actionTable; } set { actionTable = value; } }
@@ -24,6 +27,7 @@ public abstract class Enemy<T> : MonoBehaviour
     public EnemyWeapon<T> EnemyWeapon { get { return enemyWeapon; } set { enemyWeapon = value; } }
 
     public float GetDistToTarget { get { return distToTarget; } }
+    public float[] PatternValue { get { return patternValue; } }
 
     protected abstract void Initialize();
 

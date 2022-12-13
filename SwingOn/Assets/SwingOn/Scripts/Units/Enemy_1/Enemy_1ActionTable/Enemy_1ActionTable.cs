@@ -8,7 +8,7 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     private Enums.Enemy_1Actions preAction_e;
     [SerializeField]
     private Enums.Enemy_1Actions curAction_e;
-
+   
 
     protected override void Initialize()
     {

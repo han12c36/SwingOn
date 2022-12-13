@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum Enemy_1Pattern
 {
-    MeleeAtt,
-    Hill,
     Spawn,
+    Hill,
+    MeleeAtt,
     End
 }
 
@@ -41,7 +41,7 @@ public class Enemy_1 : Enemy<Enemy_1>
             status.maxHp = 10;
             status.curHp = status.maxHp;
             status.preHp = status.curHp;
-            status.AttRange = 2.5f;
+            status.AttRange = 2f;
             status.Speed = 0.6f;
             navAgent.speed = status.Speed;
             components.aniCtrl.speed = 0.7f;
@@ -76,11 +76,17 @@ public class Enemy_1 : Enemy<Enemy_1>
         base.LateUpdate();
     }
 
-    public int Enemy_1Think()
+    public int Think(float[] probs)
     {
-        // 1. 소환 2. 광역 힐 3. 일반 근접공격
-
-        return 0;
+        float total = 0;
+        foreach (float elem in probs) { total += elem; }
+        float randomPoint = Random.value * total;
+        for (int i = 0; i < probs.Length; i++)
+        {
+            if (randomPoint < probs[i]) return i;
+            else randomPoint -= probs[i];
+        }
+        return probs.Length - 1;
     }
 
 }
