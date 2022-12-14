@@ -37,6 +37,7 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
 
         SetCurAction((int)Enums.Enemy_1Actions.Idle);
     }
+
     protected override void Update()
     {
         base.Update();
@@ -55,6 +56,7 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
             }
         }
     }
+
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -70,10 +72,10 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
         base.SetCurAction(index);
         curAction_e = (Enums.Enemy_1Actions)curAction_i;
     }
+
     public void OnOffWeaponCollider_Enemy(int value)
     {
         if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
         else owner.EnemyWeapon.OnOffWeaponCollider(false);
     }
-    
 }

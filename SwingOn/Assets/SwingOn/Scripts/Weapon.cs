@@ -5,21 +5,20 @@ using UnityEngine;
 public abstract class Weapon<T> : MonoBehaviour
 {
     [SerializeField]
-    protected T Owner;
+    protected T owner;
     [SerializeField]
     protected Collider collider;
-    [SerializeField]
-    protected int detectionLayer;
-
+    
+    public int detectionLayer;
     public int dmg;
 
     public int GetDetectionLayer { get { return detectionLayer; } }
+    public T Owner { get { return owner; } set { owner = value; } }
 
     protected virtual void Awake()
     {
         if (Owner == null) Owner = GetComponentInParent<T>();
         if(Owner != null) collider = GetComponent<Collider>();
-
     }
     protected virtual void Start()
     {

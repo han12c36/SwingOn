@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWeapon<T> : Weapon<Enemy<T>>
+public class EnemyWeapon : Weapon<Enemy>
 {
     protected override void Awake()
     {
         base.Awake();
-        if (Owner != null)
+        if (owner != null)
         {
-            Owner.EnemyWeapon = this;
+            //owner = this;
             detectionLayer = LayerMask.NameToLayer("Player");
         }
     }
+
     protected override void Start()
     {
         base.Start();

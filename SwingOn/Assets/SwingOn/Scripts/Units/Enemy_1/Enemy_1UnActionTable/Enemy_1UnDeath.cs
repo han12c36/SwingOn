@@ -12,6 +12,7 @@ public class Enemy_1UnDeath : Action<Enemy_1Un>
         me.GetAniCtrl.applyRootMotion = true;
         me.GetAniCtrl.SetTrigger("isDeath");
         me.components.collider.enabled = false;
+
     }
     public override void ActionUpdate()
     {

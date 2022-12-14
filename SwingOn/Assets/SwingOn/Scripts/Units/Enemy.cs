@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Enemy<T> : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public Enums.EnemyType enemyType;
     [Space(5f)]
@@ -13,19 +13,17 @@ public abstract class Enemy<T> : MonoBehaviour
     public int hitCount;
     protected float distToTarget;
     protected Player target;
-    protected ActionTable<T> actionTable;
-    private EnemyWeapon<T> enemyWeapon;
+    //protected ActionTable<T> actionTable;
     protected NavMeshAgent navAgent;
     private int detectionLayer;
     [SerializeField]
     private float[] patternValue = new float[3] { 10f, 10f, 80f };
+    //private EnemyWeapon enemyWeapon;
 
-
-
-    public ActionTable<T> ActionTable { get { return actionTable; } set { actionTable = value; } }
+    //public ActionTable<T> ActionTable { get { return actionTable; } set { actionTable = value; } }
     public Player GetTarget { get { return target; } }
     public Animator GetAniCtrl { get { return components.aniCtrl; } }
-    public EnemyWeapon<T> EnemyWeapon { get { return enemyWeapon; } set { enemyWeapon = value; } }
+    //public EnemyWeapon EnemyWeapon { get { return enemyWeapon; } set { enemyWeapon = value; } }
 
     public float GetDistToTarget { get { return distToTarget; } }
     public float[] PatternValue { get { return patternValue; } }
@@ -39,6 +37,8 @@ public abstract class Enemy<T> : MonoBehaviour
         components.aniCtrl = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
         detectionLayer = LayerMask.NameToLayer("PlayerWeapon");
+        //enemyWeapon.Owner = this;
+        //enemyWeapon = this;
         Initialize();
     }
     protected virtual void OnEnable() 
@@ -49,8 +49,6 @@ public abstract class Enemy<T> : MonoBehaviour
     {
         status.curHp = status.maxHp;
         status.preHp = status.curHp;
-        actionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
-
     }
 
     protected virtual void Start() 

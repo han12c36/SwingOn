@@ -10,7 +10,7 @@ public enum Enemy_1Pattern
     End
 }
 
-public class Enemy_1 : Enemy<Enemy_1>
+public class Enemy_1 : Enemy
 {
     public Material OriginMaterial;
     public Material DamagedMaterial;
@@ -20,6 +20,13 @@ public class Enemy_1 : Enemy<Enemy_1>
     private float changeMaterialTimer;
     public bool isCast;
     public float recognizeRange = 3f;
+    [SerializeField]
+    protected Enemy_1ActionTable actionTable;
+    [SerializeField]
+    private Enemy_1Weapon enemyWeapon;
+
+    public Enemy_1ActionTable ActionTable { get { return actionTable; } set { actionTable = value; } }
+    public Enemy_1Weapon EnemyWeapon { get { return enemyWeapon; } set { enemyWeapon = value; } }
 
     public float Timer { get { return timer; } set { timer = value; } }
     public float IdleWaitTime { get { return idleWaitTime; } set { idleWaitTime = value; } }
@@ -47,7 +54,10 @@ public class Enemy_1 : Enemy<Enemy_1>
             navAgent.speed = status.Speed;
             components.aniCtrl.speed = 0.7f;
         }
-        actionTable = GetComponent<ActionTable<Enemy_1>>();
+        actionTable = GetComponent<Enemy_1ActionTable>();
+        enemyWeapon = GetComponentInChildren<Enemy_1Weapon>();
+        enemyWeapon.Owner = this;
+        //enemyWeapon.detectionLayer = LayerMask.NameToLayer("Player");
     }
     protected override void OnEnable() 
     {
@@ -56,6 +66,7 @@ public class Enemy_1 : Enemy<Enemy_1>
     protected override void OnDisable() 
     {
         base.OnDisable();
+        actionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
     }
 
     protected override void Start() 
