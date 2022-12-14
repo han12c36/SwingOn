@@ -31,18 +31,28 @@ public class Enemy_1Att_1 : Action<Enemy_1>
             {
                 me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
             }
-            else
-            {
-                if (PatternIndex == (int)Enemy_1Pattern.Spawn)
-                {
-                    Debug.Log("소환 중");
-                    //랜덤위치 찾아와서 거따 소환
-                }
-                else if (PatternIndex == (int)Enemy_1Pattern.Hill)
-                {
-                    Debug.Log("힐 중");
-                    //근처 범위 몬스터 가져와서 힐
+        }
 
+        if(me.isCast)
+        {
+            me.isCast = false;
+            if (PatternIndex == (int)Enemy_1Pattern.Spawn)
+            {
+                RandomNum = Random.Range(2,4);
+                for (int i = 0; i < RandomNum; i++)
+                {
+                    GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_Un");
+                    obj.transform.position = MySTL.RandomVec(me.transform.position, 5f);
+                }
+            }
+            else if (PatternIndex == (int)Enemy_1Pattern.Hill)
+            {
+                Debug.Log("힐 중");
+                Collider[] nearEnemy = Physics.OverlapSphere(me.transform.position, me.recognizeRange, LayerMask.NameToLayer("Enemy"));
+                for(int i = 0; i < nearEnemy.Length; i++)
+                {
+                    //Enemy enemy = nearEnemy[i].gameObject.GetComponent<Enemy>();
+                    //enemy.status.curHp += 2;
                 }
             }
         }
@@ -55,20 +65,10 @@ public class Enemy_1Att_1 : Action<Enemy_1>
 
     private void SetTrigger_Enemy_1(int PatternIndex)
     {
-        // 1. 소환 2. 광역 힐 3. 일반 근접공격
         switch (PatternIndex)
         {
             case (int)Enemy_1Pattern.Spawn:
-                {
-                    RandomNum = Random.Range(3, 6);
-                    Debug.Log(RandomNum);
-                    me.GetAniCtrl.SetTrigger("isCast");
-                    for(int i = 0; i < RandomNum; i++)
-                    {
-                        GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_Un");
-                        obj.transform.position = MySTL.RandomVec(me.transform.position, 5f);
-                    }
-                }
+                me.GetAniCtrl.SetTrigger("isCast");
                 break;
             case (int)Enemy_1Pattern.Hill:
                 me.GetAniCtrl.SetTrigger("isCast");

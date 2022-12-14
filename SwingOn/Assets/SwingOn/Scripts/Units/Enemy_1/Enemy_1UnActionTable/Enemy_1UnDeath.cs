@@ -7,9 +7,11 @@ public class Enemy_1UnDeath : Action<Enemy_1Un>
     public override void ActionEnter(Enemy_1Un script)
     {
         base.ActionEnter(script);
+        me.hitCount = 0;
         me.timer = 0.0f;
         me.GetAniCtrl.applyRootMotion = true;
         me.GetAniCtrl.SetTrigger("isDeath");
+        me.components.collider.enabled = false;
     }
     public override void ActionUpdate()
     {
@@ -17,9 +19,12 @@ public class Enemy_1UnDeath : Action<Enemy_1Un>
         {
             if (me.isCurrentAnimationOver(0.1f))
             {
-                GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_N");
-                obj.transform.position = me.transform.position;
-                obj.transform.rotation = me.transform.rotation;
+                if(me.status.curHp > 0)
+                {
+                    GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_N");
+                    obj.transform.position = me.transform.position;
+                    obj.transform.rotation = me.transform.rotation;
+                }
                 me.GetAniCtrl.applyRootMotion = false;
                 PoolingManager.Instance.ReturnObj(me.gameObject);
             }

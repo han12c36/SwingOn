@@ -9,8 +9,10 @@ public class Enemy_1Death : Action<Enemy_1>
     public override void ActionEnter(Enemy_1 script)
     {
         base.ActionEnter(script);
+        me.hitCount = 0;
         me.GetAniCtrl.SetTrigger("isDeath");
         me.MoveStop();
+        me.components.collider.enabled = false;
     }
     public override void ActionUpdate()
     {

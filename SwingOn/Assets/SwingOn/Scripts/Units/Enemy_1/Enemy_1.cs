@@ -18,7 +18,8 @@ public class Enemy_1 : Enemy<Enemy_1>
     private float timer;
     [SerializeField]
     private float changeMaterialTimer;
-    public GameObject Egg;
+    public bool isCast;
+    public float recognizeRange = 3f;
 
     public float Timer { get { return timer; } set { timer = value; } }
     public float IdleWaitTime { get { return idleWaitTime; } set { idleWaitTime = value; } }
@@ -28,7 +29,7 @@ public class Enemy_1 : Enemy<Enemy_1>
         status.unitName = Enums.UnitNameTable.Enemy1;
         if (enemyType == Enums.EnemyType.Normal)
         {
-            status.maxHp = 100;
+            status.maxHp = 5;
             status.curHp = status.maxHp;
             status.preHp = status.curHp;
             status.AttRange = 1f;
@@ -89,4 +90,5 @@ public class Enemy_1 : Enemy<Enemy_1>
         return probs.Length - 1;
     }
 
+    public void Enemy_1_Cast() { isCast = true; }
 }

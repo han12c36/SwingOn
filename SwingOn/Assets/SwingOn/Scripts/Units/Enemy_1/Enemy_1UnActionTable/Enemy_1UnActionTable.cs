@@ -46,7 +46,7 @@ public class Enemy_1UnActionTable : ActionTable<Enemy_1Un>
         }
         if (owner.status.curHp > 0)
         {
-            if (owner.status.preHp > owner.status.curHp)
+            if (owner.hitCount > 0)
             {
                 SetCurAction((int)Enums.Enemy_1EggActions.Damaged);
             }

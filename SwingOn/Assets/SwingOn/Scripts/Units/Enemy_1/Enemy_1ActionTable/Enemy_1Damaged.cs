@@ -10,7 +10,6 @@ public class Enemy_1Damaged : Action<Enemy_1>
     {
         base.ActionEnter(script);
         me.hitCount--;
-        Debug.Log("쳐맞는데 들어왔");
         GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
         me.GetAniCtrl.SetTrigger("isDamaged");
         me.MoveStop();
@@ -21,7 +20,6 @@ public class Enemy_1Damaged : Action<Enemy_1>
     public override void ActionUpdate()
     {
         //뒤로 살짝 넉백
-        Debug.Log("넉백중~~");
         me.transform.position = Vector3.Lerp(me.transform.position, nuckBackPos, 0.05f);
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Damaged"))
         {

@@ -14,9 +14,9 @@ public abstract class Enemy<T> : MonoBehaviour
     protected float distToTarget;
     protected Player target;
     protected ActionTable<T> actionTable;
+    private EnemyWeapon<T> enemyWeapon;
     protected NavMeshAgent navAgent;
     private int detectionLayer;
-    private EnemyWeapon<T> enemyWeapon;
     [SerializeField]
     private float[] patternValue = new float[3] { 10f, 10f, 80f };
 
@@ -41,12 +41,16 @@ public abstract class Enemy<T> : MonoBehaviour
         detectionLayer = LayerMask.NameToLayer("PlayerWeapon");
         Initialize();
     }
-    protected virtual void OnEnable() { }
+    protected virtual void OnEnable() 
+    {
+        components.collider.enabled = true;
+    }
     protected virtual void OnDisable() 
     {
         status.curHp = status.maxHp;
         status.preHp = status.curHp;
         actionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
+
     }
 
     protected virtual void Start() 
@@ -68,7 +72,6 @@ public abstract class Enemy<T> : MonoBehaviour
         {
             status.curHp -= target.PlayerWeapon.dmg;
             hitCount++;
-            Debug.Log(hitCount);
         }
     }
 
