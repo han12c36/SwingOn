@@ -5,7 +5,7 @@ using UnityEngine;
 public enum Enemy_1Pattern
 {
     Spawn,
-    Hill,
+    Heal,
     MeleeAtt,
     End
 }

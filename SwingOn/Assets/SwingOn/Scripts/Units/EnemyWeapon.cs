@@ -9,7 +9,6 @@ public class EnemyWeapon : Weapon<Enemy>
         base.Awake();
         if (owner != null)
         {
-            //owner = this;
             detectionLayer = LayerMask.NameToLayer("Player");
         }
     }

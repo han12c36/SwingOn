@@ -12,7 +12,9 @@ public class Enemy_1Att_1 : Action<Enemy_1>
         me.MoveStop();
         me.transform.LookAt(me.GetTarget.transform.position);
         if (me.enemyType == Enums.EnemyType.Normal) PatternIndex = (int)Enemy_1Pattern.MeleeAtt;
-        else PatternIndex = ((Enemy_1)me).Think(me.PatternValue);
+        //else PatternIndex = ((Enemy_1)me).Think(me.PatternValue);
+        else PatternIndex = (int)Enemy_1Pattern.Heal;
+
         SetTrigger_Enemy_1(PatternIndex);
     }
 
@@ -45,14 +47,18 @@ public class Enemy_1Att_1 : Action<Enemy_1>
                     obj.transform.position = MySTL.RandomVec(me.transform.position, 5f);
                 }
             }
-            else if (PatternIndex == (int)Enemy_1Pattern.Hill)
+            else if (PatternIndex == (int)Enemy_1Pattern.Heal)
             {
                 Debug.Log("Шњ Сп");
-                Collider[] nearEnemy = Physics.OverlapSphere(me.transform.position, me.recognizeRange, LayerMask.NameToLayer("Enemy"));
+                Collider[] nearEnemy = Physics.OverlapSphere(me.transform.position, me.recognizeRange);
                 for(int i = 0; i < nearEnemy.Length; i++)
                 {
-                    //Enemy enemy = nearEnemy[i].gameObject.GetComponent<Enemy>();
-                    //enemy.status.curHp += 2;
+                    if(nearEnemy[i].gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                    {
+                        Enemy enemy = nearEnemy[i].gameObject.GetComponent<Enemy>();
+                        //enemy.status.curHp += 2;
+                        PoolingManager.Instance.PlayEffect("Effect_Heal", enemy.transform.position);
+                    }
                 }
             }
         }
@@ -70,7 +76,7 @@ public class Enemy_1Att_1 : Action<Enemy_1>
             case (int)Enemy_1Pattern.Spawn:
                 me.GetAniCtrl.SetTrigger("isCast");
                 break;
-            case (int)Enemy_1Pattern.Hill:
+            case (int)Enemy_1Pattern.Heal:
                 me.GetAniCtrl.SetTrigger("isCast");
                 break;
             case (int)Enemy_1Pattern.MeleeAtt:

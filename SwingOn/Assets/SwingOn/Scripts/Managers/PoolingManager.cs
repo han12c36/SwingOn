@@ -20,21 +20,21 @@ public class PoolingManager : Manager<PoolingManager>
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
     }
     public void CreateBoxes()
     {
         objBoxes = new GameObject[prefabs.Length];
-        
+
 
         for (int i = 0; i < prefabs.Length; ++i)
         {
-            if(prefabs[i])
+            if (prefabs[i])
             {
                 GameObject box = new GameObject(prefabs[i].name + "_Box");
                 box.transform.SetParent(this.gameObject.transform);
@@ -45,7 +45,7 @@ public class PoolingManager : Manager<PoolingManager>
 
     private void FillAllBoxs(int count = 5)
     {
-        if(poolingObjDic == null) poolingObjDic = new Dictionary<string, Queue<GameObject>>();
+        if (poolingObjDic == null) poolingObjDic = new Dictionary<string, Queue<GameObject>>();
 
         for (int i = 0; i < prefabs.Length; i++)
         {
@@ -53,7 +53,7 @@ public class PoolingManager : Manager<PoolingManager>
 
             for (int k = 0; k < count; ++k)
             {
-                GameObject tempObj = Instantiate(prefabs[i],objBoxes[i].transform);
+                GameObject tempObj = Instantiate(prefabs[i], objBoxes[i].transform);
                 tempObj.name.Replace("(Clone)", string.Empty);
                 tempObj.SetActive(false);
                 tempObj.transform.SetParent(objBoxes[i].transform);
@@ -73,7 +73,7 @@ public class PoolingManager : Manager<PoolingManager>
             {
                 if (objBoxes[i].name.Equals(boxName))
                 {
-                    for(int k = 0; k < count; k++)
+                    for (int k = 0; k < count; k++)
                     {
                         GameObject tempObj = Instantiate(prefabs[i], objBoxes[i].transform);
                         tempObj.name.Replace("(Clone)", string.Empty);
@@ -102,12 +102,12 @@ public class PoolingManager : Manager<PoolingManager>
             return tempObj;
         }
     }
-    
+
     public void ReturnObj(GameObject obj)
     {
         obj.transform.position = Vector3.zero;
         obj.transform.rotation = Quaternion.identity;
-    
+
         string realName = obj.name.Replace("(Clone)", string.Empty);
         string boxName = realName + "_Box";
         var queueInDic = poolingObjDic.FirstOrDefault(t => t.Key == realName);
@@ -125,4 +125,52 @@ public class PoolingManager : Manager<PoolingManager>
             }
         }
     }
+    public void PlayEffect(string name, Vector3 position)
+    {
+        GameObject effect = LentalObj(name);
+        effect.transform.position = position;
+        effect.GetComponentInChildren<ParticleSystem>().Play();
+        //GameManager.Instance.GetCoroutineHelper.StartCoroutine(CheckEffect(effect));
+    }
+    private IEnumerator CheckEffect(GameObject effect)
+    {
+        ParticleSystem ps = effect.GetComponentInChildren<ParticleSystem>();
+
+        while (true)
+        {
+            if (!ps.IsAlive())
+            {
+                ps.Stop();
+                ReturnObj(effect);
+                yield return null;
+                break;
+            }
+        }
+    }
 }
+
+        //StartCoroutine(CheckIfAlive());
+
+//    IEnumerator CheckIfAlive()
+//    {
+//        ParticleSystem ps = this.GetComponent<ParticleSystem>();
+//
+//        while (true && ps != null)
+//        {
+//            yield return new WaitForSeconds(DestroyTime);
+//            if (!ps.IsAlive(true))
+//            {
+//                if (OnlyDeactivate)
+//                {
+//#if UNITY_3_5
+//						this.gameObject.SetActiveRecursively(false);
+//#else
+//                    this.gameObject.SetActive(false);
+//#endif
+//                }
+//                else
+//                ObjectPoolingCenter.Instance.ReturnObj(this.gameObject);
+//                break;
+//            }
+//        }
+//    }
