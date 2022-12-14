@@ -10,6 +10,7 @@ public abstract class Enemy<T> : MonoBehaviour
     public Structs.Status status;
     [Space(5f)]
     public Structs.UnitComponents components;
+    public int hitCount;
     protected float distToTarget;
     protected Player target;
     protected ActionTable<T> actionTable;
@@ -66,6 +67,8 @@ public abstract class Enemy<T> : MonoBehaviour
         if (other.gameObject.layer == detectionLayer)
         {
             status.curHp -= target.PlayerWeapon.dmg;
+            hitCount++;
+            Debug.Log(hitCount);
         }
     }
 

@@ -28,7 +28,7 @@ public class Enemy_1 : Enemy<Enemy_1>
         status.unitName = Enums.UnitNameTable.Enemy1;
         if (enemyType == Enums.EnemyType.Normal)
         {
-            status.maxHp = 5;
+            status.maxHp = 100;
             status.curHp = status.maxHp;
             status.preHp = status.curHp;
             status.AttRange = 1f;

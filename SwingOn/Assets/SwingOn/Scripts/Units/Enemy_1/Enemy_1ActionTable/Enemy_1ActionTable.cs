@@ -42,10 +42,14 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
         base.Update();
         if(owner.status.curHp > 0)
         {
-            if (owner.status.preHp > owner.status.curHp)
+            if(owner.hitCount > 0)
             {
                 SetCurAction((int)Enums.Enemy_1Actions.Damaged);
             }
+            //if (owner.status.preHp > owner.status.curHp)
+            //{
+            //    Debug.Log("피통이 달았는디?");
+            //}
         }
         else
         {

@@ -84,17 +84,24 @@ MonoBehaviour:
   enemyType: 0
   status:
     unitName: 0
-    maxHp: 0
+    maxHp: 100
     curHp: 0
     preHp: 0
     AttRange: 0
+    Speed: 0
   components:
     rigid: {fileID: 0}
     collider: {fileID: 0}
     aniCtrl: {fileID: 0}
+  hitCount: 0
+  patternValue:
+  - 10
+  - 10
+  - 80
   OriginMaterial: {fileID: 2100000, guid: 9e99e47d4929a7045bddbd55835dad43, type: 2}
   DamagedMaterial: {fileID: 2100000, guid: aaeca5e4855ae8c4c9d343c56bb7a0cb, type: 2}
   changeMaterialTimer: 0
+  Egg: {fileID: 0}
 --- !u!114 &6893264112954099275
 MonoBehaviour:
   m_ObjectHideFlags: 0
