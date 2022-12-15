@@ -24,12 +24,16 @@ public class PlayerActionTable : ActionTable<Player>
 
     private float animationSpeed = 1.0f;
     public float blitzRange = 10.0f;
-    
+
     [SerializeField]
     private Enums.PlayerAttType attType;
+
+    public bool tryChangeHardMode;
+    public bool tryChangeSpeedMode;
+
     [SerializeField]
     private float modeDurtaionTimer;
-    public float hardModeDurationTime = 10.0f;
+    public float ModeDurationTime = 10.0f;
     [Header("NormalDash")]
     public float normalDashSpeed = 0.1f;        //노말 대쉬 속도
     public float normalDashDistance = 5.0f;     //노말 대쉬 길이
@@ -38,7 +42,6 @@ public class PlayerActionTable : ActionTable<Player>
     public float hardDashDistance = 3.0f;       //하드 대쉬 길이
     [Header("NormalBlitz")]
     public float normalBlitzSpeed = 0.2f;          //기습 속도
-    //public float hardDashDistance = 3.0f;       //하드 대쉬 길이
 
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
@@ -61,6 +64,7 @@ public class PlayerActionTable : ActionTable<Player>
         
         actions[(int)Enums.PlayerActions.None] = new None();
         actions[(int)Enums.PlayerActions.NormalAtt] = new NormalAtt();
+        actions[(int)Enums.PlayerActions.SpeedAtt] = new SpeedAtt();
         actions[(int)Enums.PlayerActions.HardAtt] = new HardAtt();
         actions[(int)Enums.PlayerActions.Skill_1] = new Skill_1();
         actions[(int)Enums.PlayerActions.Skill_2] = new Skill_2();
@@ -110,12 +114,24 @@ public class PlayerActionTable : ActionTable<Player>
             if (AttType == Enums.PlayerAttType.Normal)
             {
                 modeChange = true;
+                tryChangeHardMode = true;
                 SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
         }
-        else if (attType == Enums.PlayerAttType.Hard)
+        else if(Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (modeDurtaionTimer < hardModeDurationTime)
+            if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
+               curAction == actions[(int)Enums.PlayerActions.Skill_2]) return;
+            if (AttType == Enums.PlayerAttType.Normal)
+            {
+                modeChange = true;
+                tryChangeSpeedMode = true;
+                SetCurAction((int)Enums.PlayerActions.Skill_3);
+            }
+        }
+        else if (attType == Enums.PlayerAttType.Hard || attType == Enums.PlayerAttType.Speed)
+        {
+            if (modeDurtaionTimer < ModeDurationTime)
             {
                 modeDurtaionTimer += Time.deltaTime;
             }
@@ -138,6 +154,10 @@ public class PlayerActionTable : ActionTable<Player>
             if (AttType == Enums.PlayerAttType.Normal)
             {
                 SetCurAction((int)Enums.PlayerActions.NormalAtt);
+            }
+            else if(AttType == Enums.PlayerAttType.Speed)
+            {
+                SetCurAction((int)Enums.PlayerActions.SpeedAtt);
             }
             else if (AttType == Enums.PlayerAttType.Hard)
             {

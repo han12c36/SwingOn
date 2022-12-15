@@ -37,6 +37,7 @@ namespace Enums
     {
         None,
         NormalAtt,
+        SpeedAtt,
         HardAtt,
         Skill_1,
         Skill_2,
@@ -63,6 +64,7 @@ namespace Enums
     public enum PlayerAttType
     {
         Normal,
+        Speed,
         Hard,
         End
     }

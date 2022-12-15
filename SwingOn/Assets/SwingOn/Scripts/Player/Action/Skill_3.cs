@@ -15,6 +15,7 @@ public class Skill_3 : Action<Player>
         me.GetAniCtrl.applyRootMotion = false;
         me.GetAniCtrl.SetTrigger("Skill_3");
         me.GetAniCtrl.SetBool("ModeChange",true);
+        me.PlayerWeapon.OnOffWeaponCollider(false);
     }
     public override void ActionUpdate()
     {
@@ -33,9 +34,19 @@ public class Skill_3 : Action<Player>
     {
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
-            me.ActionTable.AttType = Enums.PlayerAttType.Hard;
+            if(me.ActionTable.tryChangeHardMode)
+            {
+                me.ActionTable.tryChangeHardMode = false;
+                me.ActionTable.AttType = Enums.PlayerAttType.Hard;
+            }
+            else if(me.ActionTable.tryChangeSpeedMode)
+            {
+                me.ActionTable.tryChangeSpeedMode = false;
+                me.ActionTable.AttType = Enums.PlayerAttType.Speed;
+            }
         }
-        else if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
+        else if (me.ActionTable.AttType == Enums.PlayerAttType.Hard ||
+            me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {
             me.ActionTable.AttType = Enums.PlayerAttType.Normal;
         }
