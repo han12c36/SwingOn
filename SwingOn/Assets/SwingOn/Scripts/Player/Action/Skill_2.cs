@@ -10,7 +10,20 @@ public class Skill_2 : Action<Player>
         base.ActionEnter(script);
         me.MoveCtrl.CanMove = false;
         targetEnemy = FindTarget();
-        if(targetEnemy != null) me.GetAniCtrl.SetTrigger("Skill_2");
+
+        if(me.ActionTable.AttType == Enums.PlayerAttType.Hard)
+        {
+            if (!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("GroundBreak"))
+            {
+                me.GetAniCtrl.SetTrigger("GroundBreak");
+            }
+        }
+        else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed ||
+           me.ActionTable.AttType == Enums.PlayerAttType.Normal)
+        {
+            if(targetEnemy != null) me.GetAniCtrl.SetTrigger("Skill_2");
+            else me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
+        }
     }
     public override void ActionUpdate()
     {
@@ -20,6 +33,10 @@ public class Skill_2 : Action<Player>
             {
                 NormalBlitz();
             }
+        }
+        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("GroundBreak"))
+        {
+            Debug.Log("¶¥³»·ÁÂï±â");
         }
 
         if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
@@ -36,19 +53,6 @@ public class Skill_2 : Action<Player>
                         me.transform.position = vec;
                         me.transform.LookAt(targetEnemy.transform.forward);
                         me.GetAniCtrl.SetBool("DoubleBlitz", true);
-                    }
-                }
-            }
-        }
-        if (!me.GetAniCtrl.GetBool("GroundBreak"))
-        {
-            if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
-            {
-                if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    if (targetEnemy != null)
-                    {
-                        me.GetAniCtrl.SetBool("GroundBreak", true);
                     }
                 }
             }
@@ -70,8 +74,8 @@ public class Skill_2 : Action<Player>
     public override void ActionExit()
     {
         me.GetAniCtrl.ResetTrigger("Skill_2");
+        me.GetAniCtrl.ResetTrigger("GroundBreak");
         me.GetAniCtrl.SetBool("DoubleBlitz", false);
-        me.GetAniCtrl.SetBool("GroundBreak", false);
         me.ActionTable.Blitz_Finish = false;
         me.ActionTable.GroundBreak_Finish = false;
         me.MoveCtrl.CanMove = true;
