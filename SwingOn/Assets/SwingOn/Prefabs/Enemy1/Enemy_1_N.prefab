@@ -121,6 +121,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   preAction_e: 0
   curAction_e: 0
+  isHitFinish: 0
 --- !u!195 &1746438075933674580
 NavMeshAgent:
   m_ObjectHideFlags: 0

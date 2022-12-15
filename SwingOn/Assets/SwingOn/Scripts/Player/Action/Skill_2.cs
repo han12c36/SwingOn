@@ -23,10 +23,10 @@ public class Skill_2 : Action<Player>
         {
             if (targetEnemy != null)
             {
-                if (!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
-                {
+                //if (!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
+                //{
                     me.GetAniCtrl.SetTrigger("Skill_2");
-                }
+                //}
             }
             else me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
@@ -108,7 +108,7 @@ public class Skill_2 : Action<Player>
         //몬스터가 있다는 가정하에 몬스터 등 방향으로 휙 돌기
     }
 
-    private Enemy FindTarget()
+    public Enemy FindTarget()
     {
         float minDistance = float.PositiveInfinity;
         Enemy targetEnemy = null;

@@ -222,4 +222,23 @@ public class PlayerActionTable : ActionTable<Player>
         curAction_e = (Enums.PlayerActions)curAction_i;
     }
 
+    public Enemy FindTarget()
+    {
+        float minDistance = float.PositiveInfinity;
+        Enemy targetEnemy = null;
+        Collider[] nearEnemy = Physics.OverlapSphere(owner.transform.position, owner.ActionTable.blitzRange);
+        foreach (Collider enemy in nearEnemy)
+        {
+            if (enemy.gameObject.GetComponent<Enemy>() != null)
+            {
+                float dist = Vector3.Distance(owner.transform.position, enemy.transform.position);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    targetEnemy = enemy.gameObject.GetComponent<Enemy>();
+                }
+            }
+        }
+        return targetEnemy;
+    }
 }

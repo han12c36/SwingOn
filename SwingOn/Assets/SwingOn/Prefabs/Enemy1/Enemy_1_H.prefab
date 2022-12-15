@@ -88,13 +88,24 @@ MonoBehaviour:
     curHp: 0
     preHp: 0
     AttRange: 0
+    Speed: 0
   components:
     rigid: {fileID: 0}
     collider: {fileID: 0}
     aniCtrl: {fileID: 0}
+  hitCount: 0
+  isHold: 0
+  patternValue:
+  - 10
+  - 10
+  - 80
   OriginMaterial: {fileID: 2100000, guid: 9e99e47d4929a7045bddbd55835dad43, type: 2}
   DamagedMaterial: {fileID: 2100000, guid: aaeca5e4855ae8c4c9d343c56bb7a0cb, type: 2}
   changeMaterialTimer: 0
+  isCast: 0
+  recognizeRange: 3
+  actionTable: {fileID: 0}
+  enemyWeapon: {fileID: 0}
 --- !u!114 &5961226935575874806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +121,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   preAction_e: 0
   curAction_e: 0
+  isHitFinish: 0
 --- !u!195 &1526679924504528617
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -337,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46ed59784b09e6459b47e314398cdcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: {fileID: 0}
+  owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
   dmg: 3
@@ -353,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46ed59784b09e6459b47e314398cdcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: {fileID: 0}
+  owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
   dmg: 3
