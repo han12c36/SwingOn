@@ -10,7 +10,8 @@ public class Enemy_1Att_1 : Action<Enemy_1>
     {
         base.ActionEnter(script);
         me.MoveStop();
-        me.transform.LookAt(me.GetTarget.transform.position);
+
+        if(!me.isHold) me.transform.LookAt(me.GetTarget.transform.position);
         if (me.enemyType == Enums.EnemyType.Normal) PatternIndex = (int)Enemy_1Pattern.MeleeAtt;
         else PatternIndex = ((Enemy_1)me).Think(me.PatternValue);
         //else PatternIndex = (int)Enemy_1Pattern.Heal;
@@ -20,6 +21,8 @@ public class Enemy_1Att_1 : Action<Enemy_1>
 
     public override void ActionUpdate()
     {
+        if (me.isHold) return;
+
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Att"))
         {
             if (me.isCurrentAnimationOver(1.0f))

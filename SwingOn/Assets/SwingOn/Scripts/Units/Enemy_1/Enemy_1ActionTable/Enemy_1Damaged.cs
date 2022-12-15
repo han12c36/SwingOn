@@ -13,14 +13,14 @@ public class Enemy_1Damaged : Action<Enemy_1>
         GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
         me.GetAniCtrl.SetTrigger("isDamaged");
         me.MoveStop();
-        Vector3 vec = (me.transform.position - me.GetTarget.transform.position).normalized * nuckBackSpeed;
+        Vector3 vec = Vector3.zero;
+        if (!me.isHold) vec = (me.transform.position - me.GetTarget.transform.position).normalized * nuckBackSpeed;
         nuckBackPos = me.transform.position + vec;
     }
 
     public override void ActionUpdate()
     {
-        //µÚ·Î »ìÂ¦ ³Ë¹é 
-        if(!me.isHold) me.transform.position = Vector3.Lerp(me.transform.position, nuckBackPos, 0.05f);
+        if (!me.isHold) me.transform.position = Vector3.Lerp(me.transform.position, nuckBackPos, 0.05f);
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Damaged"))
         {
             if (me.isCurrentAnimationOver(1.0f))

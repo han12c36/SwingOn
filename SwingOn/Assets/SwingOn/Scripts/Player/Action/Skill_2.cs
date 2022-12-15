@@ -64,7 +64,9 @@ public class Skill_2 : Action<Player>
         me.GetAniCtrl.SetBool("DoubleBlitz", false);
         me.ActionTable.Blitz_Finish = false;
         me.MoveCtrl.CanMove = true;
+        targetEnemy.isHold = false;
         targetEnemy = null;
+
     }
 
     private void NormalBlitz()
