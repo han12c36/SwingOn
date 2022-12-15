@@ -20,7 +20,11 @@ public class PlayerActionTable : ActionTable<Player>
     [SerializeField]
     private bool modeChange;
 
+    public bool isFindNearEnemy;
+
     private float animationSpeed = 1.0f;
+    public float blitzRange = 10.0f;
+    
     [SerializeField]
     private Enums.PlayerAttType attType;
     [SerializeField]
@@ -32,6 +36,9 @@ public class PlayerActionTable : ActionTable<Player>
     [Header("HardDash")]
     public float hardDashSpeed = 0.2f;          //하드 대쉬 속도
     public float hardDashDistance = 3.0f;       //하드 대쉬 길이
+    [Header("NormalBlitz")]
+    public float normalBlitzSpeed = 0.2f;          //기습 속도
+    //public float hardDashDistance = 3.0f;       //하드 대쉬 길이
 
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
@@ -165,6 +172,8 @@ public class PlayerActionTable : ActionTable<Player>
     public void EquiptFinish() { isEquptFinish = true; }
     public void DashFinish() { if (!modeChange) isDashFinish = true; }
     public void BlitzFinish() { if (!modeChange) isBlitzFinish = true; }
+    public void FindNearEnemy() { if(!isFindNearEnemy) isFindNearEnemy = true; }
+
     public void OnOffWeaponCollider(int value)
     {
         if (value == 0) owner.PlayerWeapon.OnOffWeaponCollider(true);

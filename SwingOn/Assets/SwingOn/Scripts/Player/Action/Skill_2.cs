@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Skill_2 : Action<Player>
 {
+    Enemy targetEnemy;
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
         me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetTrigger("Skill_2");
+        targetEnemy = FindTarget();
+        me.transform.LookAt(targetEnemy.transform.position);
     }
     public override void ActionUpdate()
     {
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
         {
-            if (!me.ActionTable.isCurrentAnimationOver(0.62f)) NormalBlitz();
+            if (!me.ActionTable.isCurrentAnimationOver(0.62f))
+            {
+                NormalBlitz();
+            }
         }
 
         if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
@@ -50,12 +56,16 @@ public class Skill_2 : Action<Player>
         me.GetAniCtrl.SetBool("DoubleBlitz", false);
         me.ActionTable.Blitz_Finish = false;
         me.MoveCtrl.CanMove = true;
+        targetEnemy = null;
     }
 
     private void NormalBlitz()
     {
         Debug.Log("전방찌르기!");
-        //몬스터가 있다는 가정하에 몬스터 뒤쪽까지 찌르기로 돌진
+        if(targetEnemy != null)
+        {
+            me.transform.position = Vector3.Lerp(me.transform.position, targetEnemy.transform.position + targetEnemy.transform.forward * 1.0f, me.ActionTable.normalBlitzSpeed);
+        }
     }
     private void HardBlitz()
     {
@@ -63,4 +73,23 @@ public class Skill_2 : Action<Player>
         //몬스터가 있다는 가정하에 몬스터 등 방향으로 휙 돌기
     }
 
+    private Enemy FindTarget()
+    {
+        float minDistance = float.PositiveInfinity;
+        Enemy targetEnemy = null;
+        Collider[] nearEnemy = Physics.OverlapSphere(me.transform.position, me.ActionTable.blitzRange);
+        foreach(Collider enemy in nearEnemy)
+        {
+            if(enemy.gameObject.GetComponent<Enemy>() != null)
+            {
+                float dist = Vector3.Distance(me.transform.position, enemy.transform.position);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    targetEnemy = enemy.gameObject.GetComponent<Enemy>();
+                }
+            }
+        }
+        return targetEnemy;
+    }
 }
