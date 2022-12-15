@@ -52,6 +52,7 @@ public abstract class Enemy : MonoBehaviour
     {
         status.curHp = status.maxHp;
         status.preHp = status.curHp;
+        isHold = false;
     }
 
     protected virtual void Start() 

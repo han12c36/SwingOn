@@ -48,7 +48,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 2e5a32a9d96911c46be1a97adf5d27b1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -79,6 +79,7 @@ MonoBehaviour:
     collider: {fileID: 0}
     aniCtrl: {fileID: 0}
   hitCount: 0
+  isHold: 0
   patternValue:
   - 10
   - 10

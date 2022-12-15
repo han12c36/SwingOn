@@ -9,17 +9,15 @@ public class Skill_3 : Action<Player>
         base.ActionEnter(script);
         me.GetAniCtrl.ResetTrigger("NormalSwing");
         me.GetAniCtrl.ResetTrigger("HardSwing");
+        me.GetAniCtrl.ResetTrigger("Skill_2");
+        me.GetAniCtrl.SetBool("DoubleBlitz", false);
         me.ActionTable.Att_Finish = false;
         me.GetAniCtrl.applyRootMotion = false;
         me.GetAniCtrl.SetTrigger("Skill_3");
         me.GetAniCtrl.SetBool("ModeChange",true);
-        //me.MoveCtrl.cur_Speed = 1.5f;
     }
     public override void ActionUpdate()
     {
-        //Debug.Log("장비 중~~");
-        //무기 바끼는 이펙트 넣어주고
-        //분노 모션같은거?
         if (me.ActionTable.Equipt_Finish)
         {
             me.ActionTable.Equipt_Finish = false;

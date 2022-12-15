@@ -42,7 +42,6 @@ public class Enemy_1UnActionTable : ActionTable<Enemy_1Un>
             {
                 SetCurAction((int)Enums.Enemy_1EggActions.Death);
             }
-
         }
         if (owner.status.curHp > 0)
         {
