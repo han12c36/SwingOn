@@ -182,13 +182,17 @@ MonoBehaviour:
   isAttFinish: 0
   isEquptFinish: 0
   isDashFinish: 0
+  isPowerSlash: 0
+  isGroundBreakFinish: 0
   isBlitzFinish: 0
   modeChange: 0
   isFindNearEnemy: 0
   blitzRange: 10
   attType: 0
+  tryChangeHardMode: 0
+  tryChangeSpeedMode: 0
   modeDurtaionTimer: 0
-  hardModeDurationTime: 10
+  ModeDurationTime: 10
   normalDashSpeed: 0.1
   normalDashDistance: 5
   hardDashSpeed: 0.2
@@ -808,4 +812,4 @@ MonoBehaviour:
   owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
-  dmg: 1
+  dmg: 3

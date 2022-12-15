@@ -21,20 +21,26 @@ public class Enemy_1Damaged : Action<Enemy_1>
     public override void ActionUpdate()
     {
         if (!me.isHold) me.transform.position = Vector3.Lerp(me.transform.position, nuckBackPos, 0.05f);
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Damaged"))
+        
+        if(me.ActionTable.isHitFinish)
         {
-            if (me.isCurrentAnimationOver(1.0f))
+            me.ActionTable.isHitFinish = false;
+            if (me.GetDistToTarget > me.status.AttRange)
             {
-                if(me.GetDistToTarget > me.status.AttRange)
-                {
-                    me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
-                }
-                else
-                {
-                    me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Att_1);
-                }
+                me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
+            }
+            else
+            {
+                me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Att_1);
             }
         }
+        //if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Damaged"))
+        //{
+        //    if (me.isCurrentAnimationOver(1.0f))
+        //    {
+        //        
+        //    }
+        //}
     }
     public override void ActionExit()
     {

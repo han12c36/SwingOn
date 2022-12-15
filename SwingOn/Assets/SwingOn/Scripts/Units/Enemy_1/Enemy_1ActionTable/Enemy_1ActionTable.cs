@@ -8,7 +8,8 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     private Enums.Enemy_1Actions preAction_e;
     [SerializeField]
     private Enums.Enemy_1Actions curAction_e;
-   
+
+    public bool isHitFinish;
 
     protected override void Initialize()
     {
@@ -41,7 +42,8 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
     protected override void Update()
     {
         base.Update();
-        if(owner.status.curHp > 0)
+        if (owner.isHold) owner.MoveStop();
+        if (owner.status.curHp > 0)
         {
             if(owner.hitCount > 0)
             {
@@ -78,4 +80,7 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
         if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
         else owner.EnemyWeapon.OnOffWeaponCollider(false);
     }
+
+
+    public void HitFinish() { isHitFinish = true; }
 }

@@ -21,7 +21,13 @@ public class Skill_2 : Action<Player>
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed ||
            me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
-            if(targetEnemy != null) me.GetAniCtrl.SetTrigger("Skill_2");
+            if (targetEnemy != null)
+            {
+                if (!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
+                {
+                    me.GetAniCtrl.SetTrigger("Skill_2");
+                }
+            }
             else me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }

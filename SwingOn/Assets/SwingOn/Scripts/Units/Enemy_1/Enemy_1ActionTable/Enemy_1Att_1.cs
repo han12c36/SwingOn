@@ -21,8 +21,6 @@ public class Enemy_1Att_1 : Action<Enemy_1>
 
     public override void ActionUpdate()
     {
-        if (me.isHold) return;
-
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Att"))
         {
             if (me.isCurrentAnimationOver(1.0f))
