@@ -163,6 +163,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82172097203304136, guid: 08e521db02f40d14c9ef9fc0d60215f3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114751664330102022, guid: 08e521db02f40d14c9ef9fc0d60215f3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 198103793226961838, guid: 08e521db02f40d14c9ef9fc0d60215f3, type: 3}
       propertyPath: looping
       value: 0

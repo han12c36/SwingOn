@@ -34,14 +34,26 @@ public class Skill_1 : Action<Player>
                 }
             }
         }
+        if (!me.GetAniCtrl.GetBool("PowerSlash"))
+        {
+            if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    me.GetAniCtrl.SetBool("PowerSlash", true);
+                }
+            }
+        }
+
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
         {
             if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
         }
 
-        if (me.ActionTable.Dash_Finish)
+        if (me.ActionTable.Dash_Finish || me.ActionTable.Power_Slash)
         {
             me.ActionTable.Dash_Finish = false;
+            me.ActionTable.Power_Slash = false;
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }
@@ -53,7 +65,9 @@ public class Skill_1 : Action<Player>
     {
         me.GetAniCtrl.ResetTrigger("Skill_1");
         me.GetAniCtrl.SetBool("DoubleDash", false);
+        me.GetAniCtrl.SetBool("PowerSlash", false);
         me.ActionTable.Dash_Finish = false;
+        me.ActionTable.Power_Slash = false;
         me.MoveCtrl.CanMove = true;
         startPos = Vector3.zero;
         targetPos_1 = Vector3.zero;

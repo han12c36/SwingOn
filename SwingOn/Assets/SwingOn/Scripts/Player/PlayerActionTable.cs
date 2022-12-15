@@ -16,6 +16,10 @@ public class PlayerActionTable : ActionTable<Player>
     [SerializeField]
     private bool isDashFinish;
     [SerializeField]
+    private bool isPowerSlash;
+    [SerializeField]
+    private bool isGroundBreakFinish;
+    [SerializeField]
     private bool isBlitzFinish;
     [SerializeField]
     private bool modeChange;
@@ -46,6 +50,8 @@ public class PlayerActionTable : ActionTable<Player>
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
     public bool Dash_Finish { get { return isDashFinish; } set { isDashFinish = value; } }
+    public bool Power_Slash { get { return isPowerSlash; } set { isPowerSlash = value; } }
+    public bool GroundBreak_Finish { get { return isGroundBreakFinish; } set { isGroundBreakFinish = value; } }
     public bool Blitz_Finish { get { return isBlitzFinish; } set { isBlitzFinish = value; } }
     public bool ModeChange { get { return modeChange; } set { modeChange = value; } }
     public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
@@ -186,7 +192,6 @@ public class PlayerActionTable : ActionTable<Player>
         }
     }
 
-
     public void PlayEffect(string effectName) 
     {
         PoolingManager.Instance.PlayEffect(effectName, owner.backEffect_Pos, owner.gameObject);
@@ -194,6 +199,8 @@ public class PlayerActionTable : ActionTable<Player>
     public void AttFinish() { if (!modeChange) isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }
     public void DashFinish() { if (!modeChange) isDashFinish = true; }
+    public void PowerSlashFinish() { if (!modeChange) isPowerSlash = true; }
+    public void GroundBreakFinish() { if (!modeChange) isGroundBreakFinish = true; }
     public void BlitzFinish() { if (!modeChange) isBlitzFinish = true; }
     public void FindNearEnemy() { if(!isFindNearEnemy) isFindNearEnemy = true; }
 
@@ -214,4 +221,5 @@ public class PlayerActionTable : ActionTable<Player>
         base.SetCurAction(index);
         curAction_e = (Enums.PlayerActions)curAction_i;
     }
+
 }

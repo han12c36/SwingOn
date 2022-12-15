@@ -24,7 +24,7 @@ public class Skill_2 : Action<Player>
 
         if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
         {
-            if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
+            if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
             {
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
@@ -40,16 +40,25 @@ public class Skill_2 : Action<Player>
                 }
             }
         }
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardBlitz"))
+        if (!me.GetAniCtrl.GetBool("GroundBreak"))
         {
-            //if (!me.GetActionTable.isCurrentAnimationOver(0.62f)) 
-            HardBlitz();
+            if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    if (targetEnemy != null)
+                    {
+                        me.GetAniCtrl.SetBool("GroundBreak", true);
+                    }
+                }
+            }
         }
 
-        if (me.ActionTable.Blitz_Finish || targetEnemy == null)
+        if (me.ActionTable.Blitz_Finish || me.ActionTable.GroundBreak_Finish || targetEnemy == null)
         {
             if(targetEnemy != null)targetEnemy.isHold = false;
             me.ActionTable.Blitz_Finish = false;
+            me.ActionTable.GroundBreak_Finish = false;
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }
@@ -62,7 +71,9 @@ public class Skill_2 : Action<Player>
     {
         me.GetAniCtrl.ResetTrigger("Skill_2");
         me.GetAniCtrl.SetBool("DoubleBlitz", false);
+        me.GetAniCtrl.SetBool("GroundBreak", false);
         me.ActionTable.Blitz_Finish = false;
+        me.ActionTable.GroundBreak_Finish = false;
         me.MoveCtrl.CanMove = true;
         if(targetEnemy != null)
         {
