@@ -11,14 +11,15 @@ public class Enemy_1Trace : Action<Enemy_1>
     }
     public override void ActionUpdate()
     {
-        me.transform.LookAt(me.GetTarget.transform.position);
-        me.MoveOrder(me.GetTarget.transform, me.status.Speed);
-
-        if (me.GetDistToTarget < me.status.AttRange)
+        if(!me.isHold)
         {
-            me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Att_1);
+            me.transform.LookAt(me.GetTarget.transform.position);
+            me.MoveOrder(me.GetTarget.transform, me.status.Speed);
+            if (me.GetDistToTarget < me.status.AttRange)
+            {
+                me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Att_1);
+            }
         }
-
     }
     public override void ActionExit()
     {

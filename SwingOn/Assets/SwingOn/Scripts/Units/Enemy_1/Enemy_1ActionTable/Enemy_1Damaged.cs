@@ -14,7 +14,6 @@ public class Enemy_1Damaged : Action<Enemy_1>
         me.GetAniCtrl.SetTrigger("isDamaged");
         me.MoveStop();
         Vector3 vec = (me.transform.position - me.GetTarget.transform.position).normalized * nuckBackSpeed;
-        //Vector3 vec = (-me.transform.forward).normalized * nuckBackSpeed;
         nuckBackPos = me.transform.position + vec;
     }
 
@@ -26,7 +25,14 @@ public class Enemy_1Damaged : Action<Enemy_1>
         {
             if (me.isCurrentAnimationOver(1.0f))
             {
-                me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
+                if(me.GetDistToTarget > me.status.AttRange)
+                {
+                    me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
+                }
+                else
+                {
+                    me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Att_1);
+                }
             }
         }
     }

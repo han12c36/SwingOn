@@ -777,4 +777,4 @@ MonoBehaviour:
   owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
-  dmg: 2
+  dmg: 1

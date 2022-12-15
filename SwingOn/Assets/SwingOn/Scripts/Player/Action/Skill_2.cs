@@ -31,8 +31,9 @@ public class Skill_2 : Action<Player>
                     if(targetEnemy != null)
                     {
                         targetEnemy.isHold = true;
-                        me.transform.position = 
-                            targetEnemy.transform.position + -targetEnemy.transform.forward * targetEnemy.transform.localScale.z * 0.85f;
+                        Vector3 vec = targetEnemy.transform.position + (-targetEnemy.transform.forward).normalized * (targetEnemy.transform.localScale.z * 0.7f);
+                        vec = new Vector3(vec.x, 0.0f, vec.z);
+                        me.transform.position = vec;
                         me.transform.LookAt(targetEnemy.transform.forward);
                         me.GetAniCtrl.SetBool("DoubleBlitz", true);
                     }
