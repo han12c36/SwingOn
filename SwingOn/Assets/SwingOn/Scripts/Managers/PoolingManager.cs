@@ -129,7 +129,7 @@ public class PoolingManager : Manager<PoolingManager>
     {
         GameObject effect = LentalObj(name);
         effect.transform.position = position;
-        effect.GetComponentInChildren<ParticleSystem>().Play();
+        //effect.GetComponentInChildren<ParticleSystem>().Play();
         //GameManager.Instance.GetCoroutineHelper.StartCoroutine(CheckEffect(effect));
     }
     private IEnumerator CheckEffect(GameObject effect)

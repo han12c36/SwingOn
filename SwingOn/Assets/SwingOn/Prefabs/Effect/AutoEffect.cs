@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AutoEffect : MonoBehaviour
 {
+    private ParticleSystem effect;
+    private float DestroyTime;
 
     private void Awake()
     {
@@ -12,19 +14,23 @@ public class AutoEffect : MonoBehaviour
 
     private void OnEnable()
     {
-        
-    }
-    private void OnDisable()
-    {
-        
-    }
-    private void Start()
-    {
-        
+        effect = GetComponentInChildren<ParticleSystem>();
+        DestroyTime = effect.main.duration;
+        StartCoroutine(CheckIfAlive());
     }
 
-    private void Update()
+    IEnumerator CheckIfAlive()
     {
-        
+        effect.Play();
+        while (effect != null)
+        {
+            yield return new WaitForSeconds(DestroyTime);
+            if (!effect.IsAlive(true))
+            {
+                effect.Stop();
+                PoolingManager.Instance.ReturnObj(gameObject);
+                break;
+            }
+        }
     }
 }
