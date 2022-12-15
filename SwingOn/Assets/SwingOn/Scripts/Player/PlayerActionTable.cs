@@ -167,9 +167,9 @@ public class PlayerActionTable : ActionTable<Player>
     }
 
 
-    public void PlayEffect() 
+    public void PlayEffect(string effectName) 
     {
-        PoolingManager.Instance.PlayEffect("Effect_Dash", owner.backEffect_Pos, owner.gameObject);
+        PoolingManager.Instance.PlayEffect(effectName, owner.backEffect_Pos, owner.gameObject);
     }
     public void AttFinish() { if (!modeChange) isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }
