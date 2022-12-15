@@ -9,8 +9,8 @@ public class Skill_2 : Action<Player>
     {
         base.ActionEnter(script);
         me.MoveCtrl.CanMove = false;
-        me.GetAniCtrl.SetTrigger("Skill_2");
         targetEnemy = FindTarget();
+        if(targetEnemy != null) me.GetAniCtrl.SetTrigger("Skill_2");
     }
     public override void ActionUpdate()
     {
@@ -45,9 +45,9 @@ public class Skill_2 : Action<Player>
             HardBlitz();
         }
 
-        if (me.ActionTable.Blitz_Finish)
+        if (me.ActionTable.Blitz_Finish || targetEnemy == null)
         {
-            targetEnemy.isHold = false;
+            if(targetEnemy != null)targetEnemy.isHold = false;
             me.ActionTable.Blitz_Finish = false;
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
@@ -68,10 +68,9 @@ public class Skill_2 : Action<Player>
 
     private void NormalBlitz()
     {
-        Debug.Log("Àü¹æÂî¸£±â!");
         if(targetEnemy != null)
         {
-            Vector3 vec = targetEnemy.transform.position * targetEnemy.transform.localScale.z * 1.15f;
+            Vector3 vec =  targetEnemy.transform.position + (me.transform.position - targetEnemy.transform.position).normalized * (targetEnemy.transform.localScale.z * 0.7f);
             vec = new Vector3(vec.x, 0.0f, vec.z);
             me.transform.position = Vector3.Lerp(me.transform.position, vec,me.ActionTable.normalBlitzSpeed);
             me.transform.LookAt(vec);
