@@ -18,7 +18,10 @@ public class AutoEffect : MonoBehaviour
         DestroyTime = effect.main.duration;
         StartCoroutine(CheckIfAlive());
     }
-
+    protected virtual void OnDisable()
+    {
+        effect.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+    }
     IEnumerator CheckIfAlive()
     {
         effect.Play();

@@ -11,6 +11,9 @@ public abstract class Enemy : MonoBehaviour
     [Space(5f)]
     public Structs.UnitComponents components;
     public int hitCount;
+
+    public bool isHold;
+
     protected float distToTarget;
     protected Player target;
     //protected ActionTable<T> actionTable;

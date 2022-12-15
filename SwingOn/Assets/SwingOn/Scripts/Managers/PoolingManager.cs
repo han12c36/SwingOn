@@ -125,52 +125,10 @@ public class PoolingManager : Manager<PoolingManager>
             }
         }
     }
-    public void PlayEffect(string name, Vector3 position)
+    public void PlayEffect(string name, Vector3 position,GameObject owner)
     {
         GameObject effect = LentalObj(name);
         effect.transform.position = position;
-        //effect.GetComponentInChildren<ParticleSystem>().Play();
-        //GameManager.Instance.GetCoroutineHelper.StartCoroutine(CheckEffect(effect));
-    }
-    private IEnumerator CheckEffect(GameObject effect)
-    {
-        ParticleSystem ps = effect.GetComponentInChildren<ParticleSystem>();
-
-        while (true)
-        {
-            if (!ps.IsAlive())
-            {
-                ps.Stop();
-                ReturnObj(effect);
-                yield return null;
-                break;
-            }
-        }
+        effect.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
     }
 }
-
-        //StartCoroutine(CheckIfAlive());
-
-//    IEnumerator CheckIfAlive()
-//    {
-//        ParticleSystem ps = this.GetComponent<ParticleSystem>();
-//
-//        while (true && ps != null)
-//        {
-//            yield return new WaitForSeconds(DestroyTime);
-//            if (!ps.IsAlive(true))
-//            {
-//                if (OnlyDeactivate)
-//                {
-//#if UNITY_3_5
-//						this.gameObject.SetActiveRecursively(false);
-//#else
-//                    this.gameObject.SetActive(false);
-//#endif
-//                }
-//                else
-//                ObjectPoolingCenter.Instance.ReturnObj(this.gameObject);
-//                break;
-//            }
-//        }
-//    }

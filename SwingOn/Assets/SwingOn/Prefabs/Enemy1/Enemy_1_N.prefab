@@ -94,6 +94,7 @@ MonoBehaviour:
     collider: {fileID: 0}
     aniCtrl: {fileID: 0}
   hitCount: 0
+  isHold: 0
   patternValue:
   - 10
   - 10
@@ -101,7 +102,10 @@ MonoBehaviour:
   OriginMaterial: {fileID: 2100000, guid: 9e99e47d4929a7045bddbd55835dad43, type: 2}
   DamagedMaterial: {fileID: 2100000, guid: aaeca5e4855ae8c4c9d343c56bb7a0cb, type: 2}
   changeMaterialTimer: 0
-  Egg: {fileID: 0}
+  isCast: 0
+  recognizeRange: 3
+  actionTable: {fileID: 0}
+  enemyWeapon: {fileID: 0}
 --- !u!114 &6893264112954099275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46ed59784b09e6459b47e314398cdcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: {fileID: 0}
+  owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
   dmg: 3

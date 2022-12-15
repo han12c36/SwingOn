@@ -20,8 +20,8 @@ public class Enemy_1Damaged : Action<Enemy_1>
 
     public override void ActionUpdate()
     {
-        //µÚ·Î »ìÂ¦ ³Ë¹é
-        me.transform.position = Vector3.Lerp(me.transform.position, nuckBackPos, 0.05f);
+        //µÚ·Î »ìÂ¦ ³Ë¹é 
+        if(!me.isHold) me.transform.position = Vector3.Lerp(me.transform.position, nuckBackPos, 0.05f);
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("Damaged"))
         {
             if (me.isCurrentAnimationOver(1.0f))

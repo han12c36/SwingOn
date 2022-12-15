@@ -11,7 +11,6 @@ public class Skill_2 : Action<Player>
         me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetTrigger("Skill_2");
         targetEnemy = FindTarget();
-        me.transform.LookAt(targetEnemy.transform.position);
     }
     public override void ActionUpdate()
     {
@@ -29,7 +28,14 @@ public class Skill_2 : Action<Player>
             {
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
-                    me.GetAniCtrl.SetBool("DoubleBlitz", true);
+                    if(targetEnemy != null)
+                    {
+                        targetEnemy.isHold = true;
+                        me.transform.position = 
+                            targetEnemy.transform.position + -targetEnemy.transform.forward * targetEnemy.transform.localScale.z * 0.85f;
+                        me.transform.LookAt(targetEnemy.transform.forward);
+                        me.GetAniCtrl.SetBool("DoubleBlitz", true);
+                    }
                 }
             }
         }
@@ -41,6 +47,7 @@ public class Skill_2 : Action<Player>
 
         if (me.ActionTable.Blitz_Finish)
         {
+            targetEnemy.isHold = false;
             me.ActionTable.Blitz_Finish = false;
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
@@ -64,7 +71,10 @@ public class Skill_2 : Action<Player>
         Debug.Log("Àü¹æÂî¸£±â!");
         if(targetEnemy != null)
         {
-            me.transform.position = Vector3.Lerp(me.transform.position, targetEnemy.transform.position + targetEnemy.transform.forward * 1.0f, me.ActionTable.normalBlitzSpeed);
+            Vector3 vec = targetEnemy.transform.position * targetEnemy.transform.localScale.z * 1.15f;
+            vec = new Vector3(vec.x, 0.0f, vec.z);
+            me.transform.position = Vector3.Lerp(me.transform.position, vec,me.ActionTable.normalBlitzSpeed);
+            me.transform.LookAt(vec);
         }
     }
     private void HardBlitz()
