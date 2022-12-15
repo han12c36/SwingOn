@@ -40,13 +40,13 @@ public class Enemy_1Att_1 : Action<Enemy_1>
             me.isCast = false;
             if (PatternIndex == (int)Enemy_1Pattern.Spawn)
             {
-                PoolingManager.Instance.PlayEffect("Effect_Spawn", me.transform.position,me.gameObject);
+                PoolingManager.Instance.PlayEffect("Effect_Spawn", me.transform,me.gameObject);
                 RandomNum = Random.Range(2,4);
                 for (int i = 0; i < RandomNum; i++)
                 {
                     GameObject obj = PoolingManager.Instance.LentalObj("Enemy_1_Un");
                     obj.transform.position = MySTL.RandomVec(me.transform.position, 5f);
-                    PoolingManager.Instance.PlayEffect("Effect_Spawn", obj.transform.position, obj.gameObject);
+                    PoolingManager.Instance.PlayEffect("Effect_Spawn", obj.transform, obj.gameObject);
                 }
             }
             else if (PatternIndex == (int)Enemy_1Pattern.Heal)
@@ -59,7 +59,7 @@ public class Enemy_1Att_1 : Action<Enemy_1>
                     {
                         Enemy enemy = nearEnemy[i].gameObject.GetComponent<Enemy>();
                         //enemy.status.curHp += 2;
-                        PoolingManager.Instance.PlayEffect("Effect_Heal", enemy.transform.position, enemy.gameObject);
+                        PoolingManager.Instance.PlayEffect("Effect_Heal", enemy.transform, enemy.gameObject);
                     }
                 }
             }

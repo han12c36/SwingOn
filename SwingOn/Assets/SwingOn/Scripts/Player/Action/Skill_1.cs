@@ -15,9 +15,6 @@ public class Skill_1 : Action<Player>
         me.GetAniCtrl.SetTrigger("Skill_1");
         startPos = me.transform.position;
         targetPos_1 = startPos + me.transform.forward * me.ActionTable.normalDashDistance;
-        //Vector3 vec = new Vector3(me.transform.position.x, me.transform.position.y * 0.5f, me.transform.position.z);
-        //PoolingManager.Instance.PlayEffect("Effect_Dash", vec);
-        me.effect_Dash.GetComponentInChildren<ParticleSystem>().Play();
     }
     public override void ActionUpdate()
     {

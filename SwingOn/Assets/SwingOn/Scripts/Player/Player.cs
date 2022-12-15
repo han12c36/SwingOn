@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int detectionLayer;
 
-    public GameObject effect_Dash;
+    public Transform backEffect_Pos;
 
     public MoveCtrl MoveCtrl { get { return moveCtrl; } set { moveCtrl = value; } }
     public PlayerWeapon PlayerWeapon { get { return player_Weapon; } set { player_Weapon = value; } }

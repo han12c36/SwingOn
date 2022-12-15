@@ -125,10 +125,11 @@ public class PoolingManager : Manager<PoolingManager>
             }
         }
     }
-    public void PlayEffect(string name, Vector3 position,GameObject owner)
+    public void PlayEffect(string name, Transform trans,GameObject owner)
     {
         GameObject effect = LentalObj(name);
-        effect.transform.position = position;
+        effect.transform.position = trans.position;
+        effect.transform.rotation = trans.rotation;
         effect.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
     }
 }
