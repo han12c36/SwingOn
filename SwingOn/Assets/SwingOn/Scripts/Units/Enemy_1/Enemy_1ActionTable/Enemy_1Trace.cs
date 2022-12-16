@@ -13,7 +13,8 @@ public class Enemy_1Trace : Action<Enemy_1>
     {
         if(!me.isHold)
         {
-            me.transform.LookAt(me.GetTarget.transform.position);
+            Vector3 vec = new Vector3(me.GetTarget.transform.position.x, 0.0f, me.GetTarget.transform.position.z);
+            me.transform.LookAt(vec);
             me.MoveOrder(me.GetTarget.transform, me.status.Speed);
             if (me.GetDistToTarget < me.status.AttRange)
             {
