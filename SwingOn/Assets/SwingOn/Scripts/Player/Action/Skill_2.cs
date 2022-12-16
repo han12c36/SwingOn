@@ -23,10 +23,10 @@ public class Skill_2 : Action<Player>
         {
             if (targetEnemy != null)
             {
-                //if (!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
-                //{
-                    me.GetAniCtrl.SetTrigger("Skill_2");
-                //}
+                me.GetAniCtrl.SetTrigger("Skill_2");
+                Vector3 vec = new Vector3(targetEnemy.transform.position.x, 0.0f, targetEnemy.transform.position.z);
+                vec = vec.normalized;
+                me.transform.LookAt(vec);
             }
             else me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
@@ -99,7 +99,6 @@ public class Skill_2 : Action<Player>
             Vector3 vec =  targetEnemy.transform.position + (me.transform.position - targetEnemy.transform.position).normalized * (targetEnemy.transform.localScale.z * 0.7f);
             vec = new Vector3(vec.x, 0.0f, vec.z);
             me.transform.position = Vector3.Lerp(me.transform.position, vec,me.ActionTable.normalBlitzSpeed);
-            me.transform.LookAt(vec);
         }
     }
     private void HardBlitz()
