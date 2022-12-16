@@ -24,9 +24,8 @@ public class Skill_2 : Action<Player>
             if (targetEnemy != null)
             {
                 me.GetAniCtrl.SetTrigger("Skill_2");
-                Vector3 vec = new Vector3(targetEnemy.transform.position.x, 0.0f, targetEnemy.transform.position.z);
-                vec = vec.normalized;
-                me.transform.LookAt(vec);
+                //Vector3 vec = new Vector3(targetEnemy.transform.position.x, 0.0f, targetEnemy.transform.position.z);
+                me.transform.LookAt(targetEnemy.transform.position);
             }
             else me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
@@ -57,7 +56,7 @@ public class Skill_2 : Action<Player>
                         Vector3 vec = targetEnemy.transform.position + (-targetEnemy.transform.forward).normalized * (targetEnemy.transform.localScale.z * 0.8f);
                         //vec = new Vector3(vec.x, 0.0f, vec.z);
                         me.transform.position = vec;
-                        me.transform.LookAt(targetEnemy.transform.forward);
+                        me.transform.LookAt(me.transform.position + targetEnemy.transform.forward);
                         me.GetAniCtrl.SetBool("DoubleBlitz", true);
                     }
                 }
