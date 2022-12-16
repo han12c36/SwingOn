@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public Transform backEffect_Pos;
     public Transform chargeEffect_Pos;
+    public Transform GroundEffect_Pos;
+    public Collider dashCollder;
 
     public MoveCtrl MoveCtrl { get { return moveCtrl; } set { moveCtrl = value; } }
     public PlayerWeapon PlayerWeapon { get { return player_Weapon; } set { player_Weapon = value; } }

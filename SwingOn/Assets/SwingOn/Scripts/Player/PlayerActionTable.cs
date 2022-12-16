@@ -199,7 +199,14 @@ public class PlayerActionTable : ActionTable<Player>
     public void PlayChargeEffect(string effectName)
     {
         //speed모드 차지모션,발사모션 사용중
-        PoolingManager.Instance.PlayEffect_DontRotation(effectName, owner.chargeEffect_Pos, owner.gameObject);
+        if(effectName != "Effect_GroundBreak")
+        {
+            PoolingManager.Instance.PlayEffect_DontRotation(effectName, owner.chargeEffect_Pos, owner.gameObject);
+        }
+        else
+        {
+            PoolingManager.Instance.PlayEffect_DontRotation(effectName, owner.GroundEffect_Pos, owner.gameObject);
+        }
     }
 
     public void AttFinish() { if (!modeChange) isAttFinish = true; }
@@ -214,6 +221,11 @@ public class PlayerActionTable : ActionTable<Player>
     {
         if (value == 0) owner.PlayerWeapon.OnOffWeaponCollider(true);
         else owner.PlayerWeapon.OnOffWeaponCollider(false);
+    }
+    public void OnOffDashCollider(int value)
+    {
+        if (value == 0) owner.dashCollder.enabled = true;
+        else owner.dashCollder.enabled = false;
     }
 
     public bool isCurrentAnimationOver(float time)
