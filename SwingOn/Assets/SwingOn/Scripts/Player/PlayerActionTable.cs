@@ -196,6 +196,12 @@ public class PlayerActionTable : ActionTable<Player>
     {
         PoolingManager.Instance.PlayEffect(effectName, owner.backEffect_Pos, owner.gameObject);
     }
+    public void PlayChargeEffect(string effectName)
+    {
+        //speed모드 차지모션,발사모션 사용중
+        PoolingManager.Instance.PlayEffect_DontRotation(effectName, owner.chargeEffect_Pos, owner.gameObject);
+    }
+
     public void AttFinish() { if (!modeChange) isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }
     public void DashFinish() { if (!modeChange) isDashFinish = true; }

@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 3817404604672133185}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1408187504461784322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6808941110425007351}
+  m_Layer: 6
+  m_Name: ChargeEffectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6808941110425007351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408187504461784322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3815904007611759855}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3817404604672133197
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +194,7 @@ MonoBehaviour:
   player_Weapon: {fileID: 0}
   detectionLayer: 0
   backEffect_Pos: {fileID: 3904074984980220134}
+  chargeEffect_Pos: {fileID: 6808941110425007351}
 --- !u!114 &5191120201147685349
 MonoBehaviour:
   m_ObjectHideFlags: 0
