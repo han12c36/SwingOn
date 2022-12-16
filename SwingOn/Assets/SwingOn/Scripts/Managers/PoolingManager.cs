@@ -136,7 +136,8 @@ public class PoolingManager : Manager<PoolingManager>
     {
         GameObject effect = LentalObj(name);
         effect.transform.position = trans.position;
-        effect.transform.rotation = Quaternion.identity;
+        Vector3 vec = new Vector3(0.0f, owner.transform.rotation.eulerAngles.y, 0.0f);
+        effect.transform.eulerAngles = vec;
         effect.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
     }
 
