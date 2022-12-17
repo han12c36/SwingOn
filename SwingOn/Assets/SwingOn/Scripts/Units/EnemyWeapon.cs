@@ -17,12 +17,17 @@ public class EnemyWeapon : Weapon<Enemy>
     {
         base.Start();
     }
-    protected virtual void Update()
+    protected override void Update()
     {
         base.Update();
     }
-    protected virtual void FixedUpdate()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+
     }
 }
