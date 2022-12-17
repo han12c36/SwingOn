@@ -6,9 +6,12 @@ public class Enemy_2 : Enemy
 {
     public Material OriginMaterial;
     public Material DamagedMaterial;
+    public Transform makeBulletPos;
 
     [SerializeField]
     protected Enemy_2ActionTable actionTable;
+
+    
 
     public Enemy_2ActionTable ActionTable { get { return actionTable; } set { actionTable = value; } }
 

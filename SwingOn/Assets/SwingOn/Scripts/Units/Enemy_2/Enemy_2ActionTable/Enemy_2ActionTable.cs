@@ -84,9 +84,14 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
     public int Enemy_2Think()
     {
         //3 4 5
-        return 3;
+        return 4;
     }
 
     public void ReadyComplete() { isReadyComplete = true; }
     public void HitFinish() { isHitFinish = true; }
+    public void MakeBullet() 
+    {
+        GameObject bullet =  PoolingManager.Instance.LentalObj("Enemy_2Bullet");
+        bullet.transform.position = owner.makeBulletPos.position;
+    }
 }

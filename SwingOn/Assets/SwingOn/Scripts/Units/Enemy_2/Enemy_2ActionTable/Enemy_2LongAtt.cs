@@ -8,6 +8,7 @@ public class Enemy_2LongAtt : Action<Enemy_2>
     {
         base.ActionEnter(script);
         me.MoveStop();
+        me.transform.LookAt(me.GetTarget.transform.position);
         me.GetAniCtrl.SetTrigger("isLongAtt");
     }
     public override void ActionUpdate()

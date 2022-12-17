@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2623553644178651008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1516023687199247576}
+  m_Layer: 8
+  m_Name: makeBulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1516023687199247576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623553644178651008}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.516, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 914020021765245002}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &5261228659885054482
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +133,7 @@ MonoBehaviour:
   - 80
   OriginMaterial: {fileID: 2100000, guid: a259a2c26551e224fa207dcfec0c2cb4, type: 2}
   DamagedMaterial: {fileID: 2100000, guid: e0f49a5735ef91743b8b621620df0960, type: 2}
+  makeBulletPos: {fileID: 1516023687199247576}
   actionTable: {fileID: 0}
 --- !u!114 &2698162843166599550
 MonoBehaviour:
@@ -414,6 +445,11 @@ Transform:
 --- !u!1 &914020021765542954 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8995718604172022379, guid: 19e260f6bb791844ea812d580081cd72, type: 3}
+  m_PrefabInstance: {fileID: 8104357500664792641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &914020021765245002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8995718604172054027, guid: 19e260f6bb791844ea812d580081cd72, type: 3}
   m_PrefabInstance: {fileID: 8104357500664792641}
   m_PrefabAsset: {fileID: 0}
 --- !u!136 &6773491218728627531

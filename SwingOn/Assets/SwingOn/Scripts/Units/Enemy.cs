@@ -15,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
     public bool isHold;
 
     protected float distToTarget;
+    [SerializeField]
     protected Player target;
     //protected ActionTable<T> actionTable;
     protected NavMeshAgent navAgent;

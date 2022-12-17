@@ -19,6 +19,10 @@ public abstract class Weapon<T> : MonoBehaviour
     {
         if (Owner == null) Owner = GetComponentInParent<T>();
         if(Owner != null) collider = GetComponent<Collider>();
+        if(collider == null)
+        {
+            collider = GetComponentInChildren<Collider>();
+        }
     }
     protected virtual void Start()
     {
