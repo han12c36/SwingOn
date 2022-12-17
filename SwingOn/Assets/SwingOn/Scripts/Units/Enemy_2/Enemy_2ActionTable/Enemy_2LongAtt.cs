@@ -7,6 +7,7 @@ public class Enemy_2LongAtt : Action<Enemy_2>
      public override void ActionEnter(Enemy_2 script)
     {
         base.ActionEnter(script);
+        me.MoveStop();
         me.GetAniCtrl.SetTrigger("isLongAtt");
     }
     public override void ActionUpdate()

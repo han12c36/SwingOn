@@ -40,8 +40,11 @@ public abstract class Enemy : MonoBehaviour
         components.aniCtrl = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
         detectionLayer = LayerMask.NameToLayer("PlayerWeapon");
-        //enemyWeapon.Owner = this;
-        //enemyWeapon = this;
+        if(components.collider == null)
+        {
+            components.collider = GetComponentInChildren<Collider>();
+        }
+
         Initialize();
     }
     protected virtual void OnEnable() 

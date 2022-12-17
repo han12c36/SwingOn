@@ -88,4 +88,5 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
     }
 
     public void ReadyComplete() { isReadyComplete = true; }
+    public void HitFinish() { isHitFinish = true; }
 }

@@ -7,7 +7,9 @@ public class Enemy_2MeleeAtt : Action<Enemy_2>
      public override void ActionEnter(Enemy_2 script)
     {
         base.ActionEnter(script);
+        me.MoveStop();
         me.GetAniCtrl.SetTrigger("isMeleeAtt");
+        me.transform.LookAt(me.GetTarget.transform.position);
     }
     public override void ActionUpdate()
     {

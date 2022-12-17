@@ -7,6 +7,7 @@ public class Enemy_2RangeAtt : Action<Enemy_2>
      public override void ActionEnter(Enemy_2 script)
     {
         base.ActionEnter(script);
+        me.MoveStop();
         me.GetAniCtrl.SetTrigger("isRangeAtt");
     }
     public override void ActionUpdate()

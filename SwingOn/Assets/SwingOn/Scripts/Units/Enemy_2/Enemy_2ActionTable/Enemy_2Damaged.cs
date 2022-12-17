@@ -25,14 +25,15 @@ public class Enemy_2Damaged : Action<Enemy_2>
         if (me.ActionTable.isHitFinish)
         {
             me.ActionTable.isHitFinish = false;
-            if (me.GetDistToTarget > me.status.AttRange)
-            {
-                me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
-            }
-            else
-            {
-                me.ActionTable.SetCurAction(me.ActionTable.Enemy_2Think());
-            }
+            me.ActionTable.SetCurAction((int)Enums.Enemy_2Actions.Idle);
+            //if (me.GetDistToTarget > me.status.AttRange)
+            //{
+            //    me.ActionTable.SetCurAction((int)Enums.Enemy_1Actions.Trace);
+            //}
+            //else
+            //{
+            //    me.ActionTable.SetCurAction(me.ActionTable.Enemy_2Think());
+            //}
         }
     }
     public override void ActionExit()
