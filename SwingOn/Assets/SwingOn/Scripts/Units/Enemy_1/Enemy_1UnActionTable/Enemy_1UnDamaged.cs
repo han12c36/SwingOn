@@ -9,6 +9,7 @@ public class Enemy_1UnDamaged : Action<Enemy_1Un>
         base.ActionEnter(script);
         me.hitCount--;
         GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
+        me.ActionTable.SetCurAction((int)Enums.Enemy_1EggActions.Idle);
     }
     public override void ActionUpdate()
     {
