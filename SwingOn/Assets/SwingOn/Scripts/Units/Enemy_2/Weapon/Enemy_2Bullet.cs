@@ -14,6 +14,8 @@ public class Enemy_2Bullet : EnemyWeapon
     private float R;
     private float theta;
     private float time = 0.0f;
+    private float totalTime;
+    private float HorizontalV0;
 
     public int environmentLayer;
 
@@ -48,14 +50,19 @@ public class Enemy_2Bullet : EnemyWeapon
         v0 = Mathf.Sqrt(g * R + 0.1f);
         float thetaValue = Random.Range(1, 10) / 100f;
         theta = Mathf.Asin(((g * R) / Mathf.Pow(v0, 2))) / (1 + thetaValue);
+        totalTime = v0 * Mathf.Cos(theta) / g;
+        float rand = Random.Range(5, 9);
+        rand /= 10.0f;
+        HorizontalV0 = v0 * rand;
+
     }
     protected override void Update()
     {
         base.Update();
         time += Time.deltaTime;
-        float xValue = (endPos - startPos).normalized.x * (v0 * Mathf.Cos(theta)) * Time.deltaTime;
+        float xValue = (endPos - startPos).normalized.x * HorizontalV0 * Time.deltaTime;
         float yValue = (v0 * Mathf.Sin(theta) * time) - (0.5f * g * time * time);
-        float zValue = (endPos - startPos).normalized.z * (v0 * Mathf.Cos(theta)) * Time.deltaTime;
+        float zValue = (endPos - startPos).normalized.z * HorizontalV0 * Time.deltaTime;
         Vector3 vec = new Vector3(xValue, 0.0f, zValue);
         transform.position += vec;
         Vector3 finalVec = new Vector3(transform.position.x, yValue, transform.position.z);
