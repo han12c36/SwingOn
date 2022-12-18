@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class Enemy_2Bullet : EnemyWeapon
 {
-    public float bulletSpeed = 0.05f;
     public Transform target;
-    public float upTime = 0.3f;
-    public float timer;
     public Rigidbody rigid;
     public Vector3 targetPos;
+
+    public Vector3 startPos;
+    public Vector3 endPos;
+    public float gravity;
+    public float moveReach;
+    public float initialAngle;
+    public float MaxHeight;
+    public float initialVelocity;
+    public Vector3 HorizontalDir;
+    
+    public float timer = 0.0f;
+
 
     private void OnEnable()
     {
@@ -31,35 +40,44 @@ public class Enemy_2Bullet : EnemyWeapon
         base.Start();
         target = InGameManager.Instance.GetPlayer.transform;
         targetPos = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
+
+        //initialVelocity = 1.0f;
+        startPos = transform.position;
+        endPos = target.transform.position;
+        //initialAngle = Mathf.Asin(moveReach * gravity / initialVelocity * initialVelocity) / 2;
+        //initialVelocity = initialVelocity * Mathf.Sin(initialAngle * Mathf.Deg2Rad);
+
+
+        //float InitialSpeed = initialVelocity * Mathf.Sin(initialAngle);
+
+        gravity = Physics.gravity.magnitude;
+        initialVelocity = 0.1f;
+        HorizontalDir = endPos - startPos;
+        MaxHeight =  Mathf.Pow(initialVelocity * Mathf.Sin(initialAngle),2) / (2 * gravity);
+        float maxtime = initialVelocity * Mathf.Sin(initialAngle) / gravity;
+        moveReach = Vector3.Distance(endPos, startPos);
+
+        initialAngle =  Mathf.Asin((moveReach * gravity) / Mathf.Pow(initialVelocity, 2)) / 2;
+        initialAngle = initialAngle * Mathf.Rad2Deg;
+        Debug.Log("초기 각도 : " + initialAngle);
+        //Debug.Log("최고 높이까지 걸리는 시간 : " + maxtime);
     }
     protected override void Update()
     {
         base.Update();
-        //transform.position += targetPos.normalized * 0.02f;
-        //if (timer < upTime)
-        //{
-        //    timer += Time.deltaTime;
-        //    transform.position += Vector3.up * 0.02f;
-        //}
-        //else
-        //{
-        //    timer = 0.0f;
-        //}
+        if (transform.position.y < MaxHeight)
+        {
+            timer += Time.deltaTime;
+            float y = (initialVelocity * Mathf.Sin(initialAngle) * timer) - (0.5f * gravity * Mathf.Pow(timer, 2));
+            //float x = HorizontalDir.x * initialVelocity * timer;
+            //float z = HorizontalDir.z * initialVelocity * timer;
+            Vector3 vec = new Vector3(0.0f, y, 0.0f);
+            transform.position = vec;
+        }
     }
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        rigid.AddForce(targetPos * 0.3f, ForceMode.Impulse);
-        if (timer < upTime)
-        {
-            timer += Time.deltaTime;
-            rigid.AddForce(Vector3.up * 0.01f, ForceMode.Impulse);
-        }
-        else
-        {
-            timer = 0.0f;
-        }
-
     }
     protected override void OnTriggerEnter(Collider other)
     {
@@ -69,34 +87,5 @@ public class Enemy_2Bullet : EnemyWeapon
         //{
         //    PoolingManager.Instance.ReturnObj(gameObject);
         //}
-    }
-
-    public void SetVelocuty(Vector3 velocity)
-    {
-        rigid.velocity = velocity;
-    }
-    public void SetForce(Vector3 force)
-    {
-        rigid.AddForce(force, ForceMode.Impulse);
-    }
-    public Vector3 GetVelocity(Vector3 curPos,Vector3 targetPos,float initialAngle)
-    {
-        float gravity = Physics.gravity.magnitude;  //중력값 들고오기
-        float angle = initialAngle * Mathf.Deg2Rad; //초기 각도를 라디안으로 바꾸기
-
-        //평면 타겟위치
-        Vector3 planarTargetPos = new Vector3(targetPos.x, 0.0f, targetPos.z);
-        Vector3 planarCurPos = new Vector3(curPos.x, 0.0f, curPos.z);
-
-        float distance = Vector3.Distance(planarTargetPos, planarCurPos);   //평면상의 현재위치에서 목표점까지의 거리
-        float yOffset = curPos.y = targetPos.y;
-
-        float initialVelocity = (1 / Mathf.Cos(angle)) * Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) / (distance * Mathf.Tan(angle) + yOffset));
-
-        Vector3 velocity = new Vector3(0f, initialVelocity * Mathf.Sin(angle), initialVelocity * Mathf.Cos(angle));
-        float angleBetweenObjects = Vector3.Angle(Vector3.forward, planarTargetPos - planarCurPos) * (targetPos.x > curPos.x ? 1 : -1);
-        Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, Vector3.up) * velocity;
-
-        return finalVelocity;
     }
 }

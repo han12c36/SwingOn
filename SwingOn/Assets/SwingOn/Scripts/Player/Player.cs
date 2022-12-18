@@ -79,6 +79,11 @@ public class Player : MonoBehaviour
             GameObject obj = PoolingManager.Instance.LentalObj("Enemy_2");
             obj.transform.position = new Vector3(0.0f, 2.0f, 0.0f);
         }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameObject obj = PoolingManager.Instance.LentalObj("Enemy_2Bullet");
+            obj.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        }
     }
     private void FixedUpdate()
     {
