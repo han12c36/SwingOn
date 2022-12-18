@@ -85,7 +85,8 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
     public int Enemy_2Think()
     {
         //3 4 5
-        int index =  MySTL.Think(patternValue);
+        //int index =  MySTL.Think(patternValue);
+        int index = 0;
         return index + 3;
     }
 

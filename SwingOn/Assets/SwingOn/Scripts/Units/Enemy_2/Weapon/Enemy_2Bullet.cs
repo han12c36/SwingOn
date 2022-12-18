@@ -5,13 +5,12 @@ using UnityEngine;
 public class Enemy_2Bullet : EnemyWeapon
 {
     //public Vector3 targetvec;
-    public bool isReady;
-    public bool isStart;
 
     public Vector3 startPos;
     public Vector3 endPos;
     private float g;
     private float v0;
+    [SerializeField]
     private float R;
     private float theta;
     private float time = 0.0f;
@@ -26,28 +25,22 @@ public class Enemy_2Bullet : EnemyWeapon
 
     private void OnEnable()
     {
-        //startPos = Owner.GetComponent<Enemy_2>().makeBulletPos.position;
-        Debug.Log("활성화");
-
     }
 
     private void OnDisable()
     {
         time = 0.0f;
         owner = null;
-        isStart = false;
     }
 
     protected override void Awake()
     {
         base.Awake();
-        Debug.Log("어웨이크");
         environmentLayer = LayerMask.NameToLayer("Environment");
     }
     protected override void Start()
     {
         base.Start();
-        Debug.Log("스타트");
         if (!collider.enabled) OnOffWeaponCollider(true);
         startPos = owner.GetComponent<Enemy_2>().makeBulletPos.position;
         g = Physics.gravity.magnitude;
@@ -59,11 +52,10 @@ public class Enemy_2Bullet : EnemyWeapon
     protected override void Update()
     {
         base.Update();
-        Debug.Log("업데이트");
         time += Time.deltaTime;
-        float xValue = (endPos - startPos).normalized.x * (v0 * 0.5f) * Time.deltaTime;
+        float xValue = (endPos - startPos).normalized.x * (v0 * Mathf.Cos(theta)) * Time.deltaTime;
         float yValue = (v0 * Mathf.Sin(theta) * time) - (0.5f * g * time * time);
-        float zValue = (endPos - startPos).normalized.z * (v0 * 0.5f) * Time.deltaTime;
+        float zValue = (endPos - startPos).normalized.z * (v0 * Mathf.Cos(theta)) * Time.deltaTime;
         Vector3 vec = new Vector3(xValue, 0.0f, zValue);
         transform.position += vec;
         Vector3 finalVec = new Vector3(transform.position.x, yValue, transform.position.z);
