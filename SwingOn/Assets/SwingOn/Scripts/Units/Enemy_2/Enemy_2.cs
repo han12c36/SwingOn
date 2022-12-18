@@ -10,10 +10,12 @@ public class Enemy_2 : Enemy
 
     [SerializeField]
     protected Enemy_2ActionTable actionTable;
+    [SerializeField]
+    private Enemy_2Weapon enemyWeapon;
 
-    
 
     public Enemy_2ActionTable ActionTable { get { return actionTable; } set { actionTable = value; } }
+    public Enemy_2Weapon EnemyWeapon { get { return enemyWeapon; } }
 
     protected override void Initialize()
     {
@@ -25,6 +27,9 @@ public class Enemy_2 : Enemy
         status.Speed = 3.5f;
         navAgent.speed = status.Speed;
         components.aniCtrl.speed = 1.0f;
+
+        enemyWeapon = GetComponentInChildren<Enemy_2Weapon>();
+        enemyWeapon.Owner = this;
     }
     protected override void OnEnable()
     {

@@ -111,4 +111,10 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
         bullet.startPos = owner.makeBulletPos.position;
         bullet.endPos = targetPos;
     }
+
+    public void OnOffWeaponCollider_Enemy(int value)
+    {
+        if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
+        else owner.EnemyWeapon.OnOffWeaponCollider(false);
+    }
 }

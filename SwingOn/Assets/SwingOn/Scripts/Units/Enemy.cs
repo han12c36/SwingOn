@@ -107,4 +107,6 @@ public abstract class Enemy : MonoBehaviour
         GetComponentInChildren<SkinnedMeshRenderer>().material = OriginMaterial;
 
     }
+
+    
 }

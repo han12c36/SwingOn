@@ -136,6 +136,7 @@ MonoBehaviour:
   DamagedMaterial: {fileID: 2100000, guid: e0f49a5735ef91743b8b621620df0960, type: 2}
   makeBulletPos: {fileID: 1516023687199247576}
   actionTable: {fileID: 0}
+  enemyWeapon: {fileID: 0}
 --- !u!114 &2698162843166599550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,3 +468,19 @@ CapsuleCollider:
   m_Height: 0.60597694
   m_Direction: 0
   m_Center: {x: -0.25708133, y: 0, z: -0.0002233088}
+--- !u!114 &5695742503337975177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914020021765542954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312885cd126e4f14aa230ed2ec196cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  collider: {fileID: 0}
+  detectionLayer: 0
+  dmg: 1

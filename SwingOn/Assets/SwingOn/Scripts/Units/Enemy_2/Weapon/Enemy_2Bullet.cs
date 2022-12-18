@@ -39,6 +39,7 @@ public class Enemy_2Bullet : EnemyWeapon
     {
         base.Awake();
         environmentLayer = LayerMask.NameToLayer("Environment");
+        detectionLayer = LayerMask.NameToLayer("Player");
     }
     protected override void Start()
     {
