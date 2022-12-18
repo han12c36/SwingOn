@@ -101,7 +101,10 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == detectionLayer)
         {
-            status.curHp -= other.GetComponent<EnemyWeapon>().dmg;
+            EnemyWeapon enemyWeapon = other.GetComponent<Enemy_2Bullet>();
+            status.curHp -= enemyWeapon.dmg;
+
+            //status.curHp -= other.GetComponent<EnemyWeapon>().dmg;
         }
     }
 }

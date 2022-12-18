@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy_2Bullet : EnemyWeapon
 {
-    //public Transform targetPos;
     public Vector3 targetvec;
 
     public Vector3 startPos;
@@ -30,7 +29,7 @@ public class Enemy_2Bullet : EnemyWeapon
     protected override void Awake()
     {
         base.Awake();
-        detectionLayer = 1 << LayerMask.NameToLayer("Environment");
+        //detectionLayer = 1 << LayerMask.NameToLayer("Environment");
     }
     protected override void Start()
     {
@@ -60,20 +59,11 @@ public class Enemy_2Bullet : EnemyWeapon
     {
         base.FixedUpdate();
     }
-    protected override void OnTriggerEnter(Collider other)
+    new protected void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(collider);
         Debug.Log("ºÎµúÄ§!");
         if (other.gameObject.layer == detectionLayer)
-        {
-            PoolingManager.Instance.ReturnObj(gameObject);
-        }
-    }
-    protected override void OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-        Debug.Log("ºÎµúÄ§!");
-        if (collision.gameObject.layer == detectionLayer)
         {
             PoolingManager.Instance.ReturnObj(gameObject);
         }
