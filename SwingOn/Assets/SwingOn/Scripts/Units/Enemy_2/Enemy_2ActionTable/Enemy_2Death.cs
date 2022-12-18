@@ -30,4 +30,5 @@ public class Enemy_2Death : Action<Enemy_2>
         timer = 0.0f;
         me.GetAniCtrl.ResetTrigger("isDeath");
     }
+
 }

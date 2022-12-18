@@ -122,39 +122,17 @@ public static class MySTL
         Vector3 RandomPos = originPos + randomPos;
         return RandomPos;
     }
-    
-    
+    public static int Think(float[] probs)
+    {
+        float total = 0;
+        foreach (float elem in probs) { total += elem; }
+        float randomPoint = Random.value * total;
+        for (int i = 0; i < probs.Length; i++)
+        {
+            if (randomPoint < probs[i]) return i;
+            else randomPoint -= probs[i];
+        }
+        return probs.Length - 1;
+    }
 }
 
-public abstract class MyFunc : MonoBehaviour
-{
-    //public void Parabolic(GameObject obj,GameObject target, float initialVelocity)
-    //{
-    //    Vector3 startPos = obj.transform.position;
-    //    Vector3 endPos = target.transform.position;
-    //    float gravity = Physics.gravity.magnitude;
-    //    float moveReach = Vector3.Distance(endPos,startPos);
-    //    float initialAngle =  Mathf.Asin(moveReach * gravity / Mathf.Pow(initialVelocity, 2)) / 2;
-    //    float MaxHeight = Mathf.Pow(initialAngle, 2) / 2 * gravity;
-    //    initialVelocity = initialVelocity * Mathf.Sin(initialAngle * Mathf.Deg2Rad);
-    //
-    //    Vector3 HorizontalDir = endPos - startPos;
-    //
-    //    CoroutineHelper.StartCorotine(ParabolicMotion(obj,MaxHeight,initialVelocity, initialAngle,endPos));
-    //}
-    //
-    //public static IEnumerator ParabolicMotion(GameObject obj,float gravity,float initialVelocity, float initialAngle,Vector3 endPos)
-    //{
-    //    float timer = 0.0f;
-    //    while (true)
-    //    {
-    //        timer += Time.deltaTime;
-    //        obj.transform.position.y += (initialVelocity * Mathf.Sin(initialAngle) * timer) - (0.5f * gravity * Mathf.Pow(gravity,2));
-    //        obj.transform.position.x += HorizontalDir.x * initialVelocity * timer;
-    //        obj.transform.position.z += HorizontalDir.z * initialVelocity * timer;
-    //
-    //        if (obj.transform.position == endPos) break;
-    //        yield return null;
-    //    }
-    //}
-}

@@ -13,10 +13,11 @@ public class Enemy_1Att_1 : Action<Enemy_1>
 
         if(!me.isHold) me.transform.LookAt(me.GetTarget.transform.position);
         if (me.enemyType == Enums.EnemyType.Normal) PatternIndex = (int)Enemy_1Pattern.MeleeAtt;
-        else PatternIndex = ((Enemy_1)me).Think(me.PatternValue);
+        else PatternIndex = MySTL.Think(me.PatternValue);
         //else PatternIndex = (int)Enemy_1Pattern.Heal;
 
         SetTrigger_Enemy_1(PatternIndex);
+
     }
 
     public override void ActionUpdate()

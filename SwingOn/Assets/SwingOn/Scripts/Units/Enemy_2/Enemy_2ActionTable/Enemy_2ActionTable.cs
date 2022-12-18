@@ -13,6 +13,7 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
     public bool isReadyComplete;
 
     public float Enemy_2WaitTime = 1.5f;
+    private float[] patternValue = new float[3] { 45f, 10f, 45f };
 
     protected override void Initialize()
     {
@@ -84,14 +85,27 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
     public int Enemy_2Think()
     {
         //3 4 5
-        return 4;
+        int index =  MySTL.Think(patternValue);
+        return index + 3;
     }
 
     public void ReadyComplete() { isReadyComplete = true; }
     public void HitFinish() { isHitFinish = true; }
-    public void MakeBullet() 
+    public void FireBulletToPlayer() { FireBullet(owner.GetTarget.transform.position); }
+    public void FireBulletToRandomPos()
     {
-        GameObject bullet =  PoolingManager.Instance.LentalObj("Enemy_2Bullet");
-        bullet.transform.position = owner.makeBulletPos.position;
+        for(int i=  0; i < 3; i++)
+        {
+            Vector3 randVec = MySTL.RandomVec(owner.GetTarget.transform.position, 3.5f);
+            FireBullet(randVec);
+        }
+    }
+
+    public void FireBullet(Vector3 targetPos)
+    {
+        GameObject obj = PoolingManager.Instance.LentalObj("Enemy_2Bullet");
+        obj.transform.position = owner.makeBulletPos.position;
+        Enemy_2Bullet bullet = obj.GetComponent<Enemy_2Bullet>();
+        bullet.targetvec = targetPos;
     }
 }

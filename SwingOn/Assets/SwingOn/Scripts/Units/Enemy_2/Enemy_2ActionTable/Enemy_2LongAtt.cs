@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Enemy_2LongAtt : Action<Enemy_2>
 {
-     public override void ActionEnter(Enemy_2 script)
+    public override void ActionEnter(Enemy_2 script)
     {
         base.ActionEnter(script);
         me.MoveStop();
         me.transform.LookAt(me.GetTarget.transform.position);
         me.GetAniCtrl.SetTrigger("isLongAtt");
     }
+    
     public override void ActionUpdate()
     {
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("LongAtt"))
@@ -21,6 +22,7 @@ public class Enemy_2LongAtt : Action<Enemy_2>
             }
         }
     }
+
     public override void ActionExit()
     {
         me.GetAniCtrl.ResetTrigger("isLongAtt");

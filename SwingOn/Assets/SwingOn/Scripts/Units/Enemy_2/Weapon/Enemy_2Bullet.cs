@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Enemy_2Bullet : EnemyWeapon
 {
-    public Transform target;
-    public Rigidbody rigid;
-    public Vector3 targetPos;
+    //public Transform targetPos;
+    public Vector3 targetvec;
 
     public Vector3 startPos;
     public Vector3 endPos;
@@ -17,7 +16,6 @@ public class Enemy_2Bullet : EnemyWeapon
     public float theta;
     public float MaxHeight;
     public float time = 0.0f;
-
 
     private void OnEnable()
     {
@@ -32,7 +30,6 @@ public class Enemy_2Bullet : EnemyWeapon
     protected override void Awake()
     {
         base.Awake();
-        rigid = GetComponentInChildren<Rigidbody>();
         detectionLayer = 1 << LayerMask.NameToLayer("Environment");
     }
     protected override void Start()
@@ -40,11 +37,9 @@ public class Enemy_2Bullet : EnemyWeapon
         base.Start();
         if (!collider.enabled) OnOffWeaponCollider(true);
 
-        target = InGameManager.Instance.GetPlayer.transform;
-        targetPos = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
-
         startPos = transform.position;
-        endPos = target.transform.position;
+        endPos = targetvec;
+        //endPos = targetPos.transform.position;
         g = Physics.gravity.magnitude;
         R = Vector3.Distance(endPos, startPos);
         v0 = Mathf.Sqrt(g * R + 0.1f);

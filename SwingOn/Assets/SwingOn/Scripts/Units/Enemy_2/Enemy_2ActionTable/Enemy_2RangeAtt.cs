@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Enemy_2RangeAtt : Action<Enemy_2>
 {
-     public override void ActionEnter(Enemy_2 script)
+    public override void ActionEnter(Enemy_2 script)
     {
         base.ActionEnter(script);
         me.MoveStop();
+        me.transform.LookAt(me.GetTarget.transform.position);
         me.GetAniCtrl.SetTrigger("isRangeAtt");
     }
     public override void ActionUpdate()

@@ -62,4 +62,6 @@ public class Enemy_2 : Enemy
         Gizmos.color = col;
         Gizmos.DrawSphere(transform.position, status.AttRange);
     }
+
+    
 }

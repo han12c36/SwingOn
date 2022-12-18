@@ -42,6 +42,7 @@ public abstract class Weapon<T> : MonoBehaviour
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
+        Debug.Log("부모 무기에 무언가 부딪침");
     }
     protected virtual void OnCollisionEnter(Collision collision)
     {
