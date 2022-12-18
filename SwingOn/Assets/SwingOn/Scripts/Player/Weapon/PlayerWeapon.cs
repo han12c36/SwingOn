@@ -16,6 +16,7 @@ public class PlayerWeapon : Weapon<Player>
     protected override void Start()
     {
         base.Start();
+        if (collider.enabled) OnOffWeaponCollider(false);
     }
     protected virtual void Update()
     {

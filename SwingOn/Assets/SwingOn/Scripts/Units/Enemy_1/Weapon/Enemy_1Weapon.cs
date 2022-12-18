@@ -20,4 +20,5 @@ public class Enemy_1Weapon : EnemyWeapon
     {
         base.FixedUpdate();
     }
+
 }

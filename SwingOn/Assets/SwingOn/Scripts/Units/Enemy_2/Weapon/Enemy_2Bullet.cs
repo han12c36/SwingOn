@@ -10,14 +10,13 @@ public class Enemy_2Bullet : EnemyWeapon
 
     public Vector3 startPos;
     public Vector3 endPos;
-    public float gravity;
-    public float moveReach;
-    public float initialAngle;
+    public float g;
+    public float v0;
+    public float R;
+    public float t;
+    public float theta;
     public float MaxHeight;
-    public float initialVelocity;
-    public Vector3 HorizontalDir;
-    
-    public float timer = 0.0f;
+    public float time = 0.0f;
 
 
     private void OnEnable()
@@ -27,53 +26,40 @@ public class Enemy_2Bullet : EnemyWeapon
 
     private void OnDisable()
     {
-        timer = 0.0f;
+        time = 0.0f;
     }
 
     protected override void Awake()
     {
         base.Awake();
         rigid = GetComponentInChildren<Rigidbody>();
+        detectionLayer = 1 << LayerMask.NameToLayer("Environment");
     }
     protected override void Start()
     {
         base.Start();
+        if (!collider.enabled) OnOffWeaponCollider(true);
+
         target = InGameManager.Instance.GetPlayer.transform;
         targetPos = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
 
-        //initialVelocity = 1.0f;
         startPos = transform.position;
         endPos = target.transform.position;
-        //initialAngle = Mathf.Asin(moveReach * gravity / initialVelocity * initialVelocity) / 2;
-        //initialVelocity = initialVelocity * Mathf.Sin(initialAngle * Mathf.Deg2Rad);
-
-
-        //float InitialSpeed = initialVelocity * Mathf.Sin(initialAngle);
-
-        gravity = Physics.gravity.magnitude;
-        initialVelocity = 0.1f;
-        HorizontalDir = endPos - startPos;
-        MaxHeight =  Mathf.Pow(initialVelocity * Mathf.Sin(initialAngle),2) / (2 * gravity);
-        float maxtime = initialVelocity * Mathf.Sin(initialAngle) / gravity;
-        moveReach = Vector3.Distance(endPos, startPos);
-
-        initialAngle =  Mathf.Asin((moveReach * gravity) / Mathf.Pow(initialVelocity, 2)) / 2;
-        initialAngle = initialAngle * Mathf.Rad2Deg;
-        Debug.Log("초기 각도 : " + initialAngle);
-        //Debug.Log("최고 높이까지 걸리는 시간 : " + maxtime);
+        g = Physics.gravity.magnitude;
+        R = Vector3.Distance(endPos, startPos);
+        v0 = Mathf.Sqrt(g * R + 0.1f);
+        float thetaValue = Random.Range(1, 10) / 100f;
+        theta = Mathf.Asin(((g * R) / Mathf.Pow(v0,2))) / (1 + thetaValue);
     }
     protected override void Update()
     {
         base.Update();
-        if (transform.position.y < MaxHeight)
-        {
-            timer += Time.deltaTime;
-            float y = (initialVelocity * Mathf.Sin(initialAngle) * timer) - (0.5f * gravity * Mathf.Pow(timer, 2));
-            //float x = HorizontalDir.x * initialVelocity * timer;
-            //float z = HorizontalDir.z * initialVelocity * timer;
-            Vector3 vec = new Vector3(0.0f, y, 0.0f);
-            transform.position = vec;
-        }
+        time += Time.deltaTime;
+        float xValue = (endPos - startPos).normalized.x * (v0 * 0.5f) * time;
+        float yValue = (v0 * Mathf.Sin(theta) * time) - (0.5f * g * time * time);
+        float zValue = (endPos - startPos).normalized.z * (v0 * 0.5f) * time;
+        Vector3 vec = new Vector3(xValue, yValue, zValue);
+        transform.position = vec;
     }
     protected override void FixedUpdate()
     {
@@ -83,9 +69,18 @@ public class Enemy_2Bullet : EnemyWeapon
     {
         base.OnTriggerEnter(collider);
         Debug.Log("부딪침!");
-        //if (other.gameObject.layer == detectionLayer)
-        //{
-        //    PoolingManager.Instance.ReturnObj(gameObject);
-        //}
+        if (other.gameObject.layer == detectionLayer)
+        {
+            PoolingManager.Instance.ReturnObj(gameObject);
+        }
+    }
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        Debug.Log("부딪침!");
+        if (collision.gameObject.layer == detectionLayer)
+        {
+            PoolingManager.Instance.ReturnObj(gameObject);
+        }
     }
 }

@@ -16,6 +16,7 @@ public class EnemyWeapon : Weapon<Enemy>
     protected override void Start()
     {
         base.Start();
+        if (collider.enabled) OnOffWeaponCollider(false);
     }
     protected override void Update()
     {
@@ -28,6 +29,10 @@ public class EnemyWeapon : Weapon<Enemy>
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-
     }
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+    }
+
 }

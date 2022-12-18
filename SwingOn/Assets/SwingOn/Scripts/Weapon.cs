@@ -26,7 +26,6 @@ public abstract class Weapon<T> : MonoBehaviour
     }
     protected virtual void Start()
     {
-        if (collider.enabled) OnOffWeaponCollider(false);
     }
     protected virtual void Update()
     {
@@ -42,6 +41,9 @@ public abstract class Weapon<T> : MonoBehaviour
         collider.enabled = value;
     }
     protected virtual void OnTriggerEnter(Collider other)
+    {
+    }
+    protected virtual void OnCollisionEnter(Collision collision)
     {
     }
 }
