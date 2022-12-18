@@ -314,11 +314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8995718604172022379, guid: 19e260f6bb791844ea812d580081cd72, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8995718604172022379, guid: 19e260f6bb791844ea812d580081cd72, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: EnemyWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 8995718604172022381, guid: 19e260f6bb791844ea812d580081cd72, type: 3}
       propertyPath: m_Layer
