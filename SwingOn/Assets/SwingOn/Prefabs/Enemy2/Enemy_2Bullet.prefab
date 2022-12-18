@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7067521931259520373}
   - component: {fileID: 4054884830661570558}
+  - component: {fileID: 7038277007691744678}
   m_Layer: 9
   m_Name: Enemy_2Bullet
   m_TagString: EnemyWeapon
@@ -48,9 +49,7 @@ MonoBehaviour:
   collider: {fileID: 0}
   detectionLayer: 0
   dmg: 1
-  target: {fileID: 0}
-  rigid: {fileID: 0}
-  targetPos: {x: 0, y: 0, z: 0}
+  targetvec: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}
   g: 0
@@ -60,6 +59,20 @@ MonoBehaviour:
   theta: 0
   MaxHeight: 0
   time: 0
+--- !u!136 &7038277007691744678
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540849307555341563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.11030704
+  m_Height: 0.22061408
+  m_Direction: 1
+  m_Center: {x: -0.00021064281, y: -0.0030499697, z: 0}
 --- !u!1001 &292005128055581827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,27 +138,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1addc8b249fe7ed429d4386ab0f45f7b, type: 3}
---- !u!1 &6663896313187115520 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6374708375792766595, guid: 1addc8b249fe7ed429d4386ab0f45f7b, type: 3}
-  m_PrefabInstance: {fileID: 292005128055581827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6663896313186893344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6374708375792538275, guid: 1addc8b249fe7ed429d4386ab0f45f7b, type: 3}
   m_PrefabInstance: {fileID: 292005128055581827}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &7363753707257878652
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6663896313187115520}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.10513589
-  m_Height: 0.21027178
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

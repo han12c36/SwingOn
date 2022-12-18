@@ -16,6 +16,8 @@ public class Enemy_2Bullet : EnemyWeapon
     public float MaxHeight;
     public float time = 0.0f;
 
+    public int environmentLayer;
+
     private void OnEnable()
     {
         
@@ -29,7 +31,7 @@ public class Enemy_2Bullet : EnemyWeapon
     protected override void Awake()
     {
         base.Awake();
-        //detectionLayer = 1 << LayerMask.NameToLayer("Environment");
+        environmentLayer = LayerMask.NameToLayer("Environment");
     }
     protected override void Start()
     {
@@ -62,8 +64,11 @@ public class Enemy_2Bullet : EnemyWeapon
     new protected void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(collider);
-        Debug.Log("ºÎµúÄ§!");
         if (other.gameObject.layer == detectionLayer)
+        {
+            PoolingManager.Instance.ReturnObj(gameObject);
+        }
+        else if(other.gameObject.layer == environmentLayer)
         {
             PoolingManager.Instance.ReturnObj(gameObject);
         }
