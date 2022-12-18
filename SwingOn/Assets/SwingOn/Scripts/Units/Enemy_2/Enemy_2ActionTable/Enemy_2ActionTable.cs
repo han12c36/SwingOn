@@ -85,8 +85,7 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
     public int Enemy_2Think()
     {
         //3 4 5
-        //int index =  MySTL.Think(patternValue);
-        int index = 1;
+        int index =  MySTL.Think(patternValue);
         return index + 3;
     }
 
@@ -107,6 +106,8 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
         GameObject obj = PoolingManager.Instance.LentalObj("Enemy_2Bullet");
         obj.transform.position = owner.makeBulletPos.position;
         Enemy_2Bullet bullet = obj.GetComponent<Enemy_2Bullet>();
-        bullet.targetvec = targetPos;
+        bullet.Owner = owner;
+        bullet.startPos = owner.makeBulletPos.position;
+        bullet.endPos = targetPos;
     }
 }

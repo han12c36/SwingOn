@@ -119,7 +119,7 @@ MonoBehaviour:
     maxHp: 0
     curHp: 0
     preHp: 0
-    AttRange: 10
+    AttRange: 3
     Speed: 0
   components:
     rigid: {fileID: 0}

@@ -45,20 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0c2925bc75dbf4f832d3fd8acc4814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 4688652927110198167, guid: 3678a4f61d461c84183debedd3472502, type: 3}
+  owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
   dmg: 1
-  targetvec: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}
-  g: 0
-  v0: 5
-  R: 0
-  t: 0
-  theta: 0
-  MaxHeight: 0
-  time: 0
+  environmentLayer: 0
 --- !u!136 &7038277007691744678
 CapsuleCollider:
   m_ObjectHideFlags: 0
