@@ -80,7 +80,7 @@ public abstract class Enemy : MonoBehaviour
             hitCount++;
         }
     }
-
+    
     public void MoveOrder(Transform targetPos,float MoveSpeed)
     {
         if (navAgent == null) return;
