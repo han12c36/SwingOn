@@ -52,10 +52,6 @@ public class GameManager : Manager<GameManager>
             {
                 sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
             }
-            else if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
-            {
-                sceneCtrl.LoadScene((int)SceneIndex.InGame);
-            }
             else if (sceneCtrl.CurSceneIndex == SceneIndex.InGame)
             {
                 sceneCtrl.LoadScene((int)SceneIndex.Intro);
