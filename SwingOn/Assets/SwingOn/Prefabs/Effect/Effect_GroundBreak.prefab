@@ -55,6 +55,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightning bolt 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1930721788084196, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930721788084196, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
+      propertyPath: m_TagString
+      value: PlayerWeapon
+      objectReference: {fileID: 0}
     - target: {fileID: 4549851355168164, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -178,3 +186,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4549851355168164, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
   m_PrefabInstance: {fileID: 8664490290869823960}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8662867364700444220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1930721788084196, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
+  m_PrefabInstance: {fileID: 8664490290869823960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &9112561835975551279
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662867364700444220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.40983, y: 0.5410938, z: 2.4671574}
+  m_Center: {x: -0.025401592, y: 0.45205307, z: 0.023965657}
