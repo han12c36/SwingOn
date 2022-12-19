@@ -124,10 +124,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.0106744915
-  m_Height: 0.021348983
+  m_Radius: 0.31078213
+  m_Height: 1.4997274
   m_Direction: 1
-  m_Center: {x: 0.00005349517, y: 0.01392813, z: 0}
+  m_Center: {x: 0.00005352497, y: 0.7531174, z: 0}
 --- !u!95 &3817404604672133196
 Animator:
   serializedVersion: 3
