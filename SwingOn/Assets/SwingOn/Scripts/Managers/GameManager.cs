@@ -111,5 +111,12 @@ public class GameManager : Manager<GameManager>
             GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.InGame);
         }
     }
+    public void Button_GoMainTitleScene()
+    {
+        if (GameManager.Instance.sceneCtrl.CurSceneIndex == SceneIndex.InGame)
+        {
+            GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
+        }
+    }
     //=====================================================================================
 }
