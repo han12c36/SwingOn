@@ -8,6 +8,7 @@ public class GameManager : Manager<GameManager>
     //씬 전환이 일어나면 해당 매니저의 디스에이블이 발동한다
     //꺼졋다 다시 켜지는 매니저는 저장된 정보다 다 날라감
 
+    [SerializeField]
     private SceneController sceneCtrl;
     private CoroutineHelper coroutineHelper;
 
@@ -105,9 +106,9 @@ public class GameManager : Manager<GameManager>
     //ButtonFunc
     public void Button_GoInGameScene()
     {
-        if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
+        if(GameManager.Instance.sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
         {
-            sceneCtrl.LoadScene((int)SceneIndex.InGame);
+            GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.InGame);
         }
     }
     //=====================================================================================
