@@ -104,4 +104,15 @@ public class GameManager : Manager<GameManager>
         PoolingManager.InstantiateManger(false);
     }
     //=====================================================================================
+
+    //=====================================================================================
+    //ButtonFunc
+    public void Button_GoInGameScene()
+    {
+        if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
+        {
+            sceneCtrl.LoadScene((int)SceneIndex.InGame);
+        }
+    }
+    //=====================================================================================
 }

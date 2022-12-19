@@ -334,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5520583845748473769, guid: 09a0e0be453fa104eb74a2452613b854, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008
+      value: -0.09
       objectReference: {fileID: 0}
     - target: {fileID: 5520583845748473769, guid: 09a0e0be453fa104eb74a2452613b854, type: 3}
       propertyPath: m_LocalPosition.y
@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5520583845748473769, guid: 09a0e0be453fa104eb74a2452613b854, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5520583845748473769, guid: 09a0e0be453fa104eb74a2452613b854, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1400,7 +1400,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1459106766}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 90309443853253285, guid: 11deec73a84e68d4cbf58e6a618da7b2, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Button_GoInGameScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1459106766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2013,6 +2025,18 @@ PrefabInstance:
     - target: {fileID: 647144030629608982, guid: 8eb393ff6578ac945b50e7c1b9ba0d41, type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 647144030629608982, guid: 8eb393ff6578ac945b50e7c1b9ba0d41, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 647144030629608982, guid: 8eb393ff6578ac945b50e7c1b9ba0d41, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 647144030629608982, guid: 8eb393ff6578ac945b50e7c1b9ba0d41, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 647144030629608982, guid: 8eb393ff6578ac945b50e7c1b9ba0d41, type: 3}
       propertyPath: m_LocalPosition.x
