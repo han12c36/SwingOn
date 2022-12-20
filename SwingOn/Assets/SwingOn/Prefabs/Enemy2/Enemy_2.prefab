@@ -463,7 +463,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 914020021765542954}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.21505615
   m_Height: 0.60597694
   m_Direction: 0
@@ -482,5 +482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   collider: {fileID: 0}
+  hitObjs: []
   detectionLayer: 0
   dmg: 1

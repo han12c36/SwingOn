@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     unitName: 0
-    maxHp: 3
+    maxHp: 10
     curHp: 0
     preHp: 0
     AttRange: 0
@@ -429,6 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   collider: {fileID: 0}
+  hitObjs: []
   detectionLayer: 0
   dmg: 3
 --- !u!1001 &3817404605335750035
@@ -1101,6 +1102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   collider: {fileID: 0}
+  hitObjs: []
   detectionLayer: 0
   dmg: 1
 --- !u!65 &8151004729415137809

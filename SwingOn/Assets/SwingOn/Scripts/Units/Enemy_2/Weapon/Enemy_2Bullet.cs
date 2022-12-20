@@ -74,10 +74,10 @@ public class Enemy_2Bullet : EnemyWeapon
     {
         base.FixedUpdate();
     }
-    new protected void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(collider);
-        if (other.gameObject.layer == detectionLayer || other.gameObject.layer == environmentLayer)
+        if(other.transform.root.gameObject.layer == detectionLayer || other.transform.root.gameObject.layer == environmentLayer)
         {
             PoolingManager.Instance.ReturnObj(gameObject);
         }
