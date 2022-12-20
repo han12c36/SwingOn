@@ -42,6 +42,8 @@ namespace Enums
         Skill_1,
         Skill_2,
         Skill_3,
+        Damaged,
+        Death,
         End
     }
     public enum Enemy_1Actions

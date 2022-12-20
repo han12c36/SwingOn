@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_1UnDamaged : Action<Enemy_1Un>
+public class Player_Death : Action<Player>
 {
-    public override void ActionEnter(Enemy_1Un script)
+    public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-        me.hitCount--;
         GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
-        me.ActionTable.SetCurAction((int)Enums.Enemy_1EggActions.Idle);
+        me.GetAniCtrl.SetTrigger("isDeath");
+        me.MoveCtrl.CanMove = false;
     }
     public override void ActionUpdate()
     {
     }
     public override void ActionExit()
     {
+        //me.MoveCtrl.CanMove = true;
     }
 }

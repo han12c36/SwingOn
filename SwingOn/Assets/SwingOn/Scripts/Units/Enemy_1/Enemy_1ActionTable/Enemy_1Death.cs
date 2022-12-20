@@ -14,7 +14,7 @@ public class Enemy_1Death : Action<Enemy_1>
         me.GetAniCtrl.SetTrigger("isDeath");
         me.MoveStop();
         me.components.collider.enabled = false;
-        GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
+        GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
     }
     public override void ActionUpdate()
     {

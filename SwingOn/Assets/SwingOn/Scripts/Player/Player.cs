@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public Structs.Status status;
     [Space(5f)]
     public Structs.UnitComponents components;
+    public Material OriginMaterial;
+    public Material DamagedMaterial;
     [Space(5f)]
     [SerializeField]
     private PlayerActionTable actionTable;
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
     private PlayerWeapon player_Weapon;
     [SerializeField]
     private int detectionLayer;
+
+    public int hitCount;
 
     public Transform backEffect_Pos;
     public Transform chargeEffect_Pos;
@@ -34,7 +38,7 @@ public class Player : MonoBehaviour
     private void Initialize()
     {
         status.unitName = Enums.UnitNameTable.Player;
-        status.maxHp = 100;
+        status.maxHp = 3;
         status.curHp = status.maxHp;
         components.rigid = GetComponent<Rigidbody>();
         components.collider = GetComponent<Collider>();
@@ -84,6 +88,11 @@ public class Player : MonoBehaviour
             GameObject obj = PoolingManager.Instance.LentalObj("Enemy_2Bullet");
             obj.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            status.curHp--;
+            hitCount++;
+        }
     }
     private void FixedUpdate()
     {
@@ -104,6 +113,7 @@ public class Player : MonoBehaviour
             Debug.Log("¹¹¿¡ ºÎµú;;");
             EnemyWeapon enemyWeapon = other.GetComponent<EnemyWeapon>();
             status.curHp -= enemyWeapon.dmg;
+            hitCount++;
 
             //status.curHp -= other.GetComponent<EnemyWeapon>().dmg;
         }

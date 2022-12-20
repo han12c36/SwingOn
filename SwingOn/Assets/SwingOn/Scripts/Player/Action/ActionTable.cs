@@ -15,6 +15,7 @@ public abstract class ActionTable<T> : MonoBehaviour
     protected int preAction_i;
     protected int curAction_i;
 
+
     protected abstract void Initialize();
 
     protected virtual void Awake()
@@ -58,5 +59,12 @@ public abstract class ActionTable<T> : MonoBehaviour
 
         curAction.ActionEnter(owner);
     }
-    
+
+    public IEnumerator ChangeMaterial(Material OriginMaterial, Material DamagedMaterial, float durtaionTime)
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().material = DamagedMaterial;
+        yield return new WaitForSeconds(durtaionTime);
+        GetComponentInChildren<SkinnedMeshRenderer>().material = OriginMaterial;
+
+    }
 }

@@ -24,6 +24,8 @@ public class PlayerActionTable : ActionTable<Player>
     [SerializeField]
     private bool modeChange;
 
+    public bool isHitFinish;
+
     public bool isFindNearEnemy;
 
     private float animationSpeed = 1.0f;
@@ -75,7 +77,9 @@ public class PlayerActionTable : ActionTable<Player>
         actions[(int)Enums.PlayerActions.Skill_1] = new Skill_1();
         actions[(int)Enums.PlayerActions.Skill_2] = new Skill_2();
         actions[(int)Enums.PlayerActions.Skill_3] = new Skill_3();
-        
+        actions[(int)Enums.PlayerActions.Damaged] = new Player_Damaged();
+        actions[(int)Enums.PlayerActions.Death] = new Player_Death();
+
         attType = Enums.PlayerAttType.Normal;
     }
     protected override void Awake()
@@ -93,10 +97,29 @@ public class PlayerActionTable : ActionTable<Player>
     {
         base.Update();
 
-        Mode_Change();
-        ComboAtt();
-        DashAtt();
-        BlitzAtt();
+        if (owner.status.curHp > 0)
+        {
+            if (owner.hitCount > 0)
+            {
+                SetCurAction((int)Enums.PlayerActions.Damaged);
+            }
+            else
+            {
+                Mode_Change();
+                ComboAtt();
+                DashAtt();
+                BlitzAtt();
+            }
+        }
+        else
+        {
+            if (curAction_e != Enums.PlayerActions.Death)
+            {
+                SetCurAction((int)Enums.PlayerActions.Death);
+            }
+        }
+
+        
     }
     protected override void FixedUpdate()
     {
@@ -216,6 +239,7 @@ public class PlayerActionTable : ActionTable<Player>
     public void GroundBreakFinish() { if (!modeChange) isGroundBreakFinish = true; }
     public void BlitzFinish() { if (!modeChange) isBlitzFinish = true; }
     public void FindNearEnemy() { if(!isFindNearEnemy) isFindNearEnemy = true; }
+    public void HitFinish() { isHitFinish = true; }
 
     public void OnOffWeaponCollider(int value)
     {

@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     unitName: 0
-    maxHp: 0
+    maxHp: 3
     curHp: 0
     preHp: 0
     AttRange: 0
@@ -189,10 +189,13 @@ MonoBehaviour:
     rigid: {fileID: 0}
     collider: {fileID: 0}
     aniCtrl: {fileID: 0}
+  OriginMaterial: {fileID: 2100000, guid: d309f890620ed5041b70d8658fd94938, type: 2}
+  DamagedMaterial: {fileID: 2100000, guid: 8c6a5669242d83c4c929208feebf291b, type: 2}
   actionTable: {fileID: 0}
   moveCtrl: {fileID: 0}
   player_Weapon: {fileID: 0}
   detectionLayer: 0
+  hitCount: 0
   backEffect_Pos: {fileID: 3904074984980220134}
   chargeEffect_Pos: {fileID: 6808941110425007351}
   GroundEffect_Pos: {fileID: 2787658948321218989}
@@ -219,6 +222,7 @@ MonoBehaviour:
   isGroundBreakFinish: 0
   isBlitzFinish: 0
   modeChange: 0
+  isHitFinish: 0
   isFindNearEnemy: 0
   blitzRange: 10
   attType: 0

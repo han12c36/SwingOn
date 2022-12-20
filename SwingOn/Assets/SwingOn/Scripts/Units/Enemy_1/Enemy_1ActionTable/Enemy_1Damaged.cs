@@ -10,7 +10,7 @@ public class Enemy_1Damaged : Action<Enemy_1>
     {
         base.ActionEnter(script);
         me.hitCount--;
-        GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
+        GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
         me.GetAniCtrl.SetTrigger("isDamaged");
         me.MoveStop();
         Vector3 vec = Vector3.zero;

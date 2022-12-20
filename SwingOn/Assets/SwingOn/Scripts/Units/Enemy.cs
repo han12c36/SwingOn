@@ -100,13 +100,13 @@ public abstract class Enemy : MonoBehaviour
         return GetAniCtrl.GetCurrentAnimatorStateInfo(0).normalizedTime > time;
     }
 
-    public IEnumerator ChangeMaterial(Material OriginMaterial, Material DamagedMaterial, float durtaionTime)
-    {
-        GetComponentInChildren<SkinnedMeshRenderer>().material = DamagedMaterial;
-        yield return new WaitForSeconds(durtaionTime);
-        GetComponentInChildren<SkinnedMeshRenderer>().material = OriginMaterial;
-
-    }
+    //public IEnumerator ChangeMaterial(Material OriginMaterial, Material DamagedMaterial, float durtaionTime)
+    //{
+    //    GetComponentInChildren<SkinnedMeshRenderer>().material = DamagedMaterial;
+    //    yield return new WaitForSeconds(durtaionTime);
+    //    GetComponentInChildren<SkinnedMeshRenderer>().material = OriginMaterial;
+    //
+    //}
 
     
 }
