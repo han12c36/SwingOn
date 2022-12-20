@@ -8,7 +8,9 @@ public abstract class Weapon<T> : MonoBehaviour
     protected T owner;
     [SerializeField]
     protected Collider collider;
-    
+
+    public List<GameObject> hitObjs;
+
     public int detectionLayer;
     public int dmg;
 
@@ -23,6 +25,7 @@ public abstract class Weapon<T> : MonoBehaviour
         {
             collider = GetComponentInChildren<Collider>();
         }
+        hitObjs = new List<GameObject>();
     }
     protected virtual void Start()
     {
@@ -39,10 +42,30 @@ public abstract class Weapon<T> : MonoBehaviour
     public void OnOffWeaponCollider(bool value)
     {
         collider.enabled = value;
+        hitObjs.Clear();
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
+        if (hitObjs.Find(x => x == other.transform.root.gameObject))
+        {
+            return;
+        }
+
+        //맞는놈이 플레이어일때
+        if (other.transform.root.gameObject.GetComponent<Player>() != null)
+        {
+            Player player = other.transform.root.gameObject.GetComponent<Player>();
+            player.hitCount++;
+            player.status.curHp -= dmg;
+        }
+        else if (other.transform.root.gameObject.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = other.transform.root.gameObject.GetComponent<Enemy>();
+            enemy.hitCount++;
+            enemy.status.curHp -= dmg;
+        }
     }
+
     protected virtual void OnCollisionEnter(Collision collision)
     {
     }

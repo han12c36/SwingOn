@@ -108,14 +108,16 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == detectionLayer)
-        {
-            Debug.Log("构俊 何碟;;");
-            EnemyWeapon enemyWeapon = other.GetComponent<EnemyWeapon>();
-            status.curHp -= enemyWeapon.dmg;
-            hitCount++;
-
-            //status.curHp -= other.GetComponent<EnemyWeapon>().dmg;
-        }
+        //if (other.gameObject.layer == detectionLayer)
+        //{
+        //    Debug.Log("构俊 何碟;;");
+        //    EnemyWeapon enemyWeapon = other.GetComponent<EnemyWeapon>();
+        //    
+        //    //status.curHp -= enemyWeapon.dmg;
+        //    //hitCount++;
+        //
+        //    //status.curHp -= other.GetComponent<EnemyWeapon>().dmg;
+        //}
     }
+
 }

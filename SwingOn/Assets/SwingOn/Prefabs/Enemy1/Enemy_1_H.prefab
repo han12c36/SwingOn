@@ -112,6 +112,7 @@ MonoBehaviour:
     aniCtrl: {fileID: 0}
   hitCount: 0
   isHold: 0
+  target: {fileID: 0}
   patternValue:
   - 10
   - 10
@@ -352,8 +353,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.08177645, y: 0.68381447, z: 0.66168475}
-  m_Center: {x: -0.4591157, y: 0.011965044, z: -0.014643372}
+  m_Size: {x: 0.4905845, y: 0.68381447, z: 0.66168475}
+  m_Center: {x: -0.38348946, y: 0.011964536, z: -0.014643372}
 --- !u!114 &942170827383524031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,21 +369,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   collider: {fileID: 0}
+  hitObjs: []
   detectionLayer: 0
-  dmg: 3
---- !u!114 &1079649516907527189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303911371586671037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c46ed59784b09e6459b47e314398cdcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  collider: {fileID: 0}
-  detectionLayer: 0
-  dmg: 3
+  dmg: 1

@@ -20,5 +20,9 @@ public class Enemy_1Weapon : EnemyWeapon
     {
         base.FixedUpdate();
     }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+    }
 
 }

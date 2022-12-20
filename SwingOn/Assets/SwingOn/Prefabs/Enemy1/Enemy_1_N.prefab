@@ -112,6 +112,7 @@ MonoBehaviour:
     aniCtrl: {fileID: 0}
   hitCount: 0
   isHold: 0
+  target: {fileID: 0}
   patternValue:
   - 10
   - 10
@@ -369,4 +370,4 @@ MonoBehaviour:
   owner: {fileID: 0}
   collider: {fileID: 0}
   detectionLayer: 0
-  dmg: 3
+  dmg: 1

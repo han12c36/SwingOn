@@ -74,11 +74,6 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == detectionLayer)
-        {
-            status.curHp -= target.PlayerWeapon.dmg;
-            hitCount++;
-        }
     }
     
     public void MoveOrder(Transform targetPos,float MoveSpeed)
