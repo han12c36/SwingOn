@@ -22,9 +22,23 @@ public class Skill_1 : Action<Player>
     {
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalDash"))
         {
+            if (!me.ActionTable.isCurrentAnimationOver(0.61f)) NormalDash(); //0.645
+        }
+        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
+        {
+            if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
+        }
+
+        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalDash"))
+        {
             if(!me.ActionTable.isCurrentAnimationOver(0.61f)) NormalDash(); //0.645
         }
         
+        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
+        {
+            if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
+        }
+
         if (!me.GetAniCtrl.GetBool("DoubleDash"))
         {
             if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
@@ -46,12 +60,7 @@ public class Skill_1 : Action<Player>
                 }
             }
         }
-
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
-        {
-            if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
-        }
-
+        
         if (me.ActionTable.Dash_Finish || me.ActionTable.Power_Slash)
         {
             me.ActionTable.Dash_Finish = false;
@@ -78,10 +87,12 @@ public class Skill_1 : Action<Player>
     }
     private void NormalDash()
     {
+        //me.components.rigid.MovePosition(Vector3.Lerp(me.transform.position, targetPos_1, me.ActionTable.normalDashSpeed));
         me.transform.position = Vector3.Lerp(me.transform.position, targetPos_1, me.ActionTable.normalDashSpeed);
     }
     private void HardDash()
     {
+        me.components.rigid.MovePosition(Vector3.Lerp(me.transform.position, targetPos_2, me.ActionTable.hardDashSpeed));
         me.transform.position = Vector3.Lerp(me.transform.position, targetPos_2, me.ActionTable.hardDashSpeed);
     }
 }

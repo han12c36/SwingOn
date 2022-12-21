@@ -75,6 +75,18 @@ namespace Enums
         Death,
         End
     }
+    public enum Enemy_3Actions
+    {
+        Ready,
+        Idle,
+        Trace,
+        MeleeAtt,
+        LongAtt,
+        RangeAtt,
+        Damaged,
+        Death,
+        End
+    }
 
     public enum PlayerAttType
     {

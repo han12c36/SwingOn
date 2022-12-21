@@ -38,7 +38,7 @@ public class Enemy_2 : Enemy
     protected override void OnDisable()
     {
         base.OnDisable();
-        actionTable.SetCurAction((int)Enums.Enemy_1Actions.Idle);
+        actionTable.SetCurAction((int)Enums.Enemy_2Actions.Ready);
     }
 
     protected override void Start()

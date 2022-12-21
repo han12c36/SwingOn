@@ -39,11 +39,14 @@ public class CameraManager : Manager<CameraManager>
 
     private void FollowTarget()
     {
+        //임시로 스무스 껏음
+
         //SmoothDamp(현재위치,목표위치,현재 카메라 속도,목표위치까지 도달할 시간)
         Vector3 targetPosition = Vector3.SmoothDamp(transform.position, target.transform.position, ref cameraFollowVelocity, cameraFollowSpeed);
-        transform.position = targetPosition;
+        //transform.position = targetPosition;
+        transform.position = target.transform.position;
 
-        transform.LookAt(targetPosition);
+        //transform.LookAt(targetPosition);
     }
 
     private void RotateCamera()

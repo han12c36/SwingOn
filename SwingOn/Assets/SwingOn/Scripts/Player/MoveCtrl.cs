@@ -20,15 +20,13 @@ public class MoveCtrl : MonoBehaviour
     public float RotationSize;
 
 
-
     private bool isMove;
     private bool isRun;
 
     private float init_Speed;
     private float x;
     private float z;
-    private float animation_X;
-    private float animation_Z;
+    private float rotateSpeed = 12.0f;
 
     private Vector3 preDir;
     private Vector3 curDir;
@@ -36,9 +34,6 @@ public class MoveCtrl : MonoBehaviour
     private float RunPercent = 0.8f;
 
     public bool CanMove { get { return canMove; } set{ canMove = value; } }
-    public float X { get { return animation_X; } }
-    public float Z { get { return animation_Z; } }
-
     public bool IsMove { get { return isMove; } }
     public bool IsRun { get { return isRun; } }
 
@@ -52,7 +47,7 @@ public class MoveCtrl : MonoBehaviour
         init_Speed = cur_Speed;
     }
 
-    void Update()
+    private void Update()
     {
         if (!canMove)
         {
@@ -60,9 +55,11 @@ public class MoveCtrl : MonoBehaviour
             return;
         }
         GetInput();
-        UpdateAnimationBlendValue();
         CheckMovement();
         Move();
+    }
+    private void FixedUpdate()
+    {
     }
 
     private void GetInput()
@@ -84,7 +81,6 @@ public class MoveCtrl : MonoBehaviour
         else isRun = false;
     }
 
-    float rotateSpeed = 12.0f;
 
     private void Move()
     {
@@ -99,66 +95,14 @@ public class MoveCtrl : MonoBehaviour
         curDir = new Vector3(x, 0, z);
         curDir = curDir.normalized;
 
-
-        if (-preDir == curDir)
-        {
-            //감속
-            cur_Speed = init_Speed;
-        }
+        if (-preDir == curDir) cur_Speed = init_Speed;
         else
         {
             if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
             else cur_Speed = max_Speed;
-            //가속
-            //if (curDir.z >= 0.0f)
-            //{
-            //    if (cur_Speed < max_Speed) cur_Speed += Time.deltaTime * AccelerationValue;
-            //    else cur_Speed = max_Speed;
-            //}
-            //감속
-            //else
-            //{
-            //    if (cur_Speed < max_BackSpeed) cur_Speed += Time.deltaTime * AccelerationValue;
-            //    else cur_Speed = max_BackSpeed;
-            //}
         }
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(curDir), Time.deltaTime * rotateSpeed);
-    }
-
-    private float ToMax(float value,float max)
-    {
-        if (value < max) value += Time.deltaTime;
-        else value = max;
-
-        return value;
-    }
-    private float ToMin(float value,float min)
-    {
-        if (value > min) value -= Time.deltaTime;
-        else value = min;
-        return value;
-    }
-
-    private void UpdateAnimationBlendValue()
-    {
-
-        //if (x > 0.0f) animation_X = ToMax(animation_X, 1.0f);
-        //if (x < 0.0f) animation_X = ToMin(animation_X, -1.0f);
-        //if (z > 0.0f) animation_Z = ToMax(animation_Z, 1.0f);
-        //if (z < 0.0f) animation_Z = ToMin(animation_Z, -1.0f);
-        //if (x == 0.0f)
-        //{
-        //    if (animation_X > 0.0f) animation_X = ToMin(animation_X, 0.0f);
-        //    else if (animation_X < 0.0f) animation_X = ToMax(animation_X, 0.0f);
-        //    else animation_X = 0.0f;
-        //}
-        //if (z == 0.0f)
-        //{
-        //    if (animation_Z > 0.0f) animation_Z = ToMin(animation_Z, 0.0f);
-        //    else if (animation_Z < 0.0f) animation_Z = ToMax(animation_Z, 0.0f);
-        //    else animation_Z = 0.0f;
-        //}
     }
 }
