@@ -4,32 +4,22 @@ using UnityEngine;
 
 public class Skill_2 : Action<Player>
 {
-    Enemy targetEnemy;
+    //Enemy targetEnemy;
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
+
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.ignoreLayer, me.ActionTable.WeaponLayer);
-
         me.MoveCtrl.CanMove = false;
-        targetEnemy = FindTarget();
 
-        if(me.ActionTable.AttType == Enums.PlayerAttType.Hard)
+        if (me.ActionTable.targetEnemy == null)
         {
-            if (!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("GroundBreak"))
-            {
-                me.GetAniCtrl.SetTrigger("GroundBreak");
-            }
+            me.GetAniCtrl.SetTrigger("GroundBreak");
         }
-        else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed ||
-           me.ActionTable.AttType == Enums.PlayerAttType.Normal)
+        else
         {
-            if (targetEnemy != null)
-            {
-                me.GetAniCtrl.SetTrigger("Skill_2");
-                //Vector3 vec = new Vector3(targetEnemy.transform.position.x, 0.0f, targetEnemy.transform.position.z);
-                me.transform.LookAt(targetEnemy.transform.position);
-            }
-            else me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
+            me.GetAniCtrl.SetTrigger("Skill_2");
+            me.transform.LookAt(me.ActionTable.targetEnemy.transform.position);
         }
     }
     public override void ActionUpdate()
@@ -41,10 +31,6 @@ public class Skill_2 : Action<Player>
                 NormalBlitz();
             }
         }
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("GroundBreak"))
-        {
-            Debug.Log("땅내려찍기");
-        }
 
         if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
         {
@@ -52,25 +38,35 @@ public class Skill_2 : Action<Player>
             {
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
-                    if(targetEnemy != null)
+                    if (me.ActionTable.targetEnemy != null)
                     {
-                        targetEnemy.isHold = true;
-                        Vector3 vec = targetEnemy.transform.position + (-targetEnemy.transform.forward).normalized * (targetEnemy.transform.localScale.z * 0.8f);
-                        //vec = new Vector3(vec.x, 0.0f, vec.z);
+                        me.ActionTable.targetEnemy.isHold = true;
+                        Vector3 vec = me.ActionTable.targetEnemy.transform.position + (-me.ActionTable.targetEnemy.transform.forward).normalized * (me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
                         me.transform.position = vec;
-                        me.transform.LookAt(me.transform.position + targetEnemy.transform.forward);
+                        me.transform.LookAt(me.transform.position + me.ActionTable.targetEnemy.transform.forward);
                         me.GetAniCtrl.SetBool("DoubleBlitz", true);
                     }
                 }
             }
         }
 
-        if (me.ActionTable.Blitz_Finish || me.ActionTable.GroundBreak_Finish || targetEnemy == null)
+        if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
         {
-            if(targetEnemy != null)targetEnemy.isHold = false;
-            me.ActionTable.Blitz_Finish = false;
-            me.ActionTable.GroundBreak_Finish = false;
-            me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
+            if (me.ActionTable.GroundBreak_Finish)
+            {
+                me.ActionTable.GroundBreak_Finish = false;
+                me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
+            }
+        }
+        if (me.ActionTable.AttType == Enums.PlayerAttType.Normal || me.ActionTable.AttType == Enums.PlayerAttType.Speed)
+        {
+            if(me.ActionTable.Blitz_Finish || me.ActionTable.targetEnemy.status.curHp < 0 )//|| me.ActionTable.targetEnemy == null)
+            {
+                me.ActionTable.targetEnemy.isHold = false;
+                me.ActionTable.targetEnemy = null;
+                me.ActionTable.Blitz_Finish = false;
+                me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
+            }
         }
     }
     public override void ActionFixedUpdate()
@@ -86,45 +82,23 @@ public class Skill_2 : Action<Player>
         me.ActionTable.Blitz_Finish = false;
         me.ActionTable.GroundBreak_Finish = false;
         me.MoveCtrl.CanMove = true;
-        if(targetEnemy != null)
+        me.ActionTable.GroundBreak_Finish = false;
+        me.ActionTable.Blitz_Finish = false;
+
+        if (me.ActionTable.targetEnemy != null)
         {
-            targetEnemy.isHold = false;
-            targetEnemy = null;
+            me.ActionTable.targetEnemy.isHold = false;
+            me.ActionTable.targetEnemy = null;
         }
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.originLayer, me.ActionTable.WeaponLayer);
     }
 
     private void NormalBlitz()
     {
-        if(targetEnemy != null)
+        if(me.ActionTable.targetEnemy != null)
         {
-            Vector3 vec =  targetEnemy.transform.position + (me.transform.position - targetEnemy.transform.position).normalized * (targetEnemy.transform.localScale.z * 0.8f);
+            Vector3 vec =  me.ActionTable.targetEnemy.transform.position + (me.transform.position - me.ActionTable.targetEnemy.transform.position).normalized * (me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
             me.transform.position = Vector3.Lerp(me.transform.position, vec,me.ActionTable.normalBlitzSpeed);
         }
-    }
-    private void HardBlitz()
-    {
-        Debug.Log("샥 돌아서 뒤에서 챠챠챱");
-        //몬스터가 있다는 가정하에 몬스터 등 방향으로 휙 돌기
-    }
-
-    public Enemy FindTarget()
-    {
-        float minDistance = float.PositiveInfinity;
-        Enemy targetEnemy = null;
-        Collider[] nearEnemy = Physics.OverlapSphere(me.transform.position, me.ActionTable.blitzRange);
-        foreach(Collider enemy in nearEnemy)
-        {
-            if(enemy.gameObject.GetComponent<Enemy>() != null)
-            {
-                float dist = Vector3.Distance(me.transform.position, enemy.transform.position);
-                if (dist < minDistance)
-                {
-                    minDistance = dist;
-                    targetEnemy = enemy.gameObject.GetComponent<Enemy>();
-                }
-            }
-        }
-        return targetEnemy;
     }
 }

@@ -53,7 +53,6 @@ public class Enemy_1Att_1 : Action<Enemy_1>
             }
             else if (PatternIndex == (int)Enemy_1Pattern.Heal)
             {
-                Debug.Log("Шњ Сп");
                 Collider[] nearEnemy = Physics.OverlapSphere(me.transform.position, me.recognizeRange);
                 for(int i = 0; i < nearEnemy.Length; i++)
                 {

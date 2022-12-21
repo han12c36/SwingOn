@@ -7,9 +7,13 @@ public class AutoEffect : MonoBehaviour
     private ParticleSystem effect;
     private float DestroyTime;
 
+    private float timer;
+    public float EffectColliderLifeTime;
+    private Collider collider;
+
     private void Awake()
     {
-
+        collider = GetComponentInChildren<Collider>();
     }
 
     private void OnEnable()
@@ -18,9 +22,11 @@ public class AutoEffect : MonoBehaviour
         DestroyTime = effect.main.duration;
         StartCoroutine(CheckIfAlive());
     }
-    protected virtual void OnDisable()
+    protected void OnDisable()
     {
         effect.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        StopCoroutine(CheckIfAlive());
+        timer = 0.0f;
     }
     IEnumerator CheckIfAlive()
     {
@@ -37,5 +43,16 @@ public class AutoEffect : MonoBehaviour
         }
     }
 
-    
+    protected void Update()
+    {
+        if(collider != null && collider.enabled)
+        {
+            if (timer > EffectColliderLifeTime)
+            {
+                timer = 0.0f;
+                collider.enabled = false;
+            }
+            else timer += Time.deltaTime;
+        }
+    }
 }

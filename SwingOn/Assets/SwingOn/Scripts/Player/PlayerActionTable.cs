@@ -9,19 +9,13 @@ public class PlayerActionTable : ActionTable<Player>
     [SerializeField]
     private Enums.PlayerActions curAction_e;
 
-    [SerializeField]
     private bool isAttFinish;
-    [SerializeField]
     private bool isEquptFinish;
-    [SerializeField]
     private bool isDashFinish;
-    [SerializeField]
     private bool isPowerSlash;
-    [SerializeField]
     private bool isGroundBreakFinish;
     [SerializeField]
     private bool isBlitzFinish;
-    [SerializeField]
     private bool modeChange;
 
     public bool isHitFinish;
@@ -38,6 +32,8 @@ public class PlayerActionTable : ActionTable<Player>
 
     public bool tryChangeHardMode;
     public bool tryChangeSpeedMode;
+
+    public Enemy targetEnemy;
 
     [SerializeField]
     private float modeDurtaionTimer;
@@ -213,11 +209,22 @@ public class PlayerActionTable : ActionTable<Player>
     private void BlitzAtt()
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
-                curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
-                curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
+                   curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
+                   curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SetCurAction((int)Enums.PlayerActions.Skill_2);
+            if(attType == Enums.PlayerAttType.Hard)
+            {
+                SetCurAction((int)Enums.PlayerActions.Skill_2);
+            }
+            else
+            {
+                targetEnemy = FindTarget();
+                if (targetEnemy != null)
+                {
+                    SetCurAction((int)Enums.PlayerActions.Skill_2);
+                }
+            }
         }
     }
 
@@ -308,7 +315,5 @@ public class PlayerActionTable : ActionTable<Player>
                 parent.GetChild(i).gameObject.layer = LayerIndex;
             }
         }
-
-
     }
 }

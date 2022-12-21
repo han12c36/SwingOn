@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d270ea1495e365e4590878b156a5a65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectColliderLifeTime: 0.2
 --- !u!1001 &8664490290869823960
 PrefabInstance:
   m_ObjectHideFlags: 0

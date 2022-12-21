@@ -31,6 +31,10 @@ public class PlayerWeapon : Weapon<Player>
         {
             if (collider.enabled) OnOffWeaponCollider(false);
         }
+        else
+        {
+            if (!collider.enabled) OnOffWeaponCollider(true);
+        }
     }
     protected override void Update()
     {

@@ -114,6 +114,7 @@ namespace Structs
 
 public static class MySTL
 {
+
     public static Vector3 RandomVec(Vector3 originPos,float range)
     {
         float range_X, range_Z;
