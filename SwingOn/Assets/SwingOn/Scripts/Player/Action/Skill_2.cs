@@ -60,7 +60,7 @@ public class Skill_2 : Action<Player>
         }
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal || me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {
-            if(me.ActionTable.Blitz_Finish || me.ActionTable.targetEnemy.status.curHp < 0 )//|| me.ActionTable.targetEnemy == null)
+            if(me.ActionTable.Blitz_Finish)// || me.ActionTable.targetEnemy.status.curHp < 0 )//|| me.ActionTable.targetEnemy == null)
             {
                 me.ActionTable.targetEnemy.isHold = false;
                 me.ActionTable.targetEnemy = null;

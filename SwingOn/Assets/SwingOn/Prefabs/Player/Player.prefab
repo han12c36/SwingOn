@@ -200,13 +200,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   preAction_e: 0
   curAction_e: 0
-  isAttFinish: 0
-  isEquptFinish: 0
-  isDashFinish: 0
-  isPowerSlash: 0
-  isGroundBreakFinish: 0
   isBlitzFinish: 0
-  modeChange: 0
   isHitFinish: 0
   isFindNearEnemy: 0
   ignoreLayer: 0
@@ -216,6 +210,7 @@ MonoBehaviour:
   attType: 0
   tryChangeHardMode: 0
   tryChangeSpeedMode: 0
+  targetEnemy: {fileID: 0}
   modeDurtaionTimer: 0
   ModeDurationTime: 10
   normalDashSpeed: 0.1
@@ -315,6 +310,7 @@ MonoBehaviour:
   hitObjs: []
   detectionLayer: 0
   dmg: 1
+  weaponType: 0
 --- !u!1 &6776088079502373344
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +449,7 @@ MonoBehaviour:
   hitObjs: []
   detectionLayer: 0
   dmg: 3
+  weaponType: 0
 --- !u!1001 &3817404605335750035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1125,7 +1122,8 @@ MonoBehaviour:
   collider: {fileID: 0}
   hitObjs: []
   detectionLayer: 0
-  dmg: 1
+  dmg: 100
+  weaponType: 0
 --- !u!65 &8151004729415137809
 BoxCollider:
   m_ObjectHideFlags: 0
