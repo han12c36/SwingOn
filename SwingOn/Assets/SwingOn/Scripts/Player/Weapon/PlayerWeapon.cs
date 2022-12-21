@@ -2,8 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerWeaponType
+{
+    Melee,
+    Effect,
+    End
+}
+
+
 public class PlayerWeapon : Weapon<Player>
 {
+    public PlayerWeaponType weaponType;
+
     protected override void Awake()
     {
         base.Awake();
@@ -12,17 +22,21 @@ public class PlayerWeapon : Weapon<Player>
             Owner.PlayerWeapon = this;
             detectionLayer = LayerMask.NameToLayer("Enemy");
         }
+        if (Owner == null) Owner = InGameManager.Instance.GetPlayer;
     }
     protected override void Start()
     {
         base.Start();
-        if (collider.enabled) OnOffWeaponCollider(false);
+        if(weaponType == PlayerWeaponType.Melee)
+        {
+            if (collider.enabled) OnOffWeaponCollider(false);
+        }
     }
-    protected virtual void Update()
+    protected override void Update()
     {
         base.Update();
     }
-    protected virtual void FixedUpdate()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
     }

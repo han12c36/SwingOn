@@ -8,6 +8,8 @@ public class Skill_2 : Action<Player>
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
+        me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.ignoreLayer, me.ActionTable.WeaponLayer);
+
         me.MoveCtrl.CanMove = false;
         targetEnemy = FindTarget();
 
@@ -89,6 +91,7 @@ public class Skill_2 : Action<Player>
             targetEnemy.isHold = false;
             targetEnemy = null;
         }
+        me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.originLayer, me.ActionTable.WeaponLayer);
     }
 
     private void NormalBlitz()

@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightning bolt 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1325259769939094, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1930721788084196, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -62,6 +66,14 @@ PrefabInstance:
     - target: {fileID: 1930721788084196, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
       propertyPath: m_TagString
       value: PlayerWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010835078630078, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2986
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010835078630078, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4833472
       objectReference: {fileID: 0}
     - target: {fileID: 4549851355168164, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
       propertyPath: m_RootOrder
@@ -106,6 +118,10 @@ PrefabInstance:
     - target: {fileID: 4549851355168164, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839266963116666, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 82725133835146028, guid: 355bd4c589eeeb64485710cf8728eeef, type: 3}
       propertyPath: m_Enabled
@@ -203,4 +219,22 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.40983, y: 0.5410938, z: 2.4671574}
-  m_Center: {x: -0.025401592, y: 0.45205307, z: 0.023965657}
+  m_Center: {x: -0.025401592, y: 0.45205307, z: 0}
+--- !u!114 &4397871627238201050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662867364700444220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992e8fdb0b9619c4e818c6c894314c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  collider: {fileID: 0}
+  hitObjs: []
+  detectionLayer: 0
+  dmg: 1
+  weaponType: 1

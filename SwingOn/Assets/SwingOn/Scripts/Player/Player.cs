@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     private void Initialize()
     {
         status.unitName = Enums.UnitNameTable.Player;
-        status.maxHp = 3;
+        status.maxHp = 100;
         status.curHp = status.maxHp;
         components.rigid = GetComponent<Rigidbody>();
         components.collider = GetComponent<Collider>();

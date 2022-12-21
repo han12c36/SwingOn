@@ -25,8 +25,10 @@ public class PlayerActionTable : ActionTable<Player>
     private bool modeChange;
 
     public bool isHitFinish;
-
     public bool isFindNearEnemy;
+    public int ignoreLayer;
+    public int originLayer;
+    public int WeaponLayer;
 
     private float animationSpeed = 1.0f;
     public float blitzRange = 10.0f;
@@ -92,6 +94,10 @@ public class PlayerActionTable : ActionTable<Player>
 
         SetCurAction((int)Enums.PlayerActions.None);
         animationSpeed = 1.0f;
+        originLayer = LayerMask.NameToLayer("Player");
+        ignoreLayer = LayerMask.NameToLayer("Ignore");
+        WeaponLayer = LayerMask.NameToLayer("PlayerWeapon");
+
     }
     protected override void Update()
     {
@@ -284,5 +290,25 @@ public class PlayerActionTable : ActionTable<Player>
         return targetEnemy;
     }
 
-    
+    public void ChangeLayer(Transform parent,int LayerIndex,int dontChangeLayerIndex)
+    {
+        if(parent.gameObject.layer != dontChangeLayerIndex)
+        {
+            parent.gameObject.layer = LayerIndex;
+        }
+		for (int i = 0; i < parent.childCount; ++i)
+        {
+            if (parent.childCount != 0)
+            {
+                ChangeLayer(parent.GetChild(i),LayerIndex, dontChangeLayerIndex);
+            }
+
+            if(parent.GetChild(i).gameObject.layer != dontChangeLayerIndex)
+            {
+                parent.GetChild(i).gameObject.layer = LayerIndex;
+            }
+        }
+
+
+    }
 }

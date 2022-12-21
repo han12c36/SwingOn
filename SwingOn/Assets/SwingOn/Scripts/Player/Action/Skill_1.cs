@@ -11,6 +11,7 @@ public class Skill_1 : Action<Player>
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
+        me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.ignoreLayer,me.ActionTable.WeaponLayer);
         me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetTrigger("Skill_1");
         startPos = me.transform.position;
@@ -72,6 +73,7 @@ public class Skill_1 : Action<Player>
         startPos = Vector3.zero;
         targetPos_1 = Vector3.zero;
         targetPos_2 = Vector3.zero;
+        me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.originLayer, me.ActionTable.WeaponLayer);
     }
     private void NormalDash()
     {
