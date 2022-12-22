@@ -90,4 +90,10 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
         if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
         else owner.EnemyWeapon.OnOffWeaponCollider(false);
     }
+    public void Explosion()
+    {
+        GameObject effect = PoolingManager.Instance.LentalObj("Effect_Enemy_3Explosion");
+        effect.transform.position = owner.transform.position;
+        PoolingManager.Instance.ReturnObj(owner.gameObject);
+    }
 }
