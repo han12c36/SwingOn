@@ -33,6 +33,7 @@ public class InGameManager : Manager<InGameManager>
 
     public float playerLifeTime;
     private float gameStartTime;
+    [SerializeField]
     private float timer;
     private float enemySpawnTimer = 3.0f;
     private int enemySpawnIndex = 2;
@@ -56,7 +57,7 @@ public class InGameManager : Manager<InGameManager>
     {
         if (player.status.curHp > 0)
         {
-            playerLifeTime += Time.unscaledTime;
+            playerLifeTime += Time.deltaTime;
             IncreasingDifficulty();
         }
         EnemySpawn(spawnerPos_1);
@@ -71,17 +72,17 @@ public class InGameManager : Manager<InGameManager>
 
     private void IncreasingDifficulty()
     {
-        if (playerLifeTime > 2.0f)
+        if (playerLifeTime > 120.0f)
         {
             enemySpawnTimer = 2.5f;
             enemySpawnIndex = 4;
         }
-        else if (playerLifeTime > 4.0f)
+        else if (playerLifeTime > 240.0f)
         {
             enemySpawnTimer = 2.0f;
             enemySpawnIndex = 6;
         }
-        else if (playerLifeTime > 8.0f)
+        else if (playerLifeTime > 480.0f)
         {
             enemySpawnTimer = 1.5f;
             enemySpawnIndex = 8;
@@ -90,7 +91,6 @@ public class InGameManager : Manager<InGameManager>
 
     private void EnemySpawn(Vector3 spawnerPos)
     {
-        timer += Time.unscaledTime;
         if(timer >= enemySpawnTimer)
         {
             timer = 0.0f;
@@ -98,6 +98,7 @@ public class InGameManager : Manager<InGameManager>
             obj.transform.position = spawnerPos;
             Debug.Log(obj.name);
         }
+        else timer += Time.deltaTime;
     }
 
     public int SelectEnemy(float[] probs)
