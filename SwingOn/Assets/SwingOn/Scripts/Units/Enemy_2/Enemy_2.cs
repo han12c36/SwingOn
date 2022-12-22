@@ -62,10 +62,6 @@ public class Enemy_2 : Enemy
 
     private void OnDrawGizmos()
     {
-        Color col = Color.red;
-        col.a = 0.3f;
-        Gizmos.color = col;
-        Gizmos.DrawSphere(transform.position, status.AttRange);
     }
 
     

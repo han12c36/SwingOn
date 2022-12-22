@@ -46,8 +46,6 @@ public abstract class Weapon<T> : MonoBehaviour
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
-
         if (hitObjs.Find(x => x == other.transform.root.gameObject))
         {
             return;
