@@ -77,10 +77,17 @@ public class Enemy_2Bullet : EnemyWeapon
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(collider);
-        if(other.transform.root.gameObject.layer == detectionLayer || other.transform.root.gameObject.layer == environmentLayer)
+        Debug.Log(other.gameObject.name);
+        if(other.transform.root.gameObject.layer == detectionLayer || other.gameObject.layer == environmentLayer)
         {
             PoolingManager.Instance.ReturnObj(gameObject);
         }
+    }
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        Debug.Log(collision.gameObject.name);
+
     }
 
 }
