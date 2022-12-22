@@ -46,16 +46,22 @@ public class GameManager : Manager<GameManager>
 
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (sceneCtrl.CurSceneIndex == SceneIndex.Intro)
             {
                 sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
             }
-            else if (sceneCtrl.CurSceneIndex == SceneIndex.InGame)
+            //else if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
+            //{
+            //    sceneCtrl.LoadScene((int)SceneIndex.Intro);
+            //}
+        }
+        else if(Input.anyKeyDown)
+        {
+            if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
             {
-                sceneCtrl.LoadScene((int)SceneIndex.Intro);
+                sceneCtrl.LoadScene((int)SceneIndex.InGame);
             }
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -63,7 +69,6 @@ public class GameManager : Manager<GameManager>
             count++;
         }
     }
-
 
     public void InstantiateManagerForNextScene(int NextSceneIndex)
     {
