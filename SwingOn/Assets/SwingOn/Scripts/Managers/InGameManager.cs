@@ -35,7 +35,7 @@ public class InGameManager : Manager<InGameManager>
     private float gameStartTime;
     [SerializeField]
     private float timer;
-    private float enemySpawnTimer = 3.0f;
+    private float enemySpawnTimer = 10.0f;
     private int enemySpawnIndex = 2;
 
     public Player GetPlayer { get { return player; } }
@@ -74,17 +74,17 @@ public class InGameManager : Manager<InGameManager>
     {
         if (playerLifeTime > 120.0f)
         {
-            enemySpawnTimer = 2.5f;
+            enemySpawnTimer = 8.0f;
             enemySpawnIndex = 4;
         }
         else if (playerLifeTime > 240.0f)
         {
-            enemySpawnTimer = 2.0f;
+            enemySpawnTimer = 7.5f;
             enemySpawnIndex = 6;
         }
         else if (playerLifeTime > 480.0f)
         {
-            enemySpawnTimer = 1.5f;
+            enemySpawnTimer = 7.0f;
             enemySpawnIndex = 8;
         }
     }
