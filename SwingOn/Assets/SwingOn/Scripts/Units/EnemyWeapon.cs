@@ -17,7 +17,6 @@ public class EnemyWeapon : Weapon<Enemy>
     protected override void Start()
     {
         base.Start();
-        if (collider.enabled) OnOffWeaponCollider(false);
     }
     protected override void Update()
     {

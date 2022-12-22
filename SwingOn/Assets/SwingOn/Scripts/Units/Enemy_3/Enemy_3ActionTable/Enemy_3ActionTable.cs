@@ -13,7 +13,7 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
     public bool isReadyComplete;
 
     public float Enemy_3WaitTime = 1.5f;
-    private float[] TraceOrRoll = new float[3] { 50.0f, 0.0f, 50.0f};
+    private float[] TraceOrRoll = new float[3] { 70.0f, 0.0f, 30.0f};
 
     protected override void Initialize()
     {
@@ -77,9 +77,9 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
     public int Enemy_3Think()
     {
         //2 4
-        //int index = MySTL.Think(TraceOrRoll);
+        int index = MySTL.Think(TraceOrRoll);
         //int index = 0;
-        int index = 2;
+        //int index = 2;
         return index + 2;
     }
 
@@ -94,6 +94,7 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
     {
         GameObject effect = PoolingManager.Instance.LentalObj("Effect_Enemy_3Explosion");
         effect.transform.position = owner.transform.position;
+        effect.GetComponentInChildren<EnemyWeapon>().Owner = owner;
         PoolingManager.Instance.ReturnObj(owner.gameObject);
     }
 }

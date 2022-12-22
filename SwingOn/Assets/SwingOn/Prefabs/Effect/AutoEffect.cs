@@ -9,6 +9,7 @@ public class AutoEffect : MonoBehaviour
 
     private float timer;
     public float EffectColliderLifeTime;
+    [SerializeField]
     private Collider collider;
 
     private void Awake()

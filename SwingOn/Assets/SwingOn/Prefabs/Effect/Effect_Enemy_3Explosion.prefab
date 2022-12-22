@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EffectColliderLifeTime: 0.2
+  collider: {fileID: 0}
 --- !u!1001 &1817025029101425414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59,6 +60,14 @@ PrefabInstance:
     - target: {fileID: 1414779434264708, guid: 98bdc0d8f83c7724cada9d79e67878a1, type: 3}
       propertyPath: m_Name
       value: Explosion 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414779434264708, guid: 98bdc0d8f83c7724cada9d79e67878a1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414779434264708, guid: 98bdc0d8f83c7724cada9d79e67878a1, type: 3}
+      propertyPath: m_TagString
+      value: EnemyWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 1415739967652718, guid: 98bdc0d8f83c7724cada9d79e67878a1, type: 3}
       propertyPath: m_IsActive
@@ -289,3 +298,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.5860677, y: 4.2002406, z: 3.9977818}
   m_Center: {x: 0.08681083, y: -0.10610223, z: 0.15484995}
+--- !u!114 &3864697504439622099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815610490186431362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3e54a7676ef5048bf4b091f826fc74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  collider: {fileID: 0}
+  hitObjs: []
+  detectionLayer: 0
+  dmg: 1
