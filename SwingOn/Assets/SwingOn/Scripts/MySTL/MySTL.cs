@@ -81,8 +81,7 @@ namespace Enums
         Idle,
         Trace,
         MeleeAtt,
-        LongAtt,
-        RangeAtt,
+        Explosion,
         Damaged,
         Death,
         End

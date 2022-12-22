@@ -13,10 +13,10 @@ public class Enemy_3 : Enemy
     [SerializeField]
     protected Enemy_3ActionTable actionTable;
     [SerializeField]
-    //private Enemy_3Weapon enemyWeapon;
+    private Enemy_3Weapon enemyWeapon;
 
     public Enemy_3ActionTable ActionTable { get { return actionTable; } set { actionTable = value; } }
-    //public Enemy_3Weapon EnemyWeapon { get { return enemyWeapon; } set { enemyWeapon = value; } }
+    public Enemy_3Weapon EnemyWeapon { get { return enemyWeapon; } set { enemyWeapon = value; } }
 
     public float Timer { get { return timer; } set { timer = value; } }
     public float IdleWaitTime { get { return idleWaitTime; } set { idleWaitTime = value; } }
@@ -28,12 +28,12 @@ public class Enemy_3 : Enemy
         status.curHp = status.maxHp;
         status.preHp = status.curHp;
         status.AttRange = 1f;
-        status.Speed = 3.5f;
+        status.Speed = 1.5f;
         navAgent.speed = status.Speed;
         components.aniCtrl.speed = 1.0f;
         actionTable = GetComponent<Enemy_3ActionTable>();
-        //enemyWeapon = GetComponentInChildren<Enemy_3Weapon>();
-        //enemyWeapon.Owner = this;
+        enemyWeapon = GetComponentInChildren<Enemy_3Weapon>();
+        enemyWeapon.Owner = this;
     }
     protected override void OnEnable()
     {

@@ -13,7 +13,7 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
     public bool isReadyComplete;
 
     public float Enemy_3WaitTime = 1.5f;
-    //private float[] patternValue = new float[3] { 45f, 10f, 45f };
+    private float[] TraceOrRoll = new float[3] { 50.0f, 0.0f, 50.0f};
 
     protected override void Initialize()
     {
@@ -23,14 +23,13 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
             owner.ActionTable = this;
             actions = new Action<Enemy_3>[(int)Enums.Enemy_3Actions.End];
         }
-        //actions[(int)Enums.Enemy_2Actions.Ready] = new Enemy_2Ready();
-        //actions[(int)Enums.Enemy_2Actions.Idle] = new Enemy_2Idle();
-        //actions[(int)Enums.Enemy_2Actions.Trace] = new Enemy_2Trace();
-        //actions[(int)Enums.Enemy_2Actions.MeleeAtt] = new Enemy_2MeleeAtt();
-        //actions[(int)Enums.Enemy_2Actions.LongAtt] = new Enemy_2LongAtt();
-        //actions[(int)Enums.Enemy_2Actions.RangeAtt] = new Enemy_2RangeAtt();
-        //actions[(int)Enums.Enemy_2Actions.Damaged] = new Enemy_2Damaged();
-        //actions[(int)Enums.Enemy_2Actions.Death] = new Enemy_2Death();
+        actions[(int)Enums.Enemy_3Actions.Ready] = new Enemy_3Ready();
+        actions[(int)Enums.Enemy_3Actions.Idle] = new Enemy_3Idle();
+        actions[(int)Enums.Enemy_3Actions.Trace] = new Enemy_3Trace();
+        actions[(int)Enums.Enemy_3Actions.MeleeAtt] = new Enemy_3MeleeAtt();
+        actions[(int)Enums.Enemy_3Actions.Explosion] = new Enemy_3Explosion();
+        actions[(int)Enums.Enemy_3Actions.Damaged] = new Enemy_3Damaged();
+        actions[(int)Enums.Enemy_3Actions.Death] = new Enemy_3Death();
     }
     protected override void Awake()
     {
@@ -39,7 +38,7 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
     protected override void Start()
     {
         base.Start();
-        SetCurAction((int)Enums.Enemy_2Actions.Ready);
+        SetCurAction((int)Enums.Enemy_3Actions.Ready);
     }
 
     protected override void Update()
@@ -74,5 +73,21 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
     public bool isCurrentAnimationOver(float time)
     {
         return owner.GetAniCtrl.GetCurrentAnimatorStateInfo(0).normalizedTime > time;
+    }
+    public int Enemy_3Think()
+    {
+        //2 4
+        //int index = MySTL.Think(TraceOrRoll);
+        //int index = 0;
+        int index = 2;
+        return index + 2;
+    }
+
+    public void DamagedFinish() { isHitFinish = true; }
+    public void ReadyComplete() { isReadyComplete = true; }
+    public void OnOffWeaponCollider_Enemy(int value)
+    {
+        if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
+        else owner.EnemyWeapon.OnOffWeaponCollider(false);
     }
 }

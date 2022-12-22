@@ -1137,7 +1137,7 @@ MonoBehaviour:
   collider: {fileID: 0}
   hitObjs: []
   detectionLayer: 0
-  dmg: 100
+  dmg: 1
   weaponType: 0
 --- !u!65 &8151004729415137809
 BoxCollider:
