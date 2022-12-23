@@ -19,7 +19,6 @@ public class Enemy_3Explosion : Action<Enemy_3>
             if (explosionTimer <= Enemy_3ExplosionTime)
             {
                 explosionTimer += Time.deltaTime;
-                Debug.Log(explosionTimer);
                 Vector3 vec = new Vector3(me.GetTarget.transform.position.x, 0.0f, me.GetTarget.transform.position.z);
                 me.transform.LookAt(vec);
                 me.MoveOrder(me.GetTarget.transform, me.status.Speed * 1.5f);

@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
 
     public bool isHold;
 
+    [SerializeField]
     protected float distToTarget;
     [SerializeField]
     protected Player target;

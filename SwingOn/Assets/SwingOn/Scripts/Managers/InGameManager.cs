@@ -21,7 +21,11 @@ public enum SpawnEnemyType
 
 public class InGameManager : Manager<InGameManager>
 {
+    private bool isStop = false;
+
     private Player player;
+    private GameObject ScorePanel;
+
     private Vector3 playerStartPos = new Vector3(0.0f, 0.0f, -9f);
     private Vector3 spawnerPos_1 = new Vector3(-16.0f,1.5f,-1.5f);
     private Vector3 spawnerPos_2 = new Vector3(16.0f, 1.5f, -15f);
@@ -59,9 +63,10 @@ public class InGameManager : Manager<InGameManager>
         {
             playerLifeTime += Time.deltaTime;
             IncreasingDifficulty();
+            //EnemySpawn(spawnerPos_1);
+            //EnemySpawn(spawnerPos_2);
         }
-        EnemySpawn(spawnerPos_1);
-        EnemySpawn(spawnerPos_2);
+        
     }
     private void OnDisable()
     {
@@ -119,5 +124,18 @@ public class InGameManager : Manager<InGameManager>
             else randomPoint -= probs[i];
         }
         return probs.Length - 1;
+    }
+    public void HitStop(float fps)
+    {
+        if (isStop) return;
+        StartCoroutine(TimeStop(fps));
+    }
+    IEnumerator TimeStop(float fps)
+    {
+        isStop = true;
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(Time.deltaTime * fps);
+        Time.timeScale = 1f;
+        isStop = false;
     }
 }

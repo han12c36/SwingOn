@@ -88,6 +88,11 @@ public class Player : MonoBehaviour
             GameObject obj = PoolingManager.Instance.LentalObj("Enemy_3");
             obj.transform.position = new Vector3(0.0f, 2.0f, 0.0f);
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GameObject obj = PoolingManager.Instance.LentalObj("Enemy_4");
+            obj.transform.position = new Vector3(0.0f, 2.0f, 0.0f);
+        }
         if (Input.GetKeyDown(KeyCode.H))
         {
             status.curHp--;

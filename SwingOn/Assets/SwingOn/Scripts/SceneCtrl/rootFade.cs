@@ -15,7 +15,6 @@ public class rootFade : MonoBehaviour
     {
         StartCoroutine(RootFade());
         a = text.color.a;
-        Debug.Log(text.color.r+ text.color.g+ text.color.b+ text.color.a);
     }
     private void OnDisable()
     {

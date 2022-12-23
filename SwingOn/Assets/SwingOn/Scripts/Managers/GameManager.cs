@@ -13,6 +13,7 @@ public class GameManager : Manager<GameManager>
     private CoroutineHelper coroutineHelper;
 
     public int count;
+    public bool isPaused;
 
     public SceneController SceneCtrl { get { return sceneCtrl; } }
     public CoroutineHelper GetCoroutineHelper { get { return coroutineHelper; } }
@@ -46,16 +47,15 @@ public class GameManager : Manager<GameManager>
 
     private void Update()
     {
+        if (isPaused) Time.timeScale = 0.0f;
+        else Time.timeScale = 1.0f;
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (sceneCtrl.CurSceneIndex == SceneIndex.Intro)
             {
                 sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
             }
-            //else if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
-            //{
-            //    sceneCtrl.LoadScene((int)SceneIndex.Intro);
-            //}
         }
         else if(Input.anyKeyDown)
         {
@@ -104,6 +104,7 @@ public class GameManager : Manager<GameManager>
         InGameManager.InstantiateManger(false);
         CameraManager.InstantiateManger(false);
         PoolingManager.InstantiateManger(false);
+        UIManager.InstantiateManger(false);
     }
     //=====================================================================================
 
@@ -122,6 +123,16 @@ public class GameManager : Manager<GameManager>
         {
             GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
         }
+    }
+    public void Button_Quit()
+    {
+        Application.Quit();
+    }
+
+    void OnApplicationPause(bool pause)
+    {
+        if (pause) isPaused = true;
+        else { if (isPaused) isPaused = false; }
     }
     //=====================================================================================
 }
