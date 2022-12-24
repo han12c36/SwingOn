@@ -111,9 +111,9 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
     public void Enemy_4RandomFire()
     {
         int fireCount = Random.Range(3, 6);
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < fireCount; i++)
         {
-            Vector3 randVec = MySTL.RandomVec(owner.GetTarget.transform.position, 3.5f);
+            Vector3 randVec = MySTL.RandomVec(owner.GetTarget.transform.position, 6.0f);
             Enemy_4Fire(randVec);
         }
         Enemy_4Fire(owner.GetTarget.transform.position);
