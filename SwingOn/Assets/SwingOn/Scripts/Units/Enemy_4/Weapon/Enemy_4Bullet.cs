@@ -62,6 +62,7 @@ public class Enemy_4Bullet : EnemyWeapon
         float zValue = startPos.z + z * time;
         Vector3 vec = new Vector3(xValue, yValue, zValue);
         transform.position = vec;
+        transform.LookAt(new Vector3(0.0f, (y * time), 0.0f));
     }
 
     protected override void FixedUpdate()
