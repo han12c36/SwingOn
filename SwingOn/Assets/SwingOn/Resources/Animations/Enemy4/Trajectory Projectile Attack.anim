@@ -31000,7 +31000,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.36666667
-    functionName: MakeBulletEffect
+    functionName: Enemy_4RandomFire
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

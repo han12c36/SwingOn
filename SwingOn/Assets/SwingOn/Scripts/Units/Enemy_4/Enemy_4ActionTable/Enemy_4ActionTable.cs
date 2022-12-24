@@ -108,7 +108,19 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
         else owner.EnemyWeapon.OnOffWeaponCollider(false);
     }
 
-    public void MakeBulletEffect()
+    public void Enemy_4RandomFire()
+    {
+        int fireCount = Random.Range(3, 6);
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 randVec = MySTL.RandomVec(owner.GetTarget.transform.position, 3.5f);
+            Enemy_4Fire(randVec);
+        }
+        Enemy_4Fire(owner.GetTarget.transform.position);
+    }
+
+
+    public void Enemy_4Fire(Vector3 targetPos)
     {
         GameObject effect = PoolingManager.Instance.LentalObj("Effect_Enemy_4Bullet");
         effect.transform.position = owner.makeBulletEffectPos.transform.position;
@@ -117,8 +129,8 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
         Enemy_4Bullet bullet = obj.GetComponent<Enemy_4Bullet>();
         bullet.Owner = owner;
         bullet.startPos = owner.makeBulletEffectPos.position;
-        Vector3 vec = new Vector3(owner.GetTarget.transform.position.x, owner.GetTarget.transform.position.y, owner.GetTarget.transform.position.z);
-        bullet.endPos = vec;
+        //Vector3 vec = new Vector3(owner.GetTarget.transform.position.x, owner.GetTarget.transform.position.y, owner.GetTarget.transform.position.z);
+        bullet.endPos = targetPos;
         bullet.transform.LookAt(bullet.endPos);
         Debug.Log("ÃÑ¾Ë »ý¼º");
     }
