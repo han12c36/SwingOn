@@ -31,7 +31,6 @@ public class rootFade : MonoBehaviour
 
     IEnumerator RootFade()
     {
-        Debug.Log(text.color.a);
         float timer = 0;
         while (true)
         {

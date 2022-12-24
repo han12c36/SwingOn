@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     public Transform GroundEffect_Pos;
     public Collider dashCollder;
 
+    
+
     public MoveCtrl MoveCtrl { get { return moveCtrl; } set { moveCtrl = value; } }
     public PlayerWeapon PlayerWeapon { get { return player_Weapon; } set { player_Weapon = value; } }
     public PlayerActionTable ActionTable { get { return actionTable; } set { actionTable = value; } }
@@ -124,5 +126,9 @@ public class Player : MonoBehaviour
         //    //status.curHp -= other.GetComponent<EnemyWeapon>().dmg;
         //}
     }
+
+    
+
+    
 
 }

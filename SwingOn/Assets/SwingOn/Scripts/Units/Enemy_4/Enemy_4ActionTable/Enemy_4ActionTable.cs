@@ -117,7 +117,7 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
         Enemy_4Bullet bullet = obj.GetComponent<Enemy_4Bullet>();
         bullet.Owner = owner;
         bullet.startPos = owner.makeBulletEffectPos.position;
-        Vector3 vec = new Vector3(owner.GetTarget.transform.position.x, owner.GetTarget.transform.position.y + 0.5f, owner.GetTarget.transform.position.z);
+        Vector3 vec = new Vector3(owner.GetTarget.transform.position.x, owner.GetTarget.transform.position.y, owner.GetTarget.transform.position.z);
         bullet.endPos = vec;
         bullet.transform.LookAt(bullet.endPos);
         Debug.Log("ÃÑ¾Ë »ý¼º");

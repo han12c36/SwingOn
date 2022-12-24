@@ -14,7 +14,6 @@ public class PlayerActionTable : ActionTable<Player>
     private bool isDashFinish;
     private bool isPowerSlash;
     private bool isGroundBreakFinish;
-    [SerializeField]
     private bool isBlitzFinish;
     private bool modeChange;
 
@@ -39,11 +38,9 @@ public class PlayerActionTable : ActionTable<Player>
     private float modeDurtaionTimer;
     public float ModeDurationTime = 10.0f;
     [Header("NormalDash")]
-    public float normalDashSpeed = 0.1f;        //노말 대쉬 속도
-    public float normalDashDistance = 5.0f;     //노말 대쉬 길이
+    public float normalDashPower = 8.0f;        //노말 대쉬 속도
     [Header("HardDash")]
-    public float hardDashSpeed = 0.2f;          //하드 대쉬 속도
-    public float hardDashDistance = 3.0f;       //하드 대쉬 길이
+    public float hardDashPower = 10.0f;          //하드 대쉬 속도
     [Header("NormalBlitz")]
     public float normalBlitzSpeed = 0.2f;          //기습 속도
 

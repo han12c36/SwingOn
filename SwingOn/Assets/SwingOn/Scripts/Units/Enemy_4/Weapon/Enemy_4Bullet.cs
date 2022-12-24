@@ -8,7 +8,6 @@ public class Enemy_4Bullet : EnemyWeapon
     public Vector3 endPos;
     public Vector3 dir;
     public int environmentLayer;
-    public float timer;
 
     private float g;
     private float v0;
@@ -18,6 +17,7 @@ public class Enemy_4Bullet : EnemyWeapon
     private float time = 0.0f;
     private float totalTime;
     private float HorizontalV0;
+    private float rotateSpeed = 20.0f;
 
     private void OnEnable()
     {
@@ -53,23 +53,15 @@ public class Enemy_4Bullet : EnemyWeapon
     protected override void Update()
     {
         base.Update();
-        timer += Time.deltaTime;
-        Vector3 moveVec = startPos + dir * 5f * timer;
-        
-        //transform.position = moveVec;
+        time += Time.deltaTime;
+        float xValue = (endPos - startPos).normalized.x * HorizontalV0 * Time.deltaTime;
         float yValue = (v0 * Mathf.Sin(theta) * time) - (0.5f * g * time * time);
-        Vector3 finalVec = new Vector3(moveVec.x, moveVec.y + yValue, moveVec.z);
-        
+        float zValue = (endPos - startPos).normalized.z * HorizontalV0 * Time.deltaTime;
+        Vector3 vec = new Vector3(xValue, 0.0f, zValue);
+        transform.position += vec;
+        Vector3 finalVec = new Vector3(transform.position.x, yValue, transform.position.z);
         transform.position = finalVec;
-        transform.eulerAngles = finalVec;
-
-        //float xValue = (endPos - startPos).normalized.x * HorizontalV0 * Time.deltaTime;
-        //float yValue = (v0 * Mathf.Sin(theta) * time) - (0.5f * g * time * time);
-        //float zValue = (endPos - startPos).normalized.z * HorizontalV0 * Time.deltaTime;
-        //Vector3 vec = new Vector3(xValue, 0.0f, zValue);
-        //transform.position += vec;
-        //Vector3 finalVec = new Vector3(transform.position.x, yValue, transform.position.z);
-        //transform.position = finalVec;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotateSpeed);
     }
 
     protected override void FixedUpdate()

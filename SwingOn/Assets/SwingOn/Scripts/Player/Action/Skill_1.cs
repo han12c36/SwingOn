@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Skill_1 : Action<Player>
 {
-    private Vector3 startPos;
-    private Vector3 targetPos_1;
-    private Vector3 targetPos_2;
+
+    float timer;
+    float M;
+    Vector3 F;
+    Vector3 A;
+    Vector3 V0;
+    Vector3 dir;
 
     public override void ActionEnter(Player script)
     {
@@ -15,30 +19,12 @@ public class Skill_1 : Action<Player>
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.ignoreLayer,me.ActionTable.WeaponLayer);
         me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetTrigger("Skill_1");
-        startPos = me.transform.position;
-        targetPos_1 = startPos + me.transform.forward * me.ActionTable.normalDashDistance;
+
+        M = me.components.rigid.mass;       //w / g = M
+        dir = me.transform.forward;
     }
     public override void ActionUpdate()
     {
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalDash"))
-        {
-            if (!me.ActionTable.isCurrentAnimationOver(0.61f)) NormalDash(); //0.645
-        }
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
-        {
-            if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
-        }
-
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalDash"))
-        {
-            if(!me.ActionTable.isCurrentAnimationOver(0.61f)) NormalDash(); //0.645
-        }
-        
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
-        {
-            if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
-        }
-
         if (!me.GetAniCtrl.GetBool("DoubleDash"))
         {
             if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
@@ -46,7 +32,6 @@ public class Skill_1 : Action<Player>
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     me.GetAniCtrl.SetBool("DoubleDash", true);
-                    targetPos_2 = targetPos_1 + me.transform.forward * me.ActionTable.hardDashDistance;
                 }
             }
         }
@@ -70,6 +55,25 @@ public class Skill_1 : Action<Player>
     }
     public override void ActionFixedUpdate()
     {
+
+        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalDash"))
+        {
+            if (!me.ActionTable.isCurrentAnimationOver(0.4f)) NormalDash(); //0.645
+            else
+            {
+                me.components.rigid.velocity = Vector3.zero;
+                timer = 0.0f;
+            }
+        }
+        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
+        {
+            if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
+            else
+            {
+                me.components.rigid.velocity = Vector3.zero;
+                timer = 0.0f;
+            }
+        }
     }
 
     public override void ActionExit()
@@ -80,20 +84,46 @@ public class Skill_1 : Action<Player>
         me.ActionTable.Dash_Finish = false;
         me.ActionTable.Power_Slash = false;
         me.MoveCtrl.CanMove = true;
-        startPos = Vector3.zero;
-        targetPos_1 = Vector3.zero;
-        targetPos_2 = Vector3.zero;
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.originLayer, me.ActionTable.WeaponLayer);
+        timer = 0.0f;
+        F = Vector3.zero;
+        A = Vector3.zero;
+        V0 = Vector3.zero;
+        dir = Vector3.zero;
     }
+
     private void NormalDash()
     {
-        //me.components.rigid.MovePosition(Vector3.Lerp(me.transform.position, targetPos_1, me.ActionTable.normalDashSpeed));
-        me.transform.position = Vector3.Lerp(me.transform.position, targetPos_1, me.ActionTable.normalDashSpeed);
+        Debug.Log("일반대쉬");
+        if (timer <= 1.0f) timer += Time.fixedDeltaTime;
+        //Power = me.ActionTable.hardDashPower;
+        float normalPower = 7.0f;
+        A = dir * normalPower;
+        float decelerateValue = normalPower - timer * normalPower;
+        if (decelerateValue > normalPower * 0.93f)
+        {
+            A *= decelerateValue;
+            F = M * A;
+            V0 = F;
+            me.components.rigid.velocity = V0 + A * timer;
+        }
     }
+
+
     private void HardDash()
     {
-        me.components.rigid.MovePosition(Vector3.Lerp(me.transform.position, targetPos_2, me.ActionTable.hardDashSpeed));
-        me.transform.position = Vector3.Lerp(me.transform.position, targetPos_2, me.ActionTable.hardDashSpeed);
+        Debug.Log("하드대쉬");
+        if (timer <= 1.0f) timer += Time.fixedDeltaTime;
+        float HardPower = 10.0f;
+        A = dir * HardPower;
+        float decelerateValue = HardPower - timer * HardPower;
+        if (decelerateValue > HardPower * 0.93f)
+        {
+            A *= decelerateValue;
+            F = M * A;
+            V0 = F;
+            me.components.rigid.velocity = V0 + A * timer;
+        }
     }
 }
  

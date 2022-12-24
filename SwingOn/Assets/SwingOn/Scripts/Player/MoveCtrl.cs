@@ -56,10 +56,10 @@ public class MoveCtrl : MonoBehaviour
         }
         GetInput();
         CheckMovement();
-        Move();
     }
     private void FixedUpdate()
     {
+        RigidMove();
     }
 
     private void GetInput()
@@ -104,5 +104,28 @@ public class MoveCtrl : MonoBehaviour
 
         transform.position += curDir * cur_Speed * Time.deltaTime;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(curDir), Time.deltaTime * rotateSpeed);
+    }
+    private void RigidMove()
+    {
+        if (x == 0.0f && z == 0.0f)
+        {
+            cur_Speed = init_Speed;
+            curDir = Vector3.zero;
+            return;
+        }
+
+        preDir = curDir;
+        curDir = new Vector3(x, 0, z);
+        curDir = curDir.normalized;
+
+        if (-preDir == curDir) cur_Speed = init_Speed;
+        else
+        {
+            if (cur_Speed < max_Speed) cur_Speed += Time.fixedDeltaTime * AccelerationValue;
+            else cur_Speed = max_Speed;
+        }
+        ctrl_Owner.components.rigid.MovePosition(ctrl_Owner.components.rigid.position 
+            + curDir * cur_Speed * Time.fixedDeltaTime);
+        ctrl_Owner.components.rigid.MoveRotation(Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(curDir), Time.fixedDeltaTime * rotateSpeed));
     }
 }
