@@ -664,7 +664,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 3
+    angle: 1
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -750,7 +750,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 0.2
       mode: 0
       spread: 0
       speed:
@@ -5039,8 +5039,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.70472556, y: 0.6542091, z: 1.0319422}
-  m_Center: {x: 0.00000047940125, y: 0.057776477, z: 0.3130633}
+  m_Size: {x: 0.70472556, y: 0.6542091, z: 1.4533633}
+  m_Center: {x: 0.00000048138537, y: 0.057776492, z: 0.5237741}
 --- !u!1 &2223384169716368574
 GameObject:
   m_ObjectHideFlags: 0
