@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Enemy_4Run : Action<Enemy_4>
 {
+    Transform targetPos;
+
     public override void ActionEnter(Enemy_4 script)
     {
         base.ActionEnter(script);
         me.GetAniCtrl.SetBool("isRun", true);
-
+        targetPos.position = Vector3.zero;
     }
     public override void ActionUpdate()
     {
@@ -16,7 +18,7 @@ public class Enemy_4Run : Action<Enemy_4>
         {
             Vector3 vec = new Vector3(me.GetTarget.transform.position.x, 0.0f, me.GetTarget.transform.position.z);
             me.transform.LookAt(vec);
-            me.MoveOrder(me.GetTarget.transform, me.status.Speed * 2.0f);
+            me.MoveOrder(targetPos, me.status.Speed * 2.0f);
             if (me.GetDistToTarget < me.status.AttRange) me.ActionTable.SetCurAction(me.ActionTable.Enemy_4AttThink());
         }
     }

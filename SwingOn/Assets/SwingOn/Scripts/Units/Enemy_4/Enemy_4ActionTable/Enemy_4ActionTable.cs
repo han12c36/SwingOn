@@ -15,8 +15,8 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
 
     public float Enemy_4WaitTime = 1.5f;
     //private float[] WalkOrRunOrRange = new float[4] { 70.0f, 30.0f,0.0f, 20.0f };
-    private float[] WalkOrRunOrRange = new float[4] { 70.0f, 30.0f, 0.0f, 70.0f };
-    private float[] AttPattern = new float[3] { 50.0f, 0.0f, 20.0f };
+    private float[] WalkOrRange = new float[3] { 30.0f, 0.0f ,70.0f};
+    private float[] AttOrRun = new float[3] { 30.0f, 0.0f, 70.0f };
 
     protected override void Initialize()
     {
@@ -81,20 +81,19 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
     }
     public int Enemy_4Think()
     {
-        //¶Ù±â : 2
         //°È±â : 3
         //¿ø°Å¸® : 5
-        //int index = MySTL.Think(WalkOrRunOrRange);
-        int index = 3;
-        return index + 2;
+        //int index = MySTL.Think(WalkOrRange);
+        int index = 2;
+        return index + 3;
     }
     public int Enemy_4AttThink()
     {
+        //¶Ù±â : 2
         //±ÙÁ¢   : 4
-        //´ë½¬   : 6
-        //int index = MySTL.Think(AttPattern);
+        //int index = MySTL.Think(AttOrRun);
         int index = 0;
-        return index + 4;
+        return index + 2;
     }
 
 
@@ -125,11 +124,9 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
         GameObject effect = PoolingManager.Instance.LentalObj("Effect_Enemy_4Bullet");
         effect.transform.position = owner.makeBulletEffectPos.transform.position;
         GameObject obj = PoolingManager.Instance.LentalObj("Enemy_4Bullet");
-        //effect.transform.position = owner.makeBulletEffectPos.transform.position;
         Enemy_4Bullet bullet = obj.GetComponent<Enemy_4Bullet>();
         bullet.Owner = owner;
         bullet.startPos = owner.makeBulletEffectPos.position;
-        //Vector3 vec = new Vector3(owner.GetTarget.transform.position.x, owner.GetTarget.transform.position.y, owner.GetTarget.transform.position.z);
         bullet.endPos = targetPos;
         bullet.transform.LookAt(bullet.endPos);
         Debug.Log("ÃÑ¾Ë »ý¼º");
