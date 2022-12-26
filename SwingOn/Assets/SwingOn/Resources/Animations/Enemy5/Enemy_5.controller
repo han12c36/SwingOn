@@ -119,7 +119,7 @@ AnimatorStateTransition:
     m_ConditionEvent: isScream
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: PrickleAtt
+    m_ConditionEvent: isPrickleAtt
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4063118768391911431}
@@ -406,11 +406,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: isScream
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: RangeAtt
+    m_ConditionEvent: isRangeAtt
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4336369170329281214}
@@ -617,7 +617,7 @@ AnimatorStateTransition:
     m_ConditionEvent: isScream
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: JumpAtt
+    m_ConditionEvent: isJumpAtt
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3339753033447071388}
@@ -678,19 +678,19 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: PrickleAtt
+  - m_Name: isPrickleAtt
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: RangeAtt
+  - m_Name: isRangeAtt
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: JumpAtt
+  - m_Name: isJumpAtt
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
