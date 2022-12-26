@@ -14,7 +14,8 @@ public class Enemy_5Run : Action<Enemy_5>
         if (!me.isHold)
         {
             Vector3 vec = new Vector3(me.GetTarget.transform.position.x, 0.0f, me.GetTarget.transform.position.z);
-            me.transform.LookAt(vec);
+            //me.transform.LookAt(vec);
+            me.transform.rotation = Quaternion.Lerp(me.transform.rotation, Quaternion.LookRotation(vec), Time.deltaTime * 0.5f);
             me.MoveOrder(me.GetTarget.transform, me.status.Speed);
             if(me.GetDistToTarget < me.status.AttRange) me.ActionTable.SetCurAction(me.ActionTable.Enemy_5ShortAttThink());
         }

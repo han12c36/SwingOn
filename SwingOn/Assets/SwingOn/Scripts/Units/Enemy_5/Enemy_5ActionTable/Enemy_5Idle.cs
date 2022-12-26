@@ -24,15 +24,16 @@ public class Enemy_5Idle : Action<Enemy_5>
             {
                 if(me.GetDistToTarget > me.ActionTable.fallAttRange)
                 {
-                    me.ActionTable.SetCurAction(me.ActionTable.Enemy_5FallAttThink());
+                    me.ActionTable.SetCurAction((int)Enums.Enemy_5Actions.Run);
                 }
                 else
                 {
-                    me.ActionTable.SetCurAction(me.ActionTable.Enemy_5RunThink());
+                    me.ActionTable.SetCurAction(me.ActionTable.Enemy_5FallAttThink());
                 }
             }
         }
     }
+
     public override void ActionExit()
     {
         timer = 0.0f;

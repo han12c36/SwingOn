@@ -124,6 +124,7 @@ MonoBehaviour:
   isCast: 0
   recognizeRange: 3
   actionTable: {fileID: 0}
+  enemyWeapon: {fileID: 0}
 --- !u!114 &6970774622029329290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +140,12 @@ MonoBehaviour:
   owner: {fileID: 0}
   preAction_e: 0
   curAction_e: 0
+  Enemy_5WaitTime: 1.5
+  thinkRange: 5
+  fallAttRange: 8
   isHitFinish: 0
+  isSreamFinish: 0
+  isReadyComplete: 0
 --- !u!195 &1364818273536948190
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -225,3 +231,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7124251706586122406, guid: 0c1f4290bbb940b4ab5968c72402a050, type: 3}
   m_PrefabInstance: {fileID: 886276521305731254}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4189909885271408973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3920703552052425211, guid: 0c1f4290bbb940b4ab5968c72402a050, type: 3}
+  m_PrefabInstance: {fileID: 886276521305731254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2180732683689385292
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189909885271408973}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8466347, y: 1.2129672, z: 1}
+  m_Center: {x: -0.50352037, y: -0.1064845, z: -0.00000009746589}
+--- !u!114 &7959438837167692197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189909885271408973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bede8039349946546b0a04b8330dacdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  collider: {fileID: 0}
+  hitObjs: []
+  detectionLayer: 0
+  dmg: 1

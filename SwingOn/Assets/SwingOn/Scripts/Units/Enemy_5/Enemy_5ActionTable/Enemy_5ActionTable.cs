@@ -89,11 +89,11 @@ public class Enemy_5ActionTable : ActionTable<Enemy_5>
         curAction_e = (Enums.Enemy_5Actions)curAction_i;
     }
 
-    //public void OnOffWeaponCollider_Enemy(int value)
-    //{
-    //    if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
-    //    else owner.EnemyWeapon.OnOffWeaponCollider(false);
-    //}
+    public void OnOffWeaponCollider_Enemy(int value)
+    {
+        if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
+        else owner.EnemyWeapon.OnOffWeaponCollider(false);
+    }
 
     public void DamagedFinish() { isHitFinish = true; }
     public void ScreamFinish() { isSreamFinish = true; }
