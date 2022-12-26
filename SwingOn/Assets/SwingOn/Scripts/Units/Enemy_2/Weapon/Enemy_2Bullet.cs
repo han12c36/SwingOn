@@ -4,34 +4,29 @@ using UnityEngine;
 
 public class Enemy_2Bullet : EnemyWeapon
 {
-    //public Vector3 targetvec;
+    public float canExistTime;
 
     public Vector3 startPos;
     public Vector3 endPos;
-    private float g;
-    private float v0;
-    [SerializeField]
-    private float R;
-    private float theta;
-    private float time = 0.0f;
-    private float totalTime;
-    private float HorizontalV0;
-
     public int environmentLayer;
 
-    public Enemy_2Bullet(Vector3 startPos, Vector3 endPos)
-    {
-        this.startPos = startPos;
-        this.endPos = endPos;
-    }
-
+    float x;
+    float y;
+    float z;
+    float g;
+    float endTime;
+    float maxH;
+    float H;
+    float endH;
+    float time;
+    float MaxTime; //최대높이까지 걸리는 시간 
+   
     private void OnEnable()
     {
     }
 
     private void OnDisable()
     {
-        time = 0.0f;
         owner = null;
     }
 
@@ -45,29 +40,34 @@ public class Enemy_2Bullet : EnemyWeapon
     {
         base.Start();
         if (!collider.enabled) OnOffWeaponCollider(true);
-        startPos = owner.GetComponent<Enemy_2>().makeBulletPos.position;
-        g = Physics.gravity.magnitude;
-        R = Vector3.Distance(endPos, startPos);
-        v0 = Mathf.Sqrt(g * R + 0.1f);
-        float thetaValue = Random.Range(1, 10) / 100f;
-        theta = Mathf.Asin(((g * R) / Mathf.Pow(v0, 2))) / (1 + thetaValue);
-        totalTime = v0 * Mathf.Cos(theta) / g;
-        float rand = Random.Range(5, 9);
-        rand /= 10.0f;
-        HorizontalV0 = v0 * rand;
+        canExistTime = 5.0f;
+        maxH = Random.Range(2.5f, 4.5f);
+        float rand = Random.Range(0.0f, 2.0f);
+        MaxTime = 1 + (rand * 0.1f);
+        endH = endPos.y - startPos.y;
+        H = maxH - startPos.y;
+        g = 2 * H / (MaxTime * MaxTime);
+        y = Mathf.Sqrt(2 * g * H);
+        float a = g;
+        float b = -2 * y;
+        float c = endH;
+        endTime = (-b + Mathf.Sqrt(b * b - 4 * a * c)) / (2 * a);
+        x = (endPos.x - startPos.x) / endTime;
+        z = (endPos.z - startPos.z) / endTime;
 
     }
     protected override void Update()
     {
         base.Update();
         time += Time.deltaTime;
-        float xValue = (endPos - startPos).normalized.x * HorizontalV0 * Time.deltaTime;
-        float yValue = (v0 * Mathf.Sin(theta) * time) - (0.5f * g * time * time);
-        float zValue = (endPos - startPos).normalized.z * HorizontalV0 * Time.deltaTime;
-        Vector3 vec = new Vector3(xValue, 0.0f, zValue);
-        transform.position += vec;
-        Vector3 finalVec = new Vector3(transform.position.x, yValue, transform.position.z);
-        transform.position = finalVec;
+        float xValue = startPos.x + x * time;
+        float yValue = startPos.y + (y * time) - (0.5f * g * time * time);
+        float zValue = startPos.z + z * time;
+        Vector3 vec = new Vector3(xValue, yValue, zValue);
+        transform.position = vec;
+        transform.LookAt(new Vector3(x * time, (y * time) * 0.5f, z * time));
+
+        if (time >= canExistTime) PoolingManager.Instance.ReturnObj(gameObject);
     }
 
     protected override void FixedUpdate()
@@ -78,16 +78,9 @@ public class Enemy_2Bullet : EnemyWeapon
     {
         base.OnTriggerEnter(collider);
         Debug.Log(other.gameObject.name);
-        if(other.transform.root.gameObject.layer == detectionLayer || other.gameObject.layer == environmentLayer)
+        if (other.transform.root.gameObject.layer == detectionLayer || other.gameObject.layer == environmentLayer)
         {
             PoolingManager.Instance.ReturnObj(gameObject);
         }
     }
-    protected override void OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-        Debug.Log(collision.gameObject.name);
-
-    }
-
 }

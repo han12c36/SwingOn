@@ -15,8 +15,8 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
 
     public float Enemy_4WaitTime = 1.5f;
     //private float[] WalkOrRunOrRange = new float[4] { 70.0f, 30.0f,0.0f, 20.0f };
-    private float[] WalkOrRange = new float[3] { 30.0f, 0.0f ,70.0f};
-    private float[] AttOrRun = new float[3] { 30.0f, 0.0f, 70.0f };
+    private float[] WalkOrRange = new float[3] { 50.0f, 0.0f ,50.0f};
+    private float[] AttOrRun = new float[3] { 40.0f, 0.0f, 60.0f };
 
     protected override void Initialize()
     {
@@ -83,16 +83,16 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
     {
         //°È±â : 3
         //¿ø°Å¸® : 5
-        //int index = MySTL.Think(WalkOrRange);
-        int index = 2;
+        int index = MySTL.Think(WalkOrRange);
+        //int index = 2;
         return index + 3;
     }
     public int Enemy_4AttThink()
     {
         //¶Ù±â : 2
         //±ÙÁ¢   : 4
-        //int index = MySTL.Think(AttOrRun);
-        int index = 0;
+        int index = MySTL.Think(AttOrRun);
+        //int index = 0;
         return index + 2;
     }
 
@@ -109,6 +109,9 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
 
     public void Enemy_4RandomFire()
     {
+        GameObject effect = PoolingManager.Instance.LentalObj("Effect_Enemy_4Bullet");
+        effect.transform.position = owner.makeBulletEffectPos.transform.position;
+
         int fireCount = Random.Range(3, 6);
         for (int i = 0; i < fireCount; i++)
         {
@@ -121,14 +124,12 @@ public class Enemy_4ActionTable : ActionTable<Enemy_4>
 
     public void Enemy_4Fire(Vector3 targetPos)
     {
-        GameObject effect = PoolingManager.Instance.LentalObj("Effect_Enemy_4Bullet");
-        effect.transform.position = owner.makeBulletEffectPos.transform.position;
         GameObject obj = PoolingManager.Instance.LentalObj("Enemy_4Bullet");
+        obj.transform.position = owner.makeBulletEffectPos.position;
         Enemy_4Bullet bullet = obj.GetComponent<Enemy_4Bullet>();
         bullet.Owner = owner;
         bullet.startPos = owner.makeBulletEffectPos.position;
         bullet.endPos = targetPos;
         bullet.transform.LookAt(bullet.endPos);
-        Debug.Log("ÃÑ¾Ë »ý¼º");
     }
 }

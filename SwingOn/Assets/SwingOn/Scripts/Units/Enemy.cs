@@ -88,6 +88,8 @@ public abstract class Enemy : MonoBehaviour
     public void MoveStop()
     {
         if (navAgent == null) return;
+        if (!navAgent.enabled) return;
+
         if (!navAgent.isStopped) navAgent.isStopped = true;
         navAgent.SetDestination(transform.position);
     }

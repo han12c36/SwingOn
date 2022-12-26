@@ -97,6 +97,7 @@ MonoBehaviour:
     aniCtrl: {fileID: 0}
   hitCount: 0
   isHold: 0
+  distToTarget: 0
   target: {fileID: 0}
   patternValue:
   - 10
@@ -262,7 +263,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7554361564548208172}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.23776004
   m_Height: 1

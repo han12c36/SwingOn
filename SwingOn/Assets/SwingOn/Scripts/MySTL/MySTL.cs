@@ -149,17 +149,6 @@ public static class MySTL
         Vector3 RandomPos = originPos + randomPos;
         return RandomPos;
     }
-    public static Vector3 RandomVec(Vector3 originPos, float minRange,float maxRange)
-    {
-        float range_X, range_Z;
-        range_X = Random.Range((minRange / 2) * -1, minRange / 2);
-        range_Z = Random.Range((minRange / 2) * -1, minRange / 2);
-        Vector3 randomPos = new Vector3(range_X, 0f, range_Z);
-
-        Vector3 RandomPos = originPos + randomPos;
-        return RandomPos;
-    }
-
     public static int Think(float[] probs)
     {
         float total = 0;

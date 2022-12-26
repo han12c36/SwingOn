@@ -10,7 +10,7 @@ public class Enemy_3Damaged : Action<Enemy_3>
         me.hitCount--;
         GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
         me.GetAniCtrl.SetTrigger("isDamaged");
-        me.MoveStop();
+        //me.MoveStop();
     }
 
     public override void ActionUpdate()

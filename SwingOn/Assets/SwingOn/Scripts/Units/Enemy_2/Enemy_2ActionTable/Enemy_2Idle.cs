@@ -19,12 +19,9 @@ public class Enemy_2Idle : Action<Enemy_2>
             timer = 0.0f;
             if (me.GetDistToTarget >= me.status.AttRange)
             {
-                me.ActionTable.SetCurAction((int)Enums.Enemy_2Actions.Trace);
-            }
-            else
-            {
                 me.ActionTable.SetCurAction(me.ActionTable.Enemy_2Think());
             }
+            else me.ActionTable.SetCurAction((int)Enums.Enemy_2Actions.MeleeAtt);
         }
     }
     public override void ActionExit()

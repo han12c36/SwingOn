@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy_4Bullet : EnemyWeapon
 {
+    public float canExistTime = 7.0f;
+
     public Vector3 startPos;
     public Vector3 endPos;
     public int environmentLayer;
@@ -62,7 +64,9 @@ public class Enemy_4Bullet : EnemyWeapon
         float zValue = startPos.z + z * time;
         Vector3 vec = new Vector3(xValue, yValue, zValue);
         transform.position = vec;
-        transform.LookAt(new Vector3(0.0f, (y * time), 0.0f));
+        transform.LookAt(new Vector3(x * time, (y * time) * 0.5f, z * time));
+
+        if(time >= canExistTime) PoolingManager.Instance.ReturnObj(gameObject);
     }
 
     protected override void FixedUpdate()
@@ -75,7 +79,7 @@ public class Enemy_4Bullet : EnemyWeapon
         Debug.Log(other.gameObject.name);
         if (other.transform.root.gameObject.layer == detectionLayer || other.gameObject.layer == environmentLayer)
         {
-            //PoolingManager.Instance.ReturnObj(gameObject);
+            PoolingManager.Instance.ReturnObj(gameObject);
         }
     }
     protected override void OnCollisionEnter(Collision collision)

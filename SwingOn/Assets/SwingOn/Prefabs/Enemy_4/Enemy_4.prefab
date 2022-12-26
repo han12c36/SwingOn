@@ -483,7 +483,7 @@ MonoBehaviour:
   hitObjs: []
   detectionLayer: 0
   dmg: 1
---- !u!136 &6928081365915636832
+--- !u!136 &2021224422519432822
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -491,9 +491,9 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7597067521834095354}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.0498635
+  m_Radius: 0.6566462
+  m_Height: 1.313292
   m_Direction: 1
-  m_Center: {x: -0.000000041634284, y: 0.20361894, z: -0.0000000011085028}
+  m_Center: {x: -0.03194118, y: 0.31012842, z: -0.000000007860171}

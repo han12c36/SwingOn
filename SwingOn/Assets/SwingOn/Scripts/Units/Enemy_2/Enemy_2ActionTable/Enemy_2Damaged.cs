@@ -12,7 +12,7 @@ public class Enemy_2Damaged : Action<Enemy_2>
         me.hitCount--;
         GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.ChangeMaterial(me.OriginMaterial, me.DamagedMaterial, 0.3f));
         me.GetAniCtrl.SetTrigger("isDamaged");
-        me.MoveStop();
+        //me.MoveStop();
         Vector3 vec = Vector3.zero;
         if (!me.isHold) vec = (me.transform.position - me.GetTarget.transform.position).normalized * nuckBackSpeed;
         nuckBackPos = me.transform.position + vec;

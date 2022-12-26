@@ -60,7 +60,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6843986385213766347}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.3492796
   m_Height: 0.88101006
@@ -111,6 +111,8 @@ MonoBehaviour:
     aniCtrl: {fileID: 0}
   hitCount: 0
   isHold: 0
+  distToTarget: 0
+  target: {fileID: 0}
   patternValue:
   - 10
   - 10

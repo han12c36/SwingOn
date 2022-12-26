@@ -30,7 +30,7 @@ public class Enemy_4 : Enemy
         status.maxHp = 5;
         status.curHp = status.maxHp;
         status.preHp = status.curHp;
-        status.AttRange = 1.5f;
+        status.AttRange = 1.7f;
         status.Speed = 1.5f;
         navAgent.speed = status.Speed;
         components.aniCtrl.speed = 1.0f;

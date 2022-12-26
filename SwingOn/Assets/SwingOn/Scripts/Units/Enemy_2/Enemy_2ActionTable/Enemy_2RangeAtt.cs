@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//¥ı¿ÃªÛ æ»æ∏
+
 public class Enemy_2RangeAtt : Action<Enemy_2>
 {
     public override void ActionEnter(Enemy_2 script)

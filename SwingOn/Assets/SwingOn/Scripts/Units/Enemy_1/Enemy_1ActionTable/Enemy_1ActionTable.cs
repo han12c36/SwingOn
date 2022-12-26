@@ -47,7 +47,10 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
         {
             if(owner.hitCount > 0)
             {
-                SetCurAction((int)Enums.Enemy_1Actions.Damaged);
+                if (curAction_e != Enums.Enemy_1Actions.Death)
+                {
+                    SetCurAction((int)Enums.Enemy_1Actions.Damaged);
+                }
             }
         }
         else

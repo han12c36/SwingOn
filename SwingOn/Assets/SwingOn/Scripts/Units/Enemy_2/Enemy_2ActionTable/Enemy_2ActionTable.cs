@@ -14,6 +14,7 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
 
     public float Enemy_2WaitTime = 1.5f;
     private float[] patternValue = new float[3] { 45f, 10f, 45f };
+    private float[] traceOrRange = new float[3] { 60.0f, 0.0f, 40.0f };
 
     protected override void Initialize()
     {
@@ -84,10 +85,10 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
 
     public int Enemy_2Think()
     {
-        //3 4 5
-        //int index =  MySTL.Think(patternValue);
-        int index = 2;
-        return index + 3;
+        //2 4
+        int index =  MySTL.Think(traceOrRange);
+        //int index = 1;
+        return index + 2;
     }
 
     public void ReadyComplete() { isReadyComplete = true; }
@@ -100,6 +101,7 @@ public class Enemy_2ActionTable : ActionTable<Enemy_2>
             Vector3 randVec = MySTL.RandomVec(owner.GetTarget.transform.position, 3.5f);
             FireBullet(randVec);
         }
+        FireBulletToPlayer();
     }
 
     public void FireBullet(Vector3 targetPos)
