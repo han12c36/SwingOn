@@ -13,11 +13,13 @@ public class Enemy_5Run : Action<Enemy_5>
     {
         if (!me.isHold)
         {
-            Vector3 vec = new Vector3(me.GetTarget.transform.position.x, 0.0f, me.GetTarget.transform.position.z);
-            me.transform.LookAt(vec);
-            me.MoveOrder(me.GetTarget.transform, me.status.Speed * 1.5f);
-            if (me.GetDistToTarget < me.ActionTable.fallAttRAnge &&
-                me.GetDistToTarget >= me.status.AttRange) me.ActionTable.SetCurAction(me.ActionTable.Enemy_5FallAttThink());
+            if (me.GetDistToTarget > me.ActionTable.fallAttRAnge) me.ActionTable.SetCurAction(me.ActionTable.Enemy_5FallAttThink());
+            else if (me.GetDistToTarget <= me.ActionTable.fallAttRAnge && me.GetDistToTarget > me.status.AttRange)
+            {
+                Vector3 vec = new Vector3(me.GetTarget.transform.position.x, 0.0f, me.GetTarget.transform.position.z);
+                me.transform.LookAt(vec);
+                me.MoveOrder(me.GetTarget.transform, me.status.Speed);
+            }
             else if (me.GetDistToTarget < me.status.AttRange) me.ActionTable.SetCurAction(me.ActionTable.Enemy_5ShortAttThink());
         }
     }
