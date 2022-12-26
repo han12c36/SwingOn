@@ -26,7 +26,7 @@ public class Enemy_4 : Enemy
 
     protected override void Initialize()
     {
-        status.unitName = Enums.UnitNameTable.Enemy3;
+        status.unitName = Enums.UnitNameTable.Enemy4;
         status.maxHp = 5;
         status.curHp = status.maxHp;
         status.preHp = status.curHp;

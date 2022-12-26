@@ -12,8 +12,10 @@ namespace Enums
         Enemy1,
         Enemy2,
         Enemy3,
-        Enemy_MB,
-        Enemy_B,
+        Enemy4,
+        Enemy5,
+        Enemy6,
+        Enemy7,
         End
     }
     public enum EnemyType
@@ -87,6 +89,19 @@ namespace Enums
         End
     }
     public enum Enemy_4Actions
+    {
+        Ready,
+        Idle,
+        Walk,
+        Run,
+        MeleeAtt,
+        RangeAtt,
+        DashAtt,
+        Damaged,
+        Death,
+        End
+    }
+    public enum Enemy_5Actions
     {
         Ready,
         Idle,
