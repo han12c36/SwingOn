@@ -16,7 +16,21 @@ public class Enemy_5Idle : Action<Enemy_5>
         else
         {
             timer = 0.0f;
-            me.ActionTable.SetCurAction(me.ActionTable.Enemy_5Think());
+            if (me.GetDistToTarget <= me.ActionTable.thinkRange)
+            {
+                me.ActionTable.SetCurAction(me.ActionTable.Enemy_5WalkThink());
+            }
+            else
+            {
+                if(me.GetDistToTarget > me.ActionTable.fallAttRange)
+                {
+                    me.ActionTable.SetCurAction(me.ActionTable.Enemy_5FallAttThink());
+                }
+                else
+                {
+                    me.ActionTable.SetCurAction(me.ActionTable.Enemy_5RunThink());
+                }
+            }
         }
     }
     public override void ActionExit()

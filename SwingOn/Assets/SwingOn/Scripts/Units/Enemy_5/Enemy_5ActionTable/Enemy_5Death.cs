@@ -27,7 +27,7 @@ public class Enemy_5Death : Action<Enemy_5>
     }
     public override void ActionExit()
     {
-        timer = 0.0f;
+        timer = 0.0f;    
         me.GetAniCtrl.ResetTrigger("isDeath");
     }
 }

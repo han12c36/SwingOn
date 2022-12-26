@@ -14,7 +14,8 @@ public class Enemy_5ActionTable : ActionTable<Enemy_5>
     private float[] MeleeOrPrickle = new float[3] { 50.0f, 0.0f, 50.0f };
 
     public float Enemy_5WaitTime = 1.5f;
-    public float fallAttRAnge = 5.0f;
+    public float thinkRange = 5.0f;
+    public float fallAttRange = 8.0f;
 
     public bool isHitFinish;
     public bool isSreamFinish;
@@ -102,10 +103,27 @@ public class Enemy_5ActionTable : ActionTable<Enemy_5>
     {
         //°È±â : 2
         //¶Ù±â : 3
-        //int index = MySTL.Think(WalkOrRun);
-        int index = 0;
+        if(owner.status.curHp >= owner.status.maxHp * 0.5f) WalkOrRun = new float[3] { 70.0f, 0.0f, 30.0f };
+        else WalkOrRun = new float[3] { 30.0f, 0.0f, 70.0f };
+        int index = MySTL.Think(WalkOrRun);
+        //int index = 0;
         return index + 2;
     }
+
+    public int Enemy_5WalkThink()
+    {
+        WalkOrRun = new float[3] { 70.0f, 0.0f, 30.0f };
+        int index = MySTL.Think(WalkOrRun);
+        return index + 2;
+    }
+    public int Enemy_5RunThink()
+    {
+        WalkOrRun = new float[3] { 30.0f, 0.0f, 70.0f };
+        int index = MySTL.Think(WalkOrRun);
+        return index + 2;
+    }
+
+
     public int Enemy_5FallAttThink()
     {
         //°È±â : 5

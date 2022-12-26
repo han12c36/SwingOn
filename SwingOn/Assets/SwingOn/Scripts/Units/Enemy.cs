@@ -84,6 +84,13 @@ public abstract class Enemy : MonoBehaviour
         navAgent.speed = MoveSpeed;
         navAgent.SetDestination(targetPos.position);
     }
+    public void MoveOrder(Vector3 targetVec, float MoveSpeed)
+    {
+        if (navAgent == null) return;
+        if (navAgent.isStopped) navAgent.isStopped = false;
+        navAgent.speed = MoveSpeed;
+        navAgent.SetDestination(targetVec);
+    }
 
     public void MoveStop()
     {
