@@ -155,16 +155,16 @@ AnimatorStateMachine:
     m_Position: {x: -90, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 508084282888889082}
-    m_Position: {x: 260, y: 160, z: 0}
+    m_Position: {x: 240, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2369862529433007033}
-    m_Position: {x: 260, y: 210, z: 0}
+    m_Position: {x: 240, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8485159246763057583}
     m_Position: {x: -90, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3506490829733003836}
-    m_Position: {x: 510, y: 150, z: 0}
+    m_Position: {x: 470, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6758171091699217048}
     m_Position: {x: 170, y: -170, z: 0}
@@ -533,7 +533,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Roll
+  m_Name: RollAtt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -586,7 +586,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spit Lurker
+  m_Name: PrickleAtt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -612,7 +612,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Trajectory Projectile Attack
+  m_Name: RangeAtt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
