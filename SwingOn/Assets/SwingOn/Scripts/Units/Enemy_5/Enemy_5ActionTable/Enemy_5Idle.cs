@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy_5Idle : Action<Enemy_5>
+{
+    float timer;
+    public override void ActionEnter(Enemy_5 script)
+    {
+        base.ActionEnter(script);
+        me.GetAniCtrl.SetBool("isIdle", true);
+    }
+    public override void ActionUpdate()
+    {
+        if (timer < me.ActionTable.Enemy_5WaitTime) timer += Time.deltaTime;
+        else
+        {
+            timer = 0.0f;
+            me.ActionTable.SetCurAction(me.ActionTable.Enemy_5Think());
+        }
+    }
+    public override void ActionExit()
+    {
+        timer = 0.0f;
+        me.GetAniCtrl.SetBool("isIdle", false);
+    }
+}

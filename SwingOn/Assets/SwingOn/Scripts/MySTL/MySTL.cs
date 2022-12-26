@@ -109,7 +109,8 @@ namespace Enums
         Run,
         MeleeAtt,
         RangeAtt,
-        DashAtt,
+        PrickleAtt,
+        JumpAtt,
         Damaged,
         Death,
         End

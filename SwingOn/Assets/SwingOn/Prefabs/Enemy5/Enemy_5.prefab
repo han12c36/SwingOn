@@ -118,8 +118,8 @@ MonoBehaviour:
   - 10
   - 10
   - 80
-  OriginMaterial: {fileID: 0}
-  DamagedMaterial: {fileID: 0}
+  OriginMaterial: {fileID: 2100000, guid: 97f73af82c39ee34c8327756552e4892, type: 2}
+  DamagedMaterial: {fileID: 2100000, guid: 38c848200dbf27745a836ae3b5b58f5f, type: 2}
   changeMaterialTimer: 0
   isCast: 0
   recognizeRange: 3
