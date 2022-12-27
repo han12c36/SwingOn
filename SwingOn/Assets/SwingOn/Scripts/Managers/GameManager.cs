@@ -8,6 +8,9 @@ public class GameManager : Manager<GameManager>
     //씬 전환이 일어나면 해당 매니저의 디스에이블이 발동한다
     //꺼졋다 다시 켜지는 매니저는 저장된 정보다 다 날라감
 
+    //[SerializeField]
+    //private bool isStop = false;
+
     [SerializeField]
     private SceneController sceneCtrl;
     private CoroutineHelper coroutineHelper;
@@ -47,8 +50,10 @@ public class GameManager : Manager<GameManager>
 
     private void Update()
     {
-        if (isPaused) Time.timeScale = 0.0f;
-        else Time.timeScale = 1.0f;
+        Debug.Log(Time.timeScale);
+
+        //if (isPaused) Time.timeScale = 0.0f;
+        //else Time.timeScale = 1.0f;
 
         if (Input.GetKeyDown(KeyCode.B))
         {
@@ -68,6 +73,22 @@ public class GameManager : Manager<GameManager>
         {
             count++;
         }
+    }
+
+    public void HitStop(float fps)
+    {
+        if(!isPaused)
+        {
+            isPaused = true;
+            StartCoroutine(TimeStop(fps));
+        }
+    }
+    IEnumerator TimeStop(float fps)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(Time.deltaTime * fps);
+        Time.timeScale = 1f;
+        isPaused = false;
     }
 
     public void InstantiateManagerForNextScene(int NextSceneIndex)

@@ -12,10 +12,11 @@ public class Skill_1 : Action<Player>
     Vector3 V0;
     Vector3 dir;
 
+    float speed = 1.0f;
+
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-        Debug.Log("½ºÅ³ 1 µé¾î¿È");
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.ignoreLayer,me.ActionTable.WeaponLayer);
         me.MoveCtrl.CanMove = false;
         me.GetAniCtrl.SetTrigger("Skill_1");

@@ -92,6 +92,7 @@ public class Enemy_3ActionTable : ActionTable<Enemy_3>
     }
     public void Explosion()
     {
+        CameraEffect.instance.PlayShake("Explosion");
         GameObject effect = PoolingManager.Instance.LentalObj("Effect_Enemy_3Explosion");
         effect.transform.position = owner.transform.position;
         effect.GetComponentInChildren<EnemyWeapon>().Owner = owner;

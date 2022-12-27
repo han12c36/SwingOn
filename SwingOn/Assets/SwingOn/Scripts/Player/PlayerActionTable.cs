@@ -239,8 +239,16 @@ public class PlayerActionTable : ActionTable<Player>
         else
         {
             PoolingManager.Instance.PlayEffect_DontRotation(effectName, owner.GroundEffect_Pos, owner.gameObject);
+            CameraEffect.instance.PlayShake("GroundBreak");
+            GameManager.Instance.HitStop(3);
         }
     }
+
+    public void PlayEffect_SpeedAtt()
+    {
+        PoolingManager.Instance.PlayEffect("Effect_SpeedAtt", owner.backEffect_Pos, owner.gameObject);
+    }
+
 
     public void AttFinish() { if (!modeChange) isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }

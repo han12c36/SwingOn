@@ -97,8 +97,13 @@ public class Enemy_5ActionTable : ActionTable<Enemy_5>
 
     public void DamagedFinish() { isHitFinish = true; }
     public void ScreamFinish() { isSreamFinish = true; }
-
     public void ReadyComplete() { isReadyComplete = true; }
+    public void MakePrickle() 
+    {
+        GameObject prickle = PoolingManager.Instance.LentalObj("Prickles");
+        prickle.transform.position = owner.transform.position;
+    }
+
     public int Enemy_5Think()
     {
         //°È±â : 2
@@ -134,10 +139,10 @@ public class Enemy_5ActionTable : ActionTable<Enemy_5>
     }
     public int Enemy_5ShortAttThink()
     {
-        //°È±â : 4
-        //¶Ù±â : 6
+        //±âº» : 4
+        //°¡½Ã : 6
         //int index = MySTL.Think(MeleeOrPrickle);
-        int index = 0;
+        int index = 2;
         return index + 4;
     }
 }

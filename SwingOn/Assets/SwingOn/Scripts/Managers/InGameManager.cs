@@ -21,7 +21,7 @@ public enum SpawnEnemyType
 
 public class InGameManager : Manager<InGameManager>
 {
-    private bool isStop = false;
+    
 
     private Player player;
     private GameObject ScorePanel;
@@ -59,12 +59,17 @@ public class InGameManager : Manager<InGameManager>
 
     private void Update()
     {
+
         if (player.status.curHp > 0)
         {
             playerLifeTime += Time.deltaTime;
             IncreasingDifficulty();
             //EnemySpawn(spawnerPos_1);
             //EnemySpawn(spawnerPos_2);
+        }
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            Time.timeScale = 0;
         }
         
     }
@@ -125,17 +130,5 @@ public class InGameManager : Manager<InGameManager>
         }
         return probs.Length - 1;
     }
-    public void HitStop(float fps)
-    {
-        if (isStop) return;
-        StartCoroutine(TimeStop(fps));
-    }
-    IEnumerator TimeStop(float fps)
-    {
-        isStop = true;
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(Time.deltaTime * fps);
-        Time.timeScale = 1f;
-        isStop = false;
-    }
+   
 }

@@ -105,6 +105,10 @@ public class Player : MonoBehaviour
             status.curHp--;
             hitCount++;
         }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            CameraEffect.instance.PlayZoom(ZoomDir.Front, 1f, 1f, CameraEffect.instance.transform.localPosition);
+        }
     }
     private void FixedUpdate()
     {
