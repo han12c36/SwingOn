@@ -64,6 +64,7 @@ public abstract class Weapon<T> : MonoBehaviour
             enemy.hitCount++;
             enemy.status.curHp -= dmg;
             PoolingManager.Instance.PlayEffect("Effect_Friction", transform);
+            CameraEffect.instance.PlayShake("WeekShake");
         }
     }
 

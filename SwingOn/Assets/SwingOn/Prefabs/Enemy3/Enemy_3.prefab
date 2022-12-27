@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2044702337}
   - component: {fileID: 2044702336}
   - component: {fileID: 2044702335}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy_3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,9 +155,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 254819312584208749}
     m_Modifications:
+    - target: {fileID: 360162404342853139, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 360162404342853139, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586391699442784655, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586391699442784655, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: EnemyWeapon
+      objectReference: {fileID: 0}
     - target: {fileID: 2783635348144865613, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666527527017754867, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666527527017754867, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963657169495112826, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963657169495112826, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6066886991187512254, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6066886991187512254, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7405063534483484302, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7405063534483484302, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7643583119921643298, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7643583119921643298, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8088844594241379127, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
       propertyPath: m_RootOrder
@@ -203,9 +259,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8550769959175255322, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550769959175255322, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729597026294986229, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729597026294986229, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8866050419410387341, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
       propertyPath: m_Name
       value: Lurker 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866050419410387341, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866050419410387341, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2783635348144865613, guid: de279e8919eb178409a2adf7f7d6141e, type: 3}
