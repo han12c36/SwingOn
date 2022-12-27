@@ -246,7 +246,11 @@ public class PlayerActionTable : ActionTable<Player>
 
     public void PlayEffect_SpeedAtt()
     {
-        PoolingManager.Instance.PlayEffect("Effect_SpeedAtt", owner.backEffect_Pos, owner.gameObject);
+        PoolingManager.Instance.PlayEffect("Effect_SpeedAtt", owner.GroundEffect_Pos, owner.gameObject);
+    }
+    public void PlayEffect_HardAtt()
+    {
+        PoolingManager.Instance.PlayEffect("Effect_HardAtt", owner.GroundEffect_Pos, owner.gameObject);
     }
 
 

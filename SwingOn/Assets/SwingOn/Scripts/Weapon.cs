@@ -63,6 +63,7 @@ public abstract class Weapon<T> : MonoBehaviour
             Enemy enemy = other.transform.root.gameObject.GetComponent<Enemy>();
             enemy.hitCount++;
             enemy.status.curHp -= dmg;
+            PoolingManager.Instance.PlayEffect("Effect_Friction", transform);
         }
     }
 

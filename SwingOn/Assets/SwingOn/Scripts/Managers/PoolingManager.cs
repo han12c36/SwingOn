@@ -132,6 +132,13 @@ public class PoolingManager : Manager<PoolingManager>
         effect.transform.rotation = trans.rotation;
         effect.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
     }
+    public void PlayEffect(string name, Transform trans)
+    {
+        GameObject effect = LentalObj(name);
+        effect.transform.position = trans.position;
+        effect.transform.rotation = trans.rotation;
+    }
+
     public void PlayEffect_DontRotation(string name, Transform trans, GameObject owner)
     {
         GameObject effect = LentalObj(name);
