@@ -8,6 +8,7 @@ public enum SceneIndex
 {
     Intro,
     MainTitle,
+    Menu,
     InGame,
     End
 }

@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     unitName: 0
-    maxHp: 100
+    maxHp: 1
     curHp: 0
     preHp: 0
     AttRange: 0
@@ -201,7 +201,6 @@ MonoBehaviour:
   owner: {fileID: 0}
   preAction_e: 0
   curAction_e: 0
-  isBlitzFinish: 0
   isHitFinish: 0
   isFindNearEnemy: 0
   ignoreLayer: 0
@@ -214,10 +213,8 @@ MonoBehaviour:
   targetEnemy: {fileID: 0}
   modeDurtaionTimer: 0
   ModeDurationTime: 10
-  normalDashSpeed: 0.1
-  normalDashDistance: 5
-  hardDashSpeed: 0.2
-  hardDashDistance: 3
+  normalDashPower: 8
+  hardDashPower: 10
   normalBlitzSpeed: 0.2
 --- !u!136 &8310912298460607654
 CapsuleCollider:

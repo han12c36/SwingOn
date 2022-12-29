@@ -21,6 +21,9 @@ public class GameManager : Manager<GameManager>
     public SceneController SceneCtrl { get { return sceneCtrl; } }
     public CoroutineHelper GetCoroutineHelper { get { return coroutineHelper; } }
 
+    private Structs.UserSaveDatas saveData;
+
+    public Structs.UserSaveDatas SaveData { get { return saveData; } set { saveData = value; } }
 
     //[RuntimeInitializeOnLoadMethod]
     //private void InstantiateGameManger()
@@ -50,11 +53,6 @@ public class GameManager : Manager<GameManager>
 
     private void Update()
     {
-        Debug.Log(Time.timeScale);
-
-        //if (isPaused) Time.timeScale = 0.0f;
-        //else Time.timeScale = 1.0f;
-
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (sceneCtrl.CurSceneIndex == SceneIndex.Intro)
@@ -66,7 +64,7 @@ public class GameManager : Manager<GameManager>
         {
             if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
             {
-                sceneCtrl.LoadScene((int)SceneIndex.InGame);
+                sceneCtrl.LoadScene((int)SceneIndex.Menu);
             }
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -101,6 +99,9 @@ public class GameManager : Manager<GameManager>
             case (int)SceneIndex.MainTitle:
                 InstantiateManagerForMainTitleScene();
                 break;
+            case (int)SceneIndex.Menu:
+                InstantiateManagerForMenuScene();
+                break;
             case (int)SceneIndex.InGame:
                 InstantiateManagerForInGameScene();
                 break;
@@ -120,6 +121,10 @@ public class GameManager : Manager<GameManager>
     {
         MainTitleManager.InstantiateManger(false);
     }
+    private void InstantiateManagerForMenuScene()
+    {
+        //MenuManager.InstantiateManger(false);
+    }
     private void InstantiateManagerForInGameScene()
     {
         InGameManager.InstantiateManger(false);
@@ -133,7 +138,7 @@ public class GameManager : Manager<GameManager>
     //ButtonFunc
     public void Button_GoInGameScene()
     {
-        if(GameManager.Instance.sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
+        if(GameManager.Instance.sceneCtrl.CurSceneIndex == SceneIndex.Menu)
         {
             GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.InGame);
         }
@@ -142,18 +147,32 @@ public class GameManager : Manager<GameManager>
     {
         if (GameManager.Instance.sceneCtrl.CurSceneIndex == SceneIndex.InGame)
         {
-            GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
+            GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.Menu);
         }
     }
     public void Button_Quit()
     {
         Application.Quit();
+        PlayerPrefs.SetFloat("BestLifeTime", saveData.bestLifeTime);
+        PlayerPrefs.SetFloat("BestDamage", saveData.bestDamage);
+        PlayerPrefs.SetFloat("PlaybleStageIndex", saveData.playableStageIndex);
     }
 
     void OnApplicationPause(bool pause)
     {
-        if (pause) isPaused = true;
-        else { if (isPaused) isPaused = false; }
+        if (pause)
+        {
+            isPaused = true;
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            if (isPaused)
+            {
+                isPaused = false;
+                Time.timeScale = 1.0f;
+            }
+        }
     }
     //=====================================================================================
 }

@@ -150,6 +150,14 @@ namespace Structs
         public Collider collider;
         public Animator aniCtrl;
     }
+
+    [System.Serializable]
+    public struct UserSaveDatas
+    {
+        public float bestLifeTime;
+        public float bestDamage;
+        public int playableStageIndex;
+    }
 }
 
 public static class MySTL

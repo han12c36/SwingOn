@@ -37,6 +37,8 @@ public class InGameManager : Manager<InGameManager>
 
     public float playerLifeTime;
     private float gameStartTime;
+    public float totalDamage;
+
     [SerializeField]
     private float timer;
     private float enemySpawnTimer = 10.0f;
@@ -67,11 +69,30 @@ public class InGameManager : Manager<InGameManager>
             //EnemySpawn(spawnerPos_1);
             //EnemySpawn(spawnerPos_2);
         }
-        if(Input.GetKeyDown(KeyCode.F))
+        else
         {
-            Time.timeScale = 0;
+            Structs.UserSaveDatas datas;
+
+            if (PlayerPrefs.GetFloat("BestLifeTime") != 0.0f)
+            {
+                float saveTime = PlayerPrefs.GetFloat("BestLifeTime");
+                float saveDamage = PlayerPrefs.GetFloat("BestDamage");
+                if (saveTime >= playerLifeTime) datas.bestLifeTime = saveTime;
+                else datas.bestLifeTime = playerLifeTime;
+                if (saveDamage >= totalDamage) datas.bestDamage = saveDamage;
+                else datas.bestDamage = totalDamage;
+
+                datas.playableStageIndex = 0;
+                GameManager.Instance.SaveData = datas;
+            }
+            else
+            {
+                datas.bestLifeTime = playerLifeTime;
+                datas.bestDamage = totalDamage;
+                datas.playableStageIndex = 0;
+                GameManager.Instance.SaveData = datas;
+            }
         }
-        
     }
     private void OnDisable()
     {
