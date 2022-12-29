@@ -91,13 +91,10 @@ public class EffectData : ScriptableObject
         {
             originPos = CameraEffect.instance.transform.localPosition;
             originRot = CameraEffect.instance.transform.localEulerAngles;
-
-            //originPos = Camera.main.transform.localPosition;
-            //originRot = Camera.main.transform.localEulerAngles;
             isStart = false;
         }
-        //originPos.z = Camera.main.transform.localPosition.z;
-        originRot.y = CameraEffect.instance.transform.localEulerAngles.z;
+        originPos = CameraEffect.instance.transform.localPosition;
+        //originRot = CameraEffect.instance.transform.localEulerAngles;
 
         if (isSeedUpdate) SetSeed();
         if (!roop)
@@ -107,11 +104,11 @@ public class EffectData : ScriptableObject
                 roopTimer = 0.0f;
                 currentTime = 0.0f;
                 perlinSpeed = 0.0f;
+                CameraEffect.instance.transform.localPosition = originPos;
+                CameraEffect.instance.transform.localEulerAngles = originRot;
                 originPos = Vector3.zero;
                 originRot = Vector3.zero;
                 CameraEffect.instance.curData = null;
-                //Camera.main.transform.localEulerAngles = Vector3.zero;
-                CameraEffect.instance.transform.localEulerAngles = Vector3.zero;
             }
             else
             {
@@ -131,10 +128,11 @@ public class EffectData : ScriptableObject
                 roopTimer = 0.0f;
                 currentTime = 0.0f;
                 perlinSpeed = 0.0f;
+                CameraEffect.instance.transform.localPosition = originPos;
+                CameraEffect.instance.transform.localEulerAngles = originRot;
                 originPos = Vector3.zero;
                 originRot = Vector3.zero;
                 CameraEffect.instance.curData = null;
-                Camera.main.transform.localEulerAngles = Vector3.zero;
             }
         }
     }
@@ -161,6 +159,8 @@ public class EffectData : ScriptableObject
                 if (shakeRotation)
                 {
                     //Camera.main.transform.localEulerAngles = originRot + total * Curve.Evaluate(currentTime);
+                    //Vector3 offsetRot = total * Curve.Evaluate(currentTime);
+                    //CameraEffect.instance.transform.localEulerAngles = originRot + offsetRot;
                     CameraEffect.instance.transform.localEulerAngles = originRot + total * Curve.Evaluate(currentTime);
                 }
             }

@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             //CameraEffect.instance.PlayZoom(ZoomDir.Front, 1f, 1f, CameraEffect.instance.transform.localPosition);
-            //CameraEffect.instance.PlayShake("WeekShake");
+            CameraEffect.instance.PlayShake("Test");
         }
     }
     private void FixedUpdate()
