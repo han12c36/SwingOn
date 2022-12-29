@@ -123,7 +123,7 @@ public class GameManager : Manager<GameManager>
     }
     private void InstantiateManagerForMenuScene()
     {
-        //MenuManager.InstantiateManger(false);
+        MenuManager.InstantiateManger(false);
     }
     private void InstantiateManagerForInGameScene()
     {
@@ -155,7 +155,7 @@ public class GameManager : Manager<GameManager>
         Application.Quit();
         PlayerPrefs.SetFloat("BestLifeTime", saveData.bestLifeTime);
         PlayerPrefs.SetFloat("BestDamage", saveData.bestDamage);
-        PlayerPrefs.SetFloat("PlaybleStageIndex", saveData.playableStageIndex);
+        PlayerPrefs.SetInt("PlaybleStageIndex", saveData.playableStageIndex);
     }
 
     void OnApplicationPause(bool pause)
