@@ -36,6 +36,7 @@ public class PlayerWeapon : Weapon<Player>
             if (!collider.enabled) OnOffWeaponCollider(true);
         }
     }
+
     protected override void Update()
     {
         base.Update();

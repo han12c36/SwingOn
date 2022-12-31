@@ -29,6 +29,7 @@ public abstract class Weapon<T> : MonoBehaviour
     }
     protected virtual void Start()
     {
+
     }
     protected virtual void Update()
     {
@@ -38,7 +39,6 @@ public abstract class Weapon<T> : MonoBehaviour
     {
 
     }
-
     public void OnOffWeaponCollider(bool value)
     {
         collider.enabled = value;
@@ -46,6 +46,7 @@ public abstract class Weapon<T> : MonoBehaviour
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
+        Debug.Log("맞았!!!!!!!!!!!" + other.gameObject.name);
         if (hitObjs.Find(x => x == other.transform.root.gameObject))
         {
             return;
@@ -60,6 +61,7 @@ public abstract class Weapon<T> : MonoBehaviour
         }
         else if (other.transform.root.gameObject.GetComponent<Enemy>() != null)
         {
+            Debug.Log("적이 맞았!!!!!!!!!!!");
             Enemy enemy = other.transform.root.gameObject.GetComponent<Enemy>();
             enemy.hitCount++;
             enemy.status.curHp -= dmg;

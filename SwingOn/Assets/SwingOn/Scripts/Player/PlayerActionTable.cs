@@ -164,7 +164,6 @@ public class PlayerActionTable : ActionTable<Player>
                 SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
         }
-        else Debug.Log("모드체인지 실패!");
     }
     private void ComboAtt()
     {
@@ -229,13 +228,13 @@ public class PlayerActionTable : ActionTable<Player>
     }
     public void PlayTornado(int type)
     {
-        if(type == 0)
-        {
-            PoolingManager.Instance.PlayEffect("Effect_Tornado", owner.backEffect_Pos, owner.gameObject);
-        }
+        if (type == 0) PoolingManager.Instance.PlayEffect("Effect_Tornado", owner.GroundEffect_Pos, owner.gameObject);
         else
         {
-            PoolingManager.Instance.PlayEffect("Effect_HardTornado", owner.backEffect_Pos, owner.gameObject);
+            GameObject hardTornado = PoolingManager.Instance.LentalObj("Effect_HardTornado");
+            //hardTornado.transform.position = MySTL.CircularWaveform(owner.transform);
+            hardTornado.transform.rotation = owner.GroundEffect_Pos.rotation;
+            hardTornado.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
         }
     }
     public void PlayEffect_SpeedAtt()
@@ -319,5 +318,14 @@ public class PlayerActionTable : ActionTable<Player>
                 parent.GetChild(i).gameObject.layer = LayerIndex;
             }
         }
+    }
+
+    IEnumerator Wave()
+    {
+        yield return null;
+        //GameObject hardTornado = PoolingManager.Instance.LentalObj("Effect_HardTornado");
+        //hardTornado.transform.position = MySTL.CircularWaveform(owner.transform);
+        //hardTornado.transform.rotation = owner.GroundEffect_Pos.rotation;
+        //hardTornado.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
     }
 }

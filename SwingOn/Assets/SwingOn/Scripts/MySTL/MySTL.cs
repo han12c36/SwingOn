@@ -162,7 +162,11 @@ namespace Structs
 
 public static class MySTL
 {
+    public static Vector3 CircularWaveform(Vector3 originPos,float radius,int count)
+    {
 
+        return Vector3.zero;
+    }
     public static Vector3 RandomVec(Vector3 originPos,float range)
     {
         float range_X, range_Z;
