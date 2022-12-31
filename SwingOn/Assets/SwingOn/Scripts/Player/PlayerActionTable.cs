@@ -12,13 +12,19 @@ public class PlayerActionTable : ActionTable<Player>
     private Enums.PlayerAttType attType;
     [SerializeField]
     private float modeDurtaionTimer;
+    private float timer;
+
     [Header("Skill_1 CoolTime")]
     public float dashCoolTime = 8.0f;
+    public bool isdashCool;
+    
     public float blitzCoolTime = 10.0f;
     public float groundBreakCoolTime = 5.0f;
 
     [Header("Skill_2 CoolTime")]
     public float TornadoCoolTime = 15.0f;
+    public bool isTornadoCool;
+
     public float PowerShotCoolTime = 13.0f;
     public float HarTornadoCoolTime = 20.0f;
 
@@ -27,12 +33,8 @@ public class PlayerActionTable : ActionTable<Player>
     public float speedDurationTime = 15.0f;
     public float hardDurationTime = 25.0f;
 
-
-
     private float animationSpeed = 1.0f;
     public float blitzRange = 10.0f;
-
-
 
     private bool isAttFinish;
     private bool isEquptFinish;
@@ -119,6 +121,8 @@ public class PlayerActionTable : ActionTable<Player>
     protected override void Update()
     {
         base.Update();
+
+        CheckCoolTime();
 
         if (owner.status.curHp > 0)
         {
@@ -212,13 +216,20 @@ public class PlayerActionTable : ActionTable<Player>
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            if(attType == Enums.PlayerAttType.Normal)
+            {
+                if(!isdashCool)
+                {
+                    SetCurAction((int)Enums.PlayerActions.Skill_1);
+                }
+            }
             if(attType == Enums.PlayerAttType.Speed)
             {
                 targetEnemy = FindTarget();
                 if (targetEnemy == null) return;
                 else SetCurAction((int)Enums.PlayerActions.Skill_1);
             }
-            else SetCurAction((int)Enums.PlayerActions.Skill_1);
+            //else SetCurAction((int)Enums.PlayerActions.Skill_1);
         }
     }
     private void Skill_02()
@@ -228,7 +239,36 @@ public class PlayerActionTable : ActionTable<Player>
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SetCurAction((int)Enums.PlayerActions.Skill_2);
+            if (attType == Enums.PlayerAttType.Normal)
+            {
+                if (!isTornadoCool)
+                {
+                    SetCurAction((int)Enums.PlayerActions.Skill_2);
+                }
+            }
+            //SetCurAction((int)Enums.PlayerActions.Skill_2);
+        }
+    }
+
+    private void CheckCoolTime()
+    {
+        if(isdashCool)
+        {
+            if(timer < dashCoolTime) timer += Time.deltaTime;
+            else
+            {
+                timer = 0.0f;
+                isdashCool = false;
+            }
+        }
+        if (isTornadoCool)
+        {
+            if (timer < TornadoCoolTime) timer += Time.deltaTime;
+            else
+            {
+                timer = 0.0f;
+                isTornadoCool = false; 
+            }
         }
     }
 

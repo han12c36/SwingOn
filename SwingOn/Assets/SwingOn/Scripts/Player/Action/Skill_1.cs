@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Skill_1 : Action<Player>
 {
-
     float timer;
     float M;
     Vector3 F;
     Vector3 A;
     Vector3 V0;
     Vector3 dir;
+
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
@@ -20,6 +20,7 @@ public class Skill_1 : Action<Player>
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
             me.GetAniCtrl.SetTrigger("Dash");
+            me.ActionTable.isdashCool = true;
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {
@@ -63,15 +64,6 @@ public class Skill_1 : Action<Player>
     }
     public override void ActionFixedUpdate()
     {
-        if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalDash"))
-        {
-            if (!me.ActionTable.isCurrentAnimationOver(0.4f)) NormalDash(); //0.645
-            else
-            {
-                me.components.rigid.velocity = Vector3.zero;
-                timer = 0.0f;
-            }
-        }
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardDash"))
         {
             if (!me.ActionTable.isCurrentAnimationOver(0.18f)) HardDash(); // 0.18
@@ -87,7 +79,6 @@ public class Skill_1 : Action<Player>
     {
         me.GetAniCtrl.ResetTrigger("Dash");
         me.GetAniCtrl.ResetTrigger("Blitz");
-        //me.GetAniCtrl.ResetTrigger("DoubleBlitz");
         me.GetAniCtrl.ResetTrigger("GroundBreak");
         me.ActionTable.Dash_Finish = false;
         me.ActionTable.Blitz_Finish = false;
@@ -119,13 +110,6 @@ public class Skill_1 : Action<Player>
                     Vector3 vec = me.ActionTable.targetEnemy.transform.position + (me.transform.position - me.ActionTable.targetEnemy.transform.position).normalized * (me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
                     me.transform.position = Vector3.Lerp(me.transform.position, vec, me.ActionTable.normalBlitzSpeed);
                 }
-                else
-                {
-                    //if(!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardBlitz"))
-                    //{
-                    //    me.GetAniCtrl.SetTrigger("DoubleBlitz");
-                    //}
-                }
             }
             if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardBlitz"))
             {
@@ -135,23 +119,6 @@ public class Skill_1 : Action<Player>
                 me.transform.position = vec;
                 me.transform.LookAt(me.transform.position + me.ActionTable.targetEnemy.transform.forward);
             }
-        }
-    }
-
-    private void NormalDash()
-    {
-        Debug.Log("일반대쉬");
-        if (timer <= 1.0f) timer += Time.fixedDeltaTime;
-        //Power = me.ActionTable.hardDashPower;
-        float normalPower = 7.0f;
-        A = dir * normalPower;
-        float decelerateValue = normalPower - timer * normalPower;
-        if (decelerateValue > normalPower * 0.93f)
-        {
-            A *= decelerateValue;
-            F = M * A;
-            V0 = F;
-            me.components.rigid.velocity = V0 + A * timer;
         }
     }
 
@@ -170,28 +137,4 @@ public class Skill_1 : Action<Player>
             me.components.rigid.velocity = V0 + A * timer;
         }
     }
-
-
-
-    //if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
-    //{
-    //    if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.Alpha2))
-    //        {
-    //            
-    //        }
-    //    }
-    //}
-    //
-    //if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
-    //{
-    //    if (!me.ActionTable.isCurrentAnimationOver(0.62f))
-    //    {
-    //        NormalBlitz();
-    //    }
-    //}
-
-    
 }
-
