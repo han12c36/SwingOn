@@ -8,6 +8,31 @@ public class PlayerActionTable : ActionTable<Player>
     private Enums.PlayerActions preAction_e;
     [SerializeField]
     private Enums.PlayerActions curAction_e;
+    [SerializeField]
+    private Enums.PlayerAttType attType;
+    [SerializeField]
+    private float modeDurtaionTimer;
+    [Header("Skill_1 CoolTime")]
+    public float dashCoolTime = 8.0f;
+    public float blitzCoolTime = 10.0f;
+    public float groundBreakCoolTime = 5.0f;
+
+    [Header("Skill_2 CoolTime")]
+    public float TornadoCoolTime = 15.0f;
+    public float PowerShotCoolTime = 13.0f;
+    public float HarTornadoCoolTime = 20.0f;
+
+    [Header("Skill_3 ModeDuration")]
+    public float ModeDurationTime = 10.0f;
+    public float speedDurationTime = 15.0f;
+    public float hardDurationTime = 25.0f;
+
+
+
+    private float animationSpeed = 1.0f;
+    public float blitzRange = 10.0f;
+
+
 
     private bool isAttFinish;
     private bool isEquptFinish;
@@ -26,27 +51,20 @@ public class PlayerActionTable : ActionTable<Player>
     public int ignoreLayer;
     public int originLayer;
     public int WeaponLayer;
-
-    private float animationSpeed = 1.0f;
-    public float blitzRange = 10.0f;
-
-    [SerializeField]
-    private Enums.PlayerAttType attType;
-
+    
     public bool tryChangeHardMode;
     public bool tryChangeSpeedMode;
 
     public Enemy targetEnemy;
 
-    [SerializeField]
-    private float modeDurtaionTimer;
-    public float ModeDurationTime = 10.0f;
+    
     [Header("NormalDash")]
     public float normalDashPower = 8.0f;        //노말 대쉬 속도
     [Header("HardDash")]
     public float hardDashPower = 10.0f;          //하드 대쉬 속도
     [Header("NormalBlitz")]
     public float normalBlitzSpeed = 0.2f;          //기습 속도
+
 
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
