@@ -36,7 +36,7 @@ public class Tornado : PlayerWeapon
         else
         {
             timer = 0.0f;
-            PoolingManager.Instance.ReturnObj(gameObject);
+            PoolingManager.Instance.ReturnObj(gameObject.transform.root.gameObject);
         }
         MoveForward();
     }

@@ -231,10 +231,8 @@ public class PlayerActionTable : ActionTable<Player>
         if (type == 0) PoolingManager.Instance.PlayEffect("Effect_Tornado", owner.GroundEffect_Pos, owner.gameObject);
         else
         {
-            GameObject hardTornado = PoolingManager.Instance.LentalObj("Effect_HardTornado");
-            //hardTornado.transform.position = MySTL.CircularWaveform(owner.transform);
-            hardTornado.transform.rotation = owner.GroundEffect_Pos.rotation;
-            hardTornado.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
+            GameManager.Instance.GetCoroutineHelper.StartCoroutine(ShockWake(3));
+            //Wave(owner.transform.position, 2.0f, 5, "Effect_HardTornado");
         }
     }
     public void PlayEffect_SpeedAtt()
@@ -320,12 +318,33 @@ public class PlayerActionTable : ActionTable<Player>
         }
     }
 
-    IEnumerator Wave()
+    IEnumerator ShockWake(int count)
     {
-        yield return null;
-        //GameObject hardTornado = PoolingManager.Instance.LentalObj("Effect_HardTornado");
-        //hardTornado.transform.position = MySTL.CircularWaveform(owner.transform);
-        //hardTornado.transform.rotation = owner.GroundEffect_Pos.rotation;
-        //hardTornado.GetComponentInChildren<ParticleSystem>().transform.localScale = owner.transform.localScale;
+        for(int i = 1; i <= count; i++)
+        {
+            CameraEffect.instance.PlayShake("GroundBreak");
+            Wave(owner.transform.position, 2.0f * i, 5, "Effect_HardTornado");
+            yield return new WaitForSeconds(0.4f);
+        }
+    }
+
+    private void Wave(Vector3 originPos,float Radius, float count,string objName)
+    {
+        float initAngle = 0f;
+        float betweenAngle = 360f / count;
+
+        for (int i = 0; i < count; ++i)
+        {
+            float angle = initAngle + betweenAngle * i;
+            GameObject obj = PoolingManager.Instance.LentalObj(objName);
+            HardTornado hardTornado = obj.GetComponentInChildren<HardTornado>();
+            hardTornado.radius = Radius;
+            hardTornado.initAngle = initAngle + betweenAngle * i;
+            angle *= Mathf.Deg2Rad;
+            float x = Radius * Mathf.Sin(angle);
+            float z = Radius * Mathf.Cos(angle);
+            Vector3 vec = new Vector3(x, 0.1f, z);
+            obj.transform.position = originPos + vec;
+        }
     }
 }

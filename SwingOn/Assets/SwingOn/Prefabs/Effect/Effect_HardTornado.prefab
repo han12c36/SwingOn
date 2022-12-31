@@ -219,6 +219,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4273026355654284, guid: 4ccc4b46b54cdce4e8844c78e9857e4f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273026355654284, guid: 4ccc4b46b54cdce4e8844c78e9857e4f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273026355654284, guid: 4ccc4b46b54cdce4e8844c78e9857e4f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273026355654284, guid: 4ccc4b46b54cdce4e8844c78e9857e4f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -344,7 +356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198665152188928516, guid: 4ccc4b46b54cdce4e8844c78e9857e4f, type: 3}
       propertyPath: lengthInSec
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 198665152188928516, guid: 4ccc4b46b54cdce4e8844c78e9857e4f, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -591,6 +603,11 @@ MonoBehaviour:
   detectionLayer: 0
   dmg: 1
   weaponType: 1
-  speed: 0
   existTime: 0
   timer: 0
+  dir: {x: 0, y: 0, z: 0}
+  initPos: {x: 0, y: 0, z: 0}
+  speed: 0
+  rotationSpeed: 0
+  radius: 0
+  initAngle: 0

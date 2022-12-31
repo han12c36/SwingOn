@@ -31,7 +31,6 @@ public class SceneController : Manager<SceneController>
 
     public void Update()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (CurSceneIndex == SceneIndex.Intro)
