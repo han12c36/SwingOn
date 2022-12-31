@@ -43,7 +43,7 @@ public class PoolingManager : Manager<PoolingManager>
         }
     }
 
-    private void FillAllBoxs(int count = 5)
+    private void FillAllBoxs(int count = 100)
     {
         if (poolingObjDic == null) poolingObjDic = new Dictionary<string, Queue<GameObject>>();
 
@@ -58,6 +58,7 @@ public class PoolingManager : Manager<PoolingManager>
                 tempObj.SetActive(false);
                 tempObj.transform.SetParent(objBoxes[i].transform);
                 tempQueue.Enqueue(tempObj);
+                Debug.Log("풀링 채우는중~");
             }
             poolingObjDic.Add(prefabs[i].name, tempQueue);
         }

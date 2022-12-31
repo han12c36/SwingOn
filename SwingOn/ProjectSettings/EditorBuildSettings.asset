@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SwingOn/Scenes/inGame.unity
     guid: 905c2c49be24be3449ebc32b8dabe149
+  - enabled: 1
+    path: Assets/SwingOn/Scenes/Loading.unity
+    guid: a19c115ccd3e8b84bbde0dd71bd2f45a
   m_configObjects: {}

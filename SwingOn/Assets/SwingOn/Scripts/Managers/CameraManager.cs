@@ -17,14 +17,14 @@ public class CameraManager : Manager<CameraManager>
 
     private void Awake()
     {
-        if (GameManager.Instance.SceneCtrl.CurSceneIndex == SceneIndex.InGame)
+        if (SceneController.Instance.CurSceneIndex == SceneIndex.InGame)
         {
             target = GameObject.Find("Player");
         }
-
     }
     private void Start()
     {
+      
     }
     private void Update()
     {

@@ -51,8 +51,9 @@ public class InGameManager : Manager<InGameManager>
         Player.instance.transform.position = playerStartPos;
         player = Player.instance;
     }
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
         gameStartTime = Time.time;
     }
     private void Start()
@@ -94,8 +95,9 @@ public class InGameManager : Manager<InGameManager>
             }
         }
     }
-    private void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
         gameStartTime = 0.0f;
         enemySpawnTimer = 0.0f;
         enemySpawnIndex = 2;

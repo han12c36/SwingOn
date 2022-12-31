@@ -12,13 +12,12 @@ public class GameManager : Manager<GameManager>
     //private bool isStop = false;
 
     [SerializeField]
-    private SceneController sceneCtrl;
+    //private SceneController sceneCtrl;
     private CoroutineHelper coroutineHelper;
 
     public int count;
     public bool isPaused;
 
-    public SceneController SceneCtrl { get { return sceneCtrl; } }
     public CoroutineHelper GetCoroutineHelper { get { return coroutineHelper; } }
 
     private Structs.UserSaveDatas saveData;
@@ -35,17 +34,19 @@ public class GameManager : Manager<GameManager>
     private void Awake()
     {
         if (InstantiateManger(true) != this) Destroy(this);
-        sceneCtrl = GetComponent<SceneController>();
+        //sceneCtrl = GetComponent<SceneController>();
         coroutineHelper = GetComponent<CoroutineHelper>();
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
     }
-    
 
-    private void OnDisable()
+
+    public override void OnDisable()
     {
+        base.OnDisable();
     }
     private void Start()
     {
@@ -53,20 +54,7 @@ public class GameManager : Manager<GameManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (sceneCtrl.CurSceneIndex == SceneIndex.Intro)
-            {
-                sceneCtrl.LoadScene((int)SceneIndex.MainTitle);
-            }
-        }
-        else if(Input.anyKeyDown)
-        {
-            if (sceneCtrl.CurSceneIndex == SceneIndex.MainTitle)
-            {
-                sceneCtrl.LoadScene((int)SceneIndex.Menu);
-            }
-        }
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             count++;
@@ -89,9 +77,9 @@ public class GameManager : Manager<GameManager>
         isPaused = false;
     }
 
-    public void InstantiateManagerForNextScene(int NextSceneIndex)
+    public override void InstantiateManagerForNextScene(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
-        switch (NextSceneIndex)
+        switch (scene.buildIndex)
         {
             case (int)SceneIndex.Intro :
                 InstantiateManagerForIntroScene();
@@ -105,6 +93,9 @@ public class GameManager : Manager<GameManager>
             case (int)SceneIndex.InGame:
                 InstantiateManagerForInGameScene();
                 break;
+            case (int)SceneIndex.Loading:
+                InstantiateManagerForLoadingScene();
+                break;
             default:
                 break;
         }
@@ -113,6 +104,9 @@ public class GameManager : Manager<GameManager>
     //=====================================================================================
     // 해당씬에 필요한 매니저들
     // 씬 넘어갈떄마다 잘 삭제되는지 확인하자
+    private void InstantiateManagerForLoadingScene()
+    {
+    }
     private void InstantiateManagerForIntroScene()
     {
         //InstantiateManger(true);
@@ -120,36 +114,44 @@ public class GameManager : Manager<GameManager>
     private void InstantiateManagerForMainTitleScene()
     {
         MainTitleManager.InstantiateManger(false);
+        Debug.Log("매니저 생성중");
     }
     private void InstantiateManagerForMenuScene()
     {
         MenuManager.InstantiateManger(false);
+        Debug.Log("매니저 생성중");
     }
     private void InstantiateManagerForInGameScene()
     {
+        Debug.Log("매니저 생성중");
         InGameManager.InstantiateManger(false);
         CameraManager.InstantiateManger(false);
         PoolingManager.InstantiateManger(false);
         UIManager.InstantiateManger(false);
     }
     //=====================================================================================
-
-    //=====================================================================================
-    //ButtonFunc
+    public void Button_GoLoadingScene()
+    {
+        if (SceneController.Instance.CurSceneIndex == SceneIndex.Menu)
+        {
+            SceneController.Instance.LoadScene((int)SceneIndex.Loading);
+        }
+    }
     public void Button_GoInGameScene()
     {
-        if(GameManager.Instance.sceneCtrl.CurSceneIndex == SceneIndex.Menu)
+        if (SceneController.Instance.CurSceneIndex == SceneIndex.Menu)
         {
-            GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.InGame);
+            SceneController.Instance.LoadScene((int)SceneIndex.InGame);
         }
     }
     public void Button_GoMainTitleScene()
     {
-        if (GameManager.Instance.sceneCtrl.CurSceneIndex == SceneIndex.InGame)
+        if (SceneController.Instance.CurSceneIndex == SceneIndex.InGame)
         {
-            GameManager.Instance.sceneCtrl.LoadScene((int)SceneIndex.Menu);
+            SceneController.Instance.LoadScene((int)SceneIndex.Menu);
         }
     }
+
     public void Button_Quit()
     {
         Application.Quit();

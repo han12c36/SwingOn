@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCtrl: {fileID: 0}
   count: 0
+  isPaused: 0
 --- !u!114 &1645166631218804116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,8 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curScene: 0
-  loadingCanvas: {fileID: 225855323599009048, guid: 6d12b29e4b35655449e49d174b39b2e7, type: 3}
-  fadeImage: {fileID: 0}
+  progressBar: {fileID: 8633644549848304754, guid: e42f826183a019946a79c4e345f88e17, type: 3}
 --- !u!114 &7112478514308212579
 MonoBehaviour:
   m_ObjectHideFlags: 0

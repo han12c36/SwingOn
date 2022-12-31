@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     unitName: 0
-    maxHp: 1
+    maxHp: 100
     curHp: 0
     preHp: 0
     AttRange: 0

@@ -7,9 +7,15 @@ public class MainTitleManager : Manager<MainTitleManager>
     private void Awake()
     {
     }
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
     }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+    }
+
     private void Start()
     {
     }
@@ -17,7 +23,5 @@ public class MainTitleManager : Manager<MainTitleManager>
     private void Update()
     {
     }
-    private void OnDisable()
-    {
-    }
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
 {
@@ -84,58 +85,6 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
         if (isDontDestroy) DontDestroyOnLoad(boxObj);
         return boxObj;
     }
-
-    //protected void InstantiateManger(bool isDontDestroy)
-    //{
-	//	if (instance == null)
-	//	{
-	//		T managerObj = FindObjectOfType(typeof(T)) as T;
-	//		if (!managerObj)
-	//		{
-	//			T prefab = Resources.Load("ManagerPrefabs/" + typeof(T).Name) as T;
-	//			if (prefab)
-	//			{
-	//				managerObj = Instantiate(prefab);
-	//				managerObj.name = prefab.name.Replace("(Clone)", string.Empty);
-	//			}
-	//		}
-	//		instance = managerObj.GetComponent<T>();
-    //
-	//		GameObject boxObj = FindManagerBoxes(isDontDestroy);
-	//		managerObj.transform.SetParent(boxObj.transform);
-	//	}
-	//	else if (instance != this) Destroy(gameObject);
-	//}
-
-    //public static GameObject FindManagerBoxes(bool isDontDestroy)
-	//{
-	//	GameObject boxObj = null;
-    //
-	//	if (isDontDestroy)
-	//	{
-	//		boxObj = CheckGameObjectExist("ManagerBox_DontDestroy");
-	//		DontDestroyOnLoad(boxObj);
-	//	}
-	//	else
-	//	{
-	//		boxObj = CheckGameObjectExist("ManagerBox_Destory");
-	//	}
-    //
-	//	return boxObj;
-	//}
-	//public static GameObject CheckGameObjectExist(string name)
-	//{
-	//	GameObject temp = GameObject.Find(name);
-    //
-	//	if (temp == null)
-	//	{
-	//		temp = new GameObject();
-	//		temp.name = name;
-	//	}
-    //
-	//	return temp;
-	//}
-    
     void Start()
     {
         
@@ -145,6 +94,17 @@ public abstract class Manager<T> : MonoBehaviour where T :  MonoBehaviour
     {
         
     }
+    public virtual void OnEnable()
+    {
+        SceneManager.sceneLoaded += InstantiateManagerForNextScene;
+    }
+
+    public virtual void OnDisable()
+    {
+        SceneManager.sceneLoaded -= InstantiateManagerForNextScene;
+    }
+
+    public virtual void InstantiateManagerForNextScene(Scene scene, LoadSceneMode mode) { }
 }
 //게임매니저를 통해서 각 필요 씬에 매니저를 만들껀데 만드는 즉시 어웨이크에서
 //씬 전환시 부술 매니저인지 부수지 못하는 매니저인지 박스에 담아서 관리하기
