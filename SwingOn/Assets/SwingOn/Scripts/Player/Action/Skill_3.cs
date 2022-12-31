@@ -38,7 +38,7 @@ public class Skill_3 : Action<Player>
     {
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
-            if(me.ActionTable.tryChangeHardMode)
+            if (me.ActionTable.tryChangeHardMode)
             {
                 me.ActionTable.tryChangeHardMode = false;
                 me.ActionTable.AttType = Enums.PlayerAttType.Hard;

@@ -19,44 +19,69 @@ public class Skill_1 : Action<Player>
         base.ActionEnter(script);
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.ignoreLayer,me.ActionTable.WeaponLayer);
         me.MoveCtrl.CanMove = false;
-        me.GetAniCtrl.SetTrigger("Skill_1");
+
+        if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
+        {
+            me.GetAniCtrl.SetTrigger("Dash");
+        }
+        else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
+        {
+            me.GetAniCtrl.SetTrigger("Blitz");
+        }
+        else if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
+        {
+            me.GetAniCtrl.SetTrigger("GroundBreak");
+        }
 
         M = me.components.rigid.mass;       //w / g = M
         dir = me.transform.forward;
     }
     public override void ActionUpdate()
     {
-        if (!me.GetAniCtrl.GetBool("DoubleDash"))
-        {
-            if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
-            {
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    me.GetAniCtrl.SetBool("DoubleDash", true);
-                }
-            }
-        }
-        if (!me.GetAniCtrl.GetBool("PowerSlash"))
-        {
-            if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
-            {
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    me.GetAniCtrl.SetBool("PowerSlash", true);
-                }
-            }
-        }
-        
-        if (me.ActionTable.Dash_Finish || me.ActionTable.Power_Slash)
+        //if (!me.GetAniCtrl.GetBool("DoubleDash"))
+        //{
+        //    if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
+        //    {
+        //        if (Input.GetKeyDown(KeyCode.Alpha1))
+        //        {
+        //            me.GetAniCtrl.SetBool("DoubleDash", true);
+        //        }
+        //    }
+        //}
+        //if (!me.GetAniCtrl.GetBool("PowerSlash"))
+        //{
+        //    if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
+        //    {
+        //        if (Input.GetKeyDown(KeyCode.Alpha1))
+        //        {
+        //            me.GetAniCtrl.SetBool("PowerSlash", true);
+        //        }
+        //    }
+        //}
+
+        if (me.ActionTable.Dash_Finish)
         {
             me.ActionTable.Dash_Finish = false;
-            me.ActionTable.Power_Slash = false;
+            me.GetAniCtrl.SetBool("Skill_1", false);
+            me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
+        }
+        if (me.ActionTable.Blitz_Finish)
+        {
+            me.ActionTable.targetEnemy.isHold = false;
+            me.ActionTable.targetEnemy = null;
+            me.ActionTable.Blitz_Finish = false;
+            me.GetAniCtrl.SetBool("Skill_1", false);
+            me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
+        }
+        if (me.ActionTable.GroundBreak_Finish)
+        {
+            me.ActionTable.GroundBreak_Finish = false;
+            me.GetAniCtrl.SetBool("Skill_1", false);
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }
     public override void ActionFixedUpdate()
     {
-
         if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalDash"))
         {
             if (!me.ActionTable.isCurrentAnimationOver(0.4f)) NormalDash(); //0.645
@@ -79,11 +104,13 @@ public class Skill_1 : Action<Player>
 
     public override void ActionExit()
     {
-        me.GetAniCtrl.ResetTrigger("Skill_1");
-        me.GetAniCtrl.SetBool("DoubleDash", false);
-        me.GetAniCtrl.SetBool("PowerSlash", false);
+        me.GetAniCtrl.SetBool("Skill_1", false);
+        me.GetAniCtrl.ResetTrigger("Dash");
+        me.GetAniCtrl.ResetTrigger("Blitz");
+        me.GetAniCtrl.ResetTrigger("GroundBreak");
         me.ActionTable.Dash_Finish = false;
-        me.ActionTable.Power_Slash = false;
+        me.ActionTable.Blitz_Finish = false;
+        me.ActionTable.GroundBreak_Finish = false;
         me.MoveCtrl.CanMove = true;
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.originLayer, me.ActionTable.WeaponLayer);
         timer = 0.0f;
@@ -110,7 +137,6 @@ public class Skill_1 : Action<Player>
         }
     }
 
-
     private void HardDash()
     {
         Debug.Log("하드대쉬");
@@ -127,4 +153,38 @@ public class Skill_1 : Action<Player>
         }
     }
 }
- 
+
+//if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
+//{
+//    if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
+//    {
+//        if (Input.GetKeyDown(KeyCode.Alpha2))
+//        {
+//            if (me.ActionTable.targetEnemy != null)
+//            {
+//                me.ActionTable.targetEnemy.isHold = true;
+//                Vector3 vec = me.ActionTable.targetEnemy.transform.position + (-me.ActionTable.targetEnemy.transform.forward).normalized * //(me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
+//                me.transform.position = vec;
+//                me.transform.LookAt(me.transform.position + me.ActionTable.targetEnemy.transform.forward);
+//                me.GetAniCtrl.SetBool("DoubleBlitz", true);
+//            }
+//        }
+//    }
+//}
+
+//if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
+//{
+//    if (!me.ActionTable.isCurrentAnimationOver(0.62f))
+//    {
+//        NormalBlitz();
+//    }
+//}
+
+//private void NormalBlitz()
+//{
+//    if (me.ActionTable.targetEnemy != null)
+//    {
+//        Vector3 vec = me.ActionTable.targetEnemy.transform.position + (me.transform.position - //me.ActionTable.targetEnemy.transform.position).normalized * (me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
+//        me.transform.position = Vector3.Lerp(me.transform.position, vec, me.ActionTable.normalBlitzSpeed);
+//    }
+//}

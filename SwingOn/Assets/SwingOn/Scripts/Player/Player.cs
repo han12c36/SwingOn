@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public Structs.Status status;
     [Space(5f)]
     public Structs.UnitComponents components;
+    public float maxGauge = 100.0f;
+    public float hardGauge;
+
     public Material OriginMaterial;
     public Material DamagedMaterial;
     [Space(5f)]
@@ -45,6 +48,7 @@ public class Player : MonoBehaviour
         components.rigid = GetComponent<Rigidbody>();
         components.collider = GetComponent<Collider>();
         components.aniCtrl = GetComponent<Animator>();
+        hardGauge = 0.0f;
         moveCtrl = GetComponent<MoveCtrl>();
         detectionLayer = LayerMask.NameToLayer("EnemyWeapon");
     }
@@ -102,8 +106,13 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            status.curHp--;
-            hitCount++;
+            //status.curHp--;
+            //hitCount++;
+            hardGauge += 100.0f;
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            hardGauge = 0.0f;
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {

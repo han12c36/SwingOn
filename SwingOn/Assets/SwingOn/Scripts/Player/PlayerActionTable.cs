@@ -11,11 +11,15 @@ public class PlayerActionTable : ActionTable<Player>
 
     private bool isAttFinish;
     private bool isEquptFinish;
-    private bool isDashFinish;
-    private bool isPowerSlash;
-    private bool isGroundBreakFinish;
-    private bool isBlitzFinish;
     private bool modeChange;
+
+    private bool isDashFinish;
+    private bool isBlitzFinish;
+    private bool isGroundBreakFinish;
+
+    private bool isTornado_Finish;
+    private bool isPowerSlashFinish;
+    private bool isHardTornado_Finish;
 
     public bool isHitFinish;
     public bool isFindNearEnemy;
@@ -47,9 +51,11 @@ public class PlayerActionTable : ActionTable<Player>
     public bool Att_Finish { get { return isAttFinish; } set { isAttFinish = value; } }
     public bool Equipt_Finish { get { return isEquptFinish; } set { isEquptFinish = value; } }
     public bool Dash_Finish { get { return isDashFinish; } set { isDashFinish = value; } }
-    public bool Power_Slash { get { return isPowerSlash; } set { isPowerSlash = value; } }
+    public bool PowerSlash_Finish { get { return isPowerSlashFinish; } set { isPowerSlashFinish = value; } }
     public bool GroundBreak_Finish { get { return isGroundBreakFinish; } set { isGroundBreakFinish = value; } }
     public bool Blitz_Finish { get { return isBlitzFinish; } set { isBlitzFinish = value; } }
+    public bool Tornado_Finish { get { return isTornado_Finish; } set { isTornado_Finish = value; } }
+    public bool HardTornado_Finish { get { return isHardTornado_Finish; } set { isHardTornado_Finish = value; } }
     public bool ModeChange { get { return modeChange; } set { modeChange = value; } }
     public float AnimationSpeed { get { return animationSpeed; } set { animationSpeed = value; } }
     public float ModeDurtaionTimer { get { return modeDurtaionTimer; } set { modeDurtaionTimer = value; } }
@@ -106,8 +112,8 @@ public class PlayerActionTable : ActionTable<Player>
             {
                 Mode_Change();
                 ComboAtt();
-                DashAtt();
-                BlitzAtt();
+                Skill_01();
+                Skill_02();
             }
         }
         else
@@ -130,8 +136,6 @@ public class PlayerActionTable : ActionTable<Player>
         base.LateUpdate();
 
     }
-
-
     private void Mode_Change()
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
@@ -142,18 +146,8 @@ public class PlayerActionTable : ActionTable<Player>
             if (AttType == Enums.PlayerAttType.Normal)
             {
                 modeChange = true;
-                tryChangeHardMode = true;
-                SetCurAction((int)Enums.PlayerActions.Skill_3);
-            }
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
-               curAction == actions[(int)Enums.PlayerActions.Skill_2]) return;
-            if (AttType == Enums.PlayerAttType.Normal)
-            {
-                modeChange = true;
-                tryChangeSpeedMode = true;
+                if (owner.hardGauge >= 100.0f) tryChangeHardMode = true;
+                else tryChangeSpeedMode = true;
                 SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
         }
@@ -170,6 +164,7 @@ public class PlayerActionTable : ActionTable<Player>
                 SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
         }
+        else Debug.Log("모드체인지 실패!");
     }
     private void ComboAtt()
     {
@@ -193,7 +188,7 @@ public class PlayerActionTable : ActionTable<Player>
             }
         }
     }
-    private void DashAtt()
+    private void Skill_01()
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
                    curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
@@ -203,25 +198,14 @@ public class PlayerActionTable : ActionTable<Player>
             SetCurAction((int)Enums.PlayerActions.Skill_1);
         }
     }
-    private void BlitzAtt()
+    private void Skill_02()
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
                    curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if(attType == Enums.PlayerAttType.Hard)
-            {
-                SetCurAction((int)Enums.PlayerActions.Skill_2);
-            }
-            else
-            {
-                targetEnemy = FindTarget();
-                if (targetEnemy != null)
-                {
-                    SetCurAction((int)Enums.PlayerActions.Skill_2);
-                }
-            }
+            SetCurAction((int)Enums.PlayerActions.Skill_2);
         }
     }
 
@@ -243,7 +227,17 @@ public class PlayerActionTable : ActionTable<Player>
             GameManager.Instance.HitStop(3);
         }
     }
-
+    public void PlayTornado(int type)
+    {
+        if(type == 0)
+        {
+            PoolingManager.Instance.PlayEffect("Effect_Tornado", owner.backEffect_Pos, owner.gameObject);
+        }
+        else
+        {
+            PoolingManager.Instance.PlayEffect("Effect_HardTornado", owner.backEffect_Pos, owner.gameObject);
+        }
+    }
     public void PlayEffect_SpeedAtt()
     {
         PoolingManager.Instance.PlayEffect("Effect_SpeedAtt", owner.GroundEffect_Pos, owner.gameObject);
@@ -257,12 +251,13 @@ public class PlayerActionTable : ActionTable<Player>
     public void AttFinish() { if (!modeChange) isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }
     public void DashFinish() { if (!modeChange) isDashFinish = true; }
-    public void PowerSlashFinish() { if (!modeChange) isPowerSlash = true; }
+    public void PowerSlashFinish() { if (!modeChange) isPowerSlashFinish = true; }
     public void GroundBreakFinish() { if (!modeChange) isGroundBreakFinish = true; }
     public void BlitzFinish() { if (!modeChange) isBlitzFinish = true; }
+    public void TornadoFinish() { if (!modeChange) isTornado_Finish = true; }
+    public void HardTornadoFinish() { if (!modeChange) isHardTornado_Finish = true; }
     public void FindNearEnemy() { if(!isFindNearEnemy) isFindNearEnemy = true; }
     public void HitFinish() { isHitFinish = true; }
-
     public void OnOffWeaponCollider(int value)
     {
         if (value == 0) owner.PlayerWeapon.OnOffWeaponCollider(true);
