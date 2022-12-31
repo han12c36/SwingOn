@@ -20,7 +20,6 @@ public class Skill_1 : Action<Player>
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
             me.GetAniCtrl.SetTrigger("Dash");
-            me.ActionTable.isdashCool = true;
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {

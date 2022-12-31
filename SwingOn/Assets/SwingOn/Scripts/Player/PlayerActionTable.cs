@@ -16,14 +16,12 @@ public class PlayerActionTable : ActionTable<Player>
 
     [Header("Skill_1 CoolTime")]
     public float dashCoolTime = 8.0f;
-    public bool isdashCool;
     
     public float blitzCoolTime = 10.0f;
     public float groundBreakCoolTime = 5.0f;
 
     [Header("Skill_2 CoolTime")]
     public float TornadoCoolTime = 15.0f;
-    public bool isTornadoCool;
 
     public float PowerShotCoolTime = 13.0f;
     public float HarTornadoCoolTime = 20.0f;
@@ -122,8 +120,6 @@ public class PlayerActionTable : ActionTable<Player>
     {
         base.Update();
 
-        CheckCoolTime();
-
         if (owner.status.curHp > 0)
         {
             if (owner.hitCount > 0)
@@ -216,20 +212,13 @@ public class PlayerActionTable : ActionTable<Player>
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if(attType == Enums.PlayerAttType.Normal)
-            {
-                if(!isdashCool)
-                {
-                    SetCurAction((int)Enums.PlayerActions.Skill_1);
-                }
-            }
             if(attType == Enums.PlayerAttType.Speed)
             {
                 targetEnemy = FindTarget();
                 if (targetEnemy == null) return;
                 else SetCurAction((int)Enums.PlayerActions.Skill_1);
             }
-            //else SetCurAction((int)Enums.PlayerActions.Skill_1);
+            else SetCurAction((int)Enums.PlayerActions.Skill_1);
         }
     }
     private void Skill_02()
@@ -239,36 +228,7 @@ public class PlayerActionTable : ActionTable<Player>
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (attType == Enums.PlayerAttType.Normal)
-            {
-                if (!isTornadoCool)
-                {
-                    SetCurAction((int)Enums.PlayerActions.Skill_2);
-                }
-            }
-            //SetCurAction((int)Enums.PlayerActions.Skill_2);
-        }
-    }
-
-    private void CheckCoolTime()
-    {
-        if(isdashCool)
-        {
-            if(timer < dashCoolTime) timer += Time.deltaTime;
-            else
-            {
-                timer = 0.0f;
-                isdashCool = false;
-            }
-        }
-        if (isTornadoCool)
-        {
-            if (timer < TornadoCoolTime) timer += Time.deltaTime;
-            else
-            {
-                timer = 0.0f;
-                isTornadoCool = false; 
-            }
+            SetCurAction((int)Enums.PlayerActions.Skill_2);
         }
     }
 
@@ -387,7 +347,7 @@ public class PlayerActionTable : ActionTable<Player>
         for(int i = 1; i <= count; i++)
         {
             CameraEffect.instance.PlayShake("GroundBreak");
-            Wave(owner.transform.position, 2.0f * i, 5, "Effect_HardTornado");
+            Wave(owner.transform.position, 2.0f * i, 2 + i, "Effect_HardTornado");
             yield return new WaitForSeconds(0.4f);
         }
     }

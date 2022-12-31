@@ -15,7 +15,6 @@ public class Skill_2 : Action<Player>
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
             me.GetAniCtrl.SetTrigger("Tornado");
-            me.ActionTable.isTornadoCool = true;
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {
