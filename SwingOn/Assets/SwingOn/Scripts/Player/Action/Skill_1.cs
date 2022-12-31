@@ -11,9 +11,6 @@ public class Skill_1 : Action<Player>
     Vector3 A;
     Vector3 V0;
     Vector3 dir;
-
-    float speed = 1.0f;
-
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
@@ -27,6 +24,8 @@ public class Skill_1 : Action<Player>
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {
             me.GetAniCtrl.SetTrigger("Blitz");
+            me.ActionTable.targetEnemy.isHold = true;
+            me.transform.LookAt(-me.ActionTable.targetEnemy.transform.forward);
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
         {
@@ -38,45 +37,27 @@ public class Skill_1 : Action<Player>
     }
     public override void ActionUpdate()
     {
-        //if (!me.GetAniCtrl.GetBool("DoubleDash"))
-        //{
-        //    if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
-        //    {
-        //        if (Input.GetKeyDown(KeyCode.Alpha1))
-        //        {
-        //            me.GetAniCtrl.SetBool("DoubleDash", true);
-        //        }
-        //    }
-        //}
-        //if (!me.GetAniCtrl.GetBool("PowerSlash"))
-        //{
-        //    if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
-        //    {
-        //        if (Input.GetKeyDown(KeyCode.Alpha1))
-        //        {
-        //            me.GetAniCtrl.SetBool("PowerSlash", true);
-        //        }
-        //    }
-        //}
+        Blitz();
 
         if (me.ActionTable.Dash_Finish)
         {
             me.ActionTable.Dash_Finish = false;
-            me.GetAniCtrl.SetBool("Skill_1", false);
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
-        if (me.ActionTable.Blitz_Finish)
+        if (me.ActionTable.Blitz_Finish || (me.ActionTable.AttType == Enums.PlayerAttType.Speed && me.ActionTable.targetEnemy == null))
         {
-            me.ActionTable.targetEnemy.isHold = false;
-            me.ActionTable.targetEnemy = null;
+            if (me.ActionTable.targetEnemy != null)
+            {
+                me.ActionTable.targetEnemy.isHold = false;
+                me.ActionTable.targetEnemy = null;
+            }
+
             me.ActionTable.Blitz_Finish = false;
-            me.GetAniCtrl.SetBool("Skill_1", false);
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
         if (me.ActionTable.GroundBreak_Finish)
         {
             me.ActionTable.GroundBreak_Finish = false;
-            me.GetAniCtrl.SetBool("Skill_1", false);
             me.ActionTable.SetCurAction((int)Enums.PlayerActions.None);
         }
     }
@@ -104,13 +85,20 @@ public class Skill_1 : Action<Player>
 
     public override void ActionExit()
     {
-        me.GetAniCtrl.SetBool("Skill_1", false);
         me.GetAniCtrl.ResetTrigger("Dash");
         me.GetAniCtrl.ResetTrigger("Blitz");
+        //me.GetAniCtrl.ResetTrigger("DoubleBlitz");
         me.GetAniCtrl.ResetTrigger("GroundBreak");
         me.ActionTable.Dash_Finish = false;
         me.ActionTable.Blitz_Finish = false;
         me.ActionTable.GroundBreak_Finish = false;
+
+        if(me.ActionTable.targetEnemy != null)
+        {
+            me.ActionTable.targetEnemy.isHold = false;
+            me.ActionTable.targetEnemy = null;
+        }
+
         me.MoveCtrl.CanMove = true;
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.originLayer, me.ActionTable.WeaponLayer);
         timer = 0.0f;
@@ -118,6 +106,36 @@ public class Skill_1 : Action<Player>
         A = Vector3.zero;
         V0 = Vector3.zero;
         dir = Vector3.zero;
+    }
+
+    private void Blitz()
+    {
+        if (me.ActionTable.targetEnemy != null)
+        {
+            if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
+            {
+                if (!me.ActionTable.isCurrentAnimationOver(0.7f))
+                {
+                    Vector3 vec = me.ActionTable.targetEnemy.transform.position + (me.transform.position - me.ActionTable.targetEnemy.transform.position).normalized * (me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
+                    me.transform.position = Vector3.Lerp(me.transform.position, vec, me.ActionTable.normalBlitzSpeed);
+                }
+                else
+                {
+                    //if(!me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardBlitz"))
+                    //{
+                    //    me.GetAniCtrl.SetTrigger("DoubleBlitz");
+                    //}
+                }
+            }
+            if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("HardBlitz"))
+            {
+                me.ActionTable.targetEnemy.isHold = true;
+                Vector3 vec = me.ActionTable.targetEnemy.transform.position 
+                    + (-me.ActionTable.targetEnemy.transform.forward).normalized * me.ActionTable.targetEnemy.transform.localScale.z * 0.8f;
+                me.transform.position = vec;
+                me.transform.LookAt(me.transform.position + me.ActionTable.targetEnemy.transform.forward);
+            }
+        }
     }
 
     private void NormalDash()
@@ -152,39 +170,28 @@ public class Skill_1 : Action<Player>
             me.components.rigid.velocity = V0 + A * timer;
         }
     }
+
+
+
+    //if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
+    //{
+    //    if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Alpha2))
+    //        {
+    //            
+    //        }
+    //    }
+    //}
+    //
+    //if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
+    //{
+    //    if (!me.ActionTable.isCurrentAnimationOver(0.62f))
+    //    {
+    //        NormalBlitz();
+    //    }
+    //}
+
+    
 }
 
-//if (!me.GetAniCtrl.GetBool("DoubleBlitz"))
-//{
-//    if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
-//    {
-//        if (Input.GetKeyDown(KeyCode.Alpha2))
-//        {
-//            if (me.ActionTable.targetEnemy != null)
-//            {
-//                me.ActionTable.targetEnemy.isHold = true;
-//                Vector3 vec = me.ActionTable.targetEnemy.transform.position + (-me.ActionTable.targetEnemy.transform.forward).normalized * //(me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
-//                me.transform.position = vec;
-//                me.transform.LookAt(me.transform.position + me.ActionTable.targetEnemy.transform.forward);
-//                me.GetAniCtrl.SetBool("DoubleBlitz", true);
-//            }
-//        }
-//    }
-//}
-
-//if (me.GetAniCtrl.GetCurrentAnimatorStateInfo(0).IsName("NormalBlitz"))
-//{
-//    if (!me.ActionTable.isCurrentAnimationOver(0.62f))
-//    {
-//        NormalBlitz();
-//    }
-//}
-
-//private void NormalBlitz()
-//{
-//    if (me.ActionTable.targetEnemy != null)
-//    {
-//        Vector3 vec = me.ActionTable.targetEnemy.transform.position + (me.transform.position - //me.ActionTable.targetEnemy.transform.position).normalized * (me.ActionTable.targetEnemy.transform.localScale.z * 0.8f);
-//        me.transform.position = Vector3.Lerp(me.transform.position, vec, me.ActionTable.normalBlitzSpeed);
-//    }
-//}

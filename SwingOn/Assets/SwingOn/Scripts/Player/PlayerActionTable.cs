@@ -194,7 +194,13 @@ public class PlayerActionTable : ActionTable<Player>
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SetCurAction((int)Enums.PlayerActions.Skill_1);
+            if(attType == Enums.PlayerAttType.Speed)
+            {
+                targetEnemy = FindTarget();
+                if (targetEnemy == null) return;
+                else SetCurAction((int)Enums.PlayerActions.Skill_1);
+            }
+            else SetCurAction((int)Enums.PlayerActions.Skill_1);
         }
     }
     private void Skill_02()
