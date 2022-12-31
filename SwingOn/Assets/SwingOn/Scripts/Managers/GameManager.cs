@@ -137,13 +137,14 @@ public class GameManager : Manager<GameManager>
             SceneController.Instance.LoadScene((int)SceneIndex.Loading);
         }
     }
-    public void Button_GoInGameScene()
-    {
-        if (SceneController.Instance.CurSceneIndex == SceneIndex.Menu)
-        {
-            SceneController.Instance.LoadScene((int)SceneIndex.InGame);
-        }
-    }
+    //public void Button_GoInGameScene()
+    //{
+    //    if (SceneController.Instance.CurSceneIndex == SceneIndex.Menu)
+    //    {
+    //
+    //        SceneController.Instance.LoadScene((int)SceneIndex.InGame);
+    //    }
+    //}
     public void Button_GoMainTitleScene()
     {
         if (SceneController.Instance.CurSceneIndex == SceneIndex.InGame)
