@@ -8,7 +8,6 @@ public class Skill_2 : Action<Player>
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-
         me.ActionTable.ChangeLayer(me.transform.root, me.ActionTable.ignoreLayer, me.ActionTable.WeaponLayer);
         me.MoveCtrl.CanMove = false;
 

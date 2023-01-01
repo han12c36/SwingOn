@@ -8,10 +8,24 @@ public class InGameUICtrl : MonoBehaviour
     public Enums.PlayerAttType curPlayerAttType;
     public Enums.PlayerAttType prePlayerAttType;
     public Player player;
-
-    public Image normalSkillSet;
-    public Image speedSkillSet;
-    public Image hardSkillSet;
+    
+    [Header("Buttons")]
+    public Button skill_1Btn;
+    public Button skill_2Btn;
+    public Button skill_3Btn;
+    public Button att_Btn;
+    [Space(10.0f)]
+    [Header("NormalSkillSprite")]
+    public Sprite dashIcon;
+    public Sprite tornadoIcon;
+    [Space(10.0f)]
+    [Header("NormalSkillSprite")]
+    public Sprite blitzIcon;
+    public Sprite powerShotIcon;
+    [Space(10.0f)]
+    [Header("NormalSkillSprite")]
+    public Sprite groundBreakIcon;
+    public Sprite hardTornadoIcon;
 
     void Start()
     {
@@ -32,23 +46,20 @@ public class InGameUICtrl : MonoBehaviour
         {
             case Enums.PlayerAttType.Normal:
                 {
-                    normalSkillSet.gameObject.SetActive(true);
-                    speedSkillSet.gameObject.SetActive(false);
-                    hardSkillSet.gameObject.SetActive(false);
+                    skill_1Btn.image.sprite = dashIcon;
+                    skill_2Btn.image.sprite = tornadoIcon;
                 }
                 break;
             case Enums.PlayerAttType.Speed:
                 {
-                    normalSkillSet.gameObject.SetActive(false);
-                    speedSkillSet.gameObject.SetActive(true);
-                    hardSkillSet.gameObject.SetActive(false);
+                    skill_1Btn.image.sprite = blitzIcon;
+                    skill_2Btn.image.sprite = powerShotIcon;
                 }
                 break;
             case Enums.PlayerAttType.Hard:
                 {
-                    normalSkillSet.gameObject.SetActive(false);
-                    speedSkillSet.gameObject.SetActive(false);
-                    hardSkillSet.gameObject.SetActive(true);
+                    skill_1Btn.image.sprite = groundBreakIcon;
+                    skill_2Btn.image.sprite = hardTornadoIcon;
                 }
                 break;
             case Enums.PlayerAttType.End:
@@ -58,4 +69,35 @@ public class InGameUICtrl : MonoBehaviour
         }
     }
 
+    //============================================================================
+    //button
+    public void Button_Skill_1()
+    {
+        if(!player.ActionTable.ModeChange)
+        {
+            player.ActionTable.isSkill_1Down = true;
+        }
+    }
+    public void Button_Skill_2()
+    {
+        if (!player.ActionTable.ModeChange)
+        {
+            player.ActionTable.isSkill_2Down = true;
+        }
+    }
+    public void Button_Skill_3()
+    {
+        if (!player.ActionTable.ModeChange)
+        {
+            player.ActionTable.isSkill_3Down = true;
+        }
+    }
+    public void Button_Att()
+    {
+        if (!player.ActionTable.ModeChange)
+        {
+            player.ActionTable.isAtt_Down = true;
+        }
+    }
+    //============================================================================
 }

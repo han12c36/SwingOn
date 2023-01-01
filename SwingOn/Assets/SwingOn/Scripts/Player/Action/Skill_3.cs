@@ -10,10 +10,13 @@ public class Skill_3 : Action<Player>
         me.GetAniCtrl.ResetTrigger("NormalSwing");
         me.GetAniCtrl.ResetTrigger("SpeedSwing");
         me.GetAniCtrl.ResetTrigger("HardSwing");
-        me.GetAniCtrl.ResetTrigger("Skill_1");
+        me.GetAniCtrl.ResetTrigger("Dash");
+        me.GetAniCtrl.ResetTrigger("Blitz");
         me.GetAniCtrl.ResetTrigger("GroundBreak");
-        me.GetAniCtrl.SetBool("DoubleBlitz", false);
-        me.GetAniCtrl.SetBool("PowerSlash", false);
+        me.GetAniCtrl.ResetTrigger("Tornado");
+        me.GetAniCtrl.ResetTrigger("Dash");
+        me.GetAniCtrl.ResetTrigger("PowerSlash");
+        me.GetAniCtrl.ResetTrigger("HardTornado");
         me.ActionTable.Att_Finish = false;
         me.GetAniCtrl.applyRootMotion = false;
         me.GetAniCtrl.SetTrigger("Skill_3");

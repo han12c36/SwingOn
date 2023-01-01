@@ -34,6 +34,11 @@ public class PlayerActionTable : ActionTable<Player>
     private float animationSpeed = 1.0f;
     public float blitzRange = 10.0f;
 
+    public bool isSkill_1Down;
+    public bool isSkill_2Down;
+    public bool isSkill_3Down;
+    public bool isAtt_Down;
+
     private bool isAttFinish;
     private bool isEquptFinish;
     private bool modeChange;
@@ -128,6 +133,8 @@ public class PlayerActionTable : ActionTable<Player>
             }
             else
             {
+                CheckInputKey();
+
                 Mode_Change();
                 ComboAtt();
                 Skill_01();
@@ -144,10 +151,20 @@ public class PlayerActionTable : ActionTable<Player>
 
         
     }
+
+    public void CheckInputKey()
+    {
+        if(!modeChange)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1)) isSkill_1Down = true;
+            if (Input.GetKeyDown(KeyCode.Alpha2)) isSkill_2Down = true;
+            if (Input.GetKeyDown(KeyCode.Alpha3)) isSkill_3Down = true;
+        }
+    }
+
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
     }
     protected override void LateUpdate()
     {
@@ -157,10 +174,13 @@ public class PlayerActionTable : ActionTable<Player>
     private void Mode_Change()
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (isSkill_3Down)
         {
             if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
-               curAction == actions[(int)Enums.PlayerActions.Skill_2]) return;
+               curAction == actions[(int)Enums.PlayerActions.Skill_2])
+            {
+                return;
+            }
             if (AttType == Enums.PlayerAttType.Normal)
             {
                 modeChange = true;
@@ -182,6 +202,7 @@ public class PlayerActionTable : ActionTable<Player>
                 SetCurAction((int)Enums.PlayerActions.Skill_3);
             }
         }
+        isSkill_3Down = false;
     }
     private void ComboAtt()
     {
@@ -189,7 +210,7 @@ public class PlayerActionTable : ActionTable<Player>
                curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
                curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (isAtt_Down)
         {
             if (AttType == Enums.PlayerAttType.Normal)
             {
@@ -204,32 +225,38 @@ public class PlayerActionTable : ActionTable<Player>
                 SetCurAction((int)Enums.PlayerActions.HardAtt);
             }
         }
+        isAtt_Down = false;
     }
     private void Skill_01()
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
                    curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (isSkill_1Down)
         {
-            if(attType == Enums.PlayerAttType.Speed)
+            if (attType == Enums.PlayerAttType.Speed)
             {
                 targetEnemy = FindTarget();
-                if (targetEnemy == null) return;
+                if (targetEnemy == null)
+                {
+                    return;
+                }
                 else SetCurAction((int)Enums.PlayerActions.Skill_1);
             }
             else SetCurAction((int)Enums.PlayerActions.Skill_1);
         }
+        isSkill_1Down = false;
     }
     private void Skill_02()
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
                    curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
                    curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (isSkill_2Down)
         {
             SetCurAction((int)Enums.PlayerActions.Skill_2);
         }
+        isSkill_2Down = false;
     }
 
     public void PlayEffect(string effectName) 
