@@ -20,15 +20,18 @@ public class Skill_1 : Action<Player>
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
             me.GetAniCtrl.SetTrigger("Dash");
+            GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.playerUICtrl.ShowCoolTimeImage(me.ActionTable.playerUICtrl.skill_1Btn, me.ActionTable.dashCoolTime));
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {
             me.GetAniCtrl.SetTrigger("Blitz");
+            GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.playerUICtrl.ShowCoolTimeImage(me.ActionTable.playerUICtrl.skill_1Btn, me.ActionTable.blitzCoolTime));
             me.ActionTable.targetEnemy.isHold = true;
             me.transform.LookAt(-me.ActionTable.targetEnemy.transform.forward);
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
         {
+            GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.playerUICtrl.ShowCoolTimeImage(me.ActionTable.playerUICtrl.skill_1Btn, me.ActionTable.groundBreakCoolTime));
             me.GetAniCtrl.SetTrigger("GroundBreak");
         }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerActionTable : ActionTable<Player>
 {
+    public InGameUICtrl playerUICtrl;
+
     [SerializeField]
     private Enums.PlayerActions preAction_e;
     [SerializeField]
@@ -24,12 +26,13 @@ public class PlayerActionTable : ActionTable<Player>
     public float TornadoCoolTime = 15.0f;
 
     public float PowerShotCoolTime = 13.0f;
-    public float HarTornadoCoolTime = 20.0f;
+    public float HardTornadoCoolTime = 20.0f;
 
     [Header("Skill_3 ModeDuration")]
     public float ModeDurationTime = 10.0f;
     public float speedDurationTime = 15.0f;
     public float hardDurationTime = 25.0f;
+    public float speedModeCoolTime = 40.0f;
 
     private float animationSpeed = 1.0f;
     public float blitzRange = 10.0f;
@@ -134,7 +137,6 @@ public class PlayerActionTable : ActionTable<Player>
             else
             {
                 CheckInputKey();
-
                 Mode_Change();
                 ComboAtt();
                 Skill_01();

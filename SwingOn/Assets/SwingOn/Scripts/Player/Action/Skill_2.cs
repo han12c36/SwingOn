@@ -14,16 +14,20 @@ public class Skill_2 : Action<Player>
         if (me.ActionTable.AttType == Enums.PlayerAttType.Normal)
         {
             me.GetAniCtrl.SetTrigger("Tornado");
+            GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.playerUICtrl.ShowCoolTimeImage(me.ActionTable.playerUICtrl.skill_2Btn, me.ActionTable.TornadoCoolTime));
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Speed)
         {
             me.GetAniCtrl.SetTrigger("PowerSlash");
+            GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.playerUICtrl.ShowCoolTimeImage(me.ActionTable.playerUICtrl.skill_2Btn, me.ActionTable.PowerShotCoolTime));
         }
         else if (me.ActionTable.AttType == Enums.PlayerAttType.Hard)
         {
             me.GetAniCtrl.SetTrigger("HardTornado");
+            GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.playerUICtrl.ShowCoolTimeImage(me.ActionTable.playerUICtrl.skill_2Btn, me.ActionTable.HardTornadoCoolTime));
         }
     }
+
     public override void ActionUpdate()
     {
         if (me.ActionTable.Tornado_Finish)

@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ButtonCoolTime : MonoBehaviour
+{
+    public Button btn;
+    public Image coolTimeImage;
+    public Text coolTimeText;
+
+    void Start()
+    {
+           
+    }
+
+    void Update()
+    {
+    }
+}

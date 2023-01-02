@@ -8,12 +8,17 @@ public class InGameUICtrl : MonoBehaviour
     public Enums.PlayerAttType curPlayerAttType;
     public Enums.PlayerAttType prePlayerAttType;
     public Player player;
-    
+
+    public bool startSkill_1;
+    public bool startSkill_2;
+    public bool startSkill_3;
+
     [Header("Buttons")]
     public Button skill_1Btn;
     public Button skill_2Btn;
     public Button skill_3Btn;
     public Button att_Btn;
+
     [Space(10.0f)]
     [Header("NormalSkillSprite")]
     public Sprite dashIcon;
@@ -34,14 +39,14 @@ public class InGameUICtrl : MonoBehaviour
 
     void Update()
     {
-        curPlayerAttType = player.ActionTable.AttType;
-        ChangeModeIcon(curPlayerAttType);
-        prePlayerAttType = curPlayerAttType;
+        //curPlayerAttType = player.ActionTable.AttType;
+        //ChangeModeIcon(curPlayerAttType);
+        //prePlayerAttType = curPlayerAttType;
     }
 
-    private void ChangeModeIcon(Enums.PlayerAttType attType)
+    public void ChangeModeIcon(Enums.PlayerAttType attType)
     {
-        if (prePlayerAttType == curPlayerAttType) return;
+        //if (prePlayerAttType == curPlayerAttType) return;
         switch (attType)
         {
             case Enums.PlayerAttType.Normal:
@@ -73,30 +78,57 @@ public class InGameUICtrl : MonoBehaviour
     //button
     public void Button_Skill_1()
     {
-        if(!player.ActionTable.ModeChange)
+        if(!player.ActionTable.ModeChange && !startSkill_1)
         {
             player.ActionTable.isSkill_1Down = true;
+            startSkill_1 = true;
         }
     }
+
     public void Button_Skill_2()
     {
-        if (!player.ActionTable.ModeChange)
+        if (!player.ActionTable.ModeChange && !startSkill_2)
         {
             player.ActionTable.isSkill_2Down = true;
+            startSkill_2 = true;
         }
     }
     public void Button_Skill_3()
     {
-        if (!player.ActionTable.ModeChange)
-        {
-            player.ActionTable.isSkill_3Down = true;
-        }
+        player.ActionTable.isSkill_3Down = true;
+        //startSkill_3 = true;
+        //StartCoroutine(ShowCoolTimeImage(skill_3Btn, 1.0f));
     }
     public void Button_Att()
     {
         if (!player.ActionTable.ModeChange)
         {
             player.ActionTable.isAtt_Down = true;
+        }
+    }
+
+    public IEnumerator ShowCoolTimeImage(Button btn,float coolTime)
+    {
+        ButtonCoolTime buttonImage = btn.GetComponent<ButtonCoolTime>();
+
+        buttonImage.coolTimeImage.gameObject.SetActive(true);
+        Debug.Log("ÄÚ·çÆ¾ µå¿È");
+        float timer = 0.0f;
+        while(timer < coolTime)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+            buttonImage.coolTimeImage.fillAmount -= Time.deltaTime / coolTime;
+            buttonImage.coolTimeText.text = ((int)(coolTime - timer)).ToString();
+            if (timer >= coolTime || player.ActionTable.ModeChange)
+            {
+                buttonImage.coolTimeImage.gameObject.SetActive(false);
+                buttonImage.coolTimeImage.fillAmount = 1.0f;
+                if (btn == skill_1Btn) startSkill_1 = false;
+                if (btn == skill_2Btn) startSkill_2 = false;
+                //startSkill_3 = false;
+                yield break;
+            }
         }
     }
     //============================================================================
