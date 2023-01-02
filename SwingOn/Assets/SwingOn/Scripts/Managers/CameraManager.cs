@@ -15,8 +15,11 @@ public class CameraManager : Manager<CameraManager>
     [SerializeField]
     private LayerMask collisionLayers;
 
+    public Camera targetCamera;
+
     private void Awake()
     {
+        targetCamera = GetComponentInChildren<Camera>();
         if (SceneController.Instance.CurSceneIndex == SceneIndex.InGame)
         {
             target = GameObject.Find("Player");

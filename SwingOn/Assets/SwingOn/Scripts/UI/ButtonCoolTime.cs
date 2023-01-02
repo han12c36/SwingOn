@@ -9,12 +9,4 @@ public class ButtonCoolTime : MonoBehaviour
     public Image coolTimeImage;
     public Text coolTimeText;
 
-    void Start()
-    {
-           
-    }
-
-    void Update()
-    {
-    }
 }

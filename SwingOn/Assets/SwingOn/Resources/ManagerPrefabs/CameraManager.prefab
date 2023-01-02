@@ -83,6 +83,7 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 0
+  targetCamera: {fileID: 5734262486408686133}
 --- !u!114 &4729181486962283791
 MonoBehaviour:
   m_ObjectHideFlags: 0
