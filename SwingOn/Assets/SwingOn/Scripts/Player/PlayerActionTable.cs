@@ -6,10 +6,8 @@ public class PlayerActionTable : ActionTable<Player>
 {
     public InGameUICtrl playerUICtrl;
 
-    [SerializeField]
-    private Enums.PlayerActions preAction_e;
-    [SerializeField]
-    private Enums.PlayerActions curAction_e;
+    public Enums.PlayerActions preAction_e;
+    public Enums.PlayerActions curAction_e;
     [SerializeField]
     private Enums.PlayerAttType attType;
     [SerializeField]
@@ -32,7 +30,6 @@ public class PlayerActionTable : ActionTable<Player>
     public float ModeDurationTime = 10.0f;
     public float speedDurationTime = 15.0f;
     public float hardDurationTime = 25.0f;
-    public float speedModeCoolTime = 40.0f;
 
     private float animationSpeed = 1.0f;
     public float blitzRange = 10.0f;
@@ -181,6 +178,7 @@ public class PlayerActionTable : ActionTable<Player>
             if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
                curAction == actions[(int)Enums.PlayerActions.Skill_2])
             {
+                isSkill_3Down = false;
                 return;
             }
             if (AttType == Enums.PlayerAttType.Normal)
@@ -193,15 +191,31 @@ public class PlayerActionTable : ActionTable<Player>
         }
         else if (attType == Enums.PlayerAttType.Hard || attType == Enums.PlayerAttType.Speed)
         {
-            if (modeDurtaionTimer < ModeDurationTime)
+            if(attType == Enums.PlayerAttType.Speed)
             {
-                modeDurtaionTimer += Time.deltaTime;
+                if (modeDurtaionTimer < speedDurationTime)
+                {
+                    modeDurtaionTimer += Time.deltaTime;
+                }
+                else
+                {
+                    modeDurtaionTimer = 0.0f;
+                    modeChange = true;
+                    SetCurAction((int)Enums.PlayerActions.Skill_3);
+                }
             }
-            else
+            else if(attType == Enums.PlayerAttType.Hard)
             {
-                modeDurtaionTimer = 0.0f;
-                modeChange = true;
-                SetCurAction((int)Enums.PlayerActions.Skill_3);
+                if (modeDurtaionTimer < hardDurationTime)
+                {
+                    modeDurtaionTimer += Time.deltaTime;
+                }
+                else
+                {
+                    modeDurtaionTimer = 0.0f;
+                    modeChange = true;
+                    SetCurAction((int)Enums.PlayerActions.Skill_3);
+                }
             }
         }
         isSkill_3Down = false;
@@ -210,7 +224,11 @@ public class PlayerActionTable : ActionTable<Player>
     {
         if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
                curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
-               curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
+               curAction == actions[(int)Enums.PlayerActions.Skill_3])
+        {
+            isAtt_Down = false;
+            return;
+        }
 
         if (isAtt_Down)
         {
@@ -231,9 +249,7 @@ public class PlayerActionTable : ActionTable<Player>
     }
     private void Skill_01()
     {
-        if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
-                   curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
-                   curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
+
         if (isSkill_1Down)
         {
             if (attType == Enums.PlayerAttType.Speed)
@@ -241,6 +257,8 @@ public class PlayerActionTable : ActionTable<Player>
                 targetEnemy = FindTarget();
                 if (targetEnemy == null)
                 {
+                    isSkill_1Down = false;
+                    playerUICtrl.startSkill_1 = false;
                     return;
                 }
                 else SetCurAction((int)Enums.PlayerActions.Skill_1);
@@ -251,9 +269,6 @@ public class PlayerActionTable : ActionTable<Player>
     }
     private void Skill_02()
     {
-        if (curAction == actions[(int)Enums.PlayerActions.Skill_1] ||
-                   curAction == actions[(int)Enums.PlayerActions.Skill_2] ||
-                   curAction == actions[(int)Enums.PlayerActions.Skill_3]) return;
         if (isSkill_2Down)
         {
             SetCurAction((int)Enums.PlayerActions.Skill_2);
@@ -296,7 +311,6 @@ public class PlayerActionTable : ActionTable<Player>
     {
         PoolingManager.Instance.PlayEffect("Effect_HardAtt", owner.GroundEffect_Pos, owner.gameObject);
     }
-
 
     public void AttFinish() { if (!modeChange) isAttFinish = true; }
     public void EquiptFinish() { isEquptFinish = true; }

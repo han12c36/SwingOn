@@ -2814,9 +2814,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11509bda8878b3b48a87b9ed28b0ec39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curPlayerAttType: 0
-  prePlayerAttType: 0
   player: {fileID: 0}
+  startSkill_1: 0
+  startSkill_2: 0
+  startSkill_3: 0
   skill_1Btn: {fileID: 722537399}
   skill_2Btn: {fileID: 7719970}
   skill_3Btn: {fileID: 1891022430}
@@ -2827,6 +2828,9 @@ MonoBehaviour:
   powerShotIcon: {fileID: 21300000, guid: 1ea757794361094448f9ebb69f22f10c, type: 3}
   groundBreakIcon: {fileID: 21300000, guid: 567cba910ba89284ab5957f9df619cee, type: 3}
   hardTornadoIcon: {fileID: 21300000, guid: 3494dc956dfd7174abc07060940a2848, type: 3}
+  originColor: {r: 1, g: 1, b: 1, a: 0.43529412}
+  speedColor: {r: 0.2028302, g: 0.63753754, b: 1, a: 0.43529412}
+  hardColor: {r: 1, g: 0, b: 0, a: 0.43529412}
 --- !u!1001 &107232391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20799,6 +20803,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5935514896897341593, guid: 3455833eec4b82945b32eb9bc930accd, type: 3}
   m_PrefabInstance: {fileID: 1198672178}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1204280304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1204280305}
+  - component: {fileID: 1204280307}
+  - component: {fileID: 1204280306}
+  m_Layer: 5
+  m_Name: Mode_FadeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1204280305
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204280304}
+  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2010566841}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 180}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1204280306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204280304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.43529412}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 1
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 1
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1204280307
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204280304}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1206845140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33468,6 +33547,7 @@ GameObject:
   - component: {fileID: 2010566844}
   - component: {fileID: 2010566843}
   - component: {fileID: 2010566842}
+  - component: {fileID: 2010566845}
   m_Layer: 5
   m_Name: AttButton
   m_TagString: Untagged
@@ -33485,7 +33565,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1204280305}
   m_Father: {fileID: 667839705}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33588,6 +33669,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010566840}
   m_CullTransparentMesh: 1
+--- !u!114 &2010566845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010566840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8d0ec3463ffbf4081d628c76beeabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: 2010566842}
+  coolTimeImage: {fileID: 1204280306}
+  coolTimeText: {fileID: 0}
 --- !u!1001 &2012918523
 PrefabInstance:
   m_ObjectHideFlags: 0

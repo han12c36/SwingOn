@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class InGameUICtrl : MonoBehaviour
 {
-    public Enums.PlayerAttType curPlayerAttType;
-    public Enums.PlayerAttType prePlayerAttType;
     public Player player;
 
     public bool startSkill_1;
@@ -32,6 +30,11 @@ public class InGameUICtrl : MonoBehaviour
     public Sprite groundBreakIcon;
     public Sprite hardTornadoIcon;
 
+    [Header("NormalSkillSprite")]
+    public Color originColor;
+    public Color speedColor;
+    public Color hardColor;
+
     void Start()
     {
         player = InGameManager.Instance.GetPlayer;
@@ -39,14 +42,10 @@ public class InGameUICtrl : MonoBehaviour
 
     void Update()
     {
-        //curPlayerAttType = player.ActionTable.AttType;
-        //ChangeModeIcon(curPlayerAttType);
-        //prePlayerAttType = curPlayerAttType;
     }
 
     public void ChangeModeIcon(Enums.PlayerAttType attType)
     {
-        //if (prePlayerAttType == curPlayerAttType) return;
         switch (attType)
         {
             case Enums.PlayerAttType.Normal:
@@ -59,12 +58,14 @@ public class InGameUICtrl : MonoBehaviour
                 {
                     skill_1Btn.image.sprite = blitzIcon;
                     skill_2Btn.image.sprite = powerShotIcon;
+                    StartCoroutine(ShowModeRemainTime(att_Btn, player.ActionTable.speedDurationTime, attType));
                 }
                 break;
             case Enums.PlayerAttType.Hard:
                 {
                     skill_1Btn.image.sprite = groundBreakIcon;
                     skill_2Btn.image.sprite = hardTornadoIcon;
+                    StartCoroutine(ShowModeRemainTime(att_Btn, player.ActionTable.hardDurationTime, attType));
                 }
                 break;
             case Enums.PlayerAttType.End:
@@ -78,7 +79,11 @@ public class InGameUICtrl : MonoBehaviour
     //button
     public void Button_Skill_1()
     {
-        if(!player.ActionTable.ModeChange && !startSkill_1)
+        if (player.ActionTable.curAction_e == Enums.PlayerActions.Skill_1 ||
+            player.ActionTable.curAction_e == Enums.PlayerActions.Skill_2 ||
+            player.ActionTable.curAction_e == Enums.PlayerActions.Skill_3) return;
+
+        if (!player.ActionTable.ModeChange && !startSkill_1)
         {
             player.ActionTable.isSkill_1Down = true;
             startSkill_1 = true;
@@ -87,6 +92,10 @@ public class InGameUICtrl : MonoBehaviour
 
     public void Button_Skill_2()
     {
+        if (player.ActionTable.curAction_e == Enums.PlayerActions.Skill_1 ||
+            player.ActionTable.curAction_e == Enums.PlayerActions.Skill_2 ||
+            player.ActionTable.curAction_e == Enums.PlayerActions.Skill_3) return;
+
         if (!player.ActionTable.ModeChange && !startSkill_2)
         {
             player.ActionTable.isSkill_2Down = true;
@@ -112,7 +121,6 @@ public class InGameUICtrl : MonoBehaviour
         ButtonCoolTime buttonImage = btn.GetComponent<ButtonCoolTime>();
 
         buttonImage.coolTimeImage.gameObject.SetActive(true);
-        Debug.Log("ÄÚ·çÆ¾ µå¿È");
         float timer = 0.0f;
         while(timer < coolTime)
         {
@@ -126,7 +134,30 @@ public class InGameUICtrl : MonoBehaviour
                 buttonImage.coolTimeImage.fillAmount = 1.0f;
                 if (btn == skill_1Btn) startSkill_1 = false;
                 if (btn == skill_2Btn) startSkill_2 = false;
-                //startSkill_3 = false;
+                yield break;
+            }
+        }
+    }
+
+    public IEnumerator ShowModeRemainTime(Button btn, float duration,Enums.PlayerAttType attType)
+    {
+        ButtonCoolTime buttonImage = btn.GetComponent<ButtonCoolTime>();
+        buttonImage.coolTimeImage.gameObject.SetActive(true);
+        if (attType == Enums.PlayerAttType.Normal) buttonImage.coolTimeImage.color = originColor;
+        else if (attType == Enums.PlayerAttType.Speed) buttonImage.coolTimeImage.color = speedColor;
+        else if (attType == Enums.PlayerAttType.Hard) buttonImage.coolTimeImage.color = hardColor;
+
+        float timer = 0.0f;
+        while (timer < duration)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+            buttonImage.coolTimeImage.fillAmount -= Time.deltaTime / duration;
+            if (timer >= duration)
+            {
+                buttonImage.coolTimeImage.gameObject.SetActive(false);
+                buttonImage.coolTimeImage.fillAmount = 1.0f;
+                buttonImage.coolTimeImage.color = originColor;
                 yield break;
             }
         }

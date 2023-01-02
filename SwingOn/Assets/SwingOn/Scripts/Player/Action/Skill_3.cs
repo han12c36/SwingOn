@@ -7,7 +7,6 @@ public class Skill_3 : Action<Player>
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-        //GameManager.Instance.GetCoroutineHelper.StartCoroutine(me.ActionTable.playerUICtrl.ShowCoolTimeImage(me.ActionTable.playerUICtrl.skill_3Btn, me.ActionTable.speedModeCoolTime));
         me.GetAniCtrl.ResetTrigger("NormalSwing");
         me.GetAniCtrl.ResetTrigger("SpeedSwing");
         me.GetAniCtrl.ResetTrigger("HardSwing");
