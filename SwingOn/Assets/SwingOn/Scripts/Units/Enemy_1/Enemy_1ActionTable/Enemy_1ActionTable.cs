@@ -78,10 +78,6 @@ public class Enemy_1ActionTable : ActionTable<Enemy_1>
         curAction_e = (Enums.Enemy_1Actions)curAction_i;
     }
 
-
-
-
-
     public void OnOffWeaponCollider_Enemy(int value)
     {
         if (value == 0) owner.EnemyWeapon.OnOffWeaponCollider(true);
