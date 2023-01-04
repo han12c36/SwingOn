@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5807215314479599211}
   - component: {fileID: -1009762686864806285}
+  - component: {fileID: 1886910592993110384}
   m_Layer: 0
   m_Name: Gauge
   m_TagString: Untagged
@@ -44,10 +45,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c77ef0381979de42896c86cca2eb1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetUI: {fileID: 0}
-  canvas: {fileID: 0}
-  targetRect: {fileID: 0}
+  particle: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
+  initSpeed: 0
+  curSpeed: 0
+  timer: 0
+  distance: 0
+--- !u!65 &1886910592993110384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6330885861858506119}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &1993649697389174504
 PrefabInstance:
   m_ObjectHideFlags: 0

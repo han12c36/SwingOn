@@ -68,4 +68,5 @@ MonoBehaviour:
   - {fileID: 4387214221198987798, guid: 6b5a8cbf08851ef4396c1f32c86ebd93, type: 3}
   - {fileID: 6999232516167580398, guid: 202e33a5c4babbf4a98ad96cc0e07fb4, type: 3}
   - {fileID: 4762317174322189479, guid: 633bc73bfe7b7714bad9dab635786790, type: 3}
+  - {fileID: 6330885861858506119, guid: 327c4a8c45e3c6e468bed265a9b3a186, type: 3}
   objBoxes: []

@@ -5,52 +5,37 @@ using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour
 {
-    public Image targetUI;
-    public Canvas canvas = null;
-    public RectTransform targetRect = null;
-
+    public ParticleSystem particle;
+    public Vector3 randomDIr;
     public Vector3 target;
+
+    public float initSpeed;
+    public float curSpeed;
+    public float timer;
+    public float distance;
 
     void Start()
     {
-        target = CameraManager.Instance.targetCamera.ScreenToViewportPoint(targetUI.rectTransform.position);
-        Debug.Log(target.x + "" + target.y + " " + target.z);
-        //screenWidth = Screen.width;
-        //screenHeight = Screen.height;
-        //screenPos = targetUI.rectTransform;
-        //Debug.Log(screenPos.rect.x + " " + screenPos.rect.y);
-
-        //Vector3 vec = CameraManager.Instance.targetCamera.
-        //    .ScreenToWorldPoint(targetUI.transform.position);
-        //vec = new Vector3(vec.x, vec.y, vec.z);
-        //targetPos = vec;
-
-
+        initSpeed = 10.0f;
+        particle = GetComponentInChildren<ParticleSystem>();
+        particle.Play();
     }
 
     void Update()
     {
-        //if (Input.GetMouseButton(0))  // 마우스가 클릭 되면
-        //{
-            Vector3 mos = Input.mousePosition;
-            Debug.Log(mos);
-            //mos.z = GetComponent<Camera>().farClipPlane; //카메라가 보는 방향과 시야를 가져옴
-            mos.z = CameraManager.Instance.targetCamera.farClipPlane; //카메라가 보는 방향과 시야를 가져옴
-            Debug.Log(mos.z);
-            Vector3 dir = CameraManager.Instance.targetCamera.ScreenToWorldPoint(mos);
-            Debug.Log(dir);
-            
-            
-            //월드의 좌표를 클릭했을 때 화면에 자신이 보고있는 화면에 맞춰 좌표를 바꿔준다.
-
-            //RaycastHit hit;
-            //if (Physics.Raycast(transform.position, dir, out hit, mos.z))
-            //{
-                //target.position = hit.point; // 타겟을 레이캐스트가 충돌된 곳으로 옮긴다.
-            //}
-        //}
+        target = InGameManager.Instance.GetPlayer.transform.position;
+        distance = Vector3.Distance(target, transform.position);
+        Vector3 vec = new Vector3(target.x, target.y + 0.5f, target.z);
+        timer += Time.deltaTime;
+        curSpeed = initSpeed * (1.0f + timer);
+        transform.position += (vec - transform.position).normalized * curSpeed * Time.deltaTime;
     }
-    void LateUpdate()
+
+    private void OnTriggerEnter(Collider other)
     {
+        if(other.transform.root.gameObject == InGameManager.Instance.GetPlayer.transform.root.gameObject)
+        {
+            PoolingManager.Instance.ReturnObj(gameObject);
+        }
     }
 }

@@ -65,9 +65,17 @@ public abstract class Weapon<T> : MonoBehaviour
             Enemy enemy = other.transform.root.gameObject.GetComponent<Enemy>();
             enemy.hitCount++;
             enemy.status.curHp -= dmg;
+            CreateGauge(enemy.transform.position);
             PoolingManager.Instance.PlayEffect("Effect_Friction", transform);
             CameraEffect.instance.PlayShake("WeekShake");
+
         }
+    }
+
+    public void CreateGauge(Vector3 vec)
+    {
+        GameObject obj = PoolingManager.Instance.LentalObj("Gauge");
+        obj.transform.position = vec;
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
