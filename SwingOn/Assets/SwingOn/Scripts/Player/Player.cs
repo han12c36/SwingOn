@@ -114,6 +114,13 @@ public class Player : MonoBehaviour
         {
             hardGauge = 0.0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            GameObject obj = PoolingManager.Instance.LentalObj("Gauge");
+            obj.transform.position = new Vector3(0.0f, 0.5f, 0.0f);
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             //CameraEffect.instance.PlayZoom(ZoomDir.Front, 1f, 1f, CameraEffect.instance.transform.localPosition);
