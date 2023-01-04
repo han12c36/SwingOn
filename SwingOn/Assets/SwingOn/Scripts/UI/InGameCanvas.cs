@@ -6,11 +6,12 @@ public class InGameCanvas : MonoBehaviour
 {
     public GameObject ScorePanel;
     public int playerCurHp;
-
+    public InGameUICtrl inGameUICtrl;
 
     private void Awake()
     {
         if (ScorePanel.activeSelf) ScorePanel.gameObject.SetActive(false);
+        inGameUICtrl = GetComponentInChildren<InGameUICtrl>();
     }
     private void Start()
     {

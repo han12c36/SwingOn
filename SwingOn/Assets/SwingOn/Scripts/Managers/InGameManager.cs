@@ -21,10 +21,10 @@ public enum SpawnEnemyType
 
 public class InGameManager : Manager<InGameManager>
 {
-    
-
     private Player player;
     private GameObject ScorePanel;
+    public InGameCanvas inGameCanvas;
+    public ButtonCoolTime skill_3ButtonCoolTime;
 
     private Vector3 playerStartPos = new Vector3(0.0f, 0.0f, -9f);
     private Vector3 spawnerPos_1 = new Vector3(-16.0f,1.5f,-1.5f);
@@ -50,6 +50,8 @@ public class InGameManager : Manager<InGameManager>
     {
         Player.instance.transform.position = playerStartPos;
         player = Player.instance;
+        inGameCanvas = GameObject.Find("InGameCanvas").GetComponent<InGameCanvas>();
+        skill_3ButtonCoolTime = inGameCanvas.GetComponentInChildren<ButtonCoolTime>();
     }
     public override void OnEnable()
     {

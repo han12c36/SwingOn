@@ -7,6 +7,8 @@ public class Skill_3 : Action<Player>
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
+        me.hardGauge = 0;
+        InGameManager.Instance.skill_3ButtonCoolTime.coolTimeImage.fillAmount = me.hardGauge;
         me.GetAniCtrl.ResetTrigger("NormalSwing");
         me.GetAniCtrl.ResetTrigger("SpeedSwing");
         me.GetAniCtrl.ResetTrigger("HardSwing");

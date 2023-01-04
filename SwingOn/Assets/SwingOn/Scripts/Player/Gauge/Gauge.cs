@@ -54,7 +54,9 @@ public class Gauge : MonoBehaviour
     {
         if(other.transform.root.gameObject == InGameManager.Instance.GetPlayer.transform.root.gameObject)
         {
-            player.hardGauge++;
+            player.hardGauge += 10;
+            InGameManager.Instance.inGameCanvas.GetComponentInChildren<Skill_3Animation>().Skill_3Bounce();
+            InGameManager.Instance.inGameCanvas.GetComponentInChildren<Skill_3Animation>().button.coolTimeImage.fillAmount = player.hardGauge / player.maxGauge;
             PoolingManager.Instance.ReturnObj(gameObject);
         }
     }
