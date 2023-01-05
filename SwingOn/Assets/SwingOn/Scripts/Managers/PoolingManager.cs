@@ -43,7 +43,7 @@ public class PoolingManager : Manager<PoolingManager>
         }
     }
 
-    private void FillAllBoxs(int count = 100)
+    private void FillAllBoxs(int count = 10)
     {
         if (poolingObjDic == null) poolingObjDic = new Dictionary<string, Queue<GameObject>>();
 

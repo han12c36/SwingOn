@@ -20,11 +20,14 @@ public class Gauge : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        controllPoint1 = new Vector3(startCurveValue * Random.Range(1.0f, -1.0f), startCurveValue * Random.Range(1.0f, 0.0f), 0.0f);
+        controllPoint2 = new Vector3(endCurveValue * Random.Range(1.0f, -1.0f), endCurveValue * Random.Range(1.0f, 0.0f));
     }
 
     private void OnDisable()
     {
+        startPos = Vector3.zero;
+        endPos = Vector3.zero;
         controllPoint1 = Vector3.zero;
         controllPoint2 = Vector3.zero;
         timer = 0.0f;
@@ -36,8 +39,7 @@ public class Gauge : MonoBehaviour
         player = InGameManager.Instance.GetPlayer;
         //startPos = transform.position;
         endPos = player.transform.position;
-        controllPoint1 = new Vector3(startCurveValue * Random.Range(1.0f, -1.0f), startCurveValue * Random.Range(1.0f, 0.0f), 0.0f);
-        controllPoint2 = new Vector3(endCurveValue * Random.Range(1.0f, -1.0f), endCurveValue * Random.Range(1.0f, 0.0f));
+        
     }
 
     void Update()
