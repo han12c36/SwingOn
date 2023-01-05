@@ -65,6 +65,7 @@ public class InGameUICtrl : MonoBehaviour
                 {
                     skill_1Btn.image.sprite = groundBreakIcon;
                     skill_2Btn.image.sprite = hardTornadoIcon;
+                    skill_3Btn.GetComponentInChildren<ButtonCoolTime>().coolTimeImage.fillAmount = 0.0f;
                     StartCoroutine(ShowModeRemainTime(att_Btn, player.ActionTable.hardDurationTime, attType));
                 }
                 break;

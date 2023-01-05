@@ -106,13 +106,8 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            //status.curHp--;
-            //hitCount++;
-            hardGauge += 100.0f;
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            hardGauge = 0.0f;
+            status.curHp--;
+            hitCount++;
         }
 
         if (Input.GetKeyDown(KeyCode.Z))

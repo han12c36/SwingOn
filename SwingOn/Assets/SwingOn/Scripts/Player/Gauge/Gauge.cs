@@ -47,16 +47,20 @@ public class Gauge : MonoBehaviour
         timer += Time.deltaTime;
         startPos = transform.position;
         endPos = player.transform.position;
-        transform.position = Bezier_3Curve(startPos,controllPoint1,controllPoint2,endPos, timer * timer);
+        Vector3 vec = Bezier_3Curve(startPos, controllPoint1, controllPoint2, endPos, timer * timer);
+        transform.position = vec;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.transform.root.gameObject == InGameManager.Instance.GetPlayer.transform.root.gameObject)
         {
-            player.hardGauge += 10;
             InGameManager.Instance.inGameCanvas.GetComponentInChildren<Skill_3Animation>().Skill_3Bounce();
-            InGameManager.Instance.inGameCanvas.GetComponentInChildren<Skill_3Animation>().button.coolTimeImage.fillAmount = player.hardGauge / player.maxGauge;
+            if (player.hardGauge <= player.maxGauge)
+            {
+                player.hardGauge += 10;
+                InGameManager.Instance.inGameCanvas.GetComponentInChildren<Skill_3Animation>().button.coolTimeImage.fillAmount = player.hardGauge / player.maxGauge;
+            }
             PoolingManager.Instance.ReturnObj(gameObject);
         }
     }
