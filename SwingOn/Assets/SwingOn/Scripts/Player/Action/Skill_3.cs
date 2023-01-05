@@ -7,7 +7,6 @@ public class Skill_3 : Action<Player>
     public override void ActionEnter(Player script)
     {
         base.ActionEnter(script);
-        me.hardGauge = 0;
         me.GetAniCtrl.ResetTrigger("NormalSwing");
         me.GetAniCtrl.ResetTrigger("SpeedSwing");
         me.GetAniCtrl.ResetTrigger("HardSwing");

@@ -61,7 +61,6 @@ public abstract class Weapon<T> : MonoBehaviour
         }
         else if (other.transform.root.gameObject.GetComponent<Enemy>() != null)
         {
-            Debug.Log("적이 맞았!!!!!!!!!!!");
             Enemy enemy = other.transform.root.gameObject.GetComponent<Enemy>();
             enemy.hitCount++;
             enemy.status.curHp -= dmg;
@@ -79,9 +78,11 @@ public abstract class Weapon<T> : MonoBehaviour
         vec.y += value;
         GameObject obj = PoolingManager.Instance.LentalObj("Gauge");
         obj.transform.position = vec;
+        obj.GetComponent<Gauge>().startPos = vec;
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+
     }
 }

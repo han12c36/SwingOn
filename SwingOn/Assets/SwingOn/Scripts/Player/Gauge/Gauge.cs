@@ -25,10 +25,8 @@ public class Gauge : MonoBehaviour
 
     private void OnDisable()
     {
-        startPos = Vector3.zero;
         controllPoint1 = Vector3.zero;
         controllPoint2 = Vector3.zero;
-        endPos = Vector3.zero;
         timer = 0.0f;
     }
     void Start()
@@ -36,7 +34,7 @@ public class Gauge : MonoBehaviour
         particle = GetComponentInChildren<ParticleSystem>();
         particle.Play();
         player = InGameManager.Instance.GetPlayer;
-        startPos = transform.position;
+        //startPos = transform.position;
         endPos = player.transform.position;
         controllPoint1 = new Vector3(startCurveValue * Random.Range(1.0f, -1.0f), startCurveValue * Random.Range(1.0f, 0.0f), 0.0f);
         controllPoint2 = new Vector3(endCurveValue * Random.Range(1.0f, -1.0f), endCurveValue * Random.Range(1.0f, 0.0f));
@@ -47,8 +45,7 @@ public class Gauge : MonoBehaviour
         timer += Time.deltaTime;
         startPos = transform.position;
         endPos = player.transform.position;
-        Vector3 vec = Bezier_3Curve(startPos, controllPoint1, controllPoint2, endPos, timer * timer);
-        transform.position = vec;
+        transform.position = Bezier_3Curve(startPos, controllPoint1, controllPoint2, endPos, timer * timer);
     }
 
     private void OnTriggerEnter(Collider other)
