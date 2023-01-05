@@ -8,11 +8,8 @@ public class GameManager : Manager<GameManager>
     //씬 전환이 일어나면 해당 매니저의 디스에이블이 발동한다
     //꺼졋다 다시 켜지는 매니저는 저장된 정보다 다 날라감
 
-    //[SerializeField]
-    //private bool isStop = false;
 
     [SerializeField]
-    //private SceneController sceneCtrl;
     private CoroutineHelper coroutineHelper;
 
     public int count;
@@ -54,11 +51,6 @@ public class GameManager : Manager<GameManager>
 
     private void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            count++;
-        }
     }
 
     public void HitStop(float fps)
