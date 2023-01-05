@@ -114,16 +114,13 @@ public class GameManager : Manager<GameManager>
     private void InstantiateManagerForMainTitleScene()
     {
         MainTitleManager.InstantiateManger(false);
-        Debug.Log("概聪历 积己吝");
     }
     private void InstantiateManagerForMenuScene()
     {
         MenuManager.InstantiateManger(false);
-        Debug.Log("概聪历 积己吝");
     }
     private void InstantiateManagerForInGameScene()
     {
-        Debug.Log("概聪历 积己吝");
         InGameManager.InstantiateManger(false);
         CameraManager.InstantiateManger(false);
         PoolingManager.InstantiateManger(false);

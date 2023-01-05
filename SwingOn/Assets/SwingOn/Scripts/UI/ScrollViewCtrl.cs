@@ -30,7 +30,6 @@ public class ScrollViewCtrl : MonoBehaviour
             var Btn = Instantiate(stageBtn[i], scrollRect.content).GetComponent<RectTransform>();
             Btn.anchoredPosition = new Vector2(x + space, y);
             x += (Btn.sizeDelta.x + space);
-            Debug.Log(x);
         }
         scrollRect.content.sizeDelta = new Vector2(x + space, 800.0f);
     }

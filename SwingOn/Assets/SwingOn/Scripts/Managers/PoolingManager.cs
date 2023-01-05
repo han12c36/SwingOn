@@ -58,7 +58,6 @@ public class PoolingManager : Manager<PoolingManager>
                 tempObj.SetActive(false);
                 tempObj.transform.SetParent(objBoxes[i].transform);
                 tempQueue.Enqueue(tempObj);
-                Debug.Log("풀링 채우는중~");
             }
             poolingObjDic.Add(prefabs[i].name, tempQueue);
         }

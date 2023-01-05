@@ -43,3 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72033133572fabf42af7fbe9d9f467b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageImageTr: {fileID: 0}
+  bestTime: {fileID: 0}
+  bestDamage: {fileID: 0}
+  stageLoadingUI:
+  - {fileID: 1192796677380648501, guid: 79dc92301fcd49741bdabba1c6d69dbe, type: 3}
+  - {fileID: 1192796677380648501, guid: 98001ae46a68e78428557c76a6010b7f, type: 3}
+  - {fileID: 1192796677380648501, guid: 29b8a08fb99e9014db48405797307101, type: 3}

@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class MenuManager : Manager<MenuManager>
 {
+    public GameObject stageImageTr;
     public Text bestTime;
     public Text bestDamage;
 
+    public List<GameObject> stageLoadingUI = new List<GameObject>();
+
     void Start()
     {
+        stageImageTr = GameObject.Find("StageImageTr");
         bestTime = GameObject.Find("BestLifeText").GetComponent<Text>();
         bestDamage = GameObject.Find("BestDamageText").GetComponent<Text>();
 
@@ -37,4 +41,6 @@ public class MenuManager : Manager<MenuManager>
             else return GameManager.Instance.SaveData.bestDamage;
         }
     }
+
+
 }

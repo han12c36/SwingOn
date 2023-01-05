@@ -65,8 +65,6 @@ public class SceneController : Manager<SceneController>
         //scene -> 이제 불러 와질 씬
         if (SceneManager.GetActiveScene().buildIndex == (int)curScene)
         {
-            Debug.Log("온로드씬 함수 호출");
-            Debug.Log(SceneManager.GetActiveScene().name);
             StartCoroutine(Fade(false));
             SceneManager.sceneLoaded -= OnLoadScene;
             //GameManager.Instance.InstantiateManagerForNextScene(scene,mode);
@@ -75,12 +73,10 @@ public class SceneController : Manager<SceneController>
 
     private IEnumerator LoadSceneProcess(int sceneindex)
     {
-        Debug.Log("로딩절차..중");
         yield return StartCoroutine(Fade(true));
         // 코루틴안에서 코루틴 실행시키면서 yield return으로 실행시키면 호출된 코루틴이 끝날때까지 기다리게 만들수 있음. 즉 Fade timer시간인 1초만큼 기다림
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneindex);
         //if (operation == null) Debug.LogError("It's a scene that doesn't exist");
-        Debug.Log(SceneManager.GetActiveScene().name);
         operation.allowSceneActivation = false; //90퍼까지 로드하고 대기하겠다.
 
         float timer = 0f;
@@ -148,11 +144,6 @@ public class SceneController : Manager<SceneController>
         {
             //progressBar.value = 0.0f;
             loadingCanvas.gameObject.SetActive(false);
-            Debug.Log("로딩창 끄기");
-        }
-        else
-        {
-            Debug.Log("로딩창 켜기");
         }
 
         float timer = 0;
