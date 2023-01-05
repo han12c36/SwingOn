@@ -9,7 +9,7 @@ public class Gauge : MonoBehaviour
     public Player player;
 
     public float startCurveValue = 6.0f;
-    public float endCurveValue = 2.0f;
+    public float endCurveValue = 3.5f;
 
     public Vector3 startPos;
     public Vector3 controllPoint1;
@@ -20,12 +20,15 @@ public class Gauge : MonoBehaviour
 
     private void OnEnable()
     {
+        particle = GetComponentInChildren<ParticleSystem>();
+        particle.Play();
         controllPoint1 = new Vector3(startCurveValue * Random.Range(1.0f, -1.0f), startCurveValue * Random.Range(1.0f, 0.0f), 0.0f);
         controllPoint2 = new Vector3(endCurveValue * Random.Range(1.0f, -1.0f), endCurveValue * Random.Range(1.0f, 0.0f));
     }
 
     private void OnDisable()
     {
+        particle.Stop();
         startPos = Vector3.zero;
         endPos = Vector3.zero;
         controllPoint1 = Vector3.zero;
@@ -34,8 +37,7 @@ public class Gauge : MonoBehaviour
     }
     void Start()
     {
-        particle = GetComponentInChildren<ParticleSystem>();
-        particle.Play();
+        
         player = InGameManager.Instance.GetPlayer;
         //startPos = transform.position;
         endPos = player.transform.position;
